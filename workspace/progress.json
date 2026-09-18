@@ -1,0 +1,47 @@
+{
+  "project": "Riftbound / LoL TCG Rules Knowledge Base",
+  "current_stage": "Stage 2A - Chinese Rules Evidence Extraction",
+  "stages": {
+    "stage_0": {
+      "status": "completed",
+      "description": "Project initialization completed"
+    },
+    "stage_1": {
+      "status": "completed",
+      "description": "Source Inventory + PDF Preprocessing completed"
+    },
+    "stage_2a": {
+      "status": "pending",
+      "description": "Chinese Rules Evidence Extraction"
+    },
+    "stage_2b": {
+      "status": "pending",
+      "description": "English Rules Evidence Extraction"
+    },
+    "stage_2c": {
+      "status": "pending",
+      "description": "Errata / Correction Evidence Extraction"
+    },
+    "stage_2d": {
+      "status": "pending",
+      "description": "FAQ / Ruling / Official Explanation Extraction"
+    },
+    "stage_3": {
+      "status": "pending",
+      "description": "Entity Resolution + Chinese-English Alignment"
+    },
+    "stage_4": {
+      "status": "pending",
+      "description": "Rule Clustering + Reconciliation"
+    },
+    "stage_5": {
+      "status": "pending",
+      "description": "Independent Verification"
+    },
+    "stage_6": {
+      "status": "pending",
+      "description": "Final Build + Coverage Check"
+    }
+  },
+  "last_updated": "2026-09-18"
+}
