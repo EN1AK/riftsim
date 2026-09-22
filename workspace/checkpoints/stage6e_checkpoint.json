@@ -1,0 +1,51 @@
+{
+  "task_id": "task_6_05",
+  "stage": "6E",
+  "output": "workspace/final/manual_review.md",
+  "built_at": "2026-09-22T18:59:51",
+  "stats": {
+    "items": 186,
+    "all_closed": true,
+    "sections": {
+      "MR-2C": 4,
+      "MR-2D": 15,
+      "MR-3-CR": 161,
+      "MR-4A": 6
+    },
+    "close_date_distribution": {
+      "2026-09-20": 16,
+      "2026-09-21": 3,
+      "2026-09-22": 167
+    },
+    "null_rule_id_items": 18,
+    "legacy_rule_number_refs": 1,
+    "file_size_bytes": 233725
+  },
+  "validation": {
+    "entries_written": 186,
+    "distinct_ids": 186,
+    "count_match": true,
+    "id_set_match": true,
+    "all_closed": true,
+    "status_closed_headers": 186,
+    "status_pending_headers": 0,
+    "field_label_counts_ok": true,
+    "field_label_mismatches": [],
+    "file_headers_match": true,
+    "orphan_rule_refs": [],
+    "legacy_rule_number_refs": [
+      [
+        "MR-2D-0007",
+        "735.1.c"
+      ]
+    ],
+    "file_size_bytes": 233725,
+    "section_counts": {
+      "MR-2C": 4,
+      "MR-2D": 15,
+      "MR-3-CR": 161,
+      "MR-4A": 6
+    },
+    "PASS": true
+  }
+}

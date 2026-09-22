@@ -1,212 +1,440 @@
 {
   "tasks": [
     {
-      "task_id": "task_001",
+      "task_id": "task_001_01",
       "source_id": "source_001",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 01_2025-12-03_裁判FAQ_251023.pdf"
+      "notes": "Extract 01_2025-12-03_裁判FAQ_251023.pdf p1-10"
     },
     {
-      "task_id": "task_002",
+      "task_id": "task_002_01",
       "source_id": "source_002",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 13,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 02_2025-12-03_符文战场_勘误汇总_1028.pdf"
+      "notes": "Extract 02_2025-12-03_符文战场_勘误汇总_1028.pdf p1-10 [page_end corrected 10->13 in Stage 2C] [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_003",
+      "task_id": "task_003_01",
       "source_id": "source_003",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 14,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 03_2026-04-15_破限系列_勘误汇总_260403.pdf"
+      "notes": "Extract 03_2026-04-15_破限系列_勘误汇总_260403.pdf p1-10 [page_end corrected 10->14 in Stage 2C] [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_004",
+      "task_id": "task_004_01",
       "source_id": "source_004",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 9,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 04_2026-04-15_铸魂淬炼系列_勘误汇总_260114.pdf"
+      "notes": "Extract 04_2026-04-15_铸魂淬炼系列_勘误汇总_260114.pdf p1-9 [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_005",
+      "task_id": "task_005_01",
       "source_id": "source_005",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 05_2026-04-15_铸魂淬炼系列_官方FAQ_260114.pdf"
+      "notes": "Extract 05_2026-04-15_铸魂淬炼系列_官方FAQ_260114.pdf p1-10"
     },
     {
-      "task_id": "task_006",
+      "task_id": "task_006_01",
       "source_id": "source_006",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 06_2026-04-15_铸魂淬炼系列_裁判FAQ.pdf"
+      "notes": "Extract 06_2026-04-15_铸魂淬炼系列_裁判FAQ.pdf p1-10"
     },
     {
-      "task_id": "task_007",
+      "task_id": "task_007_01",
       "source_id": "source_007",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 07_2026-04-30_破限系列_官方FAQ.pdf"
+      "notes": "Extract 07_2026-04-30_破限系列_官方FAQ.pdf p1-10"
     },
     {
-      "task_id": "task_008",
+      "task_id": "task_008_01",
       "source_id": "source_008",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 08_2026-05-13_破限系列_裁判FAQ_260511.pdf"
+      "notes": "Extract 08_2026-05-13_破限系列_裁判FAQ_260511.pdf p1-10"
     },
     {
-      "task_id": "task_009",
+      "task_id": "task_009_01",
       "source_id": "source_009",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf"
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p1-10 covered by evidence (structural parse)"
     },
     {
-      "task_id": "task_010",
+      "task_id": "task_009_02",
+      "source_id": "source_009",
+      "page_start": 11,
+      "page_end": 20,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p11-20 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_03",
+      "source_id": "source_009",
+      "page_start": 21,
+      "page_end": 30,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p21-30 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_04",
+      "source_id": "source_009",
+      "page_start": 31,
+      "page_end": 40,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p31-40 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_05",
+      "source_id": "source_009",
+      "page_start": 41,
+      "page_end": 50,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p41-50 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_06",
+      "source_id": "source_009",
+      "page_start": 51,
+      "page_end": 60,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p51-60 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_07",
+      "source_id": "source_009",
+      "page_start": 61,
+      "page_end": 70,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p61-70 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_08",
+      "source_id": "source_009",
+      "page_start": 71,
+      "page_end": 80,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p71-80 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_09",
+      "source_id": "source_009",
+      "page_start": 81,
+      "page_end": 90,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p81-90 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_10",
+      "source_id": "source_009",
+      "page_start": 91,
+      "page_end": 100,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p91-100 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_11",
+      "source_id": "source_009",
+      "page_start": 101,
+      "page_end": 110,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p101-110 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_12",
+      "source_id": "source_009",
+      "page_start": 111,
+      "page_end": 120,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p111-120 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_009_13",
+      "source_id": "source_009",
+      "page_start": 121,
+      "page_end": 125,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Stage2A completed: 09_2026-07-23_6f47b6ebe57341a5bb5f4bed5548d051.pdf p121-125 covered by evidence (structural parse)"
+    },
+    {
+      "task_id": "task_010_01",
       "source_id": "source_010",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 8,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 10_2026-07-24_9fe1f19110dd4678a6ad7bd96e791bba.pdf"
+      "notes": "Extract 10_2026-07-24_9fe1f19110dd4678a6ad7bd96e791bba.pdf p1-8 [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_011",
+      "task_id": "task_011_01",
       "source_id": "source_011",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 11_2026-08-13_612b1cd53f9f41baaf3c8734c1881a3b.pdf"
+      "notes": "Extract 11_2026-08-13_612b1cd53f9f41baaf3c8734c1881a3b.pdf p1-10"
     },
     {
-      "task_id": "task_012",
+      "task_id": "task_012_01",
       "source_id": "source_012",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 7,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 01_2025-10-24_Core_Rules_Patch_Notes.pdf"
+      "notes": "Extract 01_2025-10-24_Core_Rules_Patch_Notes.pdf p1-7"
     },
     {
-      "task_id": "task_013",
+      "task_id": "task_013_01",
       "source_id": "source_013",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 14,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 02_2025-10-28_Origins_Errata.pdf"
+      "notes": "Extract 02_2025-10-28_Origins_Errata.pdf p1-10 [page_end corrected 10->14 in Stage 2C] [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_014",
+      "task_id": "task_014_01",
       "source_id": "source_014",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 5,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 03_2025-12-05_Spiritforged_Patch_Notes.pdf"
+      "notes": "Extract 03_2025-12-05_Spiritforged_Patch_Notes.pdf p1-5"
     },
     {
-      "task_id": "task_015",
+      "task_id": "task_015_01",
       "source_id": "source_015",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 8,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 04_2026-01-14_Spiritforged_Errata.pdf"
+      "notes": "Extract 04_2026-01-14_Spiritforged_Errata.pdf p1-8 [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_016",
+      "task_id": "task_016_01",
       "source_id": "source_016",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 7,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 05_2026-03-30_Unleashed_Patch_Notes.pdf"
+      "notes": "Extract 05_2026-03-30_Unleashed_Patch_Notes.pdf p1-7"
     },
     {
-      "task_id": "task_017",
+      "task_id": "task_017_01",
       "source_id": "source_017",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 4,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 06_2026-04-03_Unleashed_Errata.pdf"
+      "notes": "Extract 06_2026-04-03_Unleashed_Errata.pdf p1-4 [Stage 2C completed: errata evidence extracted]"
     },
     {
-      "task_id": "task_018",
+      "task_id": "task_018_01",
       "source_id": "source_018",
       "page_start": 1,
       "page_end": 10,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 07_2026-07-16_Core_Rules.pdf"
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p1-10 -> evidence rows written"
     },
     {
-      "task_id": "task_019",
+      "task_id": "task_018_02",
+      "source_id": "source_018",
+      "page_start": 11,
+      "page_end": 20,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p11-20 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_03",
+      "source_id": "source_018",
+      "page_start": 21,
+      "page_end": 30,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p21-30 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_04",
+      "source_id": "source_018",
+      "page_start": 31,
+      "page_end": 40,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p31-40 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_05",
+      "source_id": "source_018",
+      "page_start": 41,
+      "page_end": 50,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p41-50 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_06",
+      "source_id": "source_018",
+      "page_start": 51,
+      "page_end": 60,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p51-60 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_07",
+      "source_id": "source_018",
+      "page_start": 61,
+      "page_end": 70,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p61-70 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_08",
+      "source_id": "source_018",
+      "page_start": 71,
+      "page_end": 80,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p71-80 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_09",
+      "source_id": "source_018",
+      "page_start": 81,
+      "page_end": 90,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p81-90 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_10",
+      "source_id": "source_018",
+      "page_start": 91,
+      "page_end": 100,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p91-100 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_11",
+      "source_id": "source_018",
+      "page_start": 101,
+      "page_end": 110,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p101-110 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_12",
+      "source_id": "source_018",
+      "page_start": 111,
+      "page_end": 120,
+      "section": "main",
+      "status": "completed",
+      "assigned_role": null,
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p111-120 -> evidence rows written"
+    },
+    {
+      "task_id": "task_019_01",
       "source_id": "source_019",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 8,
       "section": "main",
       "status": "pending",
       "assigned_role": null,
-      "notes": "Extract rules from 08_2026-07-17_Vendetta_Patch_Notes.pdf"
+      "notes": "Extract 08_2026-07-17_Vendetta_Patch_Notes.pdf p1-8"
     },
     {
-      "task_id": "task_020",
+      "task_id": "task_020_01",
       "source_id": "source_020",
       "page_start": 1,
-      "page_end": 10,
+      "page_end": 8,
       "section": "main",
-      "status": "pending",
+      "status": "completed",
       "assigned_role": null,
-      "notes": "Extract rules from 09_2026-07-23_Vendetta_Errata.pdf"
+      "notes": "Extract 09_2026-07-23_Vendetta_Errata.pdf p1-8 [Stage 2C completed: errata evidence extracted]"
     }
   ],
-  "last_updated": "2026-09-18T17:29:55.262131",
-  "total_count": 20,
+  "last_updated": "2026-09-20T12:32:38.953066",
+  "total_count": 43,
   "status_summary": {
-    "pending": 20,
-    "running": 0,
-    "completed": 0,
-    "failed": 0
+    "pending": 18,
+    "completed": 25
   }
 }

@@ -1,0 +1,355 @@
+{
+ "rule_status_counts": [
+  {
+   "status": "pending_reconciliation",
+   "n": 88,
+   "nv": 0
+  },
+  {
+   "status": "reconciled",
+   "n": 2896,
+   "nv": 0
+  }
+ ],
+ "rec_status_counts": [
+  {
+   "status": "reconciled_tier0",
+   "n": 2188
+  },
+  {
+   "status": "reconciled_tier1",
+   "n": 398
+  },
+  {
+   "status": "reconciled_tier1f",
+   "n": 19
+  },
+  {
+   "status": "reconciled_tier2",
+   "n": 161
+  },
+  {
+   "status": "reconciled_tier2_errata",
+   "n": 130
+  }
+ ],
+ "cr_front": [
+  {
+   "rule_id": "R-CR-FRONT",
+   "topic": "Core Rules front matter",
+   "status": "reconciled",
+   "needs_verification": "false",
+   "pcr": "《符文战场》核心规则\n最后更新时间：2026 年7 月17 日"
+  },
+  {
+   "rule_id": "R-ER-FRONT",
+   "topic": "Errata documents front matter",
+   "status": "pending_reconciliation",
+   "needs_verification": null,
+   "pcr": null
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "topic": "FAQ / Official Explanation documents front matter",
+   "status": "pending_reconciliation",
+   "needs_verification": null,
+   "pcr": null
+  }
+ ],
+ "cr_front_rec": [
+  {
+   "reconciliation_id": "REC-4B-T0-R-CR-FRONT",
+   "rule_id": "R-CR-FRONT",
+   "source_id": "source_009+source_018",
+   "original_fragment": "zh+en same-version equivalent pair (EV-CN-CR-0000 / EV-EN-CR-0000); en=official, zh=canonical; no errata/FAQ links",
+   "corrected_fragment": null,
+   "modification_type": "none",
+   "effective_scope": "full_rule",
+   "status": "reconciled_tier0"
+  }
+ ],
+ "attach_sample": [
+  {
+   "rule_id": "R-CARD-ARC-003",
+   "status": "reconciled",
+   "needs_verification": "false",
+   "oi": "[EV-CN-FAQ-0322 | source_011 | official | rule_interpretation]\nQ: 如果我的传奇“杰斯 - 未来守护者”没有强化，我能否激活已强化的“黑默丁格 - 博学家”，以此让\n两件装备变为活跃状态？如果黑默丁格也没有强化呢？\nA: 只要黑默丁格已强化，就可以激活其技能，“杰斯 - 未来守护者”的强化状态并不影响这一点。\n这里稍微有些复杂，因为这个问题涉及依赖性关键词的两个重要细节：\n1. 第一，依赖性关键词（[等级][>]或[已强化][>]与箭头一同出现时所代表的这类技能）包含\n整个技能，其中也包含依赖性技能。可以说，它们都是同一个物体。\n2. 第二，即使依赖性关键词的依赖性技能当前未生效（也就是其条件尚未满足），该依赖性\n技能仍然存在，且可以被其他效果引用。在这个情况下，条件是该技能的来源已强化。\n黑默丁格会获得所有费用中带有[E]符号的主动技能，且获得的是整个技能，包括其中的所有限\n制、费用、依赖性关键词等全部内容。从实际操作的角度讲，黑默丁格从未来守护者处获得的是\n以下整行技能：\n[已强化][>] [1]，[E]：让两件装备变为活跃状态。\n正是由于前面提到的第二点，即使未来守护者没有强化，黑默丁格仍能获得这个技能。\n本案例的关键规则是727.1.b.1，内容如下：\n条件被满足前，依赖性技能仍视作存在于卡牌上，可供引用和判定",
+   "ex": "[EV-CN-FAQ-0135 | source_006 | judge-community | example_only]\nQ: Q：我方【黑默丁格】和【烈娜\n塔·戈拉斯克 - 幕后主脑】均位\n于基地中，【黑默丁格】能否使用\n“支付[4]和[B][B][B][B]，[E]：\n获得 1 分”？\nA: 可以。\n\n[EV-CN-FAQ-0179 | source_006 | judge-community | example_only]\nQ: Q：【黑默丁格 - 发明家】使用\n【海兽钓钩】的技能时，其符能费\n用应该支付[Y]，还是支付[B]？\nA: [Y]。"
+  }
+ ],
+ "rec_t1_sample": [
+  {
+   "reconciliation_id": "REC-4B-T1-R-CARD-ARC-002",
+   "rule_id": "R-CARD-ARC-002",
+   "source_id": "multi-faq",
+   "original_fragment": "faq attach: example_only=1 rule_interpretation=0 exception=0 rule_change_candidate=0; FAQ-only card cluster: no core-rule/errata text, canonical stays NULL",
+   "corrected_fragment": null,
+   "modification_type": "none",
+   "effective_scope": "faq_attach",
+   "status": "reconciled_tier1"
+  }
+ ],
+ "rcc_rules_mix": {
+  "R-MISC-source_012": [
+   "source_012"
+  ],
+  "R-MISC-source_014": [
+   "source_014"
+  ],
+  "R-MISC-source_016": [
+   "source_016"
+  ],
+  "R-MISC-source_019": [
+   "source_019"
+  ],
+  "R-TOPIC-CN-40": [
+   "source_005"
+  ],
+  "R-TOPIC-EN-02": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-04": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-05": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-06": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-07": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-08": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-10": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-11": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-12": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-14": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-15": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-16": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-17": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-18": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-21": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-22": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-23": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-25": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-26": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-29": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-30": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-31": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-32": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-33": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-34": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-36": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-37": [
+   "source_012"
+  ],
+  "R-TOPIC-EN-38": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-39": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-40": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-41": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-42": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-43": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-44": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-45": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-47": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-48": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-49": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-50": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-51": [
+   "source_014"
+  ],
+  "R-TOPIC-EN-53": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-54": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-55": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-56": [
+   "source_016"
+  ],
+  "R-TOPIC-EN-57": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-58": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-59": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-60": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-61": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-62": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-63": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-64": [
+   "source_019"
+  ],
+  "R-TOPIC-EN-65": [
+   "source_016"
+  ]
+ },
+ "rcc_rules_total": 58,
+ "rcc_link_total_pending": 117,
+ "interp_per_pending": {
+  "R-TOPIC-CN-22": 2,
+  "R-TOPIC-CN-30": 3,
+  "R-TOPIC-CN-04": 2,
+  "R-TOPIC-CN-20": 2,
+  "R-TOPIC-CN-29": 2,
+  "R-TOPIC-CN-05": 7,
+  "R-TOPIC-CN-08": 2,
+  "R-TOPIC-CN-34": 1,
+  "R-TOPIC-CN-38": 1,
+  "R-TOPIC-CN-13": 1,
+  "R-TOPIC-CN-27": 1,
+  "R-TOPIC-CN-39": 2,
+  "R-TOPIC-CN-40": 1,
+  "R-TOPIC-CN-12": 1,
+  "R-TOPIC-CN-15": 2,
+  "R-TOPIC-CN-01": 1,
+  "R-TOPIC-CN-25": 1,
+  "R-MISC-source_011": 1,
+  "R-TOPIC-EN-03": 9,
+  "R-TOPIC-EN-30": 1,
+  "R-TOPIC-EN-04": 1,
+  "R-TOPIC-EN-11": 6,
+  "R-TOPIC-EN-07": 1,
+  "R-TOPIC-EN-37": 22,
+  "R-TOPIC-EN-46": 1,
+  "R-TOPIC-EN-09": 4,
+  "R-TOPIC-EN-27": 2,
+  "R-TOPIC-EN-24": 4,
+  "R-TOPIC-EN-28": 1,
+  "R-TOPIC-EN-01": 2,
+  "R-TOPIC-EN-35": 3,
+  "R-TOPIC-EN-48": 2,
+  "R-TOPIC-EN-47": 1,
+  "R-TOPIC-EN-49": 1,
+  "R-TOPIC-EN-51": 1,
+  "R-TOPIC-EN-15": 1,
+  "R-TOPIC-EN-34": 2,
+  "R-TOPIC-EN-13": 2,
+  "R-TOPIC-EN-10": 1,
+  "R-TOPIC-EN-31": 1,
+  "R-TOPIC-EN-52": 1,
+  "R-TOPIC-EN-56": 1,
+  "R-TOPIC-EN-55": 2,
+  "R-TOPIC-EN-54": 1,
+  "R-TOPIC-EN-44": 3,
+  "R-TOPIC-EN-45": 3,
+  "R-TOPIC-EN-17": 1,
+  "R-TOPIC-EN-16": 2,
+  "R-TOPIC-EN-12": 6,
+  "R-TOPIC-EN-38": 3,
+  "R-TOPIC-EN-36": 1,
+  "R-TOPIC-EN-02": 3,
+  "R-TOPIC-EN-33": 1,
+  "R-TOPIC-EN-19": 3,
+  "R-TOPIC-EN-53": 1,
+  "R-TOPIC-EN-05": 2,
+  "R-TOPIC-EN-58": 1,
+  "R-TOPIC-EN-57": 1,
+  "R-TOPIC-EN-61": 1,
+  "R-TOPIC-EN-59": 1,
+  "R-TOPIC-EN-60": 1,
+  "R-TOPIC-EN-39": 1,
+  "R-TOPIC-EN-42": 1,
+  "R-TOPIC-EN-43": 1,
+  "R-TOPIC-EN-41": 1,
+  "R-TOPIC-EN-14": 4,
+  "R-TOPIC-EN-23": 5,
+  "R-TOPIC-EN-08": 2
+ },
+ "pending_linkless": [
+  "R-ER-FRONT",
+  "R-FAQ-FRONT"
+ ],
+ "tier_sample": [
+  {
+   "p": "[EV-CN-FAQ-0325 | source_011 | official | rule_interpretation]\nQ: 如果我在本回合内尚未征服“龙栖峰”，却试图打出“栖息的冥龙”，此时会发生什么？我可以支\n付[A][A]并将其"
+  },
+  {
+   "p": "[EV-CN-FAQ-0205 | source_007 | official | rule_interpretation]\nQ: 如果我向已贴附的武装打出“化为灰烬”，这件武装会在回合开始阶段被摧毁吗？\nA: 是的。赋予的瞬息关键词将会生"
+  },
+  {
+   "p": "[EV-CN-FAQ-0030 | source_001 | judge-community | rule_interpretation]\nQ: 问题 5.2：什么是特殊清理？\nA: 特殊清理是指在特定时间点进行的清理步骤，其包含常规清理中"
+  }
+ ]
+}

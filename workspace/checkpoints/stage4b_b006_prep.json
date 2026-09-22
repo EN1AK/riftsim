@@ -1,0 +1,403 @@
+{
+ "cr_front_rule": {
+  "rule_id": "R-CR-FRONT",
+  "topic": "Core Rules front matter",
+  "proposed_canonical_rule": "《符文战场》核心规则\n最后更新时间：2026 年7 月17 日",
+  "applicable_object": null,
+  "trigger": null,
+  "precondition": null,
+  "effect": null,
+  "restriction": null,
+  "exception": "",
+  "official_interpretation": "",
+  "derived_interpretation": null,
+  "example": "",
+  "status": "reconciled",
+  "needs_verification": "false"
+ },
+ "cr_front_rec": [
+  {
+   "reconciliation_id": "REC-4B-T0-R-CR-FRONT",
+   "rule_id": "R-CR-FRONT",
+   "source_id": "source_009+source_018",
+   "original_fragment": "zh+en same-version equivalent pair (EV-CN-CR-0000 / EV-EN-CR-0000); en=official, zh=canonical; no errata/FAQ links",
+   "corrected_fragment": null,
+   "modification_type": "none",
+   "effective_scope": "full_rule",
+   "status": "reconciled_tier0"
+  }
+ ],
+ "chg_t1f_sample": [
+  {
+   "change_id": "CHG-4B-T1F-0001",
+   "rule_id": "R-CR-187.4",
+   "original_content": "187.4.c.（旧）如果玩家在某战场上没有单位，且该回合处于开环状态，则除非该战场正在进行战斗或法术对决，否则该玩家会在后续的清理阶段失去该战场的控制权。",
+   "new_content": "323.6. 4.如果当前回合处于开环状态，且某处由某玩家控制的战场上没有正在进行的法术对决或战斗，若该处战场没有被该玩家控制的单位占据，则该玩家失去该战场的控制权。",
+   "source_type": "faq",
+   "source_language": "zh",
+   "source_document": "07_2026-04-30_破限系列_官方FAQ.pdf",
+   "version": "v2026",
+   "date": "2026-04-30",
+   "modification_type": "other",
+   "reason": "FAQ(source_007) declares old 187.4.c contradicted cleanup rule 323.6; control-loss consolidated into 323.6 and 187.4.c removed (187.4 renumbered to Mech token def)",
+   "final_conclusion": "incorporated into 2026-07 core rules; recorded, not applied"
+  },
+  {
+   "change_id": "CHG-4B-T1F-0002",
+   "rule_id": "R-CR-316.5",
+   "original_content": "316.5.b.（旧）当尚无控制者的战场进入争夺状态时，则将该战场上的法术对决标记为待发生。",
+   "new_content": "323.8. 6.如果战场进入了争夺状态，则将该战场上的法术对决标记为待发生。",
+   "source_type": "faq",
+   "source_language": "zh",
+   "source_document": "07_2026-04-30_破限系列_官方FAQ.pdf",
+   "version": "v2026",
+   "date": "2026-04-30",
+   "modification_type": "condition_change",
+   "reason": "FAQ(source_007) declares 316.5.b wording change (uncontrolled-only -> any contested battlefield); rule relocated to 323.8; 316.5.b renumbered to Neutral Open State def",
+   "final_conclusion": "incorporated into 2026-07 core rules at 323.8; recorded, not applied"
+  }
+ ],
+ "chg_t2er_sample": [
+  {
+   "change_id": "CHG-4B-T2ER-ARC-001-EV-CN-ER-0056",
+   "rule_id": "R-CARD-ARC-001",
+   "original_content": "[游走]（我可以向其他战场进行移动。）\n你可以从废牌堆回收一张卡牌，然后让我本回合内战力+1（可重复执行）。",
+   "new_content": "[游走]（我可以向其他战场进行移动。）\n从你的废牌堆回收一张卡牌：给予我在本回合内[S]+1。",
+   "source_type": "errata",
+   "source_language": "zh",
+   "source_document": "03_2026-04-15_破限系列_勘误汇总_260403.pdf",
+   "version": "v2026",
+   "date": "2026-04-15",
+   "modification_type": "terminology_fix",
+   "reason": "official errata EV-CN-ER-0056 (source_003) applied per Stage 4B; effective_scope=card_text",
+   "final_conclusion": "applied: latest zh official errata defines canonical card text"
+  }
+ ],
+ "watch_cards_direct": [
+  {
+   "rule_id": "R-CARD-OGN-131",
+   "status": "reconciled",
+   "needs_verification": "true"
+  },
+  {
+   "rule_id": "R-CARD-OGN-251",
+   "status": "reconciled",
+   "needs_verification": "false"
+  },
+  {
+   "rule_id": "R-CARD-UNL-097",
+   "status": "reconciled",
+   "needs_verification": "false"
+  },
+  {
+   "rule_id": "R-CARD-UNL-177",
+   "status": "reconciled",
+   "needs_verification": "false"
+  }
+ ],
+ "watch_cards_via_evidence": [
+  "R-CARD-ARC-005",
+  "R-CARD-OGN-030",
+  "R-CARD-OGN-030a",
+  "R-CARD-OGN-131",
+  "R-CARD-OGN-202",
+  "R-CARD-OGN-202a",
+  "R-CARD-UNL-097",
+  "R-CARD-UNL-177",
+  "R-CARD-UNL-177a",
+  "R-CARD-VEN-168"
+ ],
+ "faq0260": [
+  {
+   "evidence_id": "EV-CN-FAQ-0260",
+   "card_ids": "[\"ARC-005\", \"OGN-030\", \"OGN-030a\", \"OGN-131\", \"OGN-202\", \"OGN-202a\", \"UNL-097\", \"UNL-177\", \"UNL-177a\", \"VEN-168\"]",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"prose_passage\"], \"needs_review\": false} | cross_ref_errata=EV-CN-ER-0010 (MR-2D-0008 resolved 2026-09-20) | note: zh text semantically identical; FAQ uses full word 战力+2 where 2C uses [M]+2; FAQ entry also carries the EN text side-by-side | pending_zh_text_update (MR-2D-0005 -> Stage 3): 沙丘亚龙/金克丝/均衡门徒/艾翁 中文文本官方声明『或将在未来作出更新调整』；现行结算以本条中英对照分析为准，待后续勘误落地 | stage3_alignment: unmatched_zh (no cross-language counterpart item in corpus; doc pair source_008<->none reviewed 2026-09-21)"
+  }
+ ],
+ "rcc_on_reconciled": [
+  {
+   "rule_id": "R-CR-187.4",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战场与法术对决的控制权"
+  },
+  {
+   "rule_id": "R-CR-316.5",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战场与法术对决的控制权"
+  },
+  {
+   "rule_id": "R-CR-323.6",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战场与法术对决的控制权"
+  },
+  {
+   "rule_id": "R-CR-323.8",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战场与法术对决的控制权"
+  },
+  {
+   "rule_id": "R-CR-344.2",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战场与法术对决的控制权"
+  },
+  {
+   "rule_id": "R-CR-461.3",
+   "evidence_id": "EV-CN-FAQ-0201",
+   "source_id": "source_007",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "战斗结果"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0129",
+   "source_id": "source_014",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Specific cards may restrict or expand the list of valid locations"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0131",
+   "source_id": "source_014",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Double added to the list of game actions"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0132",
+   "source_id": "source_014",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Swap added to the list of game actions"
+  },
+  {
+   "rule_id": "R-CARD-OGN-250",
+   "evidence_id": "EV-EN-OE-0182",
+   "source_id": "source_016",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: If an event replaced by a replacement effect would be modified by a game effect or a game action, the"
+  },
+  {
+   "rule_id": "R-CARD-SFD-202",
+   "evidence_id": "EV-EN-OE-0182",
+   "source_id": "source_016",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: If an event replaced by a replacement effect would be modified by a game effect or a game action, the"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0220",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Skip action added."
+  },
+  {
+   "rule_id": "R-CARD-SFD-111",
+   "evidence_id": "EV-EN-OE-0254",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefield that their"
+  },
+  {
+   "rule_id": "R-CARD-UNL-184",
+   "evidence_id": "EV-EN-OE-0254",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefield that their"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118",
+   "evidence_id": "EV-EN-OE-0265",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said cards have been"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118a",
+   "evidence_id": "EV-EN-OE-0265",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said cards have been"
+  },
+  {
+   "rule_id": "R-CARD-UNL-106",
+   "evidence_id": "EV-EN-OE-0269",
+   "source_id": "source_019",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "q": "NEW RULE: If an Ability of a Battlefield indicates that a specific player makes a choice, that player is the Ability’s controller. They"
+  }
+ ],
+ "front_links": [
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0001",
+   "source_id": "source_013",
+   "t": "Riftbound Card Errata\nLast Updated: 2025-10-21"
+  },
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0049",
+   "source_id": "source_017",
+   "t": "UNLEASHED ERRATA UPDATES\nUpdates on the rules wording for cards from Spiritforged and Unleashed.\nRules and Releases | 4/"
+  },
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0058",
+   "source_id": "source_020",
+   "t": "VENDETTA ERRATA UPDATES\nUpdates regarding card text with the Vendetta release.\nAnnouncements | 7/24/2026\nHey Riftbounder"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0001",
+   "source_id": "source_001",
+   "t": "裁判FAQ\n最后更新时间：2025-10-23\n大家好！《符文战场》的新版完整规则已经发布，为了及时解答大家关于新版规则和卡牌效果的问题，裁\n判组在研读完核心规则后，第一时间整理了可能出现的常见疑问，并与设计师团队一一进行了确认。\n请注意，"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0052",
+   "source_id": "source_005",
+   "t": "《符文战场》：“铸魂淬炼”系列常见问题\n大家好！我们收到了许多关于“铸魂淬炼”系列的提问，希望在此对其中一些重要问题进行\n回答。另外，对于核心规则当前版本存在的模糊不清或误导性问题，我们也需要进行一些\n详细的澄清和解释。下个版本的核心规则推"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0100",
+   "source_id": "source_006",
+   "t": "铸魂淬炼系列 裁判FAQ\n更新日期：2026/01/14\n大家好！《符文战场》：“铸魂淬炼”系列常见问题（以下简称官方FAQ）已经发布，\n我们之前发布的裁判FAQ 也将随之更新，以保证判罚与设计师同步的最新设计意图一致，如\n果在未来官方FA"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0194",
+   "source_id": "source_007",
+   "t": "《符文战场》破限系列 官方FAQ\n我们注意到，最近的“破限”系列《核心规则》更新引起了部分玩家和裁判的疑虑。出于多\n种综合因素的影响，我们从本系列开始，改变了过去的一贯处理方式，这其中也包括一些必要的\n内部流程调整，目的是为了进一步优化我们"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0218",
+   "source_id": "source_008",
+   "t": "《符⽂战场》破限系列 裁判FAQ\n随着《符⽂战场》「破限」系列的到来以及此前《核⼼规则》、《赛事规则》的更\n新，我们发现在游戏过程中仍然会出现⼀些引起误解的常⻅问题，为此裁判组咨询了\n设计师后针对相关问题发布这份⽂档，以保证判罚与设计师同步"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0298",
+   "source_id": "source_011",
+   "t": "《符文战场》化神争锋系列 官方FAQ\n欢迎来到我们首个全球同步发行的系列——“化神争锋”的常见问题解答！本文档收录的问题来\n自社区讨论、全球各地的裁判，以及我们的团队内部。感谢大家在讨论“化神争锋”系列规则更新\n时展现出的热情与活力；我们希"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0001",
+   "source_id": "source_012",
+   "t": "RIFTBOUND CORE RULES: PATCH NOTES The first major Riftbound rules patch is here!\nRules and Releases | 10/24/2025\nWelcome"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0088",
+   "source_id": "source_014",
+   "t": "RIFTBOUND CORE RULES: SPIRITFORGED PATCH NOTES Here are the updates for Riftbound’s Core Rules that come with the arriva"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0134",
+   "source_id": "source_016",
+   "t": "RIFTBOUND CORE RULES: UNLEASHED PATCH NOTES Learn all about the updates to Riftbound’s rules which arrive with Unleashed"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0210",
+   "source_id": "source_019",
+   "t": "CORE RULES: VENDETTA PATCH NOTES Here are the updates to Riftbound’s Core Rules with Vendetta\nAnnouncements | 7/17/2026\n"
+  }
+ ],
+ "sources_sub": [
+  {
+   "source_id": "source_005",
+   "source_document": "05_2026-04-15_铸魂淬炼系列_官方FAQ_260114.pdf",
+   "source_type": "faq",
+   "language": "zh",
+   "date": "2026-04-15",
+   "effective_date": "2026-04-15",
+   "date_confidence": "inferred"
+  },
+  {
+   "source_id": "source_011",
+   "source_document": "11_2026-08-13_612b1cd53f9f41baaf3c8734c1881a3b.pdf",
+   "source_type": "faq",
+   "language": "zh",
+   "date": "2026-08-13",
+   "effective_date": "2026-08-13",
+   "date_confidence": "inferred"
+  },
+  {
+   "source_id": "source_012",
+   "source_document": "01_2025-10-24_Core_Rules_Patch_Notes.pdf",
+   "source_type": "official_explanation",
+   "language": "en",
+   "date": "2025-10-24",
+   "effective_date": "2025-10-24",
+   "date_confidence": "inferred"
+  },
+  {
+   "source_id": "source_014",
+   "source_document": "03_2025-12-05_Spiritforged_Patch_Notes.pdf",
+   "source_type": "official_explanation",
+   "language": "en",
+   "date": "2025-12-05",
+   "effective_date": "2025-12-12",
+   "date_confidence": "declared"
+  },
+  {
+   "source_id": "source_016",
+   "source_document": "05_2026-03-30_Unleashed_Patch_Notes.pdf",
+   "source_type": "official_explanation",
+   "language": "en",
+   "date": "2026-03-31",
+   "effective_date": "2026-03-31",
+   "date_confidence": "declared"
+  },
+  {
+   "source_id": "source_019",
+   "source_document": "08_2026-07-17_Vendetta_Patch_Notes.pdf",
+   "source_type": "official_explanation",
+   "language": "en",
+   "date": "2026-07-17",
+   "effective_date": "2026-07-24",
+   "date_confidence": "declared"
+  }
+ ],
+ "pending_rel_final": {
+  "faq:rule_change_candidate": 117,
+  "faq:rule_interpretation": 156,
+  "front_matter": 13
+ },
+ "pending_shape": {
+  "rules_with_rcc": 58,
+  "rules_only_interp": 28,
+  "rules_only_fm": 2,
+  "rules_empty": 0
+ },
+ "empty_rules": []
+}

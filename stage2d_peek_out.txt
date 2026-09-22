@@ -1,0 +1,242 @@
+### source_001  loltcg_pdfs__01_2025-12-03_裁判FAQ_251023.txt  chars=9621 lines=285
+--- head ---
+\n
+===== PAGE 1 =====\n
+ \n
+裁判FAQ \n
+最后更新时间：2025-10-23 \n
+ \n
+大家好！《符文战场》的新版完整规则已经发布，为了及时解答大家关于新版规则和卡牌效果的问题，裁\n
+判组在研读完核心规则后，第一时间整理了可能出现的常见疑问，并与设计师团队一一进行了确认。 \n
+请注意，本文档可以作为裁判判罚的依据，但不代表官方FAQ。 \n
+ \n
+本文档分为两个维度：  \n
+● 问题：关于玩家对于某些规则的疑惑，我们进行了回答。 \n
+● Q&A：关于一些复杂的卡牌互动，我们在相应问题下，补充了具体卡牌的Q&A 作为示例。 \n
+ \n
+本文档基于最新核心规则和此前已经发布的核心规则FAQ 制作；如果最新核心规则和此前已经发\n
+布的核心规则FAQ 存在冲突，请以最新核心规则为准。核心规则FAQ 中的勘误仍然有效，我们预计在\n
+下周以单独文档的形式汇总所有勘误，并长期持续更新，未来也可以在小程序内卡牌图鉴的单卡描述里查\n
+看最新勘误内容。 \n
+ \n
+1.打出卡牌 \n
+问题 1.1：当我使用了一张卡牌，但其所有效果都无法执行，我是否成功打出了它？ \n
+执行卡面文字时，需尽可能执行所有指示，并忽略其中无法实现的指示。如果某张卡牌的所有指示\n
+均无法实现，它仍可被打出并完成结算，但不会产生任何效果。 \n
+问题 1.2：当我使用效果中带有“任意数量”和“最多”字样的卡牌时，我可以不选择任何目标吗？ \n
+可以。如果卡牌指示玩
+------------
+
+### source_005  loltcg_pdfs__05_2026-04-15_铸魂淬炼系列_官方FAQ_260114.txt  chars=11797 lines=603
+--- head ---
+\n
+===== PAGE 1 =====\n
+《符文战场》：“铸魂淬炼”系列常见问题 \n
+大家好！我们收到了许多关于“铸魂淬炼”系列的提问，希望在此对其中一些重要问题进行\n
+回答。另外，对于核心规则当前版本存在的模糊不清或误导性问题，我们也需要进行一些\n
+详细的澄清和解释。下个版本的核心规则推出时，这些澄清也将正式加入规则。 \n
+ \n
+在修订和阐明规则的同时，我们也更新了部分卡牌的表述（也称为勘误）。之前已经和\n
+大家说过，我们制定了相应计划，日后将通过《符文战场》官方小程序发布勘误。这些计\n
+划仍在稳步推进中，我们将在之后向大家公布最新情况！ \n
+ \n
+本文档分为三个章节： \n
+● 现存问题——主要来自“起源”系列的常见问题，以及对“起源”与“铸魂淬炼”卡牌的\n
+部分勘误 \n
+● 功能性勘误——针对“铸魂淬炼”中少量其他卡牌的修改  \n
+● 规则阐明——针对当前规则中某些“功能本意不够明确”的卡牌进行澄清 \n
+ \n
+此外，我们还将单独发布一份勘误汇总文档。 \n
+ \n
+在本次《常见问题》中，勘误和规则修订比之前的“起源”系列少了很多，但我们仍对这个\n
+水平不太满意。出现这种情况，部分是因为实体卡牌游戏的制作周期较长。在《“起源”系\n
+列常见问题》和《勘误汇总》对许多规则和文本模板进行修订时，“铸魂淬炼”系列的卡牌\n
+文本已经定稿付印了。因此，在本次修订和勘误中，会补齐一些之前没赶上的部分。按照\n
+我们的预期，随着规则的不断稳定和
+------------
+
+### source_006  loltcg_pdfs__06_2026-04-15_铸魂淬炼系列_裁判FAQ.txt  chars=10437 lines=1005
+--- head ---
+\n
+===== PAGE 1 =====\n
+ \n
+铸魂淬炼系列 裁判FAQ \n
+更新日期：2026/01/14 \n
+ \n
+大家好！《符文战场》：“铸魂淬炼”系列常见问题（以下简称官方FAQ）已经发布，\n
+我们之前发布的裁判FAQ 也将随之更新，以保证判罚与设计师同步的最新设计意图一致，如\n
+果在未来官方FAQ 与裁判FAQ 存在冲突，请以最新版官方FAQ 为准。 \n
+请注意，本文档可以作为裁判判罚的依据，但不代表官方FAQ。 \n
+本文档分为四个部分：  \n
+● 卡牌勘误 \n
+● 官方FAQ 更新后产生变动的卡牌问题说明 \n
+● 新增QA \n
+● 其他常见卡牌QA \n
+本文档基于《符文战场》：“铸魂淬炼”系列常见问题、最新核心规则和设计师回复进行\n
+制作，代表了目前设计师的设计意图与修改方向。\n
+\n
+===== PAGE 2 =====\n
+ \n
+ \n
+1. 卡牌勘误 \n
+以下卡牌已经在官方FAQ 中已经作出勘误，最新卡面文本以官方FAQ 为\n
+准。 \n
+ \n
+Q：双方基地和战场上只存在一名单\n
+位，是敌方的【呸呸魄罗】。我方打\n
+出【星落】，可以只支付一次<法\n
+盾>费用吗？ \n
+A：不可以。 \n
+ \n
+Q：对方使用【艾卡西亚暴雨】，选\n
+择了我方单位作为目标。在【艾卡西\n
+亚暴雨】结算前，我方使用【极速反\n
+制】可以无效化【艾卡西亚暴雨】的\n
+整个效果吗？ \n
+Q：可以。 \n
+ \n
+Q1：我方使用【断魂一扼】摧毁的\n
+友方单位因【中娅沙漏】的效果被召\n
+回，【
+------------
+
+### source_007  loltcg_pdfs__07_2026-04-30_破限系列_官方FAQ.txt  chars=15885 lines=685
+--- head ---
+\n
+===== PAGE 1 =====\n
+《符文战场》破限系列 官方FAQ \n
+我们注意到，最近的“破限”系列《核心规则》更新引起了部分玩家和裁判的疑虑。出于多\n
+种综合因素的影响，我们从本系列开始，改变了过去的一贯处理方式，这其中也包括一些必要的\n
+内部流程调整，目的是为了进一步优化我们规则文档的更新体系。我们也在致力于更好地向玩家\n
+和裁判传递和沟通这些变化。希望这篇文章能够解决来自社区的诸多问题，并消除大家的疑惑。 \n
+ \n
+尽管这次“破限”系列的更新量很大，但这是《符文战场》的规则与文本规范向未来的系列\n
+过渡所迈出的重要一步。为此，我们必须对当前规则框架下最容易引起混淆的部分规则进行阐\n
+明。在此过渡期间，部分调整后的规则仍难免会有不够妥当之处，我们会继续努力完善，并衷心\n
+感谢大家的耐心包容。 \n
+ \n
+在本次《常见问题》中，我们先来为大家梳理清楚规则更新中几个令人困惑的点——如果\n
+你想直接查看常见问题的解答，那么请直接跳至本文后半部分的常见问题解答。如果本文档与\n
+《核心规则》有任何不一致之处，请以本文档为准。当下一次核心规则更新发布时，本文档将会\n
+失效。你可以随时访问《符文战场》微信小程序的玩法规则专区，查阅《符文战场》的最新规则\n
+文档。 \n
+ \n
+在本文档中，我们使用了一些特定的缩写来表示卡牌文本中的符号。以下是一份简要指南： \n
+ \n
+● [E]代表“休眠” \n
+● [M]代表“战力” \n
+● [A
+------------
+
+### source_008  loltcg_pdfs__08_2026-05-13_破限系列_裁判FAQ_260511.txt  chars=10484 lines=841
+--- head ---
+\n
+===== PAGE 1 =====\n
+ \n
+《符⽂战场》破限系列 裁判FAQ \n
+随着《符⽂战场》「破限」系列的到来以及此前《核⼼规则》、《赛事规则》的更\n
+新，我们发现在游戏过程中仍然会出现⼀些引起误解的常⻅问题，为此裁判组咨询了\n
+设计师后针对相关问题发布这份⽂档，以保证判罚与设计师同步的最新设计意图⼀\n
+致。如果在未来与官⽅ FAQ 或裁判 FAQ 存在冲突，请以未来发布的官⽅FAQ 为\n
+准。 \n
+本⽂档分为五个部分，前三部分为4 ⽉16 ⽇发布的裁判FAQ 的保留部分，后两\n
+部分为5 ⽉11 ⽇新增的卡牌⽂本以及卡牌Q&A 内容： \n
+● 官⽅规则更新后产⽣变动的卡牌问题说明 \n
+● 新增 Q&A \n
+● 其他常⻅卡牌 Q&A \n
+● 卡牌⽂本更新相关 \n
+● 260511 新增卡牌Q&A \n
+本⽂档基于《符⽂战场》「破限」系列最新核⼼规则和设计师回复进⾏制作，代表\n
+了⽬前设计师的设计意图与修改⽅向。 \n
+1. 官⽅规则更新后产⽣变动的卡牌问题 \n
+以下卡牌Q&A 在此前的起源&铸魂淬炼FAQ 已有提及，但是随着3 ⽉30 ⽇最新\n
+核⼼规则的更新，部分卡牌问题的答案发⽣了变化，因此我们重新整理后与设计\n
+师逐⼀进⾏了⼆次确认，裁判组着重提炼了以下重点问题，其余也均已于《符⽂\n
+战场》官⽅⼩程序上进⾏了更新，请各位召唤师以最新规则下的答案为准， \n
+ \n
+ \n
+Q：本回合打出的第一张卡牌是【太阳圆盘】，\n
+在打出
+------------
+
+### source_011  loltcg_pdfs__11_2026-08-13_612b1cd53f9f41baaf3c8734c1881a3b.txt  chars=14840 lines=672
+--- head ---
+\n
+===== PAGE 1 =====\n
+《符文战场》化神争锋系列 官方FAQ \n
+欢迎来到我们首个全球同步发行的系列——“化神争锋”的常见问题解答！本文档收录的问题来\n
+自社区讨论、全球各地的裁判，以及我们的团队内部。感谢大家在讨论“化神争锋”系列规则更新\n
+时展现出的热情与活力；我们希望这份文档能够澄清部分此前不够明确的规则细节，并为各位在\n
+对局中可能遇到的常见问题提供解答。 \n
+ \n
+有一点我们想特别说明：在游戏逐步迈向全球同步发行的过程中，常见问题解答的发布时机\n
+需要谨慎权衡。一方面，我们希望尽可能收集玩家和裁判在实际体验中遇到的问题；另一方面，\n
+我们也不希望出现大家在新系列中遭遇某些疑难点，却长时间得不到解答的情况。如果本文档发\n
+布得太早，我们可能无法涵盖真正困扰玩家的问题；但如果发布得太晚，又会让大家来不及参考\n
+这些内容，为即将到来的赛事准备好卡组。对于未来的系列，我们正在研究其他发布方式，希望\n
+能够改善当前时间安排给玩家带来的不便。在解决方案提出之前，也感谢各位的耐心与理解。 \n
+ \n
+本常见问题解答是一份官方判例的汇编。如果本文档与《核心规则》存在任何不一致之处，\n
+请以本文档为准。新版《核心规则》发布后，若其中有任何内容与本文档不一致，请以新版《核\n
+心规则》为准。  \n
+ \n
+在本文档中，我们使用了一些特定的缩写，来表示卡牌文本中的符号。以下是一份简要指南： \n
+ \n
+● [E]代表“休眠
+------------
+
+### source_012  riftbound_en_rules__01_2025-10-24_Core_Rules_Patch_Notes.txt  chars=23245 lines=299
+--- head ---
+\n
+===== PAGE 1 =====\n
+RIFTBOUND CORE RULES: PATCH NOTES\n
+The first major Riftbound rules patch is here!\n
+Rules and Releases | 10/24/2025\n
+Welcome to Riftbound’s first official Rules Update Patch! This will be a big one—not necessarily because of the volume of changes or\n
+shifts in how players playing already are going to be interacting with the game, but because it is the first time we are changing our\n
+Official Rules Documents (ORD)! This patch is specifically updating the Core Rules (CR) and not the Tournament Rules (TR), and the\n
+following changes will go over the broad areas of interest in more de
+------------
+
+### source_014  riftbound_en_rules__03_2025-12-05_Spiritforged_Patch_Notes.txt  chars=13311 lines=178
+--- head ---
+\n
+===== PAGE 1 =====\n
+RIFTBOUND CORE RULES: SPIRITFORGED PATCH NOTES\n
+Here are the updates for Riftbound’s Core Rules that come with the arrival of Spiritforged.\n
+Rules and Releases | 12/5/2025\n
+Spiritforged Rules Patch Notes\n
+Welcome to the Patch Notes for Riftbound, Spiritforged edition. Today we are going to be updating the Core Rules to support our\n
+newest expansion, Spiritforged! Included in today’s update are system clarifications, fixes to a few logical errors, and the new rules\n
+required to play with the mechanics included in the Spiritforged expansion.\n
+What this is\n
+In addition to the new Spir
+------------
+
+### source_016  riftbound_en_rules__05_2026-03-30_Unleashed_Patch_Notes.txt  chars=27117 lines=314
+--- head ---
+\n
+===== PAGE 1 =====\n
+RIFTBOUND CORE RULES: UNLEASHED PATCH NOTES\n
+Learn all about the updates to Riftbound’s rules which arrive with Unleashed.\n
+Rules and Releases | 3/31/2026\n
+Welcome to the Patch Notes for Riftbound, Unleashed edition. Included in today’s update are system clarifications and expansions,\n
+fixes to many logical or procedural errors, and the new rules required to play with the mechanics included in the Unleashed expansion.\n
+This rules update has three key goals: \n
+1. To support the new expansion’s cards and mechanics with rules that will explain how they function.\n
+2. To provide some c
+------------
+
+### source_019  riftbound_en_rules__08_2026-07-17_Vendetta_Patch_Notes.txt  chars=27042 lines=320
+--- head ---
+\n
+===== PAGE 1 =====\n
+CORE RULES: VENDETTA PATCH NOTES\n
+Here are the updates to Riftbound’s Core Rules with Vendetta\n
+Announcements | 7/17/2026\n
+Welcome to the patch notes for Riftbound: Vendetta. Included in today’s update are the new rules required to play with the mechanics\n
+included in the Vendetta set, as well as fixes to many logical and procedural errors.\n
+Our first goal for this rules update is primarily to support the new cards in Vendetta when it releases to the English & Chinese audiences\n
+simultaneously! Compared to the Unleashed rules update, we’re focusing more of our energy on the new r
+------------
+

@@ -1,0 +1,58 @@
+{
+  "documents": 8,
+  "evidence": 159,
+  "mapped": 156,
+  "unmapped": 0,
+  "warnings": [
+    "modification_type values are heuristic (not adjudicated); refine during Reconciliation",
+    "cross-language entry mapping NOT attempted in Stage 2C (deferred to Stage 3); known anomaly: zh source_004 entries 沉没神庙/遗忘丰碑 lack EN counterpart (MR-2C-0001)",
+    "source_013 internal date 2025-10-21 vs filename 2025-10-28 (MR-2C-0002)",
+    "source_020 article date 2026-07-24 vs filename 2026-07-23 (MR-2C-0003)",
+    "EN site-export documents (source_017/020) contained footer/sidebar noise; filtered during parse",
+    "zh source_003 zh-only translation sections flagged (MR-2C-0004)",
+    "note-marked entries '只有英文版文本不同/需要勘误' & 'Note: Text only differs for English version' assigned effective_scope=english_card_text_only",
+    "zh source_010 entries marked '新文本与目前卡面文本一致' assigned effective_scope=printed_text_alignment"
+  ],
+  "per_doc": {
+    "source_002": {
+      "entries": 31,
+      "mapped": 31,
+      "unmapped": 0
+    },
+    "source_003": {
+      "entries": 31,
+      "mapped": 31,
+      "unmapped": 0
+    },
+    "source_004": {
+      "entries": 18,
+      "mapped": 18,
+      "unmapped": 0
+    },
+    "source_010": {
+      "entries": 13,
+      "mapped": 13,
+      "unmapped": 0
+    },
+    "source_013": {
+      "entries": 31,
+      "mapped": 31,
+      "unmapped": 0
+    },
+    "source_015": {
+      "entries": 16,
+      "mapped": 16,
+      "unmapped": 0
+    },
+    "source_017": {
+      "entries": 8,
+      "mapped": 8,
+      "unmapped": 0
+    },
+    "source_020": {
+      "entries": 8,
+      "mapped": 8,
+      "unmapped": 0
+    }
+  }
+}

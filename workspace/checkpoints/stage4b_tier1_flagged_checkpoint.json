@@ -1,0 +1,30 @@
+{
+  "batch": "4B-B005-tier1-flagged",
+  "finished_at": "2026-09-22T06:12:25+00:00",
+  "stats": {
+    "candidates": 19,
+    "reconciled": 19,
+    "errors": 0,
+    "flagged_verification": 14,
+    "entries_oi": 11,
+    "entries_exc": 1,
+    "links_stale": 7,
+    "links_rcc_incorporated": 6,
+    "links_relocated": 1,
+    "changes_written": 6,
+    "mr4a_closed": 6,
+    "note": "sandbox retry re-ran script (same incident as 4B-B002/B004); run-stats in this file corrected to effective first-pass values recovered from DB"
+  },
+  "validation": {
+    "rules_reconciled_total": 2896,
+    "rules_pending": 88,
+    "pending_rcr_left": 0,
+    "rec_tier1f": 19,
+    "reconciled_missing_rec": 0,
+    "needs_verification_true": 332,
+    "changes_total": 228,
+    "mr4a_open_left": 0,
+    "verif_flag_left": 0
+  },
+  "warnings": []
+}

@@ -1,0 +1,51 @@
+{
+  "task_id": "task_6_03",
+  "stage": "6C",
+  "output": "workspace/final/rules.db",
+  "built_at": "2026-09-22T17:46:53",
+  "stats": {
+    "rules": 2984,
+    "null_canonical": 472,
+    "rule_sources": 6353,
+    "rule_cards": 7046,
+    "rule_cards_rules": 661,
+    "rule_keywords": 885,
+    "distinct_keywords": 83,
+    "verification": 393,
+    "changes": 267,
+    "fts5": true
+  },
+  "validation": {
+    "rules_rows": 2984,
+    "rules_match": true,
+    "null_canonical": 472,
+    "null_canonical_ok": true,
+    "rs_rows": 6353,
+    "rs_match": true,
+    "orphan_sources": 0,
+    "rules_without_source": 0,
+    "rc_rows": 7046,
+    "rc_rules": 661,
+    "rk_rows": 885,
+    "rk_distinct": 83,
+    "malformed_card_ids": 0,
+    "rv_rows": 393,
+    "rv_match": true,
+    "rch_rows": 267,
+    "rch_match": true,
+    "smoke_queries": {
+      "by_rule_id": 1,
+      "by_topic": 81,
+      "by_card_id": 1,
+      "by_keyword": 25,
+      "by_source": 35,
+      "by_version": 6353,
+      "by_trigger_col": 0,
+      "spot_811": 1,
+      "spot_watch_card": 1,
+      "fts_smoke": 28
+    },
+    "fts5": true,
+    "PASS": true
+  }
+}

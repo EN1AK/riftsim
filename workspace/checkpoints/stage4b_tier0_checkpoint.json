@@ -1,0 +1,21 @@
+{
+  "batch": "4B-B001-tier0",
+  "finished_at": "2026-09-21T11:12:49+00:00",
+  "stats": {
+    "candidates": 2188,
+    "reconciled": 2188,
+    "skipped_exists": 0,
+    "needs_review": 0,
+    "errors": 0
+  },
+  "validation": {
+    "rules_reconciled_total": 2188,
+    "rules_pending": 796,
+    "rules_needs_review": 0,
+    "reconciliations_tier0": 2188,
+    "reconciled_missing_rec": 0,
+    "reconciled_null_text": 0,
+    "needs_verification_true": 0
+  },
+  "warnings": []
+}

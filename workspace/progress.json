@@ -1,6 +1,6 @@
 {
   "project": "Riftbound / LoL TCG Rules Knowledge Base",
-  "current_stage": "Stage 2A - Chinese Rules Evidence Extraction",
+  "current_stage": "COMPLETE (all stages 0/1/2A/2B/2C/2D/3/4A/4B/5/6 completed 2026-09-22; no manual review items remaining — all 186 formally closed; no pending verification; no failed extraction; all 20 sources processed)",
   "stages": {
     "stage_0": {
       "status": "completed",
@@ -11,37 +11,47 @@
       "description": "Source Inventory + PDF Preprocessing completed"
     },
     "stage_2a": {
-      "status": "pending",
-      "description": "Chinese Rules Evidence Extraction"
+      "status": "completed",
+      "description": "Chinese Rules Evidence Extraction completed: 2382 evidence rows from CN Core Rules (source_009, 125/125 pages)"
     },
     "stage_2b": {
-      "status": "pending",
-      "description": "English Rules Evidence Extraction"
+      "status": "completed",
+      "description": "English Rules Evidence Extraction completed: 2382 evidence rows from EN Core Rules (source_018, 120/120 pages); EN-CN rule-number sequence identical"
     },
     "stage_2c": {
-      "status": "pending",
-      "description": "Errata / Correction Evidence Extraction"
+      "status": "completed",
+      "description": "Errata Extraction completed: 156 card_errata evidence from 8 docs (zh 93 / en 63) + 3 front_matter; 0 unmapped; 4 manual_review items; report: workspace/reports/stage2c_errata_extraction.md"
     },
     "stage_2d": {
-      "status": "pending",
-      "description": "FAQ / Ruling / Official Explanation Extraction"
+      "status": "completed",
+      "description": "FAQ / Ruling / Official Explanation Extraction completed: 594 items + 10 (post-review: 0248 merged into 0247) front_matter from 10 docs (zh 327 items: 001=50, 005=47, 006=93, 007=23, 008=79, 011=34; en 268 items: 012=86, 014=45, 016=75, 019=62); classification example_only=193 rule_interpretation=270 exception=5 rule_change_candidate=127; 0 needs_review (4 resolved 2026-09-20); MR-2D-0001..0015; report: workspace/reports/stage2d_faq_extraction.md"
     },
     "stage_3": {
-      "status": "pending",
-      "description": "Entity Resolution + Chinese-English Alignment"
+      "status": "completed",
+      "description": "Entity Resolution + Chinese-English Alignment completed 2026-09-21. tasks 3_01..3_05 all completed. alignments=2445 (2382 AL-CR core-rule pairs [equivalent 2221/translation_difference 161 -> MR-3-CR x161 for Stage 4/5] + 63 AL-ER errata pairs [equivalent/high], 0 FAQ/OE pairs after 6 candidates reviewed+rejected). 604 FAQ/OE + 33 errata zh-only/NA rows explicitly unmatched-tagged. MR-2D-0004/0005/0010 closed with findings. Validation: rule_evidence_unpaired=0, errata_unresolved=0, faq_oe_untagged=0, dup_pairs=0. reports: stage3_closeout.md, stage3_er_alignment.md, stage3_faq_alignment.md"
     },
-    "stage_4": {
-      "status": "pending",
-      "description": "Rule Clustering + Reconciliation"
+    "stage_4a": {
+      "status": "completed",
+      "description": "Rule Clustering completed 2026-09-21. 2984 clusters (R-CR 2381 + R-CARD 514 + R-TOPIC-CN 17 + R-TOPIC-EN 64 + R-MISC 5 + front-matter 3); rule_evidence links 6352; evidence 5527/5527 mapped, unmapped=0, dup=0, empty clusters pruned 25; MR-4A-0001..0006 (FAQ refs to stale rule numbers -> 4B); tasks task_4a_01..04 completed; report: workspace/reports/stage4a_rule_clustering.md; scripts: stage4a_cluster.py, stage4a_fix.py"
+    },
+    "stage_4b": {
+      "status": "completed",
+      "description": "Rule Reconciliation in progress. 4B-B001 (tier-0, task_4b_01): 2188 R-CR mechanical reconciled (canonical=zh, en=official reference). 4B-B002 (tier-1 FAQ-attach, task_4b_02, script stage4b_tier1_faq.py): 398 rules reconciled = 384 FAQ-only R-CARD (canonical NULL by design) + 14 clean FAQ-linked R-CR (canonical=zh); needs_verification=true x27; report stage4b_tier1_faq_attach.md. 4B-B003 (tier-2 tr-diff, task_4b_03, script stage4b_tier2_trdiff.py): all 161 MR-3-CR zh/en pairs re-read + adjudicated: 160 equivalent_despite_diff (orthographic only), 1 semantic_divergence (MR-3-CR-0130 / R-CR-811.1.b Hidden - EN duration clause 'for as long as you control that battlefield' missing in zh -> conflict CON-4B-T2-0001 pending_stage5); canonical=zh, ALL 161 needs_verification=true (spec 15.7); 4 rules tier-1 FAQ-attached (5 entries); MR-3-CR-0001..0161 all closed + rule_id backfilled; 0 needs_review/errors; report stage4b_tier2_trdiff.md; checkpoint stage4b_tier2_trdiff_checkpoint.json. 4B-B004 (tier-2 errata, task_4b_04, script stage4b_tier2_errata.py): 130 R-CARD errata rules reconciled; canonical = corrected_fragment of LATEST zh official errata (137 zh links applied, 7 rules chained x2 date-asc, 85 EN counterpart links recorded w/o canonical change); 222 changes rows CHG-4B-T2ER-* (per errata evidence x rule, incl. EV-CN-ER-0093 zh_only_translation fix); FAQ attach on same 130 rules per tier-1 conventions (104 example/103 interpretation/4 exception; 1 rule_change_candidate R-CARD-UNL-106 NOT applied, recorded); ALL 130 needs_verification=true; 1 chain warning R-CARD-UNL-186; canonical==latest zh corrected_fragment verified 130/130; 0 needs_review/errors; report stage4b_tier2_errata.md; checkpoint stage4b_tier2_errata_checkpoint.json (sandbox retry zeroed run-stats, recovered from DB). 4B-B005 (tier-1 flagged, task_4b_05, script stage4b_tier1_flagged.py): 19 VERIF-FLAG R-CR adjudicated (full-text + current-number-space checks): 12 attach (11 interp + 1 exception), 7 stale_note (successors verified: 187.4.c->323.6, 316.5.b->323.8, 333.1.c.3->340.4, 342.1.a->383.4.f/466.x, 376.3.b.1->383.3.d.1, 440.1.a(.b)->466.1.a/318/324.1, 460.2.c.3->465.2.c.4(.a), 466.1.b->471.1.b.1), 6 RCC (source_007) ALL INCORPORATED (CHG-4B-T1F-0001..0006, not applied), EV-CN-FAQ-0207 relocated 187.4->323.6; MR-4A-0001..0006 ALL CLOSED; R-CR-438.7 flag cleared; nv 14 true / 5 false; 0 needs_review/errors; report stage4b_tier1_flagged.md; checkpoint stage4b_tier1_flagged_checkpoint.json (sandbox retry, stats corrected from DB). Totals: reconciled 2896/2984 (needs_verification 332), conflicts 1, changes 228, pending 88 (81 R-TOPIC + 5 R-MISC + 2 front). 4B-B006 (tier-3 topic/misc/front + RCC, task_4b_06, script stage4b_b006_reconcile.py): 88/88 pending rules reconciled -> pending_reconciliation=0 -> STAGE 4B COMPLETE 2026-09-22; 128 RCC links adjudicated: 37 source_019 (post-core Vendetta eff 2026-07-24) APPLIED as official changes + CHG rows, 90 source_012/014/016 transitional pre-core NOT applied (recorded, Stage 5 spot-check), 1 EV-CN-FAQ-0055 INCORPORATED into 809.1.c (recorded, not applied); 156 faq:rule_interpretation attached verbatim; 11 RCC links on 8 reconciled R-CARD rules adjudicated w/o touching canonical; MR-2D-0005 watch fold-in 4 cards REC + nv=true; 100 REC-4B-T3 + 38 CHG-4B-T3 rows; nv=true 332->393; 0 needs_review/errors; warning: EV-CN-FAQ-0260 not linked to R-CARD-OGN-251 (noted in REC); report stage4b_b006_topic_misc_front.md; checkpoint stage4b_b006_checkpoint.json. Stage-4B final: rules 2984/2984 reconciled, reconciliations 2996, changes 266, conflicts 1 (pending_stage5). Next: Stage 5."
     },
     "stage_5": {
-      "status": "pending",
-      "description": "Independent Verification"
+      "status": "completed",
+      "description": "Independent Verification completed 2026-09-22. Script stage5_verify.py (idempotent, batches v1/v2/v3). verification table extended (stage4_conclusion/verification_conclusion/relevant_evidence/disagreement_reason/verified_at); 393 rows: 392 verified + 1 verified_with_changes; 0 rejected/needs_review/failed/pending; needs_verification='true' remaining 0. v1: 160 tr-diff R-CR canonical==zh official evidence verbatim + en links + REC rows + FAQ verbatim. v2: 130 errata R-CARD canonical==latest zh errata corrected_fragment (date-asc chains), CHG-4B-T2ER coverage == replacement links, EN counterparts recorded w/o canonical change, scope not expanded. v3: 30 FAQ-only cards + 14 T1F flagged + 57 T3 topic/misc + R-CR-811.1.b; RCC 134 links adjudication-record coverage verified (019 post-core eff 2026-07-24 APPLIED with verbatim attach + CHG-4B-T3; 012/014/016 transitional pre-core NOT applied; 005/007 INCORPORATED with CHG rows; B005 stale-ref NULL fields confirmed intentional, 0206->816.2 / 0207->323.6 relinked). CON-4B-T2-0001 R-CR-811.1.b: EN same-version duration clause 'for as long as you control that battlefield' omitted in zh translation -> verified_with_changes, canonical supplemented (zh rendering), CHG-5-0001, conflict resolved_stage5, no manual_review needed (evidence decisive). MR-2D-0005 watch cards verified with documented divergence notes. derived_interpretation=0 confirmed (no FAQ over-generalization). report: workspace/reports/stage5_verification.md; checkpoint: workspace/checkpoints/stage5_checkpoint.json; changes total 267."
     },
     "stage_6": {
-      "status": "pending",
-      "description": "Final Build + Coverage Check"
+      "status": "completed",
+      "description": "Final Build + Coverage Check COMPLETED 2026-09-22. 6A Coverage Check COMPLETED 2026-09-22 (script stage6a_coverage_check.py idempotent; task_6_01): 13/13 mandatory checks PASS (C1 sources 20/20 processed, C2 no failed/running tasks, C3 evidence mapped 5527/5527, C4 all rules sourced, C5 errata 156 applied+3 front covered, C6 FAQ/OE 604 mounted, C7 confirmed dates only doc-self-stated 009/018, C8 derived_interpretation=0, C9 superseded only EV-CN-FAQ-0089/0090 all links noted, C10 verification terminal 393, C11 conflicts all resolved, C12 manual_review 186 formally closed, C13 RCC 134 all adjudicated). report: workspace/final/coverage_report.md; checkpoint: workspace/checkpoints/stage6a_checkpoint.json. 6B rules.md COMPLETED 2026-09-22 (script stage6b_build_rules_md.py idempotent; task_6_02): workspace/final/rules.md regenerated from DB, 2984 entries in 4 parts (core 2382 / card 514 / topic 17+64 / misc+front 7), per-entry spec-17.2 fields, 472 NULL-canonical FAQ-only markers, special notes R-CR-811.1.b (CHG-5-0001) + watch cards OGN-131/OGN-251/UNL-097/UNL-177, superseded markers; validation PASS (entries 2984 unique == DB ids, markers verified). checkpoint: workspace/checkpoints/stage6b_checkpoint.json. 6C rules.db COMPLETED 2026-09-22 (script stage6c_build_rules_db.py idempotent; task_6_03): workspace/final/rules.db rebuilt from rules_work.db supporting spec-17.2 query dimensions rule_id/topic/card_id/keyword/trigger/source/version — rules 2984 (null canonical 472 kept NULL), rule_sources 6353 (rule_evidence JOIN evidence; indexed source_id/document/version), rule_cards 7046 rows/661 rules (R-CARD ids + evidence.card_ids incl. T/R/SP-prefixed ids), rule_keywords 885 rows/83 distinct (bracket-token heuristic, cost symbols dropped), rules_fts FTS5 available, rule_verification 393 + rule_changes 267 full copies, meta table; validation PASS (orphans 0, unsourced 0, malformed 0, 10 smoke queries). checkpoint: workspace/checkpoints/stage6c_checkpoint.json. 6D change_log.md COMPLETED 2026-09-22 (script stage6d_build_change_log.py idempotent; task_6_04): workspace/final/change_log.md regenerated from changes table — 267 entries (CHG-4B-T2ER 222 / CHG-4B-T1F 6 incorporated / CHG-4B-T3 38 post-core applied+recorded / CHG-5-0001 verification fix), all 11 spec-17.2 fields per entry, grouped by tier then rule_id (160 rules affected, chained errata ordered by change_id), NULL original_content 38 explicitly marked (new_rule_addition, never fabricated), NULL version 38 marked, text in dynamic-length fences (zero escaping); validation PASS (267 ids == DB set, field labels 267 each, orphan refs 0). checkpoint: workspace/checkpoints/stage6d_checkpoint.json. 6E manual_review.md COMPLETED 2026-09-22 (script stage6e_build_manual_review.py idempotent; task_6_05): workspace/final/manual_review.md regenerated from manual_review table — 186 entries (MR-2C 4 / MR-2D 15 / MR-3-CR 161 / MR-4A 6), ALL formally closed, closure trail rendered verbatim by splitting issue_description at first dated bracket into 问题(原始记录)+裁定结论(关闭记录), per-entry 状态=已关闭(final closure date: 2026-09-20 x16 / 09-21 x3 / 09-22 x167), all 8 spec-17.2 fields per entry, NULL fields explicit markers (rule_id NULL 18 source-level issues), legacy rule-number ref 1 (MR-2D-0007 -> 735.1.c, not orphan); validation PASS (186 ids == DB set, 10 field labels 186 each, 已关闭 186 / 待复盘 0, orphan R-* refs 0). checkpoint: workspace/checkpoints/stage6e_checkpoint.json. 6F Final Consistency Check COMPLETED 2026-09-22 (script stage6f_final_consistency.py idempotent, read-only on artifacts; task_6_06): 24/24 checks PASS — A rules.md (2984 ids == DB == rules.db; 14 spec-17.2 fields x2984; NULL-canonical markers 472 == DB; all statuses terminal), B rules.db (row counts == work db; meta.validation.PASS; verification dist), C change_log.md (267 ids == DB == rules.db; tiers T2ER 222/T1F 6/T3 38/5- 1), D manual_review.md (186 ids == DB; 已关闭 186 / 待复盘 0), E coverage_report.md (C1..C13 PASS re-verified; all 17.1 counts == live DB), F cross-status consistency (spec 17.4: no resolved-vs-unresolved contradictions; verification 392+1 chain; conflict resolved_stage5 chain; changes 267 chain; R-CR-811.1.b CHG-5-0001 chain; superseded 0089/0090 markers). report: workspace/reports/stage6f_final_consistency.md; checkpoint: workspace/checkpoints/stage6f_checkpoint.json. Per spec 17.5: no unprocessed source / failed extraction / pending verification and 186 manual_review items all formally closed -> Current stage: COMPLETE."
     }
   },
-  "last_updated": "2026-09-18"
+  "last_checkpoint": {
+    "batch_id": "6F-final_consistency",
+    "task_id": "task_6_06",
+    "checkpoint": "workspace/checkpoints/stage6f_checkpoint.json",
+    "note": "6F Final Consistency Check COMPLETE: 24/24 PASS across 5 final artifacts + rules_work.db (rules 2984 / verification 393 / changes 267 / manual_review 186 all closed; no contradictions); Stage 6 = completed -> Current stage: COMPLETE"
+  },
+  "last_updated": "2026-09-22"
 }

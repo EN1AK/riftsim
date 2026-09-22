@@ -1,0 +1,950 @@
+{
+ "rcc_on_card": [
+  {
+   "rule_id": "R-CARD-OGN-250",
+   "evidence_id": "EV-EN-OE-0182",
+   "source_id": "source_016",
+   "topic": "Replacement Effects",
+   "snip": "FAQ: NEW RULE: If an event replaced by a replacement effect would be modified by a game effect or a game action, th",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-SFD-111",
+   "evidence_id": "EV-EN-OE-0254",
+   "source_id": "source_019",
+   "topic": "Contested Removal",
+   "snip": "FAQ: NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefi",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-SFD-202",
+   "evidence_id": "EV-EN-OE-0182",
+   "source_id": "source_016",
+   "topic": "Replacement Effects",
+   "snip": "FAQ: NEW RULE: If an event replaced by a replacement effect would be modified by a game effect or a game action, th",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-106",
+   "evidence_id": "EV-EN-OE-0269",
+   "source_id": "source_019",
+   "topic": "Battlefield Ability Control",
+   "snip": "FAQ: NEW RULE: If an Ability of a Battlefield indicates that a specific player makes a choice, that player is the A",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118",
+   "evidence_id": "EV-EN-OE-0265",
+   "source_id": "source_019",
+   "topic": "Hidden Targeting",
+   "snip": "FAQ: NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said car",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118a",
+   "evidence_id": "EV-EN-OE-0265",
+   "source_id": "source_019",
+   "topic": "Hidden Targeting",
+   "snip": "FAQ: NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said car",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0129",
+   "source_id": "source_014",
+   "topic": "Playing Units to Valid Locations",
+   "snip": "FAQ: NEW RULE: Specific cards may restrict or expand the list of valid locations",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0131",
+   "source_id": "source_014",
+   "topic": "Double and Swap",
+   "snip": "FAQ: NEW RULE: Double added to the list of game actions",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0132",
+   "source_id": "source_014",
+   "topic": "This bears—no wait",
+   "snip": "FAQ: NEW RULE: Swap added to the list of game actions",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0220",
+   "source_id": "source_019",
+   "topic": "Vendetta Addition: Burn",
+   "snip": "FAQ: NEW RULE: Skip action added.",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CARD-UNL-184",
+   "evidence_id": "EV-EN-OE-0254",
+   "source_id": "source_019",
+   "topic": "Contested Removal",
+   "snip": "FAQ: NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefi",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-187.4",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "topic": "战场与法术对决的控制权",
+   "snip": "FAQ: 战场与法术对决的控制权",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-316.5",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "topic": "战场与法术对决的控制权",
+   "snip": "FAQ: 战场与法术对决的控制权",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-323.6",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "topic": "战场与法术对决的控制权",
+   "snip": "FAQ: 战场与法术对决的控制权",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-323.8",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "topic": "战场与法术对决的控制权",
+   "snip": "FAQ: 战场与法术对决的控制权",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-344.2",
+   "evidence_id": "EV-CN-FAQ-0196",
+   "source_id": "source_007",
+   "topic": "战场与法术对决的控制权",
+   "snip": "FAQ: 战场与法术对决的控制权",
+   "status": "reconciled"
+  },
+  {
+   "rule_id": "R-CR-461.3",
+   "evidence_id": "EV-CN-FAQ-0201",
+   "source_id": "source_007",
+   "topic": "战斗结果",
+   "snip": "FAQ: 战斗结果",
+   "status": "reconciled"
+  }
+ ],
+ "rcc_total": 134,
+ "attach_sample": [
+  {
+   "rule_id": "R-CARD-OGN-242",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "oi": "[EV-CN-FAQ-0207 | source_007 | official | rule_interpretation]\nQ: 么回事？\nA: 根据破限系列规则更新中的第187.4.c.条，只要结算链上还有项目，就无法失去对战场的控制。\n也就是说，能够放逐和打出单位的法术和技能，或者以摧毁单位为费用或效果来打出其他单位的\n法术和技能，现在可以在战场上摧毁或放逐单位，然后将由此产生的单位打出至同一个战场。\n187.4.c.\n如果玩家在某战场上没有单位，且该回合处于开环状态，则除非该战场正在进行\n战斗或法术对决，否则该玩家会在后续的清理阶段失去该战场的控制权。\n我们来看几个例子。\n我打出冷血贵族，此时我控制的一个战场上只有1 个1[M]随从。我选择摧毁我的随从，以\n此支付冷血贵族的额外费用。这样虽然会触发一次清理，但由于结算链上存在项目（冷血\n贵族），我不会失去对战场的控制。我可以毫无问题",
+   "ex": "[EV-CN-FAQ-0005 | source_001 | judge-community | example_only]\nQ: 问题 1.3：如果有卡牌（如【海兽钓钩】）要求我在对其结算期间打出另一张卡牌，我应该怎么做？我\n应该在这类法术或技能仍在结算的过程中直接将另一张卡牌打出，还是先继续完成这类法术或技能的结\n算过程？\nA: 结算这类法术或技能的效果时，被要求打出的另一张卡牌会先以待处理效果的状态加入结算链。你\n需要在完成这类法术或技能的所有指示后，再按照加入结算链的先后顺序，对待处理效果进行确认，使之\n成为已确认的结算链效果。如果一个或多个效果处于待处理状态，其控制者必须完成这些待处",
+   "exc": null
+  },
+  {
+   "rule_id": "R-CARD-OGN-025",
+   "status": "reconciled",
+   "needs_verification": "true",
+   "oi": "[EV-CN-FAQ-0056 | source_005 | official | rule_interpretation]\nQ: 问：“起源”系列中存在一些要求玩家从自己牌堆打出卡牌的卡牌，比如“光明未来”和\n“暴怒冲动”。之前进行的勘误中，这种操作变成了“先将卡牌放逐再打出”。那么，“铸\n魂淬炼”系列中拥有类似技能的卡牌，是否也会获得类似的勘误呢？\nA: 是的！这个勘误操作主要是为了方便计算——将卡牌放逐，即可确保这些卡牌在真正打出\n前，可以存放于游戏中的某个空间；不仅如此，若遇到卡牌因为种种原因无法打出的情\n况，这个办法也能提供一个“供卡牌退回”的空间。绝大多数情况下，这个勘误都不会对这\n些卡牌的真正效果产生影响。之所以进行勘误，则是为了对某些罕见个例进行明确规定。\n这次的勘误将影响3 张“铸魂淬炼”系列卡牌，以及上次未能发现的1 张“起源”系列卡牌。",
+   "ex": null,
+   "exc": null
+  }
+ ],
+ "rec_t1_sample": [
+  {
+   "reconciliation_id": "REC-4B-T1-R-CARD-ARC-002",
+   "rule_id": "R-CARD-ARC-002",
+   "source_id": "multi-faq",
+   "original_fragment": "faq attach: example_only=1 rule_interpretation=0 exception=0 rule_change_candidate=0; FAQ-only card cluster: no core-rule/errata text, canonical stays NULL",
+   "corrected_fragment": null,
+   "modification_type": "none",
+   "effective_scope": "faq_attach",
+   "status": "reconciled_tier1"
+  },
+  {
+   "reconciliation_id": "REC-4B-T1-R-CARD-ARC-003",
+   "rule_id": "R-CARD-ARC-003",
+   "source_id": "multi-faq",
+   "original_fragment": "faq attach: example_only=2 rule_interpretation=1 exception=0 rule_change_candidate=0; FAQ-only card cluster: no core-rule/errata text, canonical stays NULL",
+   "corrected_fragment": null,
+   "modification_type": "none",
+   "effective_scope": "faq_attach",
+   "status": "reconciled_tier1"
+  }
+ ],
+ "sources": [
+  {
+   "source_id": "source_005",
+   "source_type": "faq",
+   "language": "zh",
+   "version": "v2026",
+   "date": "2026-04-15",
+   "effective_date": "2026-04-15",
+   "date_confidence": "inferred",
+   "notes": "Stage2D: extracted 47 FAQ/OE items (EV-CN-FAQ-0052..EV-CN-FAQ-0099), needs_review=0"
+  },
+  {
+   "source_id": "source_012",
+   "source_type": "official_explanation",
+   "language": "en",
+   "version": "v2025",
+   "date": "2025-10-24",
+   "effective_date": "2025-10-24",
+   "date_confidence": "inferred",
+   "notes": "Stage2D: reclassified rule->official_explanation (content = Core Rules Patch Notes, same class as source_014/016/019) | Stage2D: extracted 86 FAQ/OE items (EV-EN-OE-0001..EV-EN-OE-0087), needs_review="
+  },
+  {
+   "source_id": "source_014",
+   "source_type": "official_explanation",
+   "language": "en",
+   "version": "v2025",
+   "date": "2025-12-05",
+   "effective_date": "2025-12-12",
+   "date_confidence": "declared",
+   "notes": "Stage2D: extracted 45 FAQ/OE items (EV-EN-OE-0088..EV-EN-OE-0133), needs_review=0 | Date ruling 2026-09-20 (MR-2D-0011): date=byline 12/5/2025 (unchanged); effective_date=doc-declared 'effective date "
+  },
+  {
+   "source_id": "source_016",
+   "source_type": "official_explanation",
+   "language": "en",
+   "version": "v2026",
+   "date": "2026-03-31",
+   "effective_date": "2026-03-31",
+   "date_confidence": "declared",
+   "notes": "Stage2D: extracted 75 FAQ/OE items (EV-EN-OE-0134..EV-EN-OE-0209), needs_review=0 | Date ruling 2026-09-20 (MR-2D-0011): date=byline 'Rules and Releases | 3/31/2026' (1-day file-name offset); no separ"
+  },
+  {
+   "source_id": "source_019",
+   "source_type": "official_explanation",
+   "language": "en",
+   "version": "v2026",
+   "date": "2026-07-17",
+   "effective_date": "2026-07-24",
+   "date_confidence": "declared",
+   "notes": "Stage2D: extracted 62 FAQ/OE items (EV-EN-OE-0210..EV-EN-OE-0272), needs_review=0 | Date ruling 2026-09-20 (MR-2D-0011): date=byline 7/17/2026 (unchanged); effective_date=doc-declared 'effective on Ju"
+  }
+ ],
+ "interp_on_pending_by_source": [
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-04",
+   "n": 2
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-05",
+   "n": 7
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-08",
+   "n": 2
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-20",
+   "n": 2
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-22",
+   "n": 2
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-29",
+   "n": 2
+  },
+  {
+   "source_id": "source_001",
+   "rule_id": "R-TOPIC-CN-30",
+   "n": 3
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-13",
+   "n": 1
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-27",
+   "n": 1
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-34",
+   "n": 1
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-38",
+   "n": 1
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-39",
+   "n": 2
+  },
+  {
+   "source_id": "source_005",
+   "rule_id": "R-TOPIC-CN-40",
+   "n": 1
+  },
+  {
+   "source_id": "source_006",
+   "rule_id": "R-TOPIC-CN-12",
+   "n": 1
+  },
+  {
+   "source_id": "source_007",
+   "rule_id": "R-TOPIC-CN-01",
+   "n": 1
+  },
+  {
+   "source_id": "source_007",
+   "rule_id": "R-TOPIC-CN-15",
+   "n": 2
+  },
+  {
+   "source_id": "source_008",
+   "rule_id": "R-TOPIC-CN-25",
+   "n": 1
+  },
+  {
+   "source_id": "source_011",
+   "rule_id": "R-MISC-source_011",
+   "n": 1
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-01",
+   "n": 2
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-03",
+   "n": 9
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-04",
+   "n": 1
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-07",
+   "n": 1
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-09",
+   "n": 4
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-11",
+   "n": 6
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-24",
+   "n": 4
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-27",
+   "n": 2
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-28",
+   "n": 1
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-30",
+   "n": 1
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-35",
+   "n": 3
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-37",
+   "n": 22
+  },
+  {
+   "source_id": "source_012",
+   "rule_id": "R-TOPIC-EN-46",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-10",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-13",
+   "n": 2
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-15",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-31",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-34",
+   "n": 2
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-47",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-48",
+   "n": 2
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-49",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-51",
+   "n": 1
+  },
+  {
+   "source_id": "source_014",
+   "rule_id": "R-TOPIC-EN-52",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-02",
+   "n": 3
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-05",
+   "n": 2
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-12",
+   "n": 6
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-16",
+   "n": 2
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-17",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-19",
+   "n": 3
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-33",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-36",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-38",
+   "n": 3
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-44",
+   "n": 3
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-45",
+   "n": 3
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-53",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-54",
+   "n": 1
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-55",
+   "n": 2
+  },
+  {
+   "source_id": "source_016",
+   "rule_id": "R-TOPIC-EN-56",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-08",
+   "n": 2
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-14",
+   "n": 4
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-23",
+   "n": 5
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-39",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-41",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-42",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-43",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-57",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-58",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-59",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-60",
+   "n": 1
+  },
+  {
+   "source_id": "source_019",
+   "rule_id": "R-TOPIC-EN-61",
+   "n": 1
+  }
+ ],
+ "class_on_pending": [
+  {
+   "faq_classification": "rule_change_candidate",
+   "n": 117
+  },
+  {
+   "faq_classification": "rule_interpretation",
+   "n": 156
+  }
+ ],
+ "front_links": [
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0001",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0049",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-ER-FRONT",
+   "evidence_id": "EV-EN-ER-0058",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0001",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0052",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0100",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0194",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0218",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-CN-FAQ-0298",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0001",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0088",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0134",
+   "relationship": "front_matter"
+  },
+  {
+   "rule_id": "R-FAQ-FRONT",
+   "evidence_id": "EV-EN-OE-0210",
+   "relationship": "front_matter"
+  }
+ ],
+ "s019_rcc_full": [
+  {
+   "rule_id": "R-MISC-source_019",
+   "evidence_id": "EV-EN-OE-0211",
+   "topic": null,
+   "q": "NEW RULE: Empower keyword added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-MISC-source_019",
+   "evidence_id": "EV-EN-OE-0212",
+   "topic": null,
+   "q": "NEW RULE: Empowered keyword added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-MISC-source_019",
+   "evidence_id": "EV-EN-OE-0213",
+   "topic": null,
+   "q": "NEW RULE: Empower action added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-MISC-source_019",
+   "evidence_id": "EV-EN-OE-0214",
+   "topic": null,
+   "q": "NEW RULE: Disempower action added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-MISC-source_019",
+   "evidence_id": "EV-EN-OE-0215",
+   "topic": null,
+   "q": "NEW RULE: Empowered state added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-58",
+   "evidence_id": "EV-EN-OE-0217",
+   "topic": "Vendetta Addition: Flow",
+   "q": "NEW RULE: Flow keyword added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-57",
+   "evidence_id": "EV-EN-OE-0219",
+   "topic": "Vendetta Addition: Burn",
+   "q": "NEW RULE: Burn action added.",
+   "a": "Danger and value go hand in hand. Vendetta Addition: Skip\nFor the first time, a card has been printed that allows a player to skip part of their turn. In order to support that functionality, we’ve added a new action: skip. Skip is a replacement effect that rep",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-CARD-UNL-138",
+   "evidence_id": "EV-EN-OE-0220",
+   "topic": "Vendetta Addition: Burn",
+   "q": "NEW RULE: Skip action added.",
+   "a": "Poof! It’s gone. No triggers, no procedures, nada. Zip! Zilch!! Vendetta Support: Naming Cards, Types, and Tags In Vendetta, we’ve added a card that instructs a player to name a card, in addition to the List from Unleashed that instructs a player to name a tag",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-57",
+   "evidence_id": "EV-EN-OE-0221",
+   "topic": "Vendetta Addition: Burn",
+   "q": "NEW RULE: Naming cards, types, and tags added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-61",
+   "evidence_id": "EV-EN-OE-0223",
+   "topic": "Vendetta Support: Ignoring Effects",
+   "q": "NEW RULE: Ignoring effects added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-64",
+   "evidence_id": "EV-EN-OE-0225",
+   "topic": "Vendetta Support: Untargetability",
+   "q": "NEW RULE: Untargetability added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-62",
+   "evidence_id": "EV-EN-OE-0227",
+   "topic": "Vendetta Support: Making New Choices",
+   "q": "NEW RULE: Making new choices added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-59",
+   "evidence_id": "EV-EN-OE-0229",
+   "topic": "Vendetta Support: Activated Ability Terminology",
+   "q": "NEW RULE: “Use” and “play” supported for activated ability card text.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-60",
+   "evidence_id": "EV-EN-OE-0231",
+   "topic": "Vendetta Support: Cards with Multiple Types",
+   "q": "NEW RULE: Cards with multiple types added",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-63",
+   "evidence_id": "EV-EN-OE-0233",
+   "topic": "Vendetta Support: Replacement Effects and Combat Damage",
+   "q": "NEW RULE: When assigning damage during the combat damage step, replacement effects that would apply to the resulting",
+   "a": "damage are considered to apply to the assignment instead. Rules Update: Copying Tokens Token is no longer a supertype. It being a supertype made several cards work in problematic ways, and it wasn’t entirely intuitive that it should be a supertype. Now, regard",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-63",
+   "evidence_id": "EV-EN-OE-0234",
+   "topic": "Vendetta Support: Replacement Effects and Combat Damage",
+   "q": "NEW RULE: “Token” is an intrinsic category of Game Objects, in the same way “card” is.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-63",
+   "evidence_id": "EV-EN-OE-0235",
+   "topic": "Vendetta Support: Replacement Effects and Combat Damage",
+   "q": "NEW RULE: Token Game Objects cannot lose their token nature by any means.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-63",
+   "evidence_id": "EV-EN-OE-0236",
+   "topic": "Vendetta Support: Replacement Effects and Combat Damage",
+   "q": "NEW RULE: Card Game Objects cannot become tokens by any means.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-39",
+   "evidence_id": "EV-EN-OE-0238",
+   "topic": "Rules Update: (Resource) Payment Optional",
+   "q": "NEW RULE: When a player is instructed to Pay a resource, that player may remove that resource from their Rune Pool if it exists",
+   "a": "there. If they choose not to, the instruction is ignored. Rules Update: Costs on Multi-Domain Cards We’ve aligned that it was strange that signature cards’ power costs could be paid with power of any domain. The power cost symbols have the colors of their doma",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-40",
+   "evidence_id": "EV-EN-OE-0241",
+   "topic": "Rules Update: Applied Costs",
+   "q": "NEW RULE: Applied costs added.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-42",
+   "evidence_id": "EV-EN-OE-0243",
+   "topic": "Rules Update: Deathknell and “When I Die” Alignment",
+   "q": "NEW RULE: Deathknell and “When I die” abilities aligned",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-43",
+   "evidence_id": "EV-EN-OE-0245",
+   "topic": "Rules Update: Gone Before its Time",
+   "q": "NEW RULE: If a Delayed Ability’s duration has ended before it was generated, the Delayed Ability is not generated and any",
+   "a": "instructions related to it are ignored. Rules Update: Event Definition In the last several rules updates, we’ve done our best to define terms that were otherwise underdefined or underexplained. With more instances of replacement effects, and replacement effect",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-43",
+   "evidence_id": "EV-EN-OE-0246",
+   "topic": "Rules Update: Gone Before its Time",
+   "q": "NEW RULE: An event is the singular moment that results from a Game Action being performed or from a Game Object",
+   "a": "changing state. Rules Update: New Replacement Effects There are three categories of card text that were previously undefined. The rules now recognize all three as replacement effects: Abilities that describe how a unit enters, or an action to be performed as a",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-43",
+   "evidence_id": "EV-EN-OE-0247",
+   "topic": "Rules Update: Gone Before its Time",
+   "q": "NEW RULE: New replacement effects added",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-41",
+   "evidence_id": "EV-EN-OE-0249",
+   "topic": "Rules Update: Battlefield Reuse",
+   "q": "NEW RULE: In a Best of 5 match, during games 4 and 5 of the match players may present a battlefield that has been removed",
+   "a": "from the game.",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-41",
+   "evidence_id": "EV-EN-OE-0250",
+   "topic": "Rules Update: Battlefield Reuse",
+   "q": "NEW RULE: Players may only re-use a battlefield in this way if they have already presented each of their battlefields at least",
+   "a": "once during the match, and present a battlefield at most twice in a given match.",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-41",
+   "evidence_id": "EV-EN-OE-0251",
+   "topic": "Rules Update: Battlefield Reuse",
+   "q": "NEW RULE: If no player won a game, the battlefields presented for that game may be reused in a subsequent game.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-14",
+   "evidence_id": "EV-EN-OE-0253",
+   "topic": "Contested Removal",
+   "q": "NEW RULE: In a cleanup, remove Contested status from each Battlefield without Units controlled by the player who applied",
+   "a": "Contested to that Battlefield and without a Showdown or Combat ongoing there.",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-CARD-SFD-111",
+   "evidence_id": "EV-EN-OE-0254",
+   "topic": "Contested Removal",
+   "q": "NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefield that their",
+   "a": "controller does not control, their controller applies Contested status to that Battlefield. Targeting Clarification For the first time since the great big targeting list was codified in the second Origins rules update, we’ve added a new disqualification for so",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-CARD-UNL-184",
+   "evidence_id": "EV-EN-OE-0254",
+   "topic": "Contested Removal",
+   "q": "NEW RULE: If as a result of the removal of Contested status there are Units located at an uncontested Battlefield that their",
+   "a": "controller does not control, their controller applies Contested status to that Battlefield. Targeting Clarification For the first time since the great big targeting list was codified in the second Origins rules update, we’ve added a new disqualification for so",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-14",
+   "evidence_id": "EV-EN-OE-0257",
+   "topic": "Contested Removal",
+   "q": "NEW RULE: That player cannot choose to have fewer Targets than they have damage to split when choosing which Targets",
+   "a": "cease being Targets. 2v2 Rules Clarifications We’ve added some clarifications for the 2v2 specific rules! Firstly, points are shared by teams. This was probably obvious, but it wasn’t stated directly and there were important clarifications that needed to be ma",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118",
+   "evidence_id": "EV-EN-OE-0265",
+   "topic": "Hidden Targeting",
+   "q": "NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said cards have been",
+   "a": "Finalized. Oh Damage, My Damage Lethal Damage was handled by the rules in a bit of a strange way. It was referenced obliquely in three different sections and only actually named in one of those sections. That made changes to the definition of Lethal Damage, li",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (2026-09-21 reviewed; candidate pair rejected: shared example card, different ruling content)"
+  },
+  {
+   "rule_id": "R-CARD-UNL-118a",
+   "evidence_id": "EV-EN-OE-0265",
+   "topic": "Hidden Targeting",
+   "q": "NEW RULE: Non-triggered abilities that check cards being played do so by means of referencing whether said cards have been",
+   "a": "Finalized. Oh Damage, My Damage Lethal Damage was handled by the rules in a bit of a strange way. It was referenced obliquely in three different sections and only actually named in one of those sections. That made changes to the definition of Lethal Damage, li",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (2026-09-21 reviewed; candidate pair rejected: shared example card, different ruling content)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-23",
+   "evidence_id": "EV-EN-OE-0267",
+   "topic": "Hidden Targeting",
+   "q": "NEW RULE: Game Effects may refer to a player’s Damage. This means the Damage marked by that player.",
+   "a": null,
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-CARD-UNL-106",
+   "evidence_id": "EV-EN-OE-0269",
+   "topic": "Battlefield Ability Control",
+   "q": "NEW RULE: If an Ability of a Battlefield indicates that a specific player makes a choice, that player is the Ability’s controller. They",
+   "a": "take responsibility for adding it to the chain if applicable and make all choices required by the ability. They and only they control the ability, regardless of who controls the Battlefield. Counting Targets We clarified what kinds of targets count and in what",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-08",
+   "evidence_id": "EV-EN-OE-0270",
+   "topic": "Battlefield Ability Control",
+   "q": "NEW RULE: If another spell or ability attempts to reference the number of game objects, players, or zones that a Finalized Chain",
+   "a": "Item targets, it will include any mistargeted choices, but not any targets that have changed to a non-board zone. I’m Getting Activated\nIn the Unleashed FAQ, we acknowledged that “activate” when it appears on card text was underdefined in the rules. As of the ",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  },
+  {
+   "rule_id": "R-TOPIC-EN-08",
+   "evidence_id": "EV-EN-OE-0271",
+   "topic": "Battlefield Ability Control",
+   "q": "NEW RULE: Some effects may instruct a player to “activate” a named triggered ability. To do so, that player checks the condition",
+   "a": "of all of the specified effects, as if they had fulfilled the named part of the condition Accelerate In the Unleashed FAQ, we clarified that Accelerate is an ability made up of two parts: an optional additional cost, and a delayed replacement effect that is ge",
+   "notes": "structural_extraction; stage2d faq; {\"parse\": [\"marker=NEW RULE\"], \"needs_review\": false} | stage3_alignment: unmatched_en (no cross-language counterpart item in corpus; doc pair source_011<->source_019 reviewed 2026-09-21)"
+  }
+ ]
+}

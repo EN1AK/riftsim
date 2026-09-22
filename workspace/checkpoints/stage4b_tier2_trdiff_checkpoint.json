@@ -1,0 +1,30 @@
+{
+  "batch": "4B-B003-tier2-trdiff-adjudication",
+  "finished_at": "2026-09-22T02:39:48+00:00",
+  "stats": {
+    "candidates": 161,
+    "reconciled": 161,
+    "skipped_exists": 0,
+    "equivalent": 160,
+    "semantic_divergence": 1,
+    "conflicts": 1,
+    "faq_attached_rules": 4,
+    "faq_attached_entries": 5,
+    "needs_review": 0,
+    "errors": 0
+  },
+  "validation": {
+    "rules_reconciled_total": 2747,
+    "rules_pending": 237,
+    "rules_needs_review": 0,
+    "reconciliations_tier2": 161,
+    "mr3cr_closed": 161,
+    "mr3cr_rule_id_backfilled": 161,
+    "conflicts_total": 1,
+    "reconciled_missing_rec": 0,
+    "rcr_reconciled_null_text": 0,
+    "needs_verification_true": 188,
+    "pending_rcr": 19
+  },
+  "warnings": []
+}

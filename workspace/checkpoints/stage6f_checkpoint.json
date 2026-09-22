@@ -1,0 +1,161 @@
+{
+  "task_id": "task_6_06",
+  "stage": "6F",
+  "report": "workspace/reports/stage6f_final_consistency.md",
+  "built_at": "2026-09-22T19:21:10",
+  "checks": [
+    {
+      "id": "F0",
+      "name": "五个最终产物齐备且非空",
+      "result": "PASS",
+      "detail": "missing=[]"
+    },
+    {
+      "id": "A1",
+      "name": "rules.md 条目数/ID 集合 == DB rules == rules.db",
+      "result": "PASS",
+      "detail": "file=2984 distinct=2984 db=2984 rules_db=2984"
+    },
+    {
+      "id": "A2",
+      "name": "rules.md 每条含 spec-17.2 全部 14 字段",
+      "result": "PASS",
+      "detail": "expected=2984 each; bad=[]"
+    },
+    {
+      "id": "A3",
+      "name": "rules.md NULL-canonical 标记数 == DB NULL canonical（两者一致）",
+      "result": "PASS",
+      "detail": "markers=472 db_null=472 rules_db_null=472"
+    },
+    {
+      "id": "A4",
+      "name": "rules.md 每条状态均为终态（无未解决/待验证）",
+      "result": "PASS",
+      "detail": "status_lines=2984 unresolved=[]"
+    },
+    {
+      "id": "B1",
+      "name": "rules.db 各表计数 == rules_work.db",
+      "result": "PASS",
+      "detail": "{\"rules_db\": {\"rules\": 2984, \"rule_sources\": 6353, \"rule_cards\": 7046, \"rule_keywords\": 885, \"rule_verification\": 393, \"rule_changes\": 267, \"null_canon\": 472}, \"db\": {\"rules\": 2984, \"rule_evidence\": 6353, \"verification\": 393, \"changes\": 267, \"null_canon\": 472}}"
+    },
+    {
+      "id": "B2",
+      "name": "rules.db meta.validation PASS",
+      "result": "PASS",
+      "detail": "builder=stage6c_build_rules_db.py (idempotent full rebuild)"
+    },
+    {
+      "id": "B3",
+      "name": "verification 状态分布一致 (verified=392, verified_with_changes=1)",
+      "result": "PASS",
+      "detail": "work={'verified': 392, 'verified_with_changes': 1} rules_db={'verified': 392, 'verified_with_changes': 1} nv_true=0"
+    },
+    {
+      "id": "C1",
+      "name": "change_log.md 条目 ID 集合 == DB changes == rules.db rule_changes",
+      "result": "PASS",
+      "detail": "file=267 distinct=267 db=267 rules_db=267"
+    },
+    {
+      "id": "C2",
+      "name": "change_log.md 总数声明 267 且 tier 分布与文件/DB 一致",
+      "result": "PASS",
+      "detail": "claim=267 tiers={'T2ER': 222, 'T1F': 6, 'T3': 38, '5': 1}"
+    },
+    {
+      "id": "D1",
+      "name": "manual_review.md 条目 ID 集合 == DB manual_review",
+      "result": "PASS",
+      "detail": "file=186 db=186"
+    },
+    {
+      "id": "D2",
+      "name": "manual_review.md 全部已关闭（无待复盘）",
+      "result": "PASS",
+      "detail": "closed=186 pending=0"
+    },
+    {
+      "id": "E0",
+      "name": "coverage_report.md 强制检查清单 13 行全 PASS",
+      "result": "PASS",
+      "detail": "rows=13 fail=[]"
+    },
+    {
+      "id": "E1",
+      "name": "coverage: Documents discovered/processed/failed == DB",
+      "result": "PASS",
+      "detail": "doc=20/20/0 db=20/20 bad_tasks_x6f=0"
+    },
+    {
+      "id": "E2",
+      "name": "coverage: Evidence extracted/mapped/unmapped == DB",
+      "result": "PASS",
+      "detail": "5527/5527/0"
+    },
+    {
+      "id": "E3",
+      "name": "coverage: Rules generated/verified == DB",
+      "result": "PASS",
+      "detail": "generated=2984 verified=393 dist={'verified': 392, 'verified_with_changes': 1}"
+    },
+    {
+      "id": "E4",
+      "name": "coverage: Errata applied / FAQ attached / Rulings attached == DB",
+      "result": "PASS",
+      "detail": "errata_zh=137 faq=1354 rulings=225/225"
+    },
+    {
+      "id": "E5",
+      "name": "coverage: Conflicts resolved/unresolved、Manual review items == DB",
+      "result": "PASS",
+      "detail": "conflicts=1/0 mr=186"
+    },
+    {
+      "id": "F1",
+      "name": "manual_review 全部关闭 ⟷ rules.md 无未决 ⟷ coverage C12 PASS（无 resolved/unresolved 矛盾）",
+      "result": "PASS",
+      "detail": "mr_closed=186/186 rules_unresolved=0 c12=PASS"
+    },
+    {
+      "id": "F2",
+      "name": "rules.md 统计声明 == DB verification 分布 == rules.db == coverage",
+      "result": "PASS",
+      "detail": "rules_md_claims=True dist={'verified': 392, 'verified_with_changes': 1}"
+    },
+    {
+      "id": "F3",
+      "name": "conflicts 状态一致: DB resolved_stage5 ⟷ rules.md 图例 ⟷ coverage 1/0",
+      "result": "PASS",
+      "detail": "[{\"conflict_id\": \"CON-4B-T2-0001\", \"rule_id\": \"R-CR-811.1.b\", \"resolution_status\": \"resolved_stage5\"}]"
+    },
+    {
+      "id": "F4",
+      "name": "changes 计数一致: change_log 267 ⟷ DB ⟷ rules.db ⟷ coverage",
+      "result": "PASS",
+      "detail": "changes=267"
+    },
+    {
+      "id": "F5",
+      "name": "R-CR-811.1.b 链一致: rules.md verified_with_changes ⟷ change_log CHG-5-0001 ⟷ DB",
+      "result": "PASS",
+      "detail": "verification=['verified_with_changes'] chg5=yes"
+    },
+    {
+      "id": "F6",
+      "name": "superseded 标记一致: rules.md [superseded-已被取代] >=2 ⟷ coverage C9 指向 EV-CN-FAQ-0089/0090",
+      "result": "PASS",
+      "detail": "markers=15"
+    }
+  ],
+  "PASS": true,
+  "stats": {
+    "checks_total": 24,
+    "checks_pass": 24,
+    "rules": 2984,
+    "verification": 393,
+    "changes": 267,
+    "manual_review": 186
+  }
+}

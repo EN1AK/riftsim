@@ -1,0 +1,59 @@
+{
+  "stage": "5",
+  "status": "completed",
+  "completed_at": "2026-09-22T08:52:28+00:00",
+  "script": "stage5_verify.py (idempotent)",
+  "batches": {
+    "v1_trdiff": "160 verified",
+    "v2_errata": "130 verified",
+    "v3_mixed": "102 verified + 1 verified_with_changes (R-CR-811.1.b)"
+  },
+  "totals": {
+    "verification_by_status": [
+      {
+        "status": "verified",
+        "c": 392
+      },
+      {
+        "status": "verified_with_changes",
+        "c": 1
+      }
+    ],
+    "verification_total": 393,
+    "nv_true": 0,
+    "changes_total": 267,
+    "chg5": 1,
+    "conflicts": [
+      {
+        "conflict_id": "CON-4B-T2-0001",
+        "rule_id": "R-CR-811.1.b",
+        "resolution_status": "resolved_stage5"
+      }
+    ],
+    "r811_canonical_now": "该关键词为以下功能的简称：“在你回合的开环状态下，如果此牌在你的手牌或你的英雄区域中，你可以选择支付[A]将此牌以正面朝下的方式布置到你已控制且目前没有正面朝下待命卡牌的战场上，此牌保持正面朝下待命状态，直至你不再控制该战场。从下回合开始，此牌将获得[反应]，你可以将此牌打出，无视其基础费用。”",
+    "tasks": [
+      {
+        "task_id": "task_5_01",
+        "status": "completed"
+      },
+      {
+        "task_id": "task_5_02",
+        "status": "completed"
+      },
+      {
+        "task_id": "task_5_03",
+        "status": "completed"
+      },
+      {
+        "task_id": "task_5_04",
+        "status": "completed"
+      },
+      {
+        "task_id": "task_5_05",
+        "status": "pending"
+      }
+    ]
+  },
+  "conflict_resolution": "CON-4B-T2-0001 resolved_stage5 via CHG-5-0001 (EN same-version priority, duration clause supplemented)",
+  "next": "Stage 6 - Final Build + Coverage Check"
+}

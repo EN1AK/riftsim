@@ -1,0 +1,1612 @@
+[
+ {
+  "item_id": "MR-3-CR-0001",
+  "alignment_id": "AL-CR-0037",
+  "rule_id": "R-CR-103.2.b",
+  "zh_ev": "EV-CN-CR-0037",
+  "en_ev": "EV-EN-CR-0037",
+  "zh": "你的主卡组最多可包含三张同名卡牌。",
+  "en": "Your Main Deck can include up to 3 copies of the same named card.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0002",
+  "alignment_id": "AL-CR-0038",
+  "rule_id": "R-CR-103.2.b.1",
+  "zh_ev": "EV-CN-CR-0038",
+  "en_ev": "EV-EN-CR-0038",
+  "zh": "其中包括你的选定英雄。举例：如果你选了一张“沃利贝尔 - 震怒天声”作为选定英雄，那你的主牌堆最多还可以再加两张“沃利贝尔 - 震怒天声”。",
+  "en": "This includes your Chosen Champion. Example: A deck could include Volibear, Furious as its Chosen Champion and still include 2 more copies of Volibear, Furious in their Main Deck.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0003",
+  "alignment_id": "AL-CR-0039",
+  "rule_id": "R-CR-103.2.b.2",
+  "zh_ev": "EV-CN-CR-0039",
+  "en_ev": "EV-EN-CR-0039",
+  "zh": "即使卡牌代表的是同一个角色，名称也可能不同。举例：一套卡组中可以有三张“亚索 - 迷途怅惘”和另外三张“亚索 - 乘风归”，因为两者的卡牌名称并不相同。",
+  "en": "Cards have different names even if they represent the same character. Example: A deck could include 3 copies of Yasuo, Remorseful and 3 copies of Yasuo, Windrider, because they have different names.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0004",
+  "alignment_id": "AL-CR-0041",
+  "rule_id": "R-CR-103.2.d",
+  "zh_ev": "EV-CN-CR-0041",
+  "en_ev": "EV-EN-CR-0041",
+  "zh": "你的卡组中一共只能包含三张与你的传奇卡牌具有相同英雄标签的专属卡牌。",
+  "en": "Your deck may only contain 3 total Signature cards that have the same Champion tag as your Champion Legend.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0005",
+  "alignment_id": "AL-CR-0042",
+  "rule_id": "R-CR-103.2.d.1",
+  "zh_ev": "EV-CN-CR-0042",
+  "en_ev": "EV-EN-CR-0042",
+  "zh": "无论其名称如何，一套牌组中总共只能包含三张专属卡牌。",
+  "en": "Regardless of name, a deck may only contain a sum total of 3 Signature cards.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0006",
+  "alignment_id": "AL-CR-0141",
+  "rule_id": "R-CR-116",
+  "zh_ev": "EV-CN-CR-0141",
+  "en_ev": "EV-EN-CR-0141",
+  "zh": "每名玩家各抽四张牌。",
+  "en": "Players each draw 4.",
+  "flag_reason": " (number tokens differ: zh=[] en=['4']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0007",
+  "alignment_id": "AL-CR-0191",
+  "rule_id": "R-CR-132.4",
+  "zh_ev": "EV-CN-CR-0191",
+  "en_ev": "EV-EN-CR-0191",
+  "zh": "有些卡牌会同时拥有简称与副标。在所有情境下（包括规则判定和卡组构筑），这类卡牌的名称皆为“[简称] - [副标]”。举例：“卡莎 - 蜕变者”和“卡莎 - 九死一生”的简称虽然都是“卡莎”，但卡牌名称并不相同。根据常规卡组构筑规则，你可以在卡组中加入三张“卡莎 - 蜕变者”和三张“卡莎 - 九死一生”。这两者之中你只能选择其中一个作为你的选定英雄。",
+  "en": "Some cards have both a short name and a subtitle. For all purposes, including rules and deckbuilding, such a card’s name is “[Short Name], [Subtitle]”. Example: Kai’Sa, Evolutionary and Kai’Sa, Survivor both have the short name Kai’Sa, but they have different names. You can include 3 of each in your deck under normal deckbuilding rules. If one of them is your Chosen Champion, the other is not.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']; bracket tokens differ: zh=[] en=['Short Name', 'Subtitle']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0008",
+  "alignment_id": "AL-CR-0237",
+  "rule_id": "R-CR-135.2.b.5.a",
+  "zh_ev": "EV-CN-CR-0237",
+  "en_ev": "EV-EN-CR-0237",
+  "zh": "游戏行动的补充内容包括执行该游戏行动的玩家或游戏物体、该游戏行动的执行对象和执行条件，以及其效果持续的时间。有些游戏行动会完全省略补充内容。举例：“虚空索敌”由两条指示组成。第一条是“对战场上的一名单位造成4点伤害”。此处的“造成4 点伤害”为游戏行动，而“战场上的一名单位”则是其补充内容。第二条指示“抽一张牌”，没有补充内容。举例：“提莫 - 军事家”的防守触发效果为：“当我防守时，选择此处的一名敌方单位，并展示你主牌堆顶部的五张牌。每以此方式展示一张带有待命技能的卡牌，对该单位造成1 点伤害，然后回收展示的卡牌。”这里共有四条指示：“选择此处的一名敌方单位”、“展示你主牌堆顶部的五张牌”、“每以此方式展示一张带有待命技能的卡牌，对该单位造成1 点伤害”，以及“回收展示的卡牌”。",
+  "en": "The complement of a game action is made up of the players or Game Objects that perform that game action, that that game action is performed on, the condition under which it is performed, and the duration for its effect to last. Some game actions omit a complement entirely. Example: Void Seeker is made up of two instructions. The first is “deal 4 to a unit at a battlefield.” Here “deal 4” is the game action, while “a unit at a battlefield,” is its complement. The second instruction, “draw 1,” has no complement. Example: Teemo, Strategist’s defend trigger reads “When I defend, choose an enemy unit here and reveal the top 5 cards of your Main Deck. Deal 1 to that unit for each card with Hidden revealed this way, then recycle the revealed cards.” There are four instructions here: “choose an enemy unit here,” “reveal the top 5 cards of your Main Deck,” “deal 1 to that unit for each card with Hidden revealed this way,” and “recycle the revealed cards.”",
+  "flag_reason": " (number tokens differ: zh=['4', '4', '1', '1'] en=['4', '4', '1', '5', '1', '5', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0009",
+  "alignment_id": "AL-CR-0238",
+  "rule_id": "R-CR-135.2.b.6",
+  "zh_ev": "EV-CN-CR-0238",
+  "en_ev": "EV-EN-CR-0238",
+  "zh": "指示中不包括触发条件，也不包括替换效果所定义的可被替换的事件或行动。举例：一个技能的描述为：“当你打出我时，抽一张牌。”此技能的触发条件并非指示。“抽一张牌”是该技能中的唯一指示。举例：一个技能的描述为：“如果一名单位将被摧毁，则改为将其放逐。”文本中的“如果一名单位将被摧毁，”并不是该技能的指示。举例：一个技能的描述为：“如果我从你的主牌堆中被展示，则你获得[2]。”文本中的“如果我从你的主牌堆中被展示，”并不是该技能的指示。",
+  "en": "Instructions do not include trigger conditions or the events or actions that a replacement effect defines as being eligible to be replaced. Example: An ability reads “When you play me, draw 1.” The trigger condition for this ability is not an instruction. “Draw 1,” is the only instruction included in the ability. Example: An ability reads “If a unit would die, banish it instead.” The text “If a unit would die,” is not an instruction of the ability. Example: An ability reads “As I’m revealed from your Main Deck, Add [2].” The text “As I’m revealed from your Main Deck,” is not an instruction of the ability.",
+  "flag_reason": " (number tokens differ: zh=['2'] en=['1', '1', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0010",
+  "alignment_id": "AL-CR-0253",
+  "rule_id": "R-CR-135.2.e.5.b",
+  "zh_ev": "EV-CN-CR-0253",
+  "en_ev": "EV-EN-CR-0253",
+  "zh": "当玩家的符文池获得[A]后，[A]可用于支付任意特性的符能费用。",
+  "en": "When Added to a player’s Rune Pool, [A] can be spent to pay a Power cost of any Domain.",
+  "flag_reason": " (bracket tokens differ: zh=['A', 'A'] en=['A']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0011",
+  "alignment_id": "AL-CR-0255",
+  "rule_id": "R-CR-135.2.e.6.a",
+  "zh_ev": "EV-CN-CR-0255",
+  "en_ev": "EV-EN-CR-0255",
+  "zh": "当缩写[C]作为提示文本印在卡牌上时，该缩写默认代表该牌的主要特性，但其含义依然是“此卡牌特性的1 点符能”。",
+  "en": "When a [C] shorthand is printed on a card as reminder text, it assumes that card’s usual Domain, but it still means “one Power of this card’s Domain.”",
+  "flag_reason": " (number tokens differ: zh=['1'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0012",
+  "alignment_id": "AL-CR-0259",
+  "rule_id": "R-CR-135.2.e.7.a",
+  "zh_ev": "EV-CN-CR-0259",
+  "en_ev": "EV-EN-CR-0259",
+  "zh": "此类关键词可能是依赖性关键词，如[鼓舞][>]和[等级][>]，可能是带有关键词触发条件的触发式技能，如[绝念]，也可能是与技能相关的权限性关键词，如[迅捷][>]和[反应][>]。",
+  "en": "This could be a dependent keyword like [Legion][>] or [Level][>], a triggered ability with a keyworded trigger condition like [Deathknell] or it could be a permissive keyword associated with an ability like [Action][>] or [Reaction][>].",
+  "flag_reason": " (bracket tokens differ: zh=['>', '>', '>', '>'] en=['Legion', '>', 'Level', '>', 'Deathknell', 'Action', '>', 'Reaction', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0013",
+  "alignment_id": "AL-CR-0336",
+  "rule_id": "R-CR-144.4.a.1",
+  "zh_ev": "EV-CN-CR-0336",
+  "en_ev": "EV-EN-CR-0336",
+  "zh": "单位不得移动至已存在两名其他玩家所控制单位的战场，也不得移动至一处正在进行战斗且已有两名其他玩家参与其中的战场。想获取更多有关移动的有效终点位置的信息，请查阅规则447.2.。",
+  "en": "Units cannot Move to a Battlefield that already has units from 2 other players present, or where a Combat is ongoing that has 2 other players as participants. See rule 447.2. For more information on valid destinations for movement.",
+  "flag_reason": " (number tokens differ: zh=['447.2'] en=['2', '2', '447.2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0014",
+  "alignment_id": "AL-CR-0387",
+  "rule_id": "R-CR-158.2",
+  "zh_ev": "EV-CN-CR-0387",
+  "en_ev": "EV-EN-CR-0387",
+  "zh": "如果法术的后半部分应用了替换效果，而该替换效果改变了法术的前半部分，则视情况应用这些替换效果。举例：一张法术牌的效果为：“选择一名单位，在它本回合内下次受到伤害时，将其摧毁。”以及“[鼓舞]：改为立即将其摧毁。（如果你在本回合内已打出过其他手牌，则发动此效果。）”如果[鼓舞]条件得到满足，该单位会立即被摧毁，即使该单位以某种方式留在场上，它“下次受到伤害时被摧毁”的指令也会被忽略。想获取更多有关信息，请查阅规则367.替换效果。",
+  "en": "If a later part of a spell applies a Replacement Effect that alters earlier parts of the spell, apply those replacement effects as appropriate. Example: A spell says \"Choose a unit. Kill it the next time it takes damage this turn.\" and \"[Legion] — Kill it now instead. (Get the effect if you've played another card this turn.)\" If the Legion condition is satisfied, the unit is killed immediately and the instruction to kill it the next time it takes damage is ignored, even if the unit remains on the board somehow. See rule 367. Replacement Effects for more information.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Legion']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0015",
+  "alignment_id": "AL-CR-0418",
+  "rule_id": "R-CR-164.2.a",
+  "zh_ev": "EV-CN-CR-0418",
+  "en_ev": "EV-EN-CR-0418",
+  "zh": "[E]：[反应] — [获得][1]。",
+  "en": "[E]: [Reaction] — Add [1].",
+  "flag_reason": " (bracket tokens differ: zh=['E', '1'] en=['E', 'Reaction', '1']; len_ratio=0.77 outlier). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0016",
+  "alignment_id": "AL-CR-0419",
+  "rule_id": "R-CR-164.2.b",
+  "zh_ev": "EV-CN-CR-0419",
+  "en_ev": "EV-EN-CR-0419",
+  "zh": "回收此牌：[反应] — [获得][C]。",
+  "en": "Recycle this: [Reaction] — Add [C].",
+  "flag_reason": " (bracket tokens differ: zh=['C'] en=['Reaction', 'C']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0017",
+  "alignment_id": "AL-CR-0509",
+  "rule_id": "R-CR-187.5",
+  "zh_ev": "EV-CN-CR-0509",
+  "en_ev": "EV-EN-CR-0509",
+  "zh": "“金币”装备指示物，指的是 拥有“[反应][>] 摧毁此牌，支付[E]：[获得][A]”技能，无特性的装备指示物。",
+  "en": "A Gold gear token is a domainless gear token with “[Reaction][>] Kill this, [E]: [Add] [A].”",
+  "flag_reason": " (bracket tokens differ: zh=['>', 'E', 'A'] en=['Reaction', '>', 'E', 'Add', 'A']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0018",
+  "alignment_id": "AL-CR-0515",
+  "rule_id": "R-CR-187.11",
+  "zh_ev": "EV-CN-CR-0515",
+  "en_ev": "EV-EN-CR-0515",
+  "zh": "0[M]的“影分身”，指的是战力为0，无特性的单位指示物，具有“当我进攻时，你可以选择从你的废牌堆中放逐一名单位。若如此做，则给予我在本回合内[强攻4]”。想获取更多有关信息，请查阅规则807.强攻。",
+  "en": "A 0 [M] Shadow Clone token is a domainless unit token with 0 Might and “When I attack, you may banish a unit from your trash. If you do, give me [Assault 4] this turn.” See rule 807. Assault for more information.",
+  "flag_reason": " (bracket tokens differ: zh=['M'] en=['M', 'Assault 4']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0019",
+  "alignment_id": "AL-CR-0539",
+  "rule_id": "R-CR-190.6.d",
+  "zh_ev": "EV-CN-CR-0539",
+  "en_ev": "EV-EN-CR-0539",
+  "zh": "战场技能中的“你”指代战场的控制者，包括“抽一张牌”这类未指明玩家，但暗指由“你”执行的指示，也是如此指代。如果该战场没有控制者，则“你”不会指代任何人，玩家应无视一切相应指示。",
+  "en": "“You” in a battlefield’s abilities refers to the battlefield’s Controller, as does the implied “you” in instructions that don’t specify a player like “draw 1.” If the battlefield has no Controller, “you” refers to no one, and all such instructions are ignored.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0020",
+  "alignment_id": "AL-CR-0565",
+  "rule_id": "R-CR-194.1.c",
+  "zh_ev": "EV-CN-CR-0565",
+  "en_ev": "EV-EN-CR-0565",
+  "zh": "指示其可获得1 分或更多分数的法术、触发式技能和主动技能。",
+  "en": "Spells, Triggered Abilities and Activated Abilities that instruct them to gain one or more points.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0021",
+  "alignment_id": "AL-CR-0573",
+  "rule_id": "R-CR-194.4.a",
+  "zh_ev": "EV-CN-CR-0573",
+  "en_ev": "EV-EN-CR-0573",
+  "zh": "如果玩家在分数为0 时将失去1 分或更多分数，则不会发生任何变化。",
+  "en": "If a player would lose 1 or more points while they have 0 points, nothing occurs.",
+  "flag_reason": " (number tokens differ: zh=['0', '1'] en=['1', '0']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0022",
+  "alignment_id": "AL-CR-0597",
+  "rule_id": "R-CR-204.3",
+  "zh_ev": "EV-CN-CR-0597",
+  "en_ev": "EV-EN-CR-0597",
+  "zh": "指示中的费用：此类费用属于法术或技能结算的一部分，通常以“[执行X]，以此[执行Y]”的形式出现。",
+  "en": "Costs within Instructions: These Costs are part of the resolution of a spell or ability, and will take the form “[do X] to [do Y].”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['do X', 'do Y']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0023",
+  "alignment_id": "AL-CR-0599",
+  "rule_id": "R-CR-204.3.b",
+  "zh_ev": "EV-CN-CR-0599",
+  "en_ev": "EV-EN-CR-0599",
+  "zh": "当指示中的费用出现在法术、主动技能，或者触发式技能的后半部分时，则是在结算该法术或技能的过程中，才须支付该费用，以获得相应效果。举例：“弹幕时间”是一张法术牌，其描述为：“支付任意数量的[A]，以此对一处战场上的所有敌方单位造成等同于该数量的伤害。”该法术结算时，其控制者可支付任意数量的[A]作为费用，对一处战场上的所有敌方单位造成等同于该数量的伤害作为效果。举例：“远古簇碑”是一张装备牌，其描述为：“[反应][>] [E]：支付任意数量的法力来获得等量的[A]。”该技能结算时，其控制者可支付任意数量的法力作为费用，然后获得等量的[A]作为效果。举例：“缜密的调查员”是一张单位牌，其描述为：“当你打出我时，选择一名对手。让对手展示自己的手牌。你可以选择支付2 经验，从其手牌中选择一张卡牌。若如此做，则让该对手弃置该卡牌，并抽一张牌。”该技能结算时，其控制者可支付2 经验作为费用，然后从其手牌中选择一张卡牌作为效果。",
+  "en": "When Costs within Instructions appear in spells, activated abilities, or in later parts of triggered abilities, the cost must be paid to get the effect during resolution of the spell or ability. Example: Bullet Time is a spell that reads “Pay any amount of [A] to deal that much damage to all enemy units at a battlefield.” As the spell resolves, its controller pays any amount of [A] as a cost, and deals that much damage to all units at a battlefield as the effect. Example: Ancient Henge is a gear that reads “[Reaction][>] [E]: Pay any amount of Energy to Add that much [A].” As the ability resolves, its controller pays any amount of Energy as a cost, and Adds that much [A] as the effect. Example: Insightful Investigator is a unit that reads “When you play me, choose an opponent. They reveal their hand. You may pay 2 XP to choose a card from their hand. If you do, they discard that card and draw 1.” As the ability resolves, its controller may pay 2 XP as a cost, and chooses a card from that player’s hand as the effect.",
+  "flag_reason": " (number tokens differ: zh=['2', '2'] en=['2', '1', '2']; bracket tokens differ: zh=['A', 'A', '>', 'E', 'A', 'A'] en=['A', 'A', 'Reaction', '>', 'E', 'A', 'A']). Auto-classified translation_differenc"
+ },
+ {
+  "item_id": "MR-3-CR-0024",
+  "alignment_id": "AL-CR-0606",
+  "rule_id": "R-CR-206",
+  "zh_ev": "EV-CN-CR-0606",
+  "en_ev": "EV-EN-CR-0606",
+  "zh": "任何需要判定卡牌费用的效果，一律以该卡牌卡面上印刷或复制的费用为准，即使该费用在卡牌被打出时增加、减少或被无视，也不受影响。举例：“霹天雳地”是一张费用为[8]的法术牌，其部分描述为“将此牌的法力费用减去你所控制单位中的最高战力值，即为打出此法术所需的法力”。“拉克丝 明丽光华”是一张单位牌，效果为“每当你打出费用不低于[5]的法术时，让我本回合内[M]+3”。如果一名控制着“拉克丝”的玩家打出了“霹天雳地”，则无论该玩家实际为“霹天雳地”支付了多少费用，都将触发“拉克丝”的技能。举例：“蔑视”是一张法术牌，其描述为：“无效化一个法术，但其费用不得高于[4]，也不得高于[A]。”“火箭轰击”是一张法术牌，费用为[4]和[C]，[回响]费用为[4]和[C]。即使支付了“火箭轰击”的[回响]费用，“火箭轰击”依然是“蔑视”的合法目标，因为“蔑视”只检查其目标卡面上印刷的或复制的费用。举例：“厄塔汗”是一张单位牌，其部分描述为：“你可以选择摧毁一名友方单位，作为打出我的额外费用。若如此做，则该单位每有1 点法力费用，我的法力费用便减少[1]，该单位每有1 点符能费用，我的符能费用便减少[Y]。”如果玩家打出“厄塔汗”并选择摧毁一个当前为“诺克萨斯新兵”复制体的“映像”指示物，则“厄塔汗”的费用将减少[4]。",
+  "en": "Effects that need to determine a card’s cost for any purpose always use its printed or copied cost, even if that cost is increased, decreased, or ignored as the card is played. Example: Sky Splitter is a spell that costs [8] and says in part “This spell's Energy cost is reduced by the highest Might among units you control.” Lux, Illuminated is a unit that says “When you play a spell that costs 5 or more, give me +3 [M] this turn.” If a player who controls Lux plays Sky Splitter, Lux’s ability will trigger, regardless of how much was actually paid for Sky Splitter. Example: Defy is a spell which reads “Counter a spell that costs no more than [4] and no more than [A].” Rocket Barrage is a spell that costs [4][C] and has a Repeat cost of [4][C]. Rocket Barrage is a legal target for Defy even if Rocket Barrage’s Repeat cost is paid, because Defy only checks the printed or copied cost of its target. Example: Atakhan is a unit that reads in part “You may kill a friendly unit as an additional cost to play me. If you do, I cost [1] less for each Energy it costs and [Y] less for each Power it costs.” If a player plays Atakhan and chooses to kill a Reflection token that is currently a copy of Noxus Hopeful, Atakhan will cost [4] less.",
+  "flag_reason": " (number tokens differ: zh=['8', '5', '3', '4', '4', '4', '1', '1', '1', '4'] en=['8', '5', '3', '4', '4', '4', '1', '4']; bracket tokens differ: zh=['8', '5', 'M', '4', 'A', '4', 'C', '4', 'C', '1'] "
+ },
+ {
+  "item_id": "MR-3-CR-0025",
+  "alignment_id": "AL-CR-0607",
+  "rule_id": "R-CR-206.1",
+  "zh_ev": "EV-CN-CR-0607",
+  "en_ev": "EV-EN-CR-0607",
+  "zh": "除非另有说明，否则凡需判定技能费用的效果，一律以其基础费用为准，并无视对该基础费用的任何更改。举例：一张卡牌的描述为：“当你打出一个法力费用不低于[7]的主动技能时，你可以选择让我变为休眠状态，以此让最多两枚符文变为活跃状态。”一张装备牌的主动技能描述为：“支付[12]，放逐此牌：选择一名对手。放逐其控制的所有单位。该对手每有1 分，此技能的费用便减少[1]。”打出该主动技能便会触发第一张卡牌的技能，即使所选对手的分数不少于6 分。举例：一张装备牌的技能描述为：“[装配][4][A]。每有一处敌方占领的战场，此技能的费用便减少[1]。”如果其控制者打出带有[百炼]的单位，则[百炼]的触发效果将引用经过调整的费用。这是因为[百炼]明确规定，计算费用时应包含对费用的调整。",
+  "en": "Effects that need to determine an ability’s cost for any purpose use its base cost, ignoring any alterations to that base cost unless otherwise specified. Example: A card reads “When you play an activated ability with Energy cost [7] or more, you may exhaust me to ready up to 2 runes.” A gear has an activated ability that reads “[12], Banish this: Choose an opponent. Banish all units they control. This ability costs [1] less for each point the chosen opponent has.” The ability of the first card will trigger when the activated ability is played, even if the chosen opponent has 6 or more points. Example: An equipment has an ability that reads “Equip [4][A]. This ability costs [1] less for each occupied enemy battlefield.” If its controller plays a unit with Weaponmaster, the Weaponmaster trigger will refer to the cost including the alterations. This is because Weaponmaster specifies that it includes modifications to the cost.",
+  "flag_reason": " (number tokens differ: zh=['7', '12', '1', '1', '6', '4', '1'] en=['7', '2', '12', '1', '6', '4', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0026",
+  "alignment_id": "AL-CR-0666",
+  "rule_id": "R-CR-315.3.b",
+  "zh_ev": "EV-CN-CR-0666",
+  "en_ev": "EV-EN-CR-0666",
+  "zh": "1.回合玩家从符文牌堆中召出两张符文。想获取更多有关信息，请查阅规则430.召出。",
+  "en": "1. The Turn Player channels 2 runes from their Rune Deck. See rule 430. Channel for more information.",
+  "flag_reason": " (number tokens differ: zh=['1', '430'] en=['1', '2', '430']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0027",
+  "alignment_id": "AL-CR-0667",
+  "rule_id": "R-CR-315.3.b.1",
+  "zh_ev": "EV-CN-CR-0667",
+  "en_ev": "EV-EN-CR-0667",
+  "zh": "如果符文牌堆的符文少于两张，则有多少符文就召出多少。",
+  "en": "If there are fewer than 2 runes in the Rune Deck, they channel as many as possible.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0028",
+  "alignment_id": "AL-CR-0670",
+  "rule_id": "R-CR-315.4.b",
+  "zh_ev": "EV-CN-CR-0670",
+  "en_ev": "EV-EN-CR-0670",
+  "zh": "1.回合玩家抽一张牌。",
+  "en": "1. The Turn Player draws 1.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['1', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0029",
+  "alignment_id": "AL-CR-0672",
+  "rule_id": "R-CR-315.4.b.2",
+  "zh_ev": "EV-CN-CR-0672",
+  "en_ev": "EV-EN-CR-0672",
+  "zh": "完成燃尽后，回合玩家仍要抽一张牌。",
+  "en": "After completing the Burn Out the Turn Player still Draws 1.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0030",
+  "alignment_id": "AL-CR-0863",
+  "rule_id": "R-CR-355.5.b",
+  "zh_ev": "EV-CN-CR-0863",
+  "en_ev": "EV-EN-CR-0863",
+  "zh": "这不包括为常驻牌触发式技能做出的选择，也不包括为项目确认时生成的延迟或内嵌式触发做出的选择（即使这些技能会在结算链项目打出时触发）。举例：打出具有“打出我时，摧毁一名单位”触发式技能的单位时，无需选择目标。只有在技能触发时，才需要选择目标。举例：“巨神峰之巅”的描述为：“当你征服此处时，选择两枚符文，并在本回合结束时，让它们变为活跃状态。”“选择两枚符文，并在本回合结束时，让它们变为活跃状态”是延迟触发技能的效果；任何与其相关的选择均不是在确认征服效果时做出，而是在回合结束时确认延迟触发技能的结果时做出。想获取更多有关信息，请查阅规则382.触发式技能。",
+  "en": "This does not include making choices for Triggered Abilities of permanents, or Delayed or Reflexive Triggers generated by the item being finalized, even if those abilities trigger when the chain item is played. Example: A unit with a triggered ability that says \"When I'm played, kill a unit\" does not require you to choose a target as it's played. The target will be chosen when the ability triggers. Example: Targon’s Peak reads “When you conquer here, ready up to 2 runes at the end of this turn.” Readying up to 2 runes at the end of the turn is the effect of a delayed trigger; any choices involved are not made when finalizing the conquer effect but when finalizing the resulting delayed trigger at the end of the turn. See rule 382. Triggered Abilities for more information.",
+  "flag_reason": " (number tokens differ: zh=['382'] en=['2', '2', '382']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0031",
+  "alignment_id": "AL-CR-0881",
+  "rule_id": "R-CR-355.10.c.1",
+  "zh_ev": "EV-CN-CR-0881",
+  "en_ev": "EV-EN-CR-0881",
+  "zh": "指示文本中的费用也适用此规则，可通过如“[执行X]，以此[执行Y]”的描述来识别此类文本。该指示文本中的费用为“[执行X]”。举例：“当我据守一处战场时，你可以选择摧毁此处的另一名友方单位，以此抽一张牌”不视为目标选取。举例：“当你打出我时，你可以选择消耗一个增益，以此移动一名友方单位”以友方单位为目标，而不是以增益为目标。",
+  "en": "This includes costs within instructions, identified by phrases like “[do X] to [do Y].” The cost within that instruction is “[do X].” e.g., “When I hold, you may kill another friendly unit here to draw 1” does not target anything. e.g., “When you play me, you may spend a buff to move a friendly unit” targets the friendly unit, but not the buff.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']; bracket tokens differ: zh=[] en=['do X', 'do Y', 'do X']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0032",
+  "alignment_id": "AL-CR-0882",
+  "rule_id": "R-CR-355.10.d",
+  "zh_ev": "EV-CN-CR-0882",
+  "en_ev": "EV-EN-CR-0882",
+  "zh": "其为按照自身特性由流程自动选定，而不是由法术或技能的控制者选定。举例：“摧毁一处战场上的所有单位”以一处战场为目标，而不以任意单位为目标。举例：“摧毁所有战场上的单位”不视为目标选取。举例：“摧毁一名单位。让其控制者抽两张牌”只以该单位为目标，而不以其控制者为目标。举例：“让你的传奇变为活跃状态”不视为目标选取，因为你只能拥有一名传奇。举例：“让一名友方传奇变为活跃状态”以一名传奇为目标，因为在2v2 游戏中存在两名友方传奇。举例：“回收你废牌堆中的所有卡牌”不视为目标选取，因为此效果会影响所有卡牌，且你只拥有一个废牌堆。",
+  "en": "It is programmatically selected based on its characteristics rather than chosen by the spell or ability’s controller. e.g., “Kill all units at a battlefield” targets a battlefield, but does not target any units. e.g., “Kill all units at battlefields” doesn’t target anything. e.g., “Kill a unit. Its controller draws 2” targets the unit, but not its controller. e.g., “Ready your legend” doesn’t target anything, because you can only have one legend. e.g., “Ready a friendly legend” targets a legend, because in a 2v2 game there are two friendly legends. e.g., “Recycle all cards in your trash” doesn’t target anything, because it affects all cards and you only have one trash.",
+  "flag_reason": " (number tokens differ: zh=['2', '2'] en=['2', '2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0033",
+  "alignment_id": "AL-CR-0891",
+  "rule_id": "R-CR-355.13",
+  "zh_ev": "EV-CN-CR-0891",
+  "en_ev": "EV-EN-CR-0891",
+  "zh": "如果卡牌指示玩家选择“任意数量”或“最多”一定数量的游戏物体并对其施加效果，则该玩家可以从可用目标中选择任意数量（包括0）。如果选择了0 为数量，则该法术或技能可以在没有任何目标的情况下打出。",
+  "en": "If a card specifies that a player chooses “any number” or “up to” some number of Game Objects to be affected, they may choose any number of available targets, including zero. If they choose zero, the spell or ability can be played without any targets.",
+  "flag_reason": " (number tokens differ: zh=['0', '0'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0034",
+  "alignment_id": "AL-CR-0895",
+  "rule_id": "R-CR-355.14.c",
+  "zh_ev": "EV-CN-CR-0895",
+  "en_ev": "EV-EN-CR-0895",
+  "zh": "选定的目标数量最多只能达到（且不能超过）法术打出时的初始伤害量。举例：一名玩家打出了一张法术牌，其指示为“分摊5 点伤害”，那最多只能选择5 名单位，但可以少于5 名。",
+  "en": "A number of Targets can only be chosen up to, and not exceeding, the initial amount of damage available when the spell is played. Example: A player playing a spell that instructs them to \"Split 5 damage\" may only choose up to 5 units, but may choose fewer.",
+  "flag_reason": " (number tokens differ: zh=['5', '5', '5'] en=['5', '5']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0035",
+  "alignment_id": "AL-CR-0901",
+  "rule_id": "R-CR-355.14.h.1",
+  "zh_ev": "EV-CN-CR-0901",
+  "en_ev": "EV-EN-CR-0901",
+  "zh": "该玩家在选择哪些目标不再作为目标时，不能让最终留存的目标数量少于其要分配的伤害点数。举例：一名玩家打出“阿尔法突袭”，其部分描述为：“选择一名友方单位。该单位对战场上的敌方单位造成等同于其战力的伤害，可在多名敌方单位之间分摊。”该玩家以自己的一名5[M]单位，和战场上的五名1[M]敌方随从为目标。其对手进行反应，打出“蛮荒之力”，选取其中一名随从为目标；并打出“封冻”，选取该5[M]单位为目标。当“阿尔法突袭”结算时，该玩家有3 点伤害可分配，必须选择让哪些目标不再作为目标。该玩家不能为了对该3[M]随从造成3 点伤害，而选择让其中四名单位不再成为目标。该玩家最多只能选择让两名单位不再成为目标。",
+  "en": "That player cannot choose to have fewer Targets than they have damage to split when choosing which Targets cease being Targets. Example: A player plays Alpha Strike, which reads in part “Choose a friendly unit. It deals damage equal to its Might split among enemy units at battlefields.” They target their 5 [M] unit and five 1 [M] enemy Recruits at battlefields. In reaction, their opponent plays Feral Strength targeting one of their recruits, and Frigid Touch targeting the 5 [M] unit. When Alpha Strike resolves, they have 3 damage to split, and must choose which targets cease being targets. They can’t choose for 4 of the units to cease being targets so that they can deal 3 to the 3 [M] recruit. They can only choose at most 2 of the targets to cease being targets.",
+  "flag_reason": " (number tokens differ: zh=['5', '1', '5', '3', '3', '3'] en=['5', '1', '5', '3', '4', '3', '3', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0036",
+  "alignment_id": "AL-CR-0908",
+  "rule_id": "R-CR-356.1.a",
+  "zh_ev": "EV-CN-CR-0908",
+  "en_ev": "EV-EN-CR-0908",
+  "zh": "如果某技能或指示允许你“以[费用]的费用”打出一张卡牌，则将该卡牌的基础费用替换为[费用]。",
+  "en": "If an ability or instruction allows you to play a card “for [Cost]”, replace the card’s Base Costs with [Cost].",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost', 'Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0037",
+  "alignment_id": "AL-CR-0919",
+  "rule_id": "R-CR-356.2.b.1",
+  "zh_ev": "EV-CN-CR-0919",
+  "en_ev": "EV-EN-CR-0919",
+  "zh": "部分由所打出卡牌或其他卡牌上的被动技能规定的可选费用为非强制生效，只有当玩家在步骤2 中做出支付选择后，才须支付。这类被动技能会采用“作为额外费用”的描述及“可以选择”这一字眼。举例：一名单位具有“打出我时，你可以选择弃置一张牌作为额外费用，以此让我的费用减少[2]”的技能。打出这名单位时，其控制者需在步骤2 宣告自己想要支付额外费用的意图，按照规则356.2 施加该额外费用，按照规则356.4 施加支付该费用所带来的减费效果，并按照规则357.2 弃置一张卡牌，以支付该额外费用。想获取更多有关信息，请查阅规则363.被动技能。",
+  "en": "Some Optional Costs specified by Passive Abilities on the card being played or another card are Non-Mandatory, and must be paid only if the player made the choice to pay them in step 2. They use the phrase \"as an additional cost\" and the word \"may.\" Example: A unit has the ability \"As you play me, you may discard 1 as an additional cost. If you do, reduce my cost by [2].\" While playing the unit, its controller declares their intention to pay the additional cost in step 2, applies that additional cost in rule 356.2, applies the discount granted by paying that cost in rule 356.4, and discards a card to pay that additional cost in rule 357.2. See rule 363. Passive Abilities for more information.",
+  "flag_reason": " (number tokens differ: zh=['2', '2', '2', '356.2', '356.4', '357.2', '363'] en=['2', '1', '2', '2', '356.2', '356.4', '357.2', '363']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0038",
+  "alignment_id": "AL-CR-0923",
+  "rule_id": "R-CR-356.4.b",
+  "zh_ev": "EV-CN-CR-0923",
+  "en_ev": "EV-EN-CR-0923",
+  "zh": "减费效果的描述可能是卡牌的“费用减少[数额]”，或是“将费用减去[数额引用]……”。",
+  "en": "Discounts may say that cards \"cost [amount] less\" or that one or more of their costs are \"reduced by [amount].\"",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['amount', 'amount']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0039",
+  "alignment_id": "AL-CR-0930",
+  "rule_id": "R-CR-356.4.f.1",
+  "zh_ev": "EV-CN-CR-0930",
+  "en_ev": "EV-EN-CR-0930",
+  "zh": "如果玩家决定支付可选额外费用，则该额外费用被视为“已支付”。玩家实际上究竟支付了多少费用并不重要。举例：“小小守护者”是一名费用为2 法力和0 符能的单位，其效果为“打出我时，你可以额外支付[C]来抽一张牌”。一名玩家控制了效果为“你打出的单位费用减[A]”的卡牌。该玩家打出了“小小守护者”，并选择支付可选额外费用[C]。尽管可选额外费用已减至0，该玩家依旧会抽一张牌。",
+  "en": "An optional additional cost was \"paid\" if the player made the decision to pay it. It doesn't matter how much the player actually paid. Example: Clockwork Keeper is a unit that costs 2 Energy and 0 Power and says \"As you play me, you may pay [C] as an additional cost. If you do, draw 1.\" A player controls a card that says \"Units you play cost [A] less.\" That player plays Clockwork Keeper and chooses to pay the optional additional cost of [C]. They will draw a card, even though the optional additional cost was reduced to 0.",
+  "flag_reason": " (number tokens differ: zh=['2', '0', '0'] en=['2', '0', '1', '0']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0040",
+  "alignment_id": "AL-CR-0944",
+  "rule_id": "R-CR-358.3",
+  "zh_ev": "EV-CN-CR-0944",
+  "en_ev": "EV-EN-CR-0944",
+  "zh": "检查此卡牌打出后，由其效果造成的结果会不会创造出非法状态。举例：检查法术的执行不会创造出“一处战场中同时出现由三个不同玩家控制的单位”的情况。",
+  "en": "Check that the outcome of the effect of this card being played would not create an illegal state. Example: Check that a spell's execution does not create a state where a Battlefield has Units controlled by 3 different players.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0041",
+  "alignment_id": "AL-CR-0946",
+  "rule_id": "R-CR-358.4",
+  "zh_ev": "EV-CN-CR-0946",
+  "en_ev": "EV-EN-CR-0946",
+  "zh": "检查此卡牌是否拥有合法在当前时机打出的权限。举例：如果当前状态为法术对决闭环，且该卡牌为造成闭环状态的卡牌，则需确保该卡牌具有[迅捷]或[反应]。举例：如果当前状态为闭环，且该卡牌不是造成闭环状态的卡牌，则需确保该卡牌具有[反应]。",
+  "en": "Check that the card has the appropriate permissions to be played at this timing. Example: If the state is Showdown Closed and the card was the one that Closed the state, ensure that it has [Action] or [Reaction]. Example: If the state is Closed and the card wasn’t the one that Closed the state, ensure that it has [Reaction].",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Action', 'Reaction', 'Reaction']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0042",
+  "alignment_id": "AL-CR-0965",
+  "rule_id": "R-CR-359.3.e.5",
+  "zh_ev": "EV-CN-CR-0965",
+  "en_ev": "EV-EN-CR-0965",
+  "zh": "如果该法术的目标均已不再合法，则这些游戏物体、玩家或区域在法术结算时不受影响。所有与非法目标相关的指示都无法执行。举例：一名玩家打出了“虚空索敌”，该法术的效果为“对战场上的一名单位造成4 点伤害。抽一张牌。”该法术目标单位的控制者使用[反应]，将单位移动至所属基地。既然该单位不再是合法单位，也就无法受到任何伤害。不过，“虚空索敌”的控制者依然会抽一张牌。举例：一名玩家打出了“风箱炎息”，并选取处于战斗中的一名单位为目标。该单位的部分效果为：“除非我处于战斗中，否则我无法被敌方法术和技能选作目标。”该单位的控制者打出“闪现”进行反应，将该单位移回自己的基地。该单位已脱离战斗，因此不再是“风箱炎息”的合法目标，在“风箱炎息”结算时也就不会受到影响。举例：一名玩家在一处战场从待命区域打出“暗刃”，将一个敌方单位选作目标。作为对“暗刃”的反应，对手在另一处战场从正面朝下的状态打出“控潮者”，选择与被“暗刃”选作目标的单位交换位置。当“暗刃”结算时，其选择的单位已不在相应战场，因此与该单位相关的所有指示都会被无视。",
+  "en": "If any of the spell's targets are no longer legal, those game objects, players, or zones are unaffected by the spell as it resolves. Any instructions related to an illegal target can’t be followed. Example: A player plays Void Seeker, a spell that says \"Deal 4 to a unit at a battlefield. Draw 1.\" The unit's controller uses a Reaction to move the unit to their base. Since the unit is no longer a legal target, it is not dealt any damage. Void Seeker's controller still draws 1. Example: A player plays Bellow’s Breath targeting a unit in combat that reads in part “I can’t be chosen by enemy spells and abilities unless I’m in combat.” In reaction, that unit’s controller plays Flash, moving the unit to their base. The unit is no longer in combat, so it is no longer a legal target for Bellow’s Breath. The unit will be unaffected by Bellow’s Breath as it resolves. Example: A player plays Hidden Blade from the facedown zone at a battlefield, targeting an enemy unit. In reaction to Hidden Blade, their opponent plays Tideturner from facedown at another battlefield, choosing to swap locations with the unit Hidden Blade targeted. When Hidden Blade resolves, the chosen unit is no longer at the appropriate battlefield, so any instructions related to that unit are ignored.",
+  "flag_reason": " (number tokens differ: zh=['4'] en=['4', '1', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0043",
+  "alignment_id": "AL-CR-0972",
+  "rule_id": "R-CR-359.3.e.11",
+  "zh_ev": "EV-CN-CR-0972",
+  "en_ev": "EV-EN-CR-0972",
+  "zh": "如果玩家只能遵循部分指示，则尽量遵循，否则便无视。举例：一名玩家打出一张法术牌，其效果为“弃置两张手牌，然后抽两张牌”。如果该玩家没有手牌，则无视“弃置两张手牌”的指示，但仍然会抽两张牌。如果该玩家只有一张手牌，则将其弃置，并抽两张牌。",
+  "en": "Instructions that can be partially followed are followed as much as possible and ignored otherwise. Example: A player plays a spell that says \"Discard 2, then draw 2.\" If their hand is empty, the instruction to discard 2 will be ignored. They'll still draw 2. If they had 1 card in hand, they would discard it and draw 2.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2', '2', '2', '2', '1', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0044",
+  "alignment_id": "AL-CR-0973",
+  "rule_id": "R-CR-359.3.e.12",
+  "zh_ev": "EV-CN-CR-0973",
+  "en_ev": "EV-EN-CR-0973",
+  "zh": "如果一个法术需要查询某个目标的信息，但该目标已经不再是合法目标；或者需要查询的卡牌或常驻牌由于其所在位置、区域或状态发生了变化，导致其相关信息不再可用，则查询返回的结果为“无”，基于它的所有计算都将被无视。举例：不再位于场上的单位被视为无战力、无费用，等等。不再位于场上的单位没有位置，不会进入休眠或活跃状态，等等。“海兽钓钩”的效果为“支付[1]和[C]，[E]：摧毁一名友方单位。查看你主牌堆顶部的五张牌。你可以选择从中放逐一名战力比被摧毁单位最多高1 点的单位卡牌，并将其打出，无视费用。然后回收其余的卡牌。”当“海兽钓钩”的技能位于结算链上时，对手以法术作应对，将友方单位送回其所属的手牌。因为该友方单位不再是合法目标，所以无法被摧毁，战力也会视为无。“海兽钓钩”的控制者查看其主牌堆顶部的5 张牌，但无法从中选择任何单位。“击倒”的效果为“选择一名配装的友方单位，并对一名敌方单位造成等同于该友方单位战力的伤害。然后，卸除该友方单位的一件武装。”“击倒”处于结算链上并以一名仅贴附一件武装的单位为目标时，该单位通过“取放自如”卸除了其武装。当“击倒”结算时，该目标单位不再合法，因此该单位的战力将变回“无”，与其相关的指示将被无视。",
+  "en": "If the spell checks information about a target that is no longer legal or a card or permanent whose location, zone, or status has changed such that that information is no longer available, that check returns \"null\" and all calculations based on it are ignored. Examples: A unit that is no longer on the board is treated as having null Might, null cost, etc. A unit that is no longer on the board has no location, is neither exhausted nor readied, etc. Baited Hook says \"[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may banish a unit from among them that has Might up to 1 more than the killed unit and play it, ignoring its cost. Then recycle the rest.\" While Baited Hook’s ability is on the chain, an opponent reacts with a spell that returns the friendly unit to its owner's hand. Because the friendly unit is no longer a legal target, it can't be killed and its Might is treated as null. Baited Hook’s controller looks at the top 5 cards of their Main Deck, but can’t choose any unit from among them. Strike Down reads “Choose an equipped friendly unit. It deals damage equal to its Might to an enemy unit. Then detach an Equipment from it.” While Strike Down is on the chain targeting a unit with only one Equipment attached to it, that unit has its Equipment detached via Angle Shot. When Strike Down goes to resolve, the targeted unit is no longer legal, so the unit’s Might will return as “null” and the instructions related to it are ignored.",
+  "flag_reason": " (number tokens differ: zh=['1', '1', '5'] en=['1', '5', '1', '5']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0045",
+  "alignment_id": "AL-CR-0976",
+  "rule_id": "R-CR-359.3.e.14",
+  "zh_ev": "EV-CN-CR-0976",
+  "en_ev": "EV-EN-CR-0976",
+  "zh": "有些指示可能会引用受卡牌中其他指示影响的游戏物体，或是引用在其他指示中执行的游戏行动。这些被引用和引用的指示称为“关联指示”。举例：“暗刃”的效果为“摧毁战场上的一名单位。让其控制者抽两张牌。”第二条指示中的“其”指的是第一条指示中的单位，因此该法术的两条指示是相互关联的。",
+  "en": "Some instructions may reference Game Objects affected by, or Game Actions performed in, other instructions in a card. The referenced and referencing instructions are called “linked instructions.” Example: Hidden Blade reads “Kill a unit at a battlefield. Its controller draws 2.” The “its” in the second instruction references the unit in the first, so the two instructions of the spell are linked.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0046",
+  "alignment_id": "AL-CR-0977",
+  "rule_id": "R-CR-359.3.e.14.a",
+  "zh_ev": "EV-CN-CR-0977",
+  "en_ev": "EV-EN-CR-0977",
+  "zh": "须先执行完前置关联指示，才会执行后续关联指示。如果此前置关联指示因任何原因被无视，则后续关联指示也会被无视。举例：“暗刃”的效果为“摧毁战场上的一名单位。让其控制者抽两张牌。”如果所选单位因反应“暗刃”而改变区域或移动至基地，则该法术目标指定失效，第一条指示将被无视。如果第一条指示被无视，第二条指示也不会执行，因此该单位的控制者不会抽两张牌。",
+  "en": "In order for a later linked instruction to execute, its earlier linked instruction must have executed. If the earlier linked instruction is ignored for any reason, the later linked instruction will also be ignored. Example: Hidden Blade reads “Kill a unit at a battlefield. Its controller draws 2.” If the chosen unit changes zones or moves to base in reaction to Hidden Blade, the spell will mistarget and the first instruction will be ignored. If the first instruction is ignored, the second instruction will not execute and the unit’s controller will not draw 2.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0047",
+  "alignment_id": "AL-CR-0978",
+  "rule_id": "R-CR-359.3.e.14.b",
+  "zh_ev": "EV-CN-CR-0978",
+  "en_ev": "EV-EN-CR-0978",
+  "zh": "如果在前置关联指示中执行的游戏行动被替换，后续的关联指示并不会受影响（除非后续关联指示直接引用了该游戏行动）。举例：“暗刃”的效果为“摧毁战场上的一名单位。让其控制者抽两张牌。”该效果分为两条指示：摧毁该单位，以及目标单位的控制者抽两张牌。后续关联指示并未直接引用任何行动，因此即使前置关联指示中的摧毁行行动被其他事件替换，该后续关联指示仍会执行。举例：“断魂一扼”的描述为“摧毁一名友方单位。若如此做，则给予另一名友方单位在本回合内等同于被摧毁单位战力的+[M]加成。”如果该友方单位的摧毁被其他事件替换，因此未被“断魂一扼”摧毁，则后续关联指示将不会执行，因为“若如此做”这一表述直接引用了该游戏行动。",
+  "en": "If the Game Action performed in an earlier linked instruction is replaced, this will not affect the later linked instruction, unless the later linked instruction directly references the Game Action being performed. Example: Hidden Blade reads “Kill a unit at a battlefield. Its controller draws 2.” This effect is split into two instructions: killing the unit and the targeted unit’s controller drawing 2. The later linked instruction doesn’t reference an action directly, so it will execute even if the kill action of the earlier linked action is replaced by some other event. Example: Deathgrip reads “Kill a friendly unit. If you do, give +[M] equal to its Might to another friendly unit this turn.” If the friendly unit in question is not killed by Deathgrip because its death is replaced with another event, the later linked instruction will not execute because “if you do” directly references the game action.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0048",
+  "alignment_id": "AL-CR-0981",
+  "rule_id": "R-CR-359.3.e.16",
+  "zh_ev": "EV-CN-CR-0981",
+  "en_ev": "EV-EN-CR-0981",
+  "zh": "如果延迟技能的持续时间在其生成前已结束，则不会生成该延迟技能，与其相关的所有指示也将被无视。举例：“巨神峰之巅”是一张战场牌，其部分描述为：“当你征服此处时，选择两枚符文，并在本回合结束时，让它们变为活跃状态。”如果在结束步骤开始后，“巨神峰之巅”在回合结束阶段被征服（例如通过“狩猎律动”等效果），则不会生成该延迟触发。举例：“阿克尚 - 放浪不羁”的部分描述为“当你打出我时，如果你支付了该额外费用，则可以将一件敌方装备移动到你的基地。你控制这件装备，直到我离场为止。如果它是一件武装，则将其贴附到我身上。”如果阿克尚因其打出效果受到反应而离场，则不会生成延迟被动技能“你控制这件装备，直到我离场为止”。因此，你一刻也不会获得该目标装备的控制权。",
+  "en": "If a Delayed Ability’s duration has ended before it was generated, the Delayed Ability is not generated and any instructions related to it are ignored. Example: Targon’s Peak is a battlefield that reads in part “When you conquer here, ready up to 2 runes at the end of this turn.” If Targon’s Peak is conquered during the Ending Phase after the beginning of the ending step, such as via an effect like thrill of the Hunt, the delayed trigger will not be generated. Example: Akshan, Mischievous reads in part “When you play me, if you paid the additional cost, move an enemy gear to your base. You control it until I leave the board. If it's an Equipment, attach it to me.” If Akshan leaves the board in reaction to his play effect, the delayed passive ability “You control it until I leave the board,” will not be generated. You will not gain control of the targeted gear even for a moment.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0049",
+  "alignment_id": "AL-CR-0989",
+  "rule_id": "R-CR-359.3.f.4",
+  "zh_ev": "EV-CN-CR-0989",
+  "en_ev": "EV-EN-CR-0989",
+  "zh": "触发式技能效果中使用的某些信息会直接引用自触发式技能本身，比如“敌方”和“友方”状态。该信息会在引用指示执行时进行检查。举例：“亚索 - 迷途怅惘”的描述为：“当我进攻时，对此处的一名敌方单位造成等同于我战力的伤害。”亚索移动至受敌方占据的战场，其进攻触发被放入结算链。防守方玩家对该进攻触发进行反应，从待命状态打出一张“恶意收购”，获得亚索的控制权。该触发式技能不会因亚索的控制者发生变化而受影响，且“敌方”引用自该触发式技能本身，所以结算会正常进行。举例：假设防守方玩家在对此“亚索 - 迷途怅惘”进行反应时，打出了一张如此描述的法术牌：“[反应]。获得一个触发式技能的控制权。你可以选择为其做出新的选择。”防守方玩家选择了该进攻触发。当亚索的进攻触发结算时，如果该玩家没有为该触发效果指定新的目标，则该触发式技能的控制者已不再是目标单位的“敌方”，于是该触发式技能目标指定失效，不会产生任何效果。如果该玩家为该进攻触发选取了亚索为目标，则亚索将成为该触发式技能的“敌方”单位，所以会对自己造成等同于自身战力的伤害。",
+  "en": "Some information used by the effect of a triggered ability is referenced from the triggered ability itself, such as “enemy” and “friendly” status. This information is checked on execution of the referencing instruction. Example: Yasuo, Remorseful reads “when I attack, deal damage equal to my Might to an enemy unit here.” Yasuo moves to an occupied enemy battlefield and his attack trigger goes on the chain. In reaction to the attack trigger, the defending player plays a hidden Hostile Takeover and gains control of Yasuo. The triggered ability is unaffected by Yasuo changing controllers, and “enemy” is in reference to the triggered ability itself, so it will resolve with no issue. Example: In reaction to the same Yasuo, Remorseful trigger, say the defending player had instead played a spell that reads “[Reaction]. Gain control of a triggered ability. You may make new choices for it.” They chose the attack trigger. When Yasuo’s attack trigger resolves, if they didn’t make new choices for the trigger, the controller of the triggered ability will no longer be an enemy to the targeted unit, so the triggered ability will mistarget and do nothing. If they instead chose Yasuo with the attack trigger, he would be an enemy unit to the triggered ability and so it would deal damage equal to his Might to himself.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Reaction']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0050",
+  "alignment_id": "AL-CR-0996",
+  "rule_id": "R-CR-364.1",
+  "zh_ev": "EV-CN-CR-0996",
+  "en_ev": "EV-EN-CR-0996",
+  "zh": "这类技能可通过多种格式识别。举例：“如果你有两张或以上手牌，则我获得[M]+1。”举例：“跟我位于同一处战场的友方约德尔人获得[坚守]。”",
+  "en": "These abilities have a wide variety of formats to recognize. Example: \"I get +1 [M] while you have 2 or more cards in your hand.\" Example: \"Friendly Yordles at my battlefield have [Shield].\"",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['1', '2']; bracket tokens differ: zh=['M'] en=['M', 'Shield']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0051",
+  "alignment_id": "AL-CR-1003",
+  "rule_id": "R-CR-366.1",
+  "zh_ev": "EV-CN-CR-1003",
+  "en_ev": "EV-EN-CR-1003",
+  "zh": "处于场地外区域的卡牌，其被动技能将自行描述其适用的条件。举例：被动技能“仅可在对手的回合中将我打出”适用于可以打出该卡牌的所有区域。举例：“不死军团”拥有被动技能“[鼓舞][>] 你可以选择支付[3]和[C]，将我从你的废牌堆中打出。”该被动技能仅在“不死军团”位于废牌堆时生效。",
+  "en": "Passive Abilities of cards in zones that are outside of the Board will self-describe their context. Example: The passive ability \"Play me only during an opponent's turn.\" applies in any zone from which that card can be played. Example: Undying Legion has a passive ability that reads “[Legion][>] You may play me from your trash for [3][C].” That passive ability only applies when Undying Legion is in the trash.",
+  "flag_reason": " (bracket tokens differ: zh=['>', '3', 'C'] en=['Legion', '>', '3', 'C']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0052",
+  "alignment_id": "AL-CR-1010",
+  "rule_id": "R-CR-369.1",
+  "zh_ev": "EV-CN-CR-1010",
+  "en_ev": "EV-EN-CR-1010",
+  "zh": "替换效果的描述中通常会出现“……时”、“将”或“改为”，可以以此识别。举例：“中娅沙漏”卡牌的描述为：“下一次当一名友方单位将被摧毁时，改为将此牌摧毁。移除该单位所受伤害，让其进入休眠状态，并将其召回。”这属于替换效果，可以改变任意“导致友方单位被摧毁”的游戏效果的执行结果。举例：“垓兽”是一名单位，其部分描述为：“如果我从你的主牌堆中被展示，则你[获得][2]。”这属于替换效果，可以改变任意“从你的主牌堆中展示‘垓兽’”的游戏效果的执行结果。",
+  "en": "A Replacement Effect can usually be identified by the presence of the terms “as,” “would,” or \"instead.\" Example: Zhonya's Hourglass reads \"The next time a friendly unit would die, kill this instead. Heal that unit, exhaust it, and recall it.\" This is a replacement effect that alters the execution of any Game Effect that would kill a friendly unit. Example: Undertitan is a unit that reads in part “As I’m revealed from your deck, [Add] [2].” This is a replacement effect that alters the execution of any Game Effect that reveals Undertitan from your deck.",
+  "flag_reason": " (bracket tokens differ: zh=['2'] en=['Add', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0053",
+  "alignment_id": "AL-CR-1019",
+  "rule_id": "R-CR-370.1.b.1",
+  "zh_ev": "EV-CN-CR-1019",
+  "en_ev": "EV-EN-CR-1019",
+  "zh": "对于描述在某事件发生“时”执行游戏行动的替换效果，所述事件将被替换为“原事件”加上“执行该游戏行动”。举例：“垓兽”是一名单位，其部分描述为：“如果我从你的主牌堆中被展示，则你[获得][2]。”“从你的主牌堆中展示‘垓兽’”这一事件，将被替换为“从你的主牌堆中展示‘垓兽’，并让你的符文池获得[2]法力”。",
+  "en": "In the case of Replacement Effects that describe a game action to occur “as” an event occurs, the described event is replaced by that same event plus the game action being performed. Example: Undertitan is a unit that reads in part “As I’m revealed from your deck, [Add] [2].” The event of Undertitan being revealed from your deck is replaced by Undertitan being revealed from your deck and adding [2] Energy to your Rune Pool.",
+  "flag_reason": " (bracket tokens differ: zh=['2', '2'] en=['Add', '2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0054",
+  "alignment_id": "AL-CR-1039",
+  "rule_id": "R-CR-375",
+  "zh_ev": "EV-CN-CR-1039",
+  "en_ev": "EV-EN-CR-1039",
+  "zh": "如果替换效果对应生效的事件将受生成该事件的游戏效果调整，或该事件的结果将受引用被替换事件的关联技能中的游戏行动调整，则该替换效果会继承此类调整。举例：“寻宝猎人”的描述为：“每当我移动时，打出一个休眠的‘金币’装备指示物。”某个替换效果为：“如果你将打出一个装备指示物，则改为打出该指示物与它的一个额外复制体”。此替换效果对打出“金币”装备指示物的事件生效。由此产生的额外复制体也会继承“休眠”调整，因而处于休眠状态。举例：另一替换效果为：“如果你将打出一个指示物，则改为抽一张牌。”“寻宝猎人”技能的调整无法应用，所以可以将其无视。举例：某个法术的描述为：“打出一个活跃的3[M]‘机器人’指示物”。然后进行一次：给予其[瞬息]。”某个替换效果为：“如果你将打出一个单位指示物，则改为打出该指示物与一名1[M]的‘随从’”，该效果对创造“机器人”指示物的事件生效。“随从”将以活跃状态入场，并被给予[瞬息]。",
+  "en": "If an event that a Replacement Effect applies to would be modified by the Game Effect that generated that event, or the results of that event would be modified by a Game Action from a linked ability that references the replaced event, the Replacement Effect will inherit those modifications. Example: Treasure Hunter reads “When I move, play a Gold gear token exhausted.” A Replacement Effect that says “if you would play a token gear, play that token and an additional copy instead” is applied to the event of the Gold gear token being played. The additional copy will also be exhausted, as it inherits the “exhausted” modification. Example: Another Replacement Effect says “if you would play a token, draw 1 instead.” The modification from Treasure Hunter’s ability cannot apply, so we ignore it. Example: A spell reads “play a ready 3 [M] Mech token. Then do this: Give it Temporary.” A Replacement Effect that says “if you would play a unit token, play that token and a 1 [M] Recruit token instead” is applied to the event of the Mech token being made. The Recruit token enters ready and is given Temporary.",
+  "flag_reason": " (number tokens differ: zh=['3', '1'] en=['1', '3', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0055",
+  "alignment_id": "AL-CR-1042",
+  "rule_id": "R-CR-377.1",
+  "zh_ev": "EV-CN-CR-1042",
+  "en_ev": "EV-EN-CR-1042",
+  "zh": "主动技能的卡牌文本格式为：费用 + 冒号 + 具体效果。例如：“[2]：抽一张牌。”就是一个主动技能。其费用为2 点法力。其效果为抽一张牌。",
+  "en": "Activated Abilities are recognized by the presence of a \":\" in the text of the card, preceded by a cost and succeeded by an effect. Example: \"[2]: Draw 1\" is an activated ability. The cost is 2 energy. The effect is to draw 1 card.",
+  "flag_reason": " (number tokens differ: zh=['2', '2'] en=['2', '1', '2', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0056",
+  "alignment_id": "AL-CR-1045",
+  "rule_id": "R-CR-377.2.b",
+  "zh_ev": "EV-CN-CR-1045",
+  "en_ev": "EV-EN-CR-1045",
+  "zh": "如果主动技能存在一定的“使用”或“打出”条件，则必须满足该条件才能激活此技能。举例：“绵绵魄罗”的描述为：“打出两个1[M]的‘战鹰’单位指示物，它们拥有[法盾]。我必须位于战场上才能使用此技能。”绵绵魄罗必须位于战场上才能激活该技能。",
+  "en": "If an Activated Ability has a condition on “using” or “playing” it, that condition must be true in order to activate the ability in question. Example: Ultrasoft Poro reads “[E]: Play two 1 [M] Bird unit tokens with [Deflect]. Use this ability only while I'm at a battlefield.” In order to activate the ability, Ultrasoft Poro must be located at a battlefield.",
+  "flag_reason": " (bracket tokens differ: zh=['M'] en=['E', 'M', 'Deflect']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0057",
+  "alignment_id": "AL-CR-1059",
+  "rule_id": "R-CR-383.1",
+  "zh_ev": "EV-CN-CR-1059",
+  "en_ev": "EV-EN-CR-1059",
+  "zh": "触发式技能的识别标志为技能描述中出现的“当/每当……时”（中间为一个游戏行动或事件）、“在……时”（中间为回合流程中的一个时间点），又或者“（第）N 次”（后面跟随一个游戏行动或事件）字样。举例：“当你征服此处时，你可以选择消耗一个增益，以此抽一张牌。”“在你回合结束时，让两枚符文变为活跃状态。”“每回合首次，当我移动时，你可以选择让一个其他休眠的物体变为活跃状态（包括传奇和符文）。”",
+  "en": "Triggered Abilities can usually be recognized by the word \"when\" followed by a game action or event; the word \"at\" followed by a point in time during the turn sequence; or the phrase “the [Nth] time” followed by a game action or event. Examples: \"When you conquer here, you may spend a buff to draw 1.\" \"At the end of your turn, ready 2 runes.\" “The first time I move each turn, you may ready something else that's exhausted.”",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '2']; bracket tokens differ: zh=[] en=['Nth']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0058",
+  "alignment_id": "AL-CR-1061",
+  "rule_id": "R-CR-383.1.b",
+  "zh_ev": "EV-CN-CR-1061",
+  "en_ev": "EV-EN-CR-1061",
+  "zh": "如果某个技能的触发条件是“（第）N 次”发生某事，而该条件同时多次得到满足，则控制者需要从中选择一次作为触发的时机。该技能只会在选中的时机触发一次。举例：“残响之魂”的描述为：“每回合首次，当你的另一名友方单位被摧毁时，抽一张牌。”该技能在本回合尚未触发过。其他两名友方单位同时被摧毁（比如说因为受到战斗伤害）。“残响之魂”的控制者可以从这两次被摧毁事件中选择一次来触发其技能。",
+  "en": "If an ability triggers “the [Nth] time” something happens and that trigger condition is met multiple times simultaneously, the ability’s controller picks one of those instances to serve as the trigger condition. The ability triggers only once, due to the chosen condition. Example: Wraith of Echoes reads “The first time another friendly unit dies each turn, draw 1.” That ability hasn’t triggered yet this turn. Two other friendly units die simultaneously (say, due to combat damage). The Wraith’s controller chooses one of those deaths to trigger Wraith’s ability.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']; bracket tokens differ: zh=[] en=['Nth']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0059",
+  "alignment_id": "AL-CR-1064",
+  "rule_id": "R-CR-383.2.a.1",
+  "zh_ev": "EV-CN-CR-1064",
+  "en_ev": "EV-EN-CR-1064",
+  "zh": "如果某个附加条件分句紧跟在条件之后，则只有该附加条件成立时，该条件才视为满足。此类条件分句属于触发条件的一部分，而非效果的一部分。举例：“娑娜 - 清心谐律”的描述为：“在你回合结束时，如果我位于战场上，则让最多四枚友方符文变为活跃状态。”虽然一到回合结束步骤就会满足她的触发式技能条件，但只有她在触发条件满足时位于战场上时，她的触发式技能才会进入结算链。如果她因该触发式技能受到反应而被移出战场，该技能仍会结算。举例：“暴走萝莉”的描述为：“在你的回合开始阶段，如果你的手牌不足两张，则再抽一张牌。”英文版中的“如果你的手牌不足两张”这一条件分句并非紧跟在触发条件之后，因此它属于效果的一部分，而非条件。",
+  "en": "Any additional conditional statement immediately after the Condition must be true in order for the Condition to be fulfilled. Such a conditional statement is part of the Trigger Condition and not the Effect. Example: Sona, Harmonious reads “At the end of your turn, if I'm at a battlefield, ready up to 4 friendly runes.” Her Trigger Ability’s Condition will be fulfilled in the Ending Step, but the Triggered Ability will only be placed on the chain if she is located at a battlefield when the Condition is fulfilled. If she is removed in reaction to the triggered ability, it will still resolve. Example: Loose Cannon reads “At the start of your Beginning Phase, draw 1 if you have one or fewer cards in your hand.” The “if you have one or fewer cards in your hand” conditional statement is not immediately after the trigger condition, so it is part of the effect and not the condition.",
+  "flag_reason": " (number tokens differ: zh=[] en=['4', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0060",
+  "alignment_id": "AL-CR-1073",
+  "rule_id": "R-CR-383.3.a.3",
+  "zh_ev": "EV-CN-CR-1073",
+  "en_ev": "EV-EN-CR-1073",
+  "zh": "当“你可以选择”或“该玩家可以选择”出现在触发式技能效果的后半部分时，则该选择将在结算阶段决定。举例：“奥恩 - 铁匠”的描述为：“当你打出我时，或当我据守一处战场时，查看你主牌堆顶部的四张牌。你可以选择从中展示一件装备，并抽取该卡牌。然后回收其余的卡牌。”其中的“你可以选择”并非出现在效果的开头部分，因此该决定将在结算阶段做出。该技能始终会被确认并放入结算链。",
+  "en": "If “you may” or “they may” appears in any later part of the Effect of a triggered ability, it is decided on resolution. Example: Ornn, Blacksmith reads “When you play me or when I hold, look at the top 4 cards of your Main Deck. You may reveal a gear from among them and draw it. Then recycle the rest.” This “you may” does not appear as the first part of its effect, so the choice is made on resolution. The ability is always finalized to the chain.",
+  "flag_reason": " (number tokens differ: zh=[] en=['4']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0061",
+  "alignment_id": "AL-CR-1074",
+  "rule_id": "R-CR-383.3.b",
+  "zh_ev": "EV-CN-CR-1074",
+  "en_ev": "EV-EN-CR-1074",
+  "zh": "如果触发式技能包含指示中的费用，且该费用位于效果的开头部分，或紧跟在效果开头部分出现的“你可以选择”或“该玩家可以选择”之后，则该费用将视为该触发式技能的基础费用。举例：“艾克 - 溯时洄光”的描述为：“[绝念][>] 回收我，以此让你的所有符文变为活跃状态。”在此情况下，“回收我，以此让你的所有符文变为活跃状态”便是出现在技能效果开头部分的指示中的费用，因此“回收我”被视为该触发式技能的基础费用。举例：“缜密的调查员”的描述为：“当你打出我时，选择一名对手。让对手展示自己的手牌。你可以选择支付2 经验，从其手牌中选择一张卡牌。若如此做，则让该对手弃置该卡牌，并抽一张牌。”两个部分。“支付2 经验”是指示中的费用，但由于它并非出现在效果的开头部分，因此不会被视为该触发式技能的基础费用。“支付2 经验”将在结算时执行。",
+  "en": "If a Triggered Ability contains a cost within instructions at the beginning of the effect or immediately following the “you may” or “they may” that appears as the first part of the effect, that cost is treated as the base cost of the Triggered Ability. Example: Ekko, Recurrent reads “[Deathknell][>] Recycle me to ready your runes.” In this case, “recycle me to ready your runes” is a cost within instructions that appears at the beginning of the effect of the ability, and thus “recycle me” is taken as the base cost of the triggered ability. Example: Insightful Investigator reads “When you play me, choose an opponent. They reveal their hand. You may pay 2 XP to choose a card from their hand. If you do, they discard that card and draw 1.” The “pay 2 XP” is a cost within instructions, but because it does not appear in the first part of the effect, it is not taken as the base cost of the triggered ability. Paying 2 XP is performed on resolution.",
+  "flag_reason": " (number tokens differ: zh=['2', '2', '2'] en=['2', '1', '2', '2']; bracket tokens differ: zh=['>'] en=['Deathknell', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0062",
+  "alignment_id": "AL-CR-1091",
+  "rule_id": "R-CR-383.4.b.1",
+  "zh_ev": "EV-CN-CR-1091",
+  "en_ev": "EV-EN-CR-1091",
+  "zh": "这类条件的表述通常为“当你选择我时……”或“当你选择一个[游戏物体]时……”。",
+  "en": "These are commonly structured as “When you choose me …” or “When you choose a [Game Object] …”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Game Object']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0063",
+  "alignment_id": "AL-CR-1128",
+  "rule_id": "R-CR-385.2",
+  "zh_ev": "EV-CN-CR-1128",
+  "en_ev": "EV-EN-CR-1128",
+  "zh": "处于场地外的触发式技能将自行描述其适用的条件。举例：触发式技能“每当你征服一处战场时，你可以选择弃置一张手牌，以此让此牌从你的废牌堆中返回你的手牌”，只会在该卡牌处于废牌堆时触发，且无法在别的位置触发。",
+  "en": "Triggered Abilities outside of the Board will self-describe their context. Example: The triggered ability \"When you conquer, you may discard 1 to return this from your trash to your hand.\" triggers while the card it's on is in the trash, and not anywhere else.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0064",
+  "alignment_id": "AL-CR-1143",
+  "rule_id": "R-CR-390.3",
+  "zh_ev": "EV-CN-CR-1143",
+  "en_ev": "EV-EN-CR-1143",
+  "zh": "延迟替换：这类替换效果的识别标志为指定其在特定时机将特定效果替换，或者在结算效果描述中有“（第）N 次”的表述。",
+  "en": "Delayed Replacements are Replacement Effects that can be recognized by specifying the effect they are replacing at a specific time, or “the [Nth] time” in the description of the effect as it resolves.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Nth']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0065",
+  "alignment_id": "AL-CR-1157",
+  "rule_id": "R-CR-395",
+  "zh_ev": "EV-CN-CR-1157",
+  "en_ev": "EV-EN-CR-1157",
+  "zh": "这组技能必须存在于同一个游戏物体卡面上印刷的效果或规则文本，或是都由同一来源赋予另一个游戏物体，才能组成关联技能。举例：“Z 型驱动”是一件武装装备，其部分规则文本为“支付[3]和[B]，放逐此牌：打出所有因此牌效果被放逐的单位，无视费用。”“Z 型驱动”的效果文本为：“[绝念][>] 放逐我。”其提供的绝念技能与“Z 型驱动”的主动技能相关联。",
+  "en": "In order for a set of Abilities to be Linked, they must be present in the printed Effect or Rules Text of the same Game Object, or be granted by the same source to another Game Object. Example: The Zero Drive is an Equipment gear whose rules text reads in part “[3][B], Banish this: Play all units banished with this, ignoring their costs.” The Zero Drive’s effect text reads “[Deathnkell][>] Banish me.” The granted deathknell ability is linked with the Zero Drive’s activated ability.",
+  "flag_reason": " (bracket tokens differ: zh=['3', 'B', '>'] en=['3', 'B', 'Deathnkell', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0066",
+  "alignment_id": "AL-CR-1164",
+  "rule_id": "R-CR-400.2",
+  "zh_ev": "EV-CN-CR-1164",
+  "en_ev": "EV-EN-CR-1164",
+  "zh": "当[获得]资源效果的技能确认后，它会像打出单位或装备一样立即结算。",
+  "en": "When an Ability with the [Add] action is finalized it resolves immediately, like a Unit or Gear.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Add']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0067",
+  "alignment_id": "AL-CR-1180",
+  "rule_id": "R-CR-403.1.b.1",
+  "zh_ev": "EV-CN-CR-1180",
+  "en_ev": "EV-EN-CR-1180",
+  "zh": "如果触发式技能包含指示文本中的费用（例如“[执行X]，以此[执行Y]”），则该费用视为基础费用。想获取更多有关指示文本中的费用的信息，请查阅规则740.2.a 。",
+  "en": "If a Triggered Ability has a cost within instructions (e.g. “[do X] to [do Y]”), the cost is taken as the base cost. See rule 740.2.a. for more information on costs within instructions.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['do X', 'do Y']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0068",
+  "alignment_id": "AL-CR-1213",
+  "rule_id": "R-CR-411.4",
+  "zh_ev": "EV-CN-CR-1213",
+  "en_ev": "EV-EN-CR-1213",
+  "zh": "如果有技能是在当“你”执行某行动时触发，则该技能会在你负责的游戏行动发生时触发。举例：某件装备的描述为“当你移动一名敌方单位时，你可以选择让此牌变为休眠状态，以此[眩晕]该单位。”每当你负责的移动类游戏行动导致敌方单位移动时，该效果都会触发。如果对手打出一个如此描述的法术：“选择一处战场。每位玩家都可以选择将不由其控制的一名单位移动到该战场。”且有位控制前述装备的玩家选择移动敌方单位，则其装备会触发。",
+  "en": "If an ability triggers when “you” do something, it triggers when a Game Action that you are responsible for occurs. Example: A gear reads “When you move an enemy unit, you may exhaust this to [Stun] it.” It will trigger whenever a move game action that you are responsible for causes an enemy unit to move. If an opponent plays a spell that reads “choose a Battlefield. Each player may move a unit they don’t control to that battlefield,” and a player that controls the gear chooses to move an enemy unit, their gear will trigger.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Stun']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0069",
+  "alignment_id": "AL-CR-1256",
+  "rule_id": "R-CR-416.3",
+  "zh_ev": "EV-CN-CR-1256",
+  "en_ev": "EV-EN-CR-1256",
+  "zh": "当回收被列为行动的费用时，这项行动必须能够完成，才能进行费用支付。举例：“蔚 - 铲除者”拥有“从你的废牌堆回收一张卡牌：给予我在本回合内[M]+1”的技能。每次玩家激活此技能时，都需要从废牌堆中回收一张卡牌，作为支付费用。如果玩家的废牌堆中没有卡牌，则无法支付费用，因此无法激活技能。",
+  "en": "When Recycling is listed as a Cost, the action must be able to be completed for the cost to be paid. Example: Vi, Destructive has the ability \"Recycle 1 from your trash: Give me +1 [M] this turn.\" Each time a player activates the ability, they must recycle 1 card from their trash to pay its cost. If they have no cards in their trash, they can't activate the ability, because they can't pay its cost.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['1', '1', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0070",
+  "alignment_id": "AL-CR-1258",
+  "rule_id": "R-CR-416.5",
+  "zh_ev": "EV-CN-CR-1258",
+  "en_ev": "EV-EN-CR-1258",
+  "zh": "如果同时有2 张或以上的卡牌被回收到主牌堆，则要以随机顺序放置到牌堆底部。举例：“拾荒小能手”拥有“从你的废牌堆中回收三张牌，支付[1]，[E]：抽一张牌”的技能。要支付激活这一技能的费用，需要其控制者从自己的废牌堆中选择三张卡牌，将其以随机顺序放到主牌堆底部。",
+  "en": "If 2 or more cards are Recycled to the Main Deck simultaneously, they are placed on the bottom of that deck in a random order. Example: Garbage Grabber has the ability \"Recycle 3 from your trash, [1], [E]: Draw \" To pay the cost of activating this ability, its controller chooses 3 cards from their trash and places them on the bottom of their Main Deck in a random order.",
+  "flag_reason": " (number tokens differ: zh=['2', '1'] en=['2', '3', '1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0071",
+  "alignment_id": "AL-CR-1260",
+  "rule_id": "R-CR-416.6",
+  "zh_ev": "EV-CN-CR-1260",
+  "en_ev": "EV-EN-CR-1260",
+  "zh": "该行动的表达格式可能体现为“从[区域]回收X 张牌。”这句话代表的行动为：由受到指示的玩家从相关区域中选择X张牌，将其回收。此类指示不会将回收的卡牌选取为目标。举例：“蒙多医生 - 主治大夫”拥有“在你的回合开始阶段，从你的废牌堆中回收三张牌”的技能。在这个技能进行结算的过程中，其控制者要从自己的废牌堆中回收三张卡牌。如果该玩家的废牌堆中卡牌不足三张，则有多少就回收多少。",
+  "en": "This action, when instructed, is sometimes formatted as \"Recycle X from [Zone].\" That means to take X cards of the instructed player's choice from the relevant zone and recycle them. Such an instruction does not target the recycled cards. Example: Dr. Mundo, Expert has the ability \"At the start of your Beginning Phase, recycle 3 from your trash.\" As that ability resolves, its controller recycles 3 cards from their trash. If there are fewer than 3 cards in that player's trash, they recycle as many as they can.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3', '3', '3']; bracket tokens differ: zh=[] en=['Zone']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0072",
+  "alignment_id": "AL-CR-1275",
+  "rule_id": "R-CR-417.6.a",
+  "zh_ev": "EV-CN-CR-1275",
+  "en_ev": "EV-EN-CR-1275",
+  "zh": "如果游戏效果未指明其来源，则描述造成伤害行动的游戏效果视为其来源。举例：“虚空索敌”法术的效果为“对战场上的一名单位造成4 点伤害。抽一张牌。”“虚空索敌”指示你造成的伤害，则视为伤害由“虚空索敌”造成。",
+  "en": "If a game effect does not specify a source, the game effect describing the Deal action is the source. Example: Void Seeker is a spell that reads “Deal 4 to a unit at a battlefield. Draw 1.” The damage that Void Seeker instructs you to deal is dealt by Void Seeker.",
+  "flag_reason": " (number tokens differ: zh=['4'] en=['4', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0073",
+  "alignment_id": "AL-CR-1324",
+  "rule_id": "R-CR-422.3",
+  "zh_ev": "EV-CN-CR-1324",
+  "en_ev": "EV-EN-CR-1324",
+  "zh": "当弃置被列为行动的费用时，这项行动必须能够完成，才能进行费用支付。举例：一张卡牌拥有“弃置两张手牌：对战场上的一名单位造成2 点伤害”的技能。要激活此技能，该卡牌的控制者必须拥有至少两张手牌，且必须可以将两张手牌弃置。",
+  "en": "When Discarding is listed as a Cost, then the Action must be able to be completed for the cost to be paid. Example: A card has the ability \"Discard 2: Deal 2 damage to a unit at a battlefield.\" To activate the ability, the card's controller must have at least 2 cards in hand and must be able to discard them.",
+  "flag_reason": " (number tokens differ: zh=['2'] en=['2', '2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0074",
+  "alignment_id": "AL-CR-1325",
+  "rule_id": "R-CR-422.4",
+  "zh_ev": "EV-CN-CR-1325",
+  "en_ev": "EV-EN-CR-1325",
+  "zh": "当弃置作为效果的一部分时，玩家必须从手牌中弃置所要求最大数量的卡牌。如果指示中要求的弃置卡牌数超过其手牌数量，则无视进一步的弃牌指示。举例：“卧底特工”拥有“[绝念][>] 弃置两张手牌，然后抽两张牌。（当我被摧毁后，发动此效果）”的技能。如果“卧底特工”的控制者拥有两张或以上手牌，则必须弃置两张手牌。如果该控制者仅有一张手牌，则需要弃置一张手牌，并无视进一步的弃牌指示。如果该控制者没有手牌，则完全无视弃牌指示。最后，无论其究竟弃置了几张手牌，都可抽两张牌。",
+  "en": "When Discarding is part of an effect, then a player must Discard as many cards as possible from their hand. If instructed to discard more cards than they have in their hand, further discard instructions are ignored. Example: Undercover Agent has the ability \"[Deathknell][>] Discard 2, then draw 2. (When I die, get the effect.)\" If Undercover Agent's controller has 2 or more cards in hand, they must discard 2. If they have 1 card in hand, they discard 1, and the rest of the discard instruction is ignored. If they have no cards in hand, the entire discard instruction is ignored. Regardless of how many cards they discard, they then draw 2.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2', '2', '2', '2', '1', '1', '2']; bracket tokens differ: zh=['>'] en=['Deathknell', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0075",
+  "alignment_id": "AL-CR-1346",
+  "rule_id": "R-CR-424.3",
+  "zh_ev": "EV-CN-CR-1346",
+  "en_ev": "EV-EN-CR-1346",
+  "zh": "此行动的格式为“展示[区域]的X 张牌。”或“展示[区域]。”举例：“展示主牌堆顶部的2 张牌”的执行方法为：从你的主牌堆顶部拿出两张牌，将其展示给所有玩家，让所有玩家清晰阅读并理解卡牌内容。当所有玩家都已获得机会查看并理解展示的信息后，将这两张卡牌以原有顺序放回主牌堆顶部即可。",
+  "en": "This action is formatted as \"Reveal cards from [zone].\" or “Reveal [Zone].” Example: \"Reveal 2 cards from the top of your Main Deck\" would be executed by taking the two cards from the top of your Main Deck, and then presenting them to all players to clearly read and understand at the table. Then, when all players have had a chance to understand the revealed information, return them to the top of the Main Deck in the same order.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['zone', 'Zone']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0076",
+  "alignment_id": "AL-CR-1350",
+  "rule_id": "R-CR-424.4.a",
+  "zh_ev": "EV-CN-CR-1350",
+  "en_ev": "EV-EN-CR-1350",
+  "zh": "卡牌被展示时，可受到进一步的操纵或使用。某些情况下，被展示的卡牌放回的区域也会受到调整。举例：“展示你主牌堆顶部的两张牌。将其中一张加入你的手牌，并将另一张回收”的执行方法为：从你的主牌堆顶部拿出两张牌，将其展示给所有玩家，让所有玩家清晰阅读并理解卡牌内容。当所有玩家都已获得机会查看并理解展示的信息后，你可以从中选择一张放入手牌。未被你选中的一张则会被回收，放到主牌堆底部。",
+  "en": "While cards are Revealed, those cards can be further manipulated, or accessed. They can even have their destination modified for when the Reveal ends. Example: \"Reveal 2 cards from the top of your Main Deck. Put one into your hand and Recycle the other\" would be executed by taking the top two cards from your Main Deck, presenting them to the table, and once every player present has had a chance to understand them you would make the selection of one of them to add to your hand. The one you did not select would then be Recycled to the bottom of the Main Deck.",
+  "flag_reason": " (number tokens differ: zh=[] en=['2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0077",
+  "alignment_id": "AL-CR-1380",
+  "rule_id": "R-CR-427.5",
+  "zh_ev": "EV-CN-CR-1380",
+  "en_ev": "EV-EN-CR-1380",
+  "zh": "该行动的格式为“放逐[一张或以上的卡牌或常驻牌]。”举例：“放逐你的一张手牌。”举例：“放逐你废牌堆中的两张卡牌。”举例：“查看你主牌堆顶部的两张牌。选择其中一张加入手牌，并放逐另一张卡牌。”",
+  "en": "This action is formatted as \"Banish [one or more permanents or cards].\" e.g., \"Banish a card from your hand.\" e.g., \"Banish 2 cards from your trash.\" e.g., \"Look at the top 2 cards of your Main Deck. Draw one of them and banish the other.\"",
+  "flag_reason": " (number tokens differ: zh=[] en=['2', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0078",
+  "alignment_id": "AL-CR-1401",
+  "rule_id": "R-CR-428.6",
+  "zh_ev": "EV-CN-CR-1401",
+  "en_ev": "EV-EN-CR-1401",
+  "zh": "该行动的格式为“摧毁[特定数量的常驻牌]”。举例：“摧毁一名敌方单位。”比如，“摧毁此牌，支付[2]：抽一张牌。”举例：“摧毁所有装备。”",
+  "en": "This action is formatted as \"Kill [one or more permanents].\" e.g., \"Kill an enemy unit.\" e.g., \"Kill this, [2]: Draw 1.\" e.g., \"Kill all gear.\"",
+  "flag_reason": " (number tokens differ: zh=['2'] en=['2', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0079",
+  "alignment_id": "AL-CR-1414",
+  "rule_id": "R-CR-430.2",
+  "zh_ev": "EV-CN-CR-1414",
+  "en_ev": "EV-EN-CR-1414",
+  "zh": "指示玩家召出1 个或以上符文的游戏效果，可能会指明这些符文进场的条件或情况。举例：某个法术描述为“召出一枚休眠的符文。”随着该法术开始结算，其控制者将其符文牌堆顶部的符文放入场中，且该符文以休眠（而非活跃）状态入场。",
+  "en": "The Game Effect that instructs a player to channel 1 or more runes may specify the conditions or circumstances under which those runes enter the board. Example: A spell reads \"Channel 1 rune exhausted.\" As that spell resolves, its controller puts the top rune of their rune deck onto the board and that rune enters the board exhausted rather than ready.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['1', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0080",
+  "alignment_id": "AL-CR-1420",
+  "rule_id": "R-CR-430.5",
+  "zh_ev": "EV-CN-CR-1420",
+  "en_ev": "EV-EN-CR-1420",
+  "zh": "该行动的格式为“召出X 枚符文”，后面可能跟有相应条件或规定。举例：“召出一枚符文。”举例：“打出我时，召出一枚休眠的符文。”举例：“召出两枚休眠的符文。如果你无法以此方式召出两枚符文，则抽一张牌。”",
+  "en": "This action is formatted as \"Channel X rune(s),\" optionally followed by conditions or stipulations. e.g., \"Channel 1 rune.\" e.g., \"When you play me, channel 1 rune exhausted.\" e.g., \"Channel 2 runes exhausted. If you couldn't channel 2 runes this way, draw 1.\"",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '1', '2', '2', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0081",
+  "alignment_id": "AL-CR-1431",
+  "rule_id": "R-CR-431.2.d",
+  "zh_ev": "EV-CN-CR-1431",
+  "en_ev": "EV-EN-CR-1431",
+  "zh": "完成原本让自己触发燃尽的剩余行动。举例：一名玩家在主牌堆耗尽的情况下，在抽牌步骤尝试抽取一张卡牌，因此触发燃尽。该玩家转而将废牌堆回收后放入主牌堆，照常洗匀；然后选择一名对手，使其获得1 分；最后，该玩家抽一张牌。",
+  "en": "Completes the remainder of the action that caused them to burn out. Example: A player attempts to draw 1 during their Draw Phase while their Main Deck is empty. That player instead recycles their trash into their Main Deck, randomizing it as normal, then chooses an opponent to gain 1 point, and then draws 1.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['1', '1', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0082",
+  "alignment_id": "AL-CR-1492",
+  "rule_id": "R-CR-436.3.a",
+  "zh_ev": "EV-CN-CR-1492",
+  "en_ev": "EV-EN-CR-1492",
+  "zh": "如果[X]没有出现，则默认数值为1。",
+  "en": "If omitted, X is presumed to be 1.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0083",
+  "alignment_id": "AL-CR-1500",
+  "rule_id": "R-CR-437.1.b.1",
+  "zh_ev": "EV-CN-CR-1500",
+  "en_ev": "EV-EN-CR-1500",
+  "zh": "抵挡行动通常的格式为：“在本回合内，抵挡接下来将对[单位]造成的X 点[来源]伤害。”",
+  "en": "Prevent actions are usually formatted as “Prevent the next X [source] damage that would be dealt to a [unit] this turn.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['source', 'unit']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0084",
+  "alignment_id": "AL-CR-1501",
+  "rule_id": "R-CR-437.1.b.1.a",
+  "zh_ev": "EV-CN-CR-1501",
+  "en_ev": "EV-EN-CR-1501",
+  "zh": "[X]即为“抵挡值”。",
+  "en": "The X is referred to as the Prevent Value.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0085",
+  "alignment_id": "AL-CR-1505",
+  "rule_id": "R-CR-437.2.a",
+  "zh_ev": "EV-CN-CR-1505",
+  "en_ev": "EV-EN-CR-1505",
+  "zh": "经抵挡后将造成的伤害绝不会低于0，但可以为0。伤害为0 等同于未造成伤害。",
+  "en": "The damage being dealt as a result of Preventing can never be less than 0, but can be 0. This is equivalent to not dealing damage.",
+  "flag_reason": " (number tokens differ: zh=['0', '0', '0'] en=['0', '0']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0086",
+  "alignment_id": "AL-CR-1531",
+  "rule_id": "R-CR-438.7",
+  "zh_ev": "EV-CN-CR-1531",
+  "en_ev": "EV-EN-CR-1531",
+  "zh": "通过替换行动创建的指示物可以在指示下“换回”。该表述也可能显示为：“将[指示物]替换为其所替换的[游戏物体]。”",
+  "en": "Tokens that have been Created through a Replace action can be instructed to be “Swapped back.” This may also appear as “replace [the token] with the [Game Object] it replaced.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['the token', 'Game Object']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0087",
+  "alignment_id": "AL-CR-1552",
+  "rule_id": "R-CR-439.5",
+  "zh_ev": "EV-CN-CR-1552",
+  "en_ev": "EV-EN-CR-1552",
+  "zh": "作为指示时，此行动的格式通常为“在[Y]创建[X]”或“添加[X]到[Y]”。",
+  "en": "This action, when instructed, is usually formatted as \"Create [X] at [Y]\" or “Add [X] to [Y].”",
+  "flag_reason": " (bracket tokens differ: zh=['Y', 'X', 'X', 'Y'] en=['X', 'Y', 'X', 'Y']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0088",
+  "alignment_id": "AL-CR-1672",
+  "rule_id": "R-CR-465.2.c.3",
+  "zh_ev": "EV-CN-CR-1672",
+  "en_ev": "EV-EN-CR-1672",
+  "zh": "在其它单位承担伤害之前，必须先向一个单位分配可以将其摧毁的致命伤害。举例：如果玩家有5 点伤害要分配给四名战力为3 的单位，则不可选择将2 点伤害分配给其中一名单位，再向其余3 名单位各分配1 点伤害。必须将至少3 点伤害分配给其中一名单位，再将剩余的2 点伤害分配给另一名单位。",
+  "en": "Units must have lethal damage assigned to them in full before damage is assigned to a different Unit. Example: If a player has 5 damage to distribute among four 3 Might units, they may not choose to assign 2 damage to one of the units and 1 damage to each of the remaining 3. They must assign at least 3 damage to one, and the remaining 2 to another.",
+  "flag_reason": " (number tokens differ: zh=['5', '3', '2', '3', '1', '3', '2'] en=['5', '3', '2', '1', '3', '3', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0089",
+  "alignment_id": "AL-CR-1675",
+  "rule_id": "R-CR-465.2.c.5",
+  "zh_ev": "EV-CN-CR-1675",
+  "en_ev": "EV-EN-CR-1675",
+  "zh": "以这种方式分配战斗伤害时，影响最终伤害的替换效果将转而在分配伤害时生效。举例：要在战斗伤害阶段中为一个2[M]单位分配伤害。该单位拥有“抵挡我在每次战斗中承受的前3 点伤害。因此需要为该单位分配5 点伤害，才算是为其分配了达致命伤害数量的数值。举例：进攻方玩家需要将其3[M]的伤害分配给两个均为2[M]的防守方单位。其中一个单位还受到一个延迟替换效果：“在本回合内，该单位受到的所有伤害翻倍。”进攻方玩家先向另一个防守方单位分配2 点伤害，随后向带有该延迟替换效果的单位分配2 点伤害；其剩余的1 点伤害在分配给该单位时翻倍为2 点。当实际造成伤害时，该伤害不会再次翻倍，因为翻倍效果已视为在伤害分配阶段完成。举例：进攻方玩家需要将其3[M]的伤害分配给一个2[M]单位。该单位具有2 点抵挡值，并受到“莲花陷阱”的效果影响，使其受到的伤害翻倍。这两个替换效果都会在伤害分配时生效，其应用顺序由该2[M]单位的控制者选择。如果其选择先应用抵挡值，则会先抵挡2 点已分配伤害，剩余1 点伤害随后翻倍为2 点。该单位最终会被分配4 点伤害。实际造成伤害时，该单位会受到2 点伤害。如果其选择另一种顺序，则该单位会被分配6 点伤害，其中2 点会被抵挡。实际造成伤害时，该单位会受到4点伤害。",
+  "en": "When assigning damage in this way, replacement effects that would apply to the resulting damage are considered to apply to the assignment instead. Example: A unit with 2 [M] is being assigned damage in the combat damage step. The unit has “prevent the first 3 damage I would take each combat.” The unit would need to be assigned 5 damage in order to have lethal damage assigned to it. Example: The attacking player is assigning their 3 [M] worth of damage to two defending units with 2 [M] each. One of the units has a delayed replacement effect applied to it that reads “Double all damage that would be dealt to it this turn.” The attacking player assigns two damage to the other defending unit, then when assigning damage to the unit with the delayed replacement effect they assign 2 damage to it; 1 damage that doubles to 2 damage as it is assigned to the unit. When that damage is dealt, it doesn’t get doubled again—the doubling is considered to have already happened during damage assignment. Example: The attacking player is assigning their 3 [M] worth of damage to a 2 [M] unit. That unit has a prevent value of two being applied to it, as well as the effect of Lotus Trap, doubling the damage dealt to them. Both of these replacement effects apply to the assignment of damage, in the order of the controller of the 2 [M] unit’s choice. If they choose to order the replacement effects so that the prevent value is applied first, the unit will prevent 2 of the assigned damage, then the last 1 point of damage will be doubled to 2. The unit will have 4 damage assigned to it. When damage is dealt, the unit will take 2 damage. If they choose the other order, the unit will have 6 damage assigned to it, 2 of which will be prevented. When damage is dealt, the unit will take 4 damage.",
+  "flag_reason": " (number tokens differ: zh=['2', '3', '5', '3', '2', '2', '2', '1', '2', '3', '2', '2', '2', '2'] en=['2', '3', '5', '3', '2', '2', '1', '2', '3', '2', '2', '2', '1', '2']). Auto-classified translatio"
+ },
+ {
+  "item_id": "MR-3-CR-0090",
+  "alignment_id": "AL-CR-1717",
+  "rule_id": "R-CR-471.1",
+  "zh_ev": "EV-CN-CR-1717",
+  "en_ev": "EV-EN-CR-1717",
+  "zh": "玩家根据自己的当前得分，可获得最多1 分。",
+  "en": "The player Gains up to one Point, depending on their current score.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0091",
+  "alignment_id": "AL-CR-1747",
+  "rule_id": "R-CR-477.2.b",
+  "zh_ev": "EV-CN-CR-1747",
+  "en_ev": "EV-EN-CR-1747",
+  "zh": "本效果层的效果可通过文本中的“成为”、“让……获得”、“失去”、“获得”来识别。举例：一张常驻牌拥有“其他友方单位获得[预知]”的技能。其他友方单位便会在本效果层中获得[预知]关键词。",
+  "en": "Effects for this layer can be identified by the phrase \"become(s),\" \"give,\" \"lose(s),\" \"have,\" \"has,\" \"is,\" or \"are\" in the text. Example: A permanent has the ability \"Other friendly units have [Vision].\" Other friendly units gain the Vision keyword in this layer.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Vision']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0092",
+  "alignment_id": "AL-CR-1751",
+  "rule_id": "R-CR-477.3.b",
+  "zh_ev": "EV-CN-CR-1751",
+  "en_ev": "EV-EN-CR-1751",
+  "zh": "当一个来自非被动技能来源的加减计算效果带有限制条件时，其效果会在应用时根据该限制进行结算，而该受限制影响的数值将被“记住”，并在效果的整个持续期间保持不变。此过程称为“快照”。举例：如果某个效果给予某单位 “在本回合内[M]-4，不得低于1[M]”，而所选择的单位为2[M]时，则该效果将产生“在本回合中[M]-1”。举例：一名单位的描述为“你在此处控制的单位战力提升至5[M]。”这是一个被动技能，因此不会进行快照。举例：一张法术牌的描述为“将一个友方单位的战力提升至5[M]。”该效果仅触发一次，持续时间无限。由于该效果并非来自被动技能，因此会进行快照。",
+  "en": "When an arithmetic effect from a source that is not a passive ability has a limitation that applies, it is limited at the time of its application, and is “remembered” at that limited level for the duration of its effect. This process is called “snapshotting.” Example: If an effect gives a unit “-4 [M] to a min of 1 this turn” choosing a unit with 2 [M], then the effect will generate -1 [M] this turn. Example: A unit reads “Units you control here have their Might increased to 5 [M].” This is a passive ability, so it will not snapshot. Example: A spell reads “Increase a friendly unit’s Might to 5 [M].” This effect is applied once, with an unlimited duration. Because it isn’t from a passive ability, it will snapshot.",
+  "flag_reason": " (bracket tokens differ: zh=['M', 'M', 'M', 'M', 'M', 'M'] en=['M', 'M', 'M', 'M', 'M']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0093",
+  "alignment_id": "AL-CR-1799",
+  "rule_id": "R-CR-485.4.a",
+  "zh_ev": "EV-CN-CR-1799",
+  "en_ev": "EV-EN-CR-1799",
+  "zh": "每名玩家提供三个战场，在自己构筑卡组期间将其加入卡组。一局游戏只会用到其中1 个战场，由玩家在准备阶段选定。",
+  "en": "Each player provides three (3) Battlefields, included in their deck during deck building. Only 1 will be used, chosen during setup.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['3', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0094",
+  "alignment_id": "AL-CR-1800",
+  "rule_id": "R-CR-485.5",
+  "zh_ev": "EV-CN-CR-1800",
+  "en_ev": "EV-EN-CR-1800",
+  "zh": "准备：每名玩家从自己的三个战场中随机选出一个。剩余的两个战场将被移除，本局游戏中不予使用。选定的战场将同时放入战场区域。",
+  "en": "Setup: Each player randomly selects one (1) of their three (3) Battlefields. The other two are removed and will not be used for this game. The selected Battlefields are placed simultaneously in the Battlefield Zone.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0095",
+  "alignment_id": "AL-CR-1801",
+  "rule_id": "R-CR-485.6",
+  "zh_ev": "EV-CN-CR-1801",
+  "en_ev": "EV-EN-CR-1801",
+  "zh": "赛制：单局制。首个分数达到胜利得分的玩家将赢得比赛。",
+  "en": "Format: Best of 1. The first player to reach the Victory Score in Points wins the Match.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0096",
+  "alignment_id": "AL-CR-1808",
+  "rule_id": "R-CR-486.4.a",
+  "zh_ev": "EV-CN-CR-1808",
+  "en_ev": "EV-EN-CR-1808",
+  "zh": "每名玩家提供三个战场，在自己构筑卡组期间将其加入卡组。一局游戏只会用到其中1 个战场，由玩家在准备阶段选定。",
+  "en": "Each player provides three (3) Battlefields, included in their deck during deck building. Only 1 will be used, chosen during setup.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['3', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0097",
+  "alignment_id": "AL-CR-1809",
+  "rule_id": "R-CR-486.5",
+  "zh_ev": "EV-CN-CR-1809",
+  "en_ev": "EV-EN-CR-1809",
+  "zh": "准备：每名玩家从自己的三个战场中选出一个。剩余的两个战场搁置到一边，本局游戏不予使用。选定的战场将同时放入战场区域。本局游戏过后，如果有一名玩家获胜，使用的战场将被移除，本次比赛不再选用。之后的对局中，需要转而从剩余的搁置战场中选择一个。",
+  "en": "Setup: Each player selects one (1) of their three (3) Battlefields. The other two are set aside and will not be used for this round of play. The selected Battlefields are placed simultaneously in the Battlefield Zone. After this game, if a player won, the Battlefields that were used are to be removed and not selected again for this Match. One of the remaining Battlefields that were set aside must be chosen instead.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0098",
+  "alignment_id": "AL-CR-1811",
+  "rule_id": "R-CR-486.6",
+  "zh_ev": "EV-CN-CR-1811",
+  "en_ev": "EV-EN-CR-1811",
+  "zh": "赛制：三局两胜制。首个分数达到胜利得分的玩家将赢得该赛局。赢得一场比赛的玩家可获得一个胜场。随后，双方玩家需重置游戏状态，移除之前使用的战场，从搁置的战场中选择一个新的，再次进行游戏。率先获得两个胜场的玩家将赢得本场比赛。",
+  "en": "Format: Best of 3. The first player to reach the Victory Score in Points wins the game. The winner of that game earns One Game Win. Players then reset the game state, remove the Battlefields in play from the game, choose new Battlefields from those set aside, and play again. The first player to earn Two Game Wins wins the match.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0099",
+  "alignment_id": "AL-CR-1812",
+  "rule_id": "R-CR-486.6.a",
+  "zh_ev": "EV-CN-CR-1812",
+  "en_ev": "EV-EN-CR-1812",
+  "zh": "该赛制可能采用五局三胜制。在这种情况下，进行到比赛的第4 局和第5 局时，选手可以使用已被移除的战场。",
+  "en": "This format may be played as best of 5. In such a case, during games 4 and 5 of the match players may present a battlefield that has been removed from the game.",
+  "flag_reason": " (number tokens differ: zh=['4', '5'] en=['5', '4', '5']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0100",
+  "alignment_id": "AL-CR-1821",
+  "rule_id": "R-CR-487.4.a",
+  "zh_ev": "EV-CN-CR-1821",
+  "en_ev": "EV-EN-CR-1821",
+  "zh": "每名玩家提供三个战场，在自己构筑卡组期间将其加入卡组。一局游戏只会用到其中1 个战场，由玩家在准备阶段选定。",
+  "en": "Each player provides three (3) Battlefields, included in their deck during deck building. Only 1 will be used, chosen during setup.",
+  "flag_reason": " (number tokens differ: zh=['1'] en=['3', '1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0101",
+  "alignment_id": "AL-CR-1822",
+  "rule_id": "R-CR-487.5",
+  "zh_ev": "EV-CN-CR-1822",
+  "en_ev": "EV-EN-CR-1822",
+  "zh": "准备：每名玩家从自己的三个战场中随机选出一个。剩余的两个战场将被弃置，本局游戏中不予使用。选定的战场将在游戏开始前同时放置到三名玩家之间，在本局游戏中使用。",
+  "en": "Setup: Each player randomly selects one (1) of their three (3) Battlefields. The other two are discarded and will not be used for this game. The selected Battlefields are placed simultaneously between the three Players before play and will be used for this game.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0102",
+  "alignment_id": "AL-CR-1823",
+  "rule_id": "R-CR-487.6",
+  "zh_ev": "EV-CN-CR-1823",
+  "en_ev": "EV-EN-CR-1823",
+  "zh": "赛制：单局制。首个分数达到胜利得分的玩家将赢得比赛。",
+  "en": "Format: Best of 1. The first player to reach the Victory Score in Points wins the Match.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0103",
+  "alignment_id": "AL-CR-1830",
+  "rule_id": "R-CR-488.4.a",
+  "zh_ev": "EV-CN-CR-1830",
+  "en_ev": "EV-EN-CR-1830",
+  "zh": "每名玩家提供三个战场，在自己构筑卡组期间将其加入卡组。",
+  "en": "Each player provides three (3) Battlefields, included in their deck during deck building.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0104",
+  "alignment_id": "AL-CR-1832",
+  "rule_id": "R-CR-488.5",
+  "zh_ev": "EV-CN-CR-1832",
+  "en_ev": "EV-EN-CR-1832",
+  "zh": "准备：除起始玩家以外的每名玩家从自己的三个战场中随机选出一个。剩余的两个战场将被移除，本局游戏中不予使用。选定的战场将在游戏开始前同时放置到玩家之间，在本局游戏中使用。",
+  "en": "Setup: Each player who is not going first randomly selects one (1) of their three (3) Battlefields. The other two are removed and will not be used for this game. The selected Battlefields are placed simultaneously between the players before play and will be used for this game.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0105",
+  "alignment_id": "AL-CR-1833",
+  "rule_id": "R-CR-488.6",
+  "zh_ev": "EV-CN-CR-1833",
+  "en_ev": "EV-EN-CR-1833",
+  "zh": "赛制：单局制。首个分数达到胜利得分的玩家将赢得比赛。",
+  "en": "Format: Best of 1. The first player to reach the Victory Score in Points wins the Match.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0106",
+  "alignment_id": "AL-CR-1840",
+  "rule_id": "R-CR-489.4.a",
+  "zh_ev": "EV-CN-CR-1840",
+  "en_ev": "EV-EN-CR-1840",
+  "zh": "每名玩家提供三个战场，在自己构筑卡组期间将其加入卡组。",
+  "en": "Each player provides three (3) Battlefields, included in their deck during deck building.",
+  "flag_reason": " (number tokens differ: zh=[] en=['3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0107",
+  "alignment_id": "AL-CR-1842",
+  "rule_id": "R-CR-489.5.a",
+  "zh_ev": "EV-CN-CR-1842",
+  "en_ev": "EV-EN-CR-1842",
+  "zh": "除起始玩家以外的每名玩家从自己的三个战场中随机选出一个。剩余的两个战场将被移除，本局游戏中不予使用。选定的战场将在游戏开始前同时放置到玩家之间，在本局游戏中使用。",
+  "en": "Each player who is not going first randomly selects one (1) of their three (3) Battlefields. The other two are removed and will not be used for this game. The selected Battlefields are placed simultaneously between the players before play and will be used for this game.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0108",
+  "alignment_id": "AL-CR-1848",
+  "rule_id": "R-CR-489.6",
+  "zh_ev": "EV-CN-CR-1848",
+  "en_ev": "EV-EN-CR-1848",
+  "zh": "赛制：单局制。首个分数达到胜利得分的队伍将赢得比赛。",
+  "en": "Format: Best of 1. The first team to reach the Victory Score in Points wins the Match.",
+  "flag_reason": " (number tokens differ: zh=[] en=['1']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0109",
+  "alignment_id": "AL-CR-1926",
+  "rule_id": "R-CR-715.3",
+  "zh_ev": "EV-CN-CR-1926",
+  "en_ev": "EV-EN-CR-1926",
+  "zh": "如果造成伤害行动需要分摊伤害，则额外伤害将加算至需要分摊的伤害量中。这可能改变可供选择的目标数量。举例：“沃利贝尔 - 震怒天声”是一名单位，其部分描述为：“当我进攻时，对此处的敌方单位造成共计5 点伤害，可在多名敌方单位之间分摊。”一名玩家在控制“安妮 - 汹涌烈焰”的情况下使用“沃利贝尔 - 震怒天声”发动进攻。“安妮 - 汹涌烈焰”的描述为：“你的法术和技能造成1 点额外伤害。”“沃利贝尔 - 震怒天声”现将对其所在位置的敌方单位造成共计6 点伤害，可在多名敌方单位之间分摊。不仅如此，可以选择分摊单位的数量也从之前的最多5 名单位提升至最多6 名单位。",
+  "en": "If the Deal action Splits damage, then the Bonus Damage applies to the amount of Damage that will be Split. This can alter the number of targets eligible to be chosen. Example: Volibear, Furious is a unit that says in part “When I attack, deal 5 damage split among any number of enemy units here.” A player attacks with Volibear, Furious while they also control Annie, Fiery, a unit that says “Your spells and abilities deal 1 Bonus Damage.” Volibear, Furious now deals 6 damage split among any number of enemy units at its location, and can choose to split that damage among up to 6 units rather than the usual 5.",
+  "flag_reason": " (number tokens differ: zh=['5', '1', '6', '5', '6'] en=['5', '1', '6', '6', '5']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0110",
+  "alignment_id": "AL-CR-1927",
+  "rule_id": "R-CR-715.4",
+  "zh_ev": "EV-CN-CR-1927",
+  "en_ev": "EV-EN-CR-1927",
+  "zh": "如果实际未造成伤害，那么额外伤害将不会生效。举例：“提莫 - 军事家”是一名单位，其部分描述为：“当我防守时，选择此处的一名敌方单位，并展示你主牌堆顶部的五张牌。每以此方式展示一张带有[待命]技能的卡牌，对该单位造成1 点伤害，然后回收展示的卡牌。”他贴附了“灭世者的死亡之冠”。一名敌方单位移动至提莫所在的战场，并在该处开始战斗。提莫的控制者展示其主牌堆顶部的5 张牌，但其中没有带有[待命]的卡牌。虽然该技能因“灭世者的死亡之冠”获得了3 点额外伤害，但并未执行可供额外伤害应用的造成伤害行动。",
+  "en": "If no damage was Dealt, then Bonus Damage will not apply. Example: Teemo, Strategist is a unit that reads in part “When I defend, choose an enemy unit here and reveal the top 5 cards of your Main Deck. Deal 1 to that unit for each card with Hidden revealed this way, then recycle the revealed cards.” He has Rabadon’s Deathcrown attached to him. An enemy unit moves to the battlefield where Teemo is located and a combat opens there. Teemo’s controller reveals the top 5 cards of their Main Deck and reveals no cards with Hidden. Although the ability has 3 Bonus Damage from Rabadon’s Deathcrown, no deal action is performed for the Bonus Damage to apply to.",
+  "flag_reason": " (number tokens differ: zh=['1', '5', '3'] en=['5', '1', '5', '3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0111",
+  "alignment_id": "AL-CR-1959",
+  "rule_id": "R-CR-722.2",
+  "zh_ev": "EV-CN-CR-1959",
+  "en_ev": "EV-EN-CR-1959",
+  "zh": "如果游戏效果需要解析或解读文本以确定目标资格，那么为了确定资格，仍可以解析未激活的文本。举例：旋转飞斧是一件拥有[瞬息]的装备。当它被贴附，且规则文本处于未激活状态时，其[瞬息]技能不会触发。然而，一个描述为“摧毁一件拥有[瞬息]的装备”的法术仍然可以选择并摧毁旋转飞斧。",
+  "en": "Game Effects that parse or interpret text to determine target eligibility may still parse Inactive text for the sake of eligibility. Example: Spinning Axe is a gear with [Temporary]. While it’s attached and its rules text is inactive, its [Temporary] ability doesn’t trigger. However, a spell that reads “Destroy a gear with [Temporary]” could still choose and destroy Spinning Axe.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Temporary', 'Temporary', 'Temporary']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0112",
+  "alignment_id": "AL-CR-1969",
+  "rule_id": "R-CR-727.1",
+  "zh_ev": "EV-CN-CR-1969",
+  "en_ev": "EV-EN-CR-1969",
+  "zh": "依赖性关键词由它所代表的条件和紧随关键词后某种形式的技能共同组成。举例：诺克萨斯新兵拥有“[鼓舞][>] 我的费用降低[2]。”[鼓舞]代表条件“如果你在本回合内已打出过其他卡牌，则此牌获得[文本]”的简写，而“我的费用降低[2]”是其依赖性技能。",
+  "en": "A Dependent Keyword is comprised of both a Condition that it is short for, and an ability of some format immediately after the Keyword itself. Example: Noxus Hopeful has “[Legion][>] I cost [2] less.” [Legion] is short for the condition “if you have played another card this turn, this card gains [Text],” while “I cost [2] less” is the dependent ability.",
+  "flag_reason": " (bracket tokens differ: zh=['>', '2', '2'] en=['Legion', '>', '2', 'Legion', 'Text', '2']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0113",
+  "alignment_id": "AL-CR-1974",
+  "rule_id": "R-CR-727.1.b.2",
+  "zh_ev": "EV-CN-CR-1974",
+  "en_ev": "EV-EN-CR-1974",
+  "zh": "当条件满足时，依赖性技能会完全按照描述生效。举例：“风行狐”拥有“[等级3][>] 我获得[M]+1 和游走。”只要其控制者拥有至少3 点经验，风行狐的游走就会生效。",
+  "en": "The Dependent Ability is Active exactly as written while the Condition is true Example: Gustwalker has “[Level 3][>] I have +1 [M] and Ganking.” As long as its controller has 3 XP, Gustwalker’s Ganking is active.",
+  "flag_reason": " (bracket tokens differ: zh=['>', 'M'] en=['Level 3', '>', 'M']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0114",
+  "alignment_id": "AL-CR-1975",
+  "rule_id": "R-CR-727.1.b.3",
+  "zh_ev": "EV-CN-CR-1975",
+  "en_ev": "EV-EN-CR-1975",
+  "zh": "如果一个技能拥有多个依赖性关键词，则这些关键词的条件必须全部达成，该技能才会生效。举例：一名单位的描述为：“[等级11][>>] [鼓舞][>] 当你征服一处战场时，获得1分。”要使该单位的征服效果生效，其控制者必须拥有11 点经验，并且在本回合已完成一张非该单位卡牌的确认。",
+  "en": "If an ability has multiple Dependent Keywords, all of them must have their Condition met in order for the ability to be active. Example: A unit reads “[Level 11][>>][Legion][>] When you conquer, gain 1 point.” In order for the conquer effect of the unit to be active, its controller must have 11 XP and have finalized a card other than the unit that turn.",
+  "flag_reason": " (bracket tokens differ: zh=['>>', '>'] en=['Level 11', '>>', 'Legion', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0115",
+  "alignment_id": "AL-CR-2011",
+  "rule_id": "R-CR-740.4.a",
+  "zh_ev": "EV-CN-CR-2011",
+  "en_ev": "EV-EN-CR-2011",
+  "zh": "指示文本中的费用，指采用了特定形式的指示（“[执行X]，以此[执行Y]”）。[执行X]是该指示对应的费用，[执行Y]则是产生的效果。",
+  "en": "Costs within instructions are instructions that take a particular form (“[do X] to [do Y]”). [Do X] is the cost associated with the instruction, and [do Y] is the effect.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['do X', 'do Y', 'Do X', 'do Y']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0116",
+  "alignment_id": "AL-CR-2042",
+  "rule_id": "R-CR-757.1",
+  "zh_ev": "EV-CN-CR-2042",
+  "en_ev": "EV-EN-CR-2042",
+  "zh": "这类被动技能通常采用以下形式：“[游戏物体]无法被[类别]法术和技能选作目标。”举例：“沙墟啸匪”的被动技能描述为：“我无法被敌方法术和技能选作目标。”",
+  "en": "These passive abilities will usually take the form “[Game Object] can’t be chosen by [Category] spells and abilities.” Example: Ruin Runner’s passive ability reads “I can’t be chosen by enemy spells and abilities.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Game Object', 'Category']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0117",
+  "alignment_id": "AL-CR-2097",
+  "rule_id": "R-CR-806.1.d",
+  "zh_ev": "EV-CN-CR-2097",
+  "en_ev": "EV-EN-CR-2097",
+  "zh": "[迅捷]在法术中的格式为“[迅捷]”，在技能中的格式为“[迅捷][>]”。",
+  "en": "Action is formatted as “[Action]” on spells, or “[Action][>]” on abilities.",
+  "flag_reason": " (bracket tokens differ: zh=['>'] en=['Action', 'Action', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0118",
+  "alignment_id": "AL-CR-2111",
+  "rule_id": "R-CR-807.1.b.1",
+  "zh_ev": "EV-CN-CR-2111",
+  "en_ev": "EV-EN-CR-2111",
+  "zh": "[X]会被技能的功能性文本引用。",
+  "en": "The X is referenced in the functional text of the ability.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0119",
+  "alignment_id": "AL-CR-2112",
+  "rule_id": "R-CR-807.1.b.2",
+  "zh_ev": "EV-CN-CR-2112",
+  "en_ev": "EV-EN-CR-2112",
+  "zh": "[X]即为“强攻值”。",
+  "en": "The X is referred to as the Assault Value.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0120",
+  "alignment_id": "AL-CR-2113",
+  "rule_id": "R-CR-807.1.b.3",
+  "zh_ev": "EV-CN-CR-2113",
+  "en_ev": "EV-EN-CR-2113",
+  "zh": "如果[X]没有出现，则默认数值为1。",
+  "en": "If X is omitted, it is presumed to be 1.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0121",
+  "alignment_id": "AL-CR-2117",
+  "rule_id": "R-CR-807.2",
+  "zh_ev": "EV-CN-CR-2117",
+  "en_ev": "EV-EN-CR-2117",
+  "zh": "如果一个单位本身就拥有[强攻]，或是获得了[强攻]，并再次从其他来源获得了[强攻]，则所有[强攻]关键词提供的强攻值将一并相加。举例：“躁烈的副官”拥有[强攻]。该单位被选为“顺劈”的目标，其效果为：“让一名单位在本回合内获得[强攻3]。”“顺劈”结算后，“躁烈的副官”将在本回合内拥有[强攻4]。",
+  "en": "If a Unit has Assault or has been granted Assault and is granted Assault by an additional source, the Assault Value of all granted Assault keywords is summed. Example: Petty Officer has Assault. It is chosen as the target of Cleave, which says \"Give a unit [Assault 3] this turn.\" After Cleave resolves, Petty Officer has Assault 4 this turn.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Assault 3']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0122",
+  "alignment_id": "AL-CR-2122",
+  "rule_id": "R-CR-808.1.b",
+  "zh_ev": "EV-CN-CR-2122",
+  "en_ev": "EV-EN-CR-2122",
+  "zh": "[绝念]的格式为“[绝念][>] [效果]”。",
+  "en": "It is formatted as \"[Deathknell][>] [Effect]\".",
+  "flag_reason": " (bracket tokens differ: zh=['>'] en=['Deathknell', '>', 'Effect']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0123",
+  "alignment_id": "AL-CR-2123",
+  "rule_id": "R-CR-808.1.b.1",
+  "zh_ev": "EV-CN-CR-2123",
+  "en_ev": "EV-EN-CR-2123",
+  "zh": "[效果]为[绝念]特定实例的规则文本。这也称为[绝念]的效果。",
+  "en": "[Effect] is the rules text for the specific instance of Deathknell. This is referred to as the Deathknell effect.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Effect']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0124",
+  "alignment_id": "AL-CR-2124",
+  "rule_id": "R-CR-808.1.c",
+  "zh_ev": "EV-CN-CR-2124",
+  "en_ev": "EV-EN-CR-2124",
+  "zh": "该关键词为以下功能的简称：“当我被摧毁后，[效果]。”",
+  "en": "It is functionally short for \"When I die, [Effect].\"",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Effect']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0125",
+  "alignment_id": "AL-CR-2125",
+  "rule_id": "R-CR-808.1.c.1",
+  "zh_ev": "EV-CN-CR-2125",
+  "en_ev": "EV-EN-CR-2125",
+  "zh": "[效果]为[绝念]效果的规则文本。",
+  "en": "[Effect] is the rules text of the Deathknell effect.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Effect']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0126",
+  "alignment_id": "AL-CR-2137",
+  "rule_id": "R-CR-809.1.b.1",
+  "zh_ev": "EV-CN-CR-2137",
+  "en_ev": "EV-EN-CR-2137",
+  "zh": "[X]会被技能的功能性文本引用。",
+  "en": "The X is referenced in the functional text of the ability.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0127",
+  "alignment_id": "AL-CR-2138",
+  "rule_id": "R-CR-809.1.b.2",
+  "zh_ev": "EV-CN-CR-2138",
+  "en_ev": "EV-EN-CR-2138",
+  "zh": "[X]即为“法盾值”。",
+  "en": "The X is referred to as the Deflect Value.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0128",
+  "alignment_id": "AL-CR-2139",
+  "rule_id": "R-CR-809.1.b.3",
+  "zh_ev": "EV-CN-CR-2139",
+  "en_ev": "EV-EN-CR-2139",
+  "zh": "如果[X]没有出现，则默认数值为1。",
+  "en": "If X is omitted, it is presumed to be 1.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0129",
+  "alignment_id": "AL-CR-2140",
+  "rule_id": "R-CR-809.1.c",
+  "zh_ev": "EV-CN-CR-2140",
+  "en_ev": "EV-EN-CR-2140",
+  "zh": "该关键词为以下功能的简称：“由对手控制且将[我/此牌]选为目标的法术或技能，每将[我/此牌]选作一次目标，其费用就增加等同于[法盾值]的额外费用才能打出。”",
+  "en": "It is functionally short for \"Spells and abilities an opponent controls that target [me/this] cost an amount of Power equal to [Deflect Value] more to play as an additional cost for each time they choose [me/this].\"",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['me/this', 'me/this']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0130",
+  "alignment_id": "AL-CR-2158",
+  "rule_id": "R-CR-811.1.b",
+  "zh_ev": "EV-CN-CR-2158",
+  "en_ev": "EV-EN-CR-2158",
+  "zh": "该关键词为以下功能的简称：“在你回合的开环状态下，如果此牌在你的手牌或你的英雄区域中，你可以选择支付[A]将此牌以正面朝下的方式布置到你已控制且目前没有正面朝下待命卡牌的战场上。从下回合开始，此牌将获得[反应]，你可以将此牌打出，无视其基础费用。”",
+  "en": "It is functionally short for \"While this card is in your hand or in your Champion Zone on your turn during an Open State, you may pay [A] to hide this facedown at a battlefield you control that doesn't already have a facedown card hidden there for as long as you control that battlefield. Beginning on the next turn, this gains [Reaction] and you may play this, ignoring its base cost.\"",
+  "flag_reason": " (bracket tokens differ: zh=['A'] en=['A', 'Reaction']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0131",
+  "alignment_id": "AL-CR-2169",
+  "rule_id": "R-CR-811.2",
+  "zh_ev": "EV-CN-CR-2169",
+  "en_ev": "EV-EN-CR-2169",
+  "zh": "除了上述列出的选择以外，待命卡牌的所有技能与指示均照常生效。举例：“秘奥义！慈悲度魂落”是一张法术牌，拥有[待命]，且描述为“给予一名友方单位增益。在本回合内，所有增益可额外给予友方单位[M]+1”。如果该法术从待命状态打出，其技能的首个部分必须选择处于同一战场的友方单位，但技能的第二部分则可以对所有拥有增益的友方单位产生效果，不受位置影响。",
+  "en": "Abilities and instructions of hidden cards other than the choices listed above function as normal. Example: Stand United is a spell that has Hidden and says “Buff a friendly unit. Buffs give an additional +1 might to friendly units this turn.” If it’s played from Hidden, the first part of its ability must choose a friendly unit at the same battlefield, but the second part of its ability affects all friendly units with buffs, no matter where they are.",
+  "flag_reason": " (bracket tokens differ: zh=['M'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0132",
+  "alignment_id": "AL-CR-2178",
+  "rule_id": "R-CR-812.1.a",
+  "zh_ev": "EV-CN-CR-2178",
+  "en_ev": "EV-EN-CR-2178",
+  "zh": "[鼓舞]的格式为“[鼓舞][>] [文本]”。",
+  "en": "It is formatted as \"[Legion][>] [Text]\".",
+  "flag_reason": " (bracket tokens differ: zh=['>'] en=['Legion', '>', 'Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0133",
+  "alignment_id": "AL-CR-2180",
+  "rule_id": "R-CR-812.1.b.1",
+  "zh_ev": "EV-CN-CR-2180",
+  "en_ev": "EV-EN-CR-2180",
+  "zh": "[鼓舞]为以下功能的简称：“如果你在本回合内已打出过其他卡牌，则此牌获得[文本]。”",
+  "en": "Legion is functionally short for “If you have played another card this turn, this card gains [Text].”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0134",
+  "alignment_id": "AL-CR-2181",
+  "rule_id": "R-CR-812.1.b.2",
+  "zh_ev": "EV-CN-CR-2181",
+  "en_ev": "EV-EN-CR-2181",
+  "zh": "此处的[文本]指代的是依赖性技能。",
+  "en": "The [Text] is the Dependent Ability.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0135",
+  "alignment_id": "AL-CR-2192",
+  "rule_id": "R-CR-813.1.d",
+  "zh_ev": "EV-CN-CR-2192",
+  "en_ev": "EV-EN-CR-2192",
+  "zh": "[反应]在卡牌上的格式为“[反应]”，在技能中的格式为“[反应][>]”。",
+  "en": "Reaction is formatted as “[Reaction]” on cards, or “[Reaction][>]” on abilities.",
+  "flag_reason": " (bracket tokens differ: zh=['>'] en=['Reaction', 'Reaction', '>']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0136",
+  "alignment_id": "AL-CR-2207",
+  "rule_id": "R-CR-814.1.b.1",
+  "zh_ev": "EV-CN-CR-2207",
+  "en_ev": "EV-EN-CR-2207",
+  "zh": "[X]会被技能的功能性文本引用。",
+  "en": "The X is referenced in the functional text of the ability.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0137",
+  "alignment_id": "AL-CR-2208",
+  "rule_id": "R-CR-814.1.b.2",
+  "zh_ev": "EV-CN-CR-2208",
+  "en_ev": "EV-EN-CR-2208",
+  "zh": "[X]即为“坚守值”。",
+  "en": "The X is referred to as the Shield Value.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0138",
+  "alignment_id": "AL-CR-2209",
+  "rule_id": "R-CR-814.1.b.3",
+  "zh_ev": "EV-CN-CR-2209",
+  "en_ev": "EV-EN-CR-2209",
+  "zh": "如果[X]没有出现，则默认数值为1。",
+  "en": "If X is omitted, it is presumed to be 1.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0139",
+  "alignment_id": "AL-CR-2213",
+  "rule_id": "R-CR-814.2",
+  "zh_ev": "EV-CN-CR-2213",
+  "en_ev": "EV-EN-CR-2213",
+  "zh": "如果一个单位本身就拥有[坚守]，或是获得了[坚守]，并再次从其他来源获得了[坚守]，则所有[坚守]关键词提供的坚守值将一并相加。举例：“强强魄罗”拥有[坚守]。该单位被选为“格挡”的目标，其效果为：“让一名单位在本回合内获得[坚守3]和[壁垒]。”“格挡”结算后，“强强魄罗”将在本回合内拥有[坚守4]。",
+  "en": "If a Unit has Shield, or has been granted Shield, and is granted Shield by an additional source, the Shield Value of all granted Shield keywords is summed. Example: Stalwart Poro has Shield. It is chosen as the target of Block, which says \"Give a unit [Shield 3] and [Tank] this turn.\" After Block resolves, Stalwart Poro has Shield 4 this turn.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Shield 3', 'Tank']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0140",
+  "alignment_id": "AL-CR-2218",
+  "rule_id": "R-CR-815.1.b",
+  "zh_ev": "EV-CN-CR-2218",
+  "en_ev": "EV-EN-CR-2218",
+  "zh": "该关键词为以下功能的简称：“在战斗伤害步骤中，在为其他控制者与我相同但不带有[壁垒]的单位分配伤害前，须先为我分配致命伤害。”",
+  "en": "It is functionally short for \"I must be assigned lethal damage before any other unit with the same controller as me that does not have [Tank] during the Combat Damage step.\"",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Tank']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0141",
+  "alignment_id": "AL-CR-2247",
+  "rule_id": "R-CR-818.1.c",
+  "zh_ev": "EV-CN-CR-2247",
+  "en_ev": "EV-EN-CR-2247",
+  "zh": "[装配]的格式为“装配[费用]”。",
+  "en": "Equip is formatted as “Equip [Cost]”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0142",
+  "alignment_id": "AL-CR-2249",
+  "rule_id": "R-CR-818.1.c.2",
+  "zh_ev": "EV-CN-CR-2249",
+  "en_ev": "EV-EN-CR-2249",
+  "zh": "[装配]关键词为以下功能的简称：“支付[费用]：将此装备贴附到你控制的一名单位上。”",
+  "en": "Equip is functionally short for “[Cost]: Attach this gear to a unit you control.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0143",
+  "alignment_id": "AL-CR-2267",
+  "rule_id": "R-CR-819.1.d",
+  "zh_ev": "EV-CN-CR-2267",
+  "en_ev": "EV-EN-CR-2267",
+  "zh": "[灵便]为以下功能的简称：“[反应]”以及“当你打出此牌时，将其贴附于你控制的一名单位上。”想获取更多有关信息，请查阅规则716.贴附。",
+  "en": "Quick-Draw is functionally short for “[Reaction]” and “When you play this, attach it to a Unit you control.” See rule 716. Attachment for more information.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Reaction']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0144",
+  "alignment_id": "AL-CR-2274",
+  "rule_id": "R-CR-820.1.c",
+  "zh_ev": "EV-CN-CR-2274",
+  "en_ev": "EV-EN-CR-2274",
+  "zh": "[回响]的格式为“回响[费用]”。",
+  "en": "Repeat is formatted as “Repeat [Cost]”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0145",
+  "alignment_id": "AL-CR-2278",
+  "rule_id": "R-CR-820.1.d",
+  "zh_ev": "EV-CN-CR-2278",
+  "en_ev": "EV-EN-CR-2278",
+  "zh": "[回响]为以下功能的简称：“打出此法术/技能时，你可以选择支付[费用]作为额外费用，若如此做，在结算时额外执行一次此结算链项目的指示。”",
+  "en": "Repeat is functionally short for “You may pay [Cost] as an additional cost as you play this. If you do, execute the instructions of this chain item one additional time during resolution.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0146",
+  "alignment_id": "AL-CR-2279",
+  "rule_id": "R-CR-820.1.d.1",
+  "zh_ev": "EV-CN-CR-2279",
+  "en_ev": "EV-EN-CR-2279",
+  "zh": "支付了额外费用后，该法术或技能在结算时，其效果将额外执行一次。举例：“沙漠召唤”是一张拥有[回响][2]的法术，且描述为“打出一名2[M]的‘黄沙士兵’。”如果其控制者在打出时支付了[回响]费用，则该卡牌打出“黄沙士兵”的指示将执行两次，如同卡牌描述为“打出一名2[M]的‘黄沙士兵’。打出一名2[M]的“黄沙士兵”。举例：一名单位的部分描述为：“当我进攻或防守时，你可以对此处的一名敌方单位造成等同于我战力的伤害。”，以及“我的技能带有[回响] — 弃置一张手牌。”当其技能触发时，如果其控制者在打出该技能时支付了[回响]费用，则该技能中“造成等同于我战力的伤害”这一指示会执行两次，如同该技能的描述为：“对此处的一名敌方单位造成等同于我战力的伤害。对此处的一名敌方单位造成等同于我战力的伤害。”",
+  "en": "When the additional cost is paid, the effect of the spell or ability, upon resolution, will be performed an additional time. Example: Desert’s Call is a spell with [Repeat] [2] and “Play a 2 [M] Sand Soldier unit token.” If its controller pays its Repeat cost as they play it, the card’s instruction to play a Sand Soldier is executed twice, as though the card says “Play a 2 [M] Sand Soldier unit token. Play a 2 [M] Sand Soldier unit token.” Example: A unit reads in part “When I attack or defend, you may deal damage equal to my Might to an enemy unit here,” and “My abilities have [Repeat] — Discard 1.” When its ability triggers, if its controller pays the Repeat cost as they play it, the ability’s instruction to deal damage equal to the unit’s Might is executed twice, as though the ability says “Deal damage equal to my Might to an enemy unit here. Deal damage equal to my Might to an enemy unit here.”",
+  "flag_reason": " (number tokens differ: zh=['2', '2', '2', '2'] en=['2', '2', '2', '2', '1']; bracket tokens differ: zh=['2', 'M', 'M', 'M'] en=['Repeat', '2', 'M', 'M', 'M', 'Repeat']). Auto-classified translation_d"
+ },
+ {
+  "item_id": "MR-3-CR-0147",
+  "alignment_id": "AL-CR-2282",
+  "rule_id": "R-CR-820.2.a",
+  "zh_ev": "EV-CN-CR-2282",
+  "en_ev": "EV-EN-CR-2282",
+  "zh": "为额外执行所做的选择，不必与为初始执行所做的选择相同。举例：“火箭轰击”是一个拥有[回响][4][C]的法术，且描述为“选择一个效果 — 对基地中的一名单位造成4 点伤害。[或] 摧毁一件装备。”如果“火箭轰击”的控制者在打出时支付了[回响]费用，这名控制者可以选择相同的模式或不同的模式；如果选择相同的模式，可以选择相同的目标或不同的目标。如果这名控制者两次都选择了“摧毁一件装备”，并选择了两件不同的装备，则必须指明哪件装备是第一个目标，哪件是第二个。随着法术结算，这两件装备将按选定的顺序被摧毁。",
+  "en": "Choices made for the additional execution do not have to be the same as the choices made for the initial execution. Example: Rocket Barrage is a spell with [Repeat] [4][C] and “Choose one — Deal 4 to a unit in a base. [or] Kill a gear.” If Rocket Barrage’s controller pays its Repeat cost as they play it, they may choose the same mode or a different one, and if they choose the same mode, may choose the same target or a different one. If they choose “Kill a gear” twice and choose two different gear, they must specify which gear is the first target and which is the second. As the spell resolves, those two gear will be killed in the chosen order.",
+  "flag_reason": " (bracket tokens differ: zh=['4', 'C'] en=['Repeat', '4', 'C', 'or']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0148",
+  "alignment_id": "AL-CR-2304",
+  "rule_id": "R-CR-822.1.b",
+  "zh_ev": "EV-CN-CR-2304",
+  "en_ev": "EV-EN-CR-2304",
+  "zh": "该关键词为以下功能的简称：“我可以被打出到有己方单位的战场”，以及“只要我被打出到有己方单位的战场上，就能获得[反应]”。",
+  "en": "It is functionally short for \"I may be played to a battlefield where you control Units\" and “I have [Reaction] as long as I’m being played to a battlefield where you control Units.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Reaction']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0149",
+  "alignment_id": "AL-CR-2306",
+  "rule_id": "R-CR-822.1.d",
+  "zh_ev": "EV-CN-CR-2306",
+  "en_ev": "EV-EN-CR-2306",
+  "zh": "[伏击]也可以作为动词出现在卡牌上。在这种情况下，该动词表示“按照[伏击]关键词授予的权限打出”。举例：“雷恩加尔 - 异兽猎手”的部分描述为：“我可以[伏击]到有敌方单位的战场，即使你在该处没有单位。”该技能将[伏击]关键词通常授予的权限扩宽至有敌方单位的战场。举例：一张卡牌的部分描述为：“对手只能在其能够打出[迅捷]卡牌的时机下[伏击]。”该技能会限制对手打出具有[伏击]的卡牌的时机。",
+  "en": "Ambush can also appear as a verb on a card. In such a case, the verb is taken to mean “play with the permissions of the Ambush keyword.” Example: Rengar, Trophy Hunter reads in part “I can [Ambush] to a battlefield where there are enemy units, even if you don't have units there.” This ability expands the normal permissions of the Ambush keyword to include battlefields where there are enemy units. Example: A card reads in part “Opponents can only [Ambush] at any time they could play cards with [Action].” This ability introduces a restriction to when opponents can play cards with Ambush.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Ambush', 'Ambush', 'Action']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0150",
+  "alignment_id": "AL-CR-2317",
+  "rule_id": "R-CR-823.1.c.2",
+  "zh_ev": "EV-CN-CR-2317",
+  "en_ev": "EV-EN-CR-2317",
+  "zh": "如果[X]没有出现，则默认数值为1。",
+  "en": "If X is omitted, it is presumed to be 1.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0151",
+  "alignment_id": "AL-CR-2318",
+  "rule_id": "R-CR-823.1.c.3",
+  "zh_ev": "EV-CN-CR-2318",
+  "en_ev": "EV-EN-CR-2318",
+  "zh": "[X]即为“狩猎值”。",
+  "en": "X is referred to as the Hunt Value.",
+  "flag_reason": " (bracket tokens differ: zh=['X'] en=[]). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0152",
+  "alignment_id": "AL-CR-2323",
+  "rule_id": "R-CR-824.1.a",
+  "zh_ev": "EV-CN-CR-2323",
+  "en_ev": "EV-EN-CR-2323",
+  "zh": "[等级]的格式为“[等级[N][>] [文本]”。",
+  "en": "It is formatted as \"[Level [N][>] [Text]\".",
+  "flag_reason": " (bracket tokens differ: zh=['N', '>'] en=['Level [N', '>', 'Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0153",
+  "alignment_id": "AL-CR-2325",
+  "rule_id": "R-CR-824.1.b.1",
+  "zh_ev": "EV-CN-CR-2325",
+  "en_ev": "EV-EN-CR-2325",
+  "zh": "该关键词为以下功能的简称：“如果你拥有不少于[N]经验，则该卡牌获得‘[文本]’。”",
+  "en": "It is functionally short for “While you have [N] or more XP, this card gains ‘[Text]’.”",
+  "flag_reason": " (bracket tokens differ: zh=['N'] en=['N', 'Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0154",
+  "alignment_id": "AL-CR-2326",
+  "rule_id": "R-CR-824.1.b.2",
+  "zh_ev": "EV-CN-CR-2326",
+  "en_ev": "EV-EN-CR-2326",
+  "zh": "此处的[文本]指代的是依赖性技能。",
+  "en": "The [Text] here is the Dependent Ability",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0155",
+  "alignment_id": "AL-CR-2342",
+  "rule_id": "R-CR-826.3",
+  "zh_ev": "EV-CN-CR-2342",
+  "en_ev": "EV-EN-CR-2342",
+  "zh": "该关键词为以下功能的简称：“在战斗伤害步骤中，必须先给其他控制者与我相同且不带有[后排]的单位分配致命伤害后，才能给我分配伤害。”",
+  "en": "It is functionally short for “I must be assigned lethal damage after any other unit with the same controller as me that does not have [Backline] during the Combat Damage step.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Backline']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0156",
+  "alignment_id": "AL-CR-2353",
+  "rule_id": "R-CR-827.1.c",
+  "zh_ev": "EV-CN-CR-2353",
+  "en_ev": "EV-EN-CR-2353",
+  "zh": "[强化]的格式为“强化[费用]”。",
+  "en": "Empower is formatted as “Empower [Cost]”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0157",
+  "alignment_id": "AL-CR-2354",
+  "rule_id": "R-CR-827.1.c.1",
+  "zh_ev": "EV-CN-CR-2354",
+  "en_ev": "EV-EN-CR-2354",
+  "zh": "[强化]为以下功能的简称：“支付[费用]：强化此牌。”仅在未强化时打出。”",
+  "en": "Empower is functionally short for “[Cost]: Empower this. Play only if not Empowered.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0158",
+  "alignment_id": "AL-CR-2364",
+  "rule_id": "R-CR-828.1.a",
+  "zh_ev": "EV-CN-CR-2364",
+  "en_ev": "EV-EN-CR-2364",
+  "zh": "其格式为“[已强化][>] [文本]”。",
+  "en": "It is formatted as “[Empowered][>] [Text].”",
+  "flag_reason": " (bracket tokens differ: zh=['>'] en=['Empowered', '>', 'Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0159",
+  "alignment_id": "AL-CR-2366",
+  "rule_id": "R-CR-828.1.b.1",
+  "zh_ev": "EV-CN-CR-2366",
+  "en_ev": "EV-EN-CR-2366",
+  "zh": "该关键词为以下功能的简称：“只要我处于已强化状态，此牌便获得‘[文本]’。”",
+  "en": "It is functionally short for “While I have the Empowered status, this card gains ‘[Text]’.”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0160",
+  "alignment_id": "AL-CR-2367",
+  "rule_id": "R-CR-828.1.b.2",
+  "zh_ev": "EV-CN-CR-2367",
+  "en_ev": "EV-EN-CR-2367",
+  "zh": "此处的[文本]指的是依赖性技能。",
+  "en": "The [Text] here is the Dependent Ability.",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Text']). Auto-classified translation_difference(low)."
+ },
+ {
+  "item_id": "MR-3-CR-0161",
+  "alignment_id": "AL-CR-2377",
+  "rule_id": "R-CR-829.1.c",
+  "zh_ev": "EV-CN-CR-2377",
+  "en_ev": "EV-EN-CR-2377",
+  "zh": "[流转]的格式为“流转[费用]”。",
+  "en": "Flow is formatted as “Flow [Cost]”",
+  "flag_reason": " (bracket tokens differ: zh=[] en=['Cost']). Auto-classified translation_difference(low)."
+ }
+]

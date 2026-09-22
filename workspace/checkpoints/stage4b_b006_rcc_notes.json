@@ -1,0 +1,995 @@
+{
+  "total_rcc": 134,
+  "resolved": 17,
+  "unresolved": 117,
+  "note_patterns": {
+    "topic-only cluster assignment; refine in Stage 4B": 101,
+    "no topic/card/rule-ref; manual topic assignment in Stage 4B": 16,
+    "card entity mentioned in faq (stage3 entity resolution)": 11,
+    "explicit rule-number reference in faq text | VERIFICATION FL": 6
+  },
+  "unresolved_by_bucket": {
+    "R-TOPIC-CN": [
+      "EV-CN-FAQ-0055(source_005)"
+    ],
+    "R-MISC": [
+      "EV-EN-OE-0002(source_012)",
+      "EV-EN-OE-0003(source_012)",
+      "EV-EN-OE-0089(source_014)",
+      "EV-EN-OE-0090(source_014)",
+      "EV-EN-OE-0091(source_014)",
+      "EV-EN-OE-0092(source_014)",
+      "EV-EN-OE-0093(source_014)",
+      "EV-EN-OE-0094(source_014)",
+      "EV-EN-OE-0135(source_016)",
+      "EV-EN-OE-0136(source_016)",
+      "EV-EN-OE-0137(source_016)",
+      "EV-EN-OE-0211(source_019)",
+      "EV-EN-OE-0212(source_019)",
+      "EV-EN-OE-0213(source_019)",
+      "EV-EN-OE-0214(source_019)",
+      "EV-EN-OE-0215(source_019)"
+    ],
+    "R-TOPIC-EN": [
+      "EV-EN-OE-0014(source_012)",
+      "EV-EN-OE-0015(source_012)",
+      "EV-EN-OE-0016(source_012)",
+      "EV-EN-OE-0020(source_012)",
+      "EV-EN-OE-0023(source_012)",
+      "EV-EN-OE-0024(source_012)",
+      "EV-EN-OE-0025(source_012)",
+      "EV-EN-OE-0028(source_012)",
+      "EV-EN-OE-0031(source_012)",
+      "EV-EN-OE-0032(source_012)",
+      "EV-EN-OE-0033(source_012)",
+      "EV-EN-OE-0035(source_012)",
+      "EV-EN-OE-0036(source_012)",
+      "EV-EN-OE-0045(source_012)",
+      "EV-EN-OE-0046(source_012)",
+      "EV-EN-OE-0048(source_012)",
+      "EV-EN-OE-0052(source_012)",
+      "EV-EN-OE-0054(source_012)",
+      "EV-EN-OE-0058(source_012)",
+      "EV-EN-OE-0060(source_012)",
+      "EV-EN-OE-0066(source_012)",
+      "EV-EN-OE-0067(source_012)",
+      "EV-EN-OE-0068(source_012)",
+      "EV-EN-OE-0069(source_012)",
+      "EV-EN-OE-0097(source_014)",
+      "EV-EN-OE-0098(source_014)",
+      "EV-EN-OE-0100(source_014)",
+      "EV-EN-OE-0101(source_014)",
+      "EV-EN-OE-0103(source_014)",
+      "EV-EN-OE-0104(source_014)",
+      "EV-EN-OE-0106(source_014)",
+      "EV-EN-OE-0107(source_014)",
+      "EV-EN-OE-0109(source_014)",
+      "EV-EN-OE-0110(source_014)",
+      "EV-EN-OE-0112(source_014)",
+      "EV-EN-OE-0115(source_014)",
+      "EV-EN-OE-0116(source_014)",
+      "EV-EN-OE-0119(source_014)",
+      "EV-EN-OE-0120(source_014)",
+      "EV-EN-OE-0121(source_014)",
+      "EV-EN-OE-0124(source_014)",
+      "EV-EN-OE-0125(source_014)",
+      "EV-EN-OE-0128(source_014)",
+      "EV-EN-OE-0139(source_016)",
+      "EV-EN-OE-0141(source_016)",
+      "EV-EN-OE-0144(source_016)",
+      "EV-EN-OE-0145(source_016)",
+      "EV-EN-OE-0146(source_016)",
+      "EV-EN-OE-0149(source_016)",
+      "EV-EN-OE-0150(source_016)",
+      "EV-EN-OE-0151(source_016)",
+      "EV-EN-OE-0152(source_016)",
+      "EV-EN-OE-0153(source_016)",
+      "EV-EN-OE-0158(source_016)",
+      "EV-EN-OE-0159(source_016)",
+      "EV-EN-OE-0161(source_016)",
+      "EV-EN-OE-0163(source_016)",
+      "EV-EN-OE-0164(source_016)",
+      "EV-EN-OE-0168(source_016)",
+      "EV-EN-OE-0169(source_016)",
+      "EV-EN-OE-0176(source_016)",
+      "EV-EN-OE-0181(source_016)",
+      "EV-EN-OE-0184(source_016)",
+      "EV-EN-OE-0186(source_016)",
+      "EV-EN-OE-0187(source_016)",
+      "EV-EN-OE-0188(source_016)",
+      "EV-EN-OE-0189(source_016)",
+      "EV-EN-OE-0191(source_016)",
+      "EV-EN-OE-0193(source_016)",
+      "EV-EN-OE-0198(source_016)",
+      "EV-EN-OE-0203(source_016)",
+      "EV-EN-OE-0205(source_016)",
+      "EV-EN-OE-0208(source_016)",
+      "EV-EN-OE-0209(source_016)",
+      "EV-EN-OE-0217(source_019)",
+      "EV-EN-OE-0219(source_019)",
+      "EV-EN-OE-0221(source_019)",
+      "EV-EN-OE-0223(source_019)",
+      "EV-EN-OE-0225(source_019)",
+      "EV-EN-OE-0227(source_019)",
+      "EV-EN-OE-0229(source_019)",
+      "EV-EN-OE-0231(source_019)",
+      "EV-EN-OE-0233(source_019)",
+      "EV-EN-OE-0234(source_019)",
+      "EV-EN-OE-0235(source_019)",
+      "EV-EN-OE-0236(source_019)",
+      "EV-EN-OE-0238(source_019)",
+      "EV-EN-OE-0241(source_019)",
+      "EV-EN-OE-0243(source_019)",
+      "EV-EN-OE-0245(source_019)",
+      "EV-EN-OE-0246(source_019)",
+      "EV-EN-OE-0247(source_019)",
+      "EV-EN-OE-0249(source_019)",
+      "EV-EN-OE-0250(source_019)",
+      "EV-EN-OE-0251(source_019)",
+      "EV-EN-OE-0253(source_019)",
+      "EV-EN-OE-0257(source_019)",
+      "EV-EN-OE-0267(source_019)",
+      "EV-EN-OE-0270(source_019)",
+      "EV-EN-OE-0271(source_019)"
+    ]
+  },
+  "resolved_list": [
+    {
+      "rule_id": "R-CR-187.4",
+      "evidence_id": "EV-CN-FAQ-0196",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-187.4"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CR-316.5",
+      "evidence_id": "EV-CN-FAQ-0196",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-316.5"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CR-323.6",
+      "evidence_id": "EV-CN-FAQ-0196",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-323.6"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CR-323.8",
+      "evidence_id": "EV-CN-FAQ-0196",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-323.8"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CR-344.2",
+      "evidence_id": "EV-CN-FAQ-0196",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-344.2"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CR-461.3",
+      "evidence_id": "EV-CN-FAQ-0201",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1F-R-CR-461.3"
+      ],
+      "notes": "explicit rule-number reference in faq text | VERIFICATION FLAG 4B: citing source predates 2026-07 core-rules renumbering"
+    },
+    {
+      "rule_id": "R-CARD-UNL-138",
+      "evidence_id": "EV-EN-OE-0129",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-138"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-138",
+      "evidence_id": "EV-EN-OE-0131",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-138"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-138",
+      "evidence_id": "EV-EN-OE-0132",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-138"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-OGN-250",
+      "evidence_id": "EV-EN-OE-0182",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-OGN-250"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-SFD-202",
+      "evidence_id": "EV-EN-OE-0182",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-SFD-202"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-138",
+      "evidence_id": "EV-EN-OE-0220",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-138"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-SFD-111",
+      "evidence_id": "EV-EN-OE-0254",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-SFD-111"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-184",
+      "evidence_id": "EV-EN-OE-0254",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-184"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-118",
+      "evidence_id": "EV-EN-OE-0265",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-118"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-118a",
+      "evidence_id": "EV-EN-OE-0265",
+      "changes": [],
+      "recs": [
+        "REC-4B-T1-R-CARD-UNL-118a"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    },
+    {
+      "rule_id": "R-CARD-UNL-106",
+      "evidence_id": "EV-EN-OE-0269",
+      "changes": [],
+      "recs": [
+        "REC-4B-T2ER-R-CARD-UNL-106"
+      ],
+      "notes": "card entity mentioned in faq (stage3 entity resolution)"
+    }
+  ],
+  "unresolved_list": [
+    {
+      "rule_id": "R-TOPIC-CN-40",
+      "evidence_id": "EV-CN-FAQ-0055",
+      "source_id": "source_005",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_012",
+      "evidence_id": "EV-EN-OE-0002",
+      "source_id": "source_012",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_012",
+      "evidence_id": "EV-EN-OE-0003",
+      "source_id": "source_012",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-30",
+      "evidence_id": "EV-EN-OE-0014",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-30",
+      "evidence_id": "EV-EN-OE-0015",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-04",
+      "evidence_id": "EV-EN-OE-0016",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-11",
+      "evidence_id": "EV-EN-OE-0020",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-11",
+      "evidence_id": "EV-EN-OE-0023",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-11",
+      "evidence_id": "EV-EN-OE-0024",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-11",
+      "evidence_id": "EV-EN-OE-0025",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-11",
+      "evidence_id": "EV-EN-OE-0028",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-07",
+      "evidence_id": "EV-EN-OE-0031",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-07",
+      "evidence_id": "EV-EN-OE-0032",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-21",
+      "evidence_id": "EV-EN-OE-0033",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0035",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0036",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0045",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0046",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0048",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0052",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0054",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0058",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0060",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0066",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0067",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0068",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-37",
+      "evidence_id": "EV-EN-OE-0069",
+      "source_id": "source_012",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0089",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0090",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0091",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0092",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0093",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_014",
+      "evidence_id": "EV-EN-OE-0094",
+      "source_id": "source_014",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-48",
+      "evidence_id": "EV-EN-OE-0097",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-25",
+      "evidence_id": "EV-EN-OE-0098",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-47",
+      "evidence_id": "EV-EN-OE-0100",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-22",
+      "evidence_id": "EV-EN-OE-0101",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-49",
+      "evidence_id": "EV-EN-OE-0103",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-49",
+      "evidence_id": "EV-EN-OE-0104",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-51",
+      "evidence_id": "EV-EN-OE-0106",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-51",
+      "evidence_id": "EV-EN-OE-0107",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-50",
+      "evidence_id": "EV-EN-OE-0109",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-26",
+      "evidence_id": "EV-EN-OE-0110",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-15",
+      "evidence_id": "EV-EN-OE-0112",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-34",
+      "evidence_id": "EV-EN-OE-0115",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-34",
+      "evidence_id": "EV-EN-OE-0116",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-18",
+      "evidence_id": "EV-EN-OE-0119",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-18",
+      "evidence_id": "EV-EN-OE-0120",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-18",
+      "evidence_id": "EV-EN-OE-0121",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-10",
+      "evidence_id": "EV-EN-OE-0124",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-10",
+      "evidence_id": "EV-EN-OE-0125",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-31",
+      "evidence_id": "EV-EN-OE-0128",
+      "source_id": "source_014",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_016",
+      "evidence_id": "EV-EN-OE-0135",
+      "source_id": "source_016",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_016",
+      "evidence_id": "EV-EN-OE-0136",
+      "source_id": "source_016",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_016",
+      "evidence_id": "EV-EN-OE-0137",
+      "source_id": "source_016",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-56",
+      "evidence_id": "EV-EN-OE-0139",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-55",
+      "evidence_id": "EV-EN-OE-0141",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-54",
+      "evidence_id": "EV-EN-OE-0144",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-54",
+      "evidence_id": "EV-EN-OE-0145",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-54",
+      "evidence_id": "EV-EN-OE-0146",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-44",
+      "evidence_id": "EV-EN-OE-0149",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-44",
+      "evidence_id": "EV-EN-OE-0150",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-44",
+      "evidence_id": "EV-EN-OE-0151",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-44",
+      "evidence_id": "EV-EN-OE-0152",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-44",
+      "evidence_id": "EV-EN-OE-0153",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-45",
+      "evidence_id": "EV-EN-OE-0158",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-45",
+      "evidence_id": "EV-EN-OE-0159",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-17",
+      "evidence_id": "EV-EN-OE-0161",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-32",
+      "evidence_id": "EV-EN-OE-0163",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-32",
+      "evidence_id": "EV-EN-OE-0164",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-16",
+      "evidence_id": "EV-EN-OE-0168",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-16",
+      "evidence_id": "EV-EN-OE-0169",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-12",
+      "evidence_id": "EV-EN-OE-0176",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-38",
+      "evidence_id": "EV-EN-OE-0181",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-38",
+      "evidence_id": "EV-EN-OE-0184",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-29",
+      "evidence_id": "EV-EN-OE-0186",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-65",
+      "evidence_id": "EV-EN-OE-0187",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-65",
+      "evidence_id": "EV-EN-OE-0188",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-65",
+      "evidence_id": "EV-EN-OE-0189",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-36",
+      "evidence_id": "EV-EN-OE-0191",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-02",
+      "evidence_id": "EV-EN-OE-0193",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-33",
+      "evidence_id": "EV-EN-OE-0198",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-53",
+      "evidence_id": "EV-EN-OE-0203",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-06",
+      "evidence_id": "EV-EN-OE-0205",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-05",
+      "evidence_id": "EV-EN-OE-0208",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-05",
+      "evidence_id": "EV-EN-OE-0209",
+      "source_id": "source_016",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_019",
+      "evidence_id": "EV-EN-OE-0211",
+      "source_id": "source_019",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_019",
+      "evidence_id": "EV-EN-OE-0212",
+      "source_id": "source_019",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_019",
+      "evidence_id": "EV-EN-OE-0213",
+      "source_id": "source_019",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_019",
+      "evidence_id": "EV-EN-OE-0214",
+      "source_id": "source_019",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-MISC-source_019",
+      "evidence_id": "EV-EN-OE-0215",
+      "source_id": "source_019",
+      "notes": "no topic/card/rule-ref; manual topic assignment in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-58",
+      "evidence_id": "EV-EN-OE-0217",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-57",
+      "evidence_id": "EV-EN-OE-0219",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-57",
+      "evidence_id": "EV-EN-OE-0221",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-61",
+      "evidence_id": "EV-EN-OE-0223",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-64",
+      "evidence_id": "EV-EN-OE-0225",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-62",
+      "evidence_id": "EV-EN-OE-0227",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-59",
+      "evidence_id": "EV-EN-OE-0229",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-60",
+      "evidence_id": "EV-EN-OE-0231",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-63",
+      "evidence_id": "EV-EN-OE-0233",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-63",
+      "evidence_id": "EV-EN-OE-0234",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-63",
+      "evidence_id": "EV-EN-OE-0235",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-63",
+      "evidence_id": "EV-EN-OE-0236",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-39",
+      "evidence_id": "EV-EN-OE-0238",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-40",
+      "evidence_id": "EV-EN-OE-0241",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-42",
+      "evidence_id": "EV-EN-OE-0243",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-43",
+      "evidence_id": "EV-EN-OE-0245",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-43",
+      "evidence_id": "EV-EN-OE-0246",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-43",
+      "evidence_id": "EV-EN-OE-0247",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-41",
+      "evidence_id": "EV-EN-OE-0249",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-41",
+      "evidence_id": "EV-EN-OE-0250",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-41",
+      "evidence_id": "EV-EN-OE-0251",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-14",
+      "evidence_id": "EV-EN-OE-0253",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-14",
+      "evidence_id": "EV-EN-OE-0257",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-23",
+      "evidence_id": "EV-EN-OE-0267",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-08",
+      "evidence_id": "EV-EN-OE-0270",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    },
+    {
+      "rule_id": "R-TOPIC-EN-08",
+      "evidence_id": "EV-EN-OE-0271",
+      "source_id": "source_019",
+      "notes": "topic-only cluster assignment; refine in Stage 4B"
+    }
+  ]
+}

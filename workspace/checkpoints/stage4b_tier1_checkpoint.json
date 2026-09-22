@@ -1,0 +1,29 @@
+{
+  "batch": "4B-B002-tier1-faq-attach",
+  "finished_at": "2026-09-21T11:35:04+00:00",
+  "stats_note": "run stats rewritten after sandbox retry overwrote them with zeros; values recovered from DB (reconciliations.original_fragment sums + rules flags)",
+  "stats": {
+    "candidates_rcard": 384,
+    "candidates_rcr": 14,
+    "reconciled": 398,
+    "skipped_exists": 0,
+    "needs_review": 0,
+    "errors": 0,
+    "flagged_verification": 27,
+    "example_entries": 408,
+    "interpretation_entries": 399,
+    "exception_entries": 22,
+    "rule_change_links": 10
+  },
+  "validation": {
+    "rules_reconciled_total": 2586,
+    "rules_pending": 398,
+    "rules_needs_review": 0,
+    "reconciliations_tier1": 398,
+    "reconciled_missing_rec": 0,
+    "rcr_reconciled_null_text": 0,
+    "rcard_faqonly_null_text_expected": 384,
+    "needs_verification_true": 27
+  },
+  "warnings": []
+}

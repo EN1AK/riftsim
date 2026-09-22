@@ -1,0 +1,39 @@
+{
+  "task_id": "task_6_02",
+  "stage": "6B",
+  "output": "workspace/final/rules.md",
+  "built_at": "2026-09-22T17:33:05",
+  "parts": {
+    "front_matter": 0,
+    "part1_core": 2382,
+    "part2_card": 514,
+    "part3_topic_cn": 17,
+    "part3_topic_en": 64,
+    "part4_misc_front": 7
+  },
+  "stats": {
+    "rules_total": 2984,
+    "null_canonical": 472,
+    "with_oi": 387,
+    "with_example": 293,
+    "with_exception": 27,
+    "derived_rows": 0,
+    "verified": 392,
+    "verified_with_changes": 1,
+    "unresolved": 0
+  },
+  "validation": {
+    "entries_in_file": 2984,
+    "entries_unique": 2984,
+    "matches_db": true,
+    "all_db_ids_present": true,
+    "null_canonical_marker_count": 472,
+    "null_canonical_ok": true,
+    "special_811": true,
+    "watch_cards_marked": true,
+    "superseded_flag_present": true,
+    "derived_legend": true,
+    "PASS": true
+  },
+  "verification_included": 393
+}

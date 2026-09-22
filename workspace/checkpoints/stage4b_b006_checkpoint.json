@@ -1,0 +1,32 @@
+{
+ "batch": "4B-B006",
+ "task": "task_4b_06",
+ "date": "2026-09-22",
+ "stats": {
+  "rules_reconciled": 88,
+  "interp_attached": 156,
+  "rcc_transitional": 90,
+  "rcc_applied_019": 37,
+  "rcc_incorporated": 1,
+  "chg_rows": 38,
+  "rec_rows": 100,
+  "nv_true": 58,
+  "nv_false": 30,
+  "watch_cards": 4,
+  "card_rcc_rules": 8,
+  "errors": [],
+  "warnings": [
+   "EV-CN-FAQ-0260 not linked to R-CARD-OGN-251"
+  ],
+  "verify": {
+   "pending_left": 0,
+   "reconciled_total": 2984,
+   "rec_t3": 100,
+   "chg_t3": 38,
+   "rec_total": 2996,
+   "chg_total": 266,
+   "nv_true_total": 393,
+   "rcc_links_remaining_on_pending": 0
+  }
+ }
+}

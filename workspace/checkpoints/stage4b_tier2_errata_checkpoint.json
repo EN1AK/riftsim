@@ -1,0 +1,33 @@
+{
+  "batch": "4B-B004-tier2-errata",
+  "finished_at": "2026-09-22T03:05:44+00:00",
+  "note": "stats recovered from DB after sandbox retry zeroed the first-run files (same as 4B-B002)",
+  "stats": {
+    "candidates": 130,
+    "reconciled": 130,
+    "errors": 0,
+    "changes_added": 222,
+    "zh_errata_links": 137,
+    "en_errata_links": 85,
+    "chained_rules": 7,
+    "faq_example": 104,
+    "faq_interpretation": 103,
+    "faq_exception": 4,
+    "faq_rcc": 1,
+    "faq_forced_verif": 10
+  },
+  "validation": {
+    "rules_reconciled_total": 2877,
+    "rules_pending_left": 107,
+    "needs_review": 0,
+    "rcard_errata_reconciled": 130,
+    "changes_rows_batch": 222,
+    "rec_rows_batch": 130,
+    "errata_rules_missing_changes": 0,
+    "needs_verification_true_total": 318,
+    "all_130_needs_verification": 130
+  },
+  "warnings": [
+    "R-CARD-UNL-186: errata chain mismatch EV-CN-ER-0034->EV-CN-ER-0090"
+  ]
+}

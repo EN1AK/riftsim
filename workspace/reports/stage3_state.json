@@ -1,0 +1,308 @@
+{
+  "alignments_by_relation": [
+    {
+      "relation": "equivalent",
+      "n": 2221
+    },
+    {
+      "relation": "translation_difference",
+      "n": 161
+    }
+  ],
+  "alignments_sample": [
+    {
+      "alignment_id": "AL-CR-0000",
+      "evidence_a": "EV-CN-CR-0000",
+      "evidence_b": "EV-EN-CR-0000",
+      "relation": "equivalent",
+      "confidence": "high",
+      "version_relation": "same_version_confirmed (stage2b: en/cn rule-number sequence identical, source_018 2026-07-16 / source_009 2026-07-17)",
+      "notes": "title/last-updated front matter; dates consistent with source records"
+    },
+    {
+      "alignment_id": "AL-CR-0001",
+      "evidence_a": "EV-CN-CR-0001",
+      "evidence_b": "EV-EN-CR-0001",
+      "relation": "equivalent",
+      "confidence": "high",
+      "version_relation": "same_version_confirmed (stage2b: en/cn rule-number sequence identical, source_018 2026-07-16 / source_009 2026-07-17)",
+      "notes": "auto: numbers+brackets identical, len_ratio=0.35 within [0.22,0.76]"
+    },
+    {
+      "alignment_id": "AL-CR-0002",
+      "evidence_a": "EV-CN-CR-0002",
+      "evidence_b": "EV-EN-CR-0002",
+      "relation": "equivalent",
+      "confidence": "high",
+      "version_relation": "same_version_confirmed (stage2b: en/cn rule-number sequence identical, source_018 2026-07-16 / source_009 2026-07-17)",
+      "notes": "auto: numbers+brackets identical, len_ratio=0.40 within [0.22,0.76]"
+    }
+  ],
+  "manual_review_by_rule_id": [
+    {
+      "rule_id": null,
+      "n": 179
+    },
+    {
+      "rule_id": "735.1.c",
+      "n": 1
+    }
+  ],
+  "manual_review_sample": [
+    {
+      "item_id": "MR-2C-0001",
+      "rule_id": null,
+      "issue_description": "zh source_004 (铸魂淬炼勘误) contains 2 entries (沉没神庙, 遗忘丰碑) with no counterpart in EN source_015 (Spiritforged_Errata): cross",
+      "source_a": "source_004",
+      "source_b": "source_015",
+      "conflicting_points": "zh has 18 entries incl. 沉没神庙/遗忘丰碑; en has 16 without them",
+      "possible_explanation": "zh-only correction entries (possibly translation-only or EN issued separately)",
+      "cannot_auto_resolve_reason": "cannot confirm EN-side status automatically; cross-language meaning check deferred to Stage 3"
+    },
+    {
+      "item_id": "MR-2C-0002",
+      "rule_id": null,
+      "issue_description": "source_013 (Origins_Errata): internal 'Last Updated: 2025-10-21' differs from filename date 2025-10-28 [2026-09-20 裁定关闭]",
+      "source_a": "source_013",
+      "source_b": "source_013",
+      "conflicting_points": "document-internal date 2025-10-21 vs filename date 2025-10-28",
+      "possible_explanation": "PDF last-updated stamp predates the 10-28 site release/packaging date",
+      "cannot_auto_resolve_reason": "date/version ambiguity flagged per Stage 2C rules; sources.date kept as filename date"
+    },
+    {
+      "item_id": "MR-2C-0003",
+      "rule_id": null,
+      "issue_description": "source_020 (Vendetta_Errata): article byline date 7/24/2026 differs from filename date 2026-07-23 (matches zh counterpar",
+      "source_a": "source_020",
+      "source_b": "source_010",
+      "conflicting_points": "EN article date 2026-07-24 vs EN filename 2026-07-23; zh doc 2026-07-24",
+      "possible_explanation": "timezone/packaging offset of one day",
+      "cannot_auto_resolve_reason": "date/version ambiguity flagged per Stage 2C rules; sources.date kept as filename date"
+    },
+    {
+      "item_id": "MR-2C-0004",
+      "rule_id": null,
+      "issue_description": "zh source_003 contains 13 zh-only 翻译勘误/翻译优化 entries (倾颓宫殿, 击退, 苍蓝雕纹魔像, 圣裁之刻, 宏伟广场, 卡尔萨斯-永恒颂葬, 厄运小姐-海盗, 伊泽瑞尔-奥法逸才, 黛安娜, 兰",
+      "source_a": "source_003",
+      "source_b": null,
+      "conflicting_points": "zh translation-correction sections have no EN parallel errata",
+      "possible_explanation": "translation-only fixes cannot alter EN card text meaning",
+      "cannot_auto_resolve_reason": "cross-language equivalence must be verified in Stage 3; flagged per Stage 2C rules"
+    },
+    {
+      "item_id": "MR-2D-0001",
+      "rule_id": null,
+      "issue_description": "source_001 日期冲突：文件名标注 2025-12-03，文档内文声明『最后更新时间：2025-10-23』。 [2026-09-20 裁定关闭] 采用内文『最后更新时间：2025-10-23』为 date；文件名 2025-12-",
+      "source_a": "source_001",
+      "source_b": null,
+      "conflicting_points": "sources.date=2025-12-03 vs doc internal date=2025-10-23 （均为 inferred）",
+      "possible_explanation": "文件名为发布/归档日期，内文为内容最后更新日期，两者可能都真实",
+      "cannot_auto_resolve_reason": "来源日期效力判定需人工决定 effective_date 与 version 采用哪个日期"
+    }
+  ],
+  "recent_tasks": [
+    {
+      "task_id": "task_3_05",
+      "source_id": null,
+      "status": "pending",
+      "notes": "Stage 3 close-out: MR-2D-0004/0005/0010 findings + validation + checkpoint"
+    },
+    {
+      "task_id": "task_3_04",
+      "source_id": null,
+      "status": "pending",
+      "notes": "Stage 3 batch 3-FAQ: cross-language FAQ/OE alignment + explicit unmatched records"
+    },
+    {
+      "task_id": "task_3_03",
+      "source_id": null,
+      "status": "pending",
+      "notes": "Stage 3 batch 3-ER: zh-en errata alignment by card_key"
+    },
+    {
+      "task_id": "task_3_02",
+      "source_id": null,
+      "status": "completed",
+      "notes": "Stage 3 batch 3-CR: zh-en core rules alignment by rule_number (2381 pairs + front matter) [done: 2382 inserted, 0 skippe"
+    },
+    {
+      "task_id": "task_3_01",
+      "source_id": null,
+      "status": "completed",
+      "notes": "Stage 3 batch 3-ENT: card entity resolution across evidence (errata/faq/oe/rule)"
+    },
+    {
+      "task_id": "task_020_01",
+      "source_id": "source_020",
+      "status": "completed",
+      "notes": "Extract 09_2026-07-23_Vendetta_Errata.pdf p1-8 [Stage 2C completed: errata evidence extracted]"
+    },
+    {
+      "task_id": "task_019_01",
+      "source_id": "source_019",
+      "status": "completed",
+      "notes": "Extract 08_2026-07-17_Vendetta_Patch_Notes.pdf p1-8 | Stage2D: completed"
+    },
+    {
+      "task_id": "task_018_12",
+      "source_id": "source_018",
+      "status": "completed",
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p111-120 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_11",
+      "source_id": "source_018",
+      "status": "completed",
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p101-110 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_10",
+      "source_id": "source_018",
+      "status": "completed",
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p91-100 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_09",
+      "source_id": "source_018",
+      "status": "completed",
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p81-90 -> evidence rows written"
+    },
+    {
+      "task_id": "task_018_08",
+      "source_id": "source_018",
+      "status": "completed",
+      "notes": "Extract 07_2026-07-16_Core_Rules.pdf p71-80 -> evidence rows written"
+    }
+  ],
+  "tasks_by_source_status": [
+    {
+      "source_id": null,
+      "status": "completed",
+      "n": 2
+    },
+    {
+      "source_id": null,
+      "status": "pending",
+      "n": 3
+    },
+    {
+      "source_id": "source_001",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_002",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_003",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_004",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_005",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_006",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_007",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_008",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_009",
+      "status": "completed",
+      "n": 13
+    },
+    {
+      "source_id": "source_010",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_011",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_012",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_013",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_014",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_015",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_016",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_017",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_018",
+      "status": "completed",
+      "n": 12
+    },
+    {
+      "source_id": "source_019",
+      "status": "completed",
+      "n": 1
+    },
+    {
+      "source_id": "source_020",
+      "status": "completed",
+      "n": 1
+    }
+  ],
+  "zh_rules_with_number": 2381,
+  "en_rules_with_number": 2381,
+  "cardid_coverage": [
+    {
+      "source_type": "errata",
+      "total": 159,
+      "with_cards": 156
+    },
+    {
+      "source_type": "faq",
+      "total": 332,
+      "with_cards": 286
+    },
+    {
+      "source_type": "official_explanation",
+      "total": 272,
+      "with_cards": 29
+    }
+  ]
+}

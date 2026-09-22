@@ -1,0 +1,48 @@
+{
+  "task_id": "task_6_04",
+  "stage": "6D",
+  "output": "workspace/final/change_log.md",
+  "built_at": "2026-09-22T18:45:23",
+  "stats": {
+    "changes": 267,
+    "tiers": {
+      "CHG-4B-T2ER": 222,
+      "CHG-4B-T1F": 6,
+      "CHG-4B-T3": 38,
+      "CHG-5-": 1
+    },
+    "modification_types": {
+      "terminology_fix": 40,
+      "condition_change": 59,
+      "partial_replacement": 100,
+      "effect_change": 23,
+      "replacement": 5,
+      "numeric_change": 1,
+      "other": 2,
+      "new_rule_addition": 37
+    },
+    "rules_affected": 160,
+    "null_original_content": 38,
+    "null_version": 38,
+    "file_size_bytes": 294518
+  },
+  "validation": {
+    "entries_written": 267,
+    "distinct_ids": 267,
+    "count_match": true,
+    "id_set_match": true,
+    "orphan_rule_refs": [],
+    "id_headers_in_file": 267,
+    "file_headers_match": true,
+    "field_label_counts_ok": true,
+    "field_label_mismatches": [],
+    "file_size_bytes": 294518,
+    "tier_counts": {
+      "CHG-4B-T2ER": 222,
+      "CHG-4B-T1F": 6,
+      "CHG-4B-T3": 38,
+      "CHG-5-": 1
+    },
+    "PASS": true
+  }
+}

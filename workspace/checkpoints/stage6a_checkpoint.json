@@ -1,0 +1,102 @@
+{
+  "stage": "6A",
+  "batch_id": "6A-coverage",
+  "status": "completed",
+  "completed_at": "2026-09-22T09:14:16+00:00",
+  "script": "stage6a_coverage_check.py (idempotent)",
+  "artifact": "workspace/final/coverage_report.md",
+  "checks": [
+    {
+      "id": "C1",
+      "desc": "source 全部已处理 (evidence>0)",
+      "status": "PASS",
+      "detail": "documents discovered=20 processed=20 failed=0"
+    },
+    {
+      "id": "C2",
+      "desc": "无未恢复 failed/running/pending task",
+      "status": "PASS",
+      "detail": "processing_tasks={'completed': 64}"
+    },
+    {
+      "id": "C3",
+      "desc": "Evidence 全部已映射 (rule_evidence)",
+      "status": "PASS",
+      "detail": "mapped=5527/5527 unmapped=0"
+    },
+    {
+      "id": "C4",
+      "desc": "Rule 全部有来源",
+      "status": "PASS",
+      "detail": "rules=2984 without-evidence=0"
+    },
+    {
+      "id": "C5",
+      "desc": "Errata 全部已应用/记录",
+      "status": "PASS",
+      "detail": "card errata w/ replacement link=156 (zh links=137, en links=85), front_matter=3, uncovered=0"
+    },
+    {
+      "id": "C6",
+      "desc": "FAQ/OE 全部已挂载",
+      "status": "PASS",
+      "detail": "faq:* links=1354 on 604 faq/oe rows, unmounted=0"
+    },
+    {
+      "id": "C7",
+      "desc": "inferred 日期未误写 confirmed",
+      "status": "PASS",
+      "detail": "confirmed=2 [('source_009', '2026-07-17'), ('source_018', '2026-07-16')] (doc-self-stated only); date_confidence dist={'confirmed': 2, 'declared': 8, 'inferred': 10}"
+    },
+    {
+      "id": "C8",
+      "desc": "FAQ 无过度泛化 (derived_interpretation=0)",
+      "status": "PASS",
+      "detail": "derived_interpretation non-empty=0"
+    },
+    {
+      "id": "C9",
+      "desc": "superseded 项已标记且不作为现行规则",
+      "status": "PASS",
+      "detail": "superseded-tagged=['EV-CN-FAQ-0089', 'EV-CN-FAQ-0090'] (expected ['EV-CN-FAQ-0089', 'EV-CN-FAQ-0090']), all links noted=True; Group-C chain 0089/0090 superseded_by 0307"
+    },
+    {
+      "id": "C10",
+      "desc": "verification 无 pending",
+      "status": "PASS",
+      "detail": "verification={'verified': 392, 'verified_with_changes': 1} (total 393), rules.needs_verification=true remaining=0"
+    },
+    {
+      "id": "C11",
+      "desc": "冲突全部已裁决",
+      "status": "PASS",
+      "detail": "conflicts=[{'conflict_id': 'CON-4B-T2-0001', 'rule_id': 'R-CR-811.1.b', 'resolution_status': 'resolved_stage5'}]"
+    },
+    {
+      "id": "C12",
+      "desc": "manual_review 无擅自裁决 (186 项, 全部经正式裁决流程关闭)",
+      "status": "PASS",
+      "detail": "total=186, rule_id NULL=18 (18 document-level: MR-2C x4 + MR-2D x14; MR-2D-0007 rule_id='735.1.c' 为 incorporated 关闭时回填的历史编号), MR-3-CR x161 / MR-4A x6 backfilled; DB 无 status 列, 关闭记录见各 stage 报告"
+    },
+    {
+      "id": "C13",
+      "desc": "RCC 链接全部经 4B 裁决",
+      "status": "PASS",
+      "detail": "faq:rule_change_candidate links=134 (37 source_019 APPLIED + 1 incorporated-not-applied + 90 pre-core 记录未应用 + 6 incorporated CHG-4B-T1F = 134)"
+    }
+  ],
+  "counters": {
+    "sources": 20,
+    "evidence": 5527,
+    "evidence_mapped": 5527,
+    "rules": 2984,
+    "verification": {
+      "verified": 392,
+      "verified_with_changes": 1
+    },
+    "changes": 267,
+    "conflicts": 1,
+    "manual_review": 186
+  },
+  "next": "6B rules.md 分章节构建 (workspace/final/rules.md)"
+}

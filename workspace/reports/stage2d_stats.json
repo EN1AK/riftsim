@@ -1,0 +1,68 @@
+{
+  "sources": {
+    "source_001": {
+      "items": 50,
+      "needs_review": 0,
+      "pages": 10
+    },
+    "source_005": {
+      "items": 47,
+      "needs_review": 0,
+      "pages": 21
+    },
+    "source_006": {
+      "items": 93,
+      "needs_review": 0,
+      "pages": 25
+    },
+    "source_007": {
+      "items": 23,
+      "needs_review": 0,
+      "pages": 24
+    },
+    "source_008": {
+      "items": 79,
+      "needs_review": 0,
+      "pages": 24
+    },
+    "source_011": {
+      "items": 34,
+      "needs_review": 0,
+      "pages": 22
+    },
+    "source_012": {
+      "items": 86,
+      "needs_review": 0,
+      "pages": 7
+    },
+    "source_014": {
+      "items": 45,
+      "needs_review": 0,
+      "pages": 5
+    },
+    "source_016": {
+      "items": 75,
+      "needs_review": 0,
+      "pages": 7
+    },
+    "source_019": {
+      "items": 62,
+      "needs_review": 0,
+      "pages": 8
+    }
+  },
+  "totals": {
+    "items": 594,
+    "front_matter": 10,
+    "needs_review": 0
+  },
+  "classification": {
+    "example_only": 193,
+    "rule_interpretation": 270,
+    "additional_condition": 0,
+    "exception": 5,
+    "rule_change_candidate": 127,
+    "uncertain": 0
+  },
+  "post_review_note": "2026-09-20: human review resolved all 4 needs_review; EV-CN-FAQ-0248 merged into 0247 and deleted; ids renumbered."
+}

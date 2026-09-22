@@ -1,0 +1,344 @@
+{
+  "evidence_cols": [
+    "evidence_id",
+    "rule_id_candidate",
+    "topic",
+    "source_id",
+    "source_type",
+    "source_language",
+    "source_document",
+    "version",
+    "date",
+    "page",
+    "section",
+    "heading",
+    "rule_number",
+    "original_text",
+    "normalized_summary",
+    "applicable_object",
+    "trigger",
+    "precondition",
+    "effect",
+    "restriction",
+    "exception",
+    "example",
+    "confidence",
+    "notes",
+    "target_rule_candidate",
+    "target_source",
+    "original_fragment",
+    "corrected_fragment",
+    "modification_type",
+    "effective_scope",
+    "faq_question",
+    "faq_answer",
+    "faq_classification",
+    "related_cards",
+    "card_ids"
+  ],
+  "errata_by_source": [
+    {
+      "source_id": "source_002",
+      "source_language": "zh",
+      "n": 31,
+      "with_cardids": 31
+    },
+    {
+      "source_id": "source_003",
+      "source_language": "zh",
+      "n": 31,
+      "with_cardids": 31
+    },
+    {
+      "source_id": "source_004",
+      "source_language": "zh",
+      "n": 18,
+      "with_cardids": 18
+    },
+    {
+      "source_id": "source_010",
+      "source_language": "zh",
+      "n": 13,
+      "with_cardids": 13
+    },
+    {
+      "source_id": "source_013",
+      "source_language": "en",
+      "n": 32,
+      "with_cardids": 31
+    },
+    {
+      "source_id": "source_015",
+      "source_language": "en",
+      "n": 16,
+      "with_cardids": 16
+    },
+    {
+      "source_id": "source_017",
+      "source_language": "en",
+      "n": 9,
+      "with_cardids": 8
+    },
+    {
+      "source_id": "source_020",
+      "source_language": "en",
+      "n": 9,
+      "with_cardids": 8
+    }
+  ],
+  "zh_errata_sample": [
+    {
+      "evidence_id": "EV-CN-ER-0001",
+      "source_id": "source_002",
+      "page": 1,
+      "rule_number": null,
+      "target_rule_candidate": "斥候标兵 艾娃",
+      "modification_type": "partial_replacement",
+      "card_ids": "[\"OGN-107\"]",
+      "related_cards": null,
+      "original_text": "斥候标兵 艾娃\n[新文本/NEW TEXT]\n当我进攻时，你可以选择支付[C]，以此从你的手牌中正面朝上打出一张带有[待命]技能的卡牌，\n无视费用。如果其为单位，则将其打出到此处。\n▲\n[旧文本/OLD TEXT]\n当我进攻时，你可以选择支付[C]，以此从你的手牌中正面朝上打出一张带有[待命]技能的卡牌，\n无视费用。",
+      "normalized_summary": "Errata: 斥候标兵 艾娃 — partial_replacement",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='斥候标兵 艾娃'"
+    },
+    {
+      "evidence_id": "EV-CN-ER-0002",
+      "source_id": "source_002",
+      "page": 1,
+      "rule_number": null,
+      "target_rule_candidate": "海兽钓钩",
+      "modification_type": "partial_replacement",
+      "card_ids": "[\"OGN-242\"]",
+      "related_cards": null,
+      "original_text": "海兽钓钩\n[新文本/NEW TEXT]\n支付[1][C]，[E]：摧毁一名友方单位。查看你主牌堆顶部的五张牌。你可以选择从中放逐一名战\n力比被摧毁单位最多高1 点的单位卡牌，然后将其打出，无视费用。然后回收其余的卡牌。\n▲\n[旧文本/OLD TEXT]\n支付[1][C]，[E]：摧毁一名友方单位，然后查看主牌堆顶部的五张牌。你可以选择从中打出一名\n战力比被摧毁单位最多高1 点的单位卡牌，无视费用，",
+      "normalized_summary": "Errata: 海兽钓钩 — partial_replacement",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='海兽钓钩'"
+    },
+    {
+      "evidence_id": "EV-CN-ER-0003",
+      "source_id": "source_002",
+      "page": 2,
+      "rule_number": null,
+      "target_rule_candidate": "暴怒冲动",
+      "modification_type": "partial_replacement",
+      "card_ids": "[\"OGN-025\"]",
+      "related_cards": null,
+      "original_text": "暴怒冲动\n[新文本/NEW TEXT]\n[迅捷]（可在你的回合或法术对决中打出。）\n每名对手展示其主牌堆顶部的一张牌。你从中选择一张，将其放逐，然后当作自己的牌打出，无\n视费用。然后回收其余的卡牌。\n▲\n[旧文本/OLD TEXT]\n[迅捷]（可在你的回合或法术对决中打出。）\n每名对手展示其主牌堆顶部的一张牌。你从中选择一张，并当作自己的牌打出，无视费用，然后\n回收其余的卡牌。",
+      "normalized_summary": "Errata: 暴怒冲动 — partial_replacement",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='暴怒冲动'"
+    },
+    {
+      "evidence_id": "EV-CN-ER-0004",
+      "source_id": "source_002",
+      "page": 2,
+      "rule_number": null,
+      "target_rule_candidate": "小小守护者",
+      "modification_type": "replacement",
+      "card_ids": "[\"OGN-044\"]",
+      "related_cards": null,
+      "original_text": "小小守护者\n[新文本/NEW TEXT]\n你可以选择支付[C]，作为打出我的额外费用。\n当你打出我时，如果你支付了该额外费用，则抽一张牌。\n▲\n[旧文本/OLD TEXT]\n打出我时，你可以选择额外支付[C]来抽一张牌。",
+      "normalized_summary": "Errata: 小小守护者 — replacement",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='小小守护者'"
+    },
+    {
+      "evidence_id": "EV-CN-ER-0005",
+      "source_id": "source_002",
+      "page": 3,
+      "rule_number": null,
+      "target_rule_candidate": "聚合变异",
+      "modification_type": "condition_change",
+      "card_ids": "[\"OGN-108\"]",
+      "related_cards": null,
+      "original_text": "聚合变异\n[新文本/NEW TEXT]\n[反应]（可在任意时机打出，甚至先于其他法术和技能的结算。）\n选择一名友方单位。本回合内，将其战力提升至与另一名友方单位战力相同。\n▲\n[旧文本/OLD TEXT]\n[反应]（可在任意时机打出，甚至先于其他法术和技能的结算。）\n选择一名友方单位。如果其战力低于另一名友方单位，则让其在本回合内变为后者的战力。",
+      "normalized_summary": "Errata: 聚合变异 — condition_change",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='聚合变异'"
+    }
+  ],
+  "en_errata_sample": [
+    {
+      "evidence_id": "EV-EN-ER-0001",
+      "source_id": "source_013",
+      "page": 1,
+      "rule_number": null,
+      "target_rule_candidate": null,
+      "modification_type": null,
+      "card_ids": null,
+      "related_cards": null,
+      "original_text": "Riftbound Card Errata\nLast Updated: 2025-10-21",
+      "normalized_summary": "Errata document header / title block",
+      "notes": "structural_extraction; stage2c errata doc header | stage3_entity: no target (preamble/unmapped row)"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0002",
+      "source_id": "source_013",
+      "page": 1,
+      "rule_number": null,
+      "target_rule_candidate": "Ava Achiever",
+      "modification_type": "condition_change",
+      "card_ids": "[\"OGN-107\"]",
+      "related_cards": null,
+      "original_text": "Ava Achiever\n[新文本/NEW TEXT]\nWhen I attack, you may pay [C] to play a card with [Hidden] from your hand,\nignoring its cost. If it’s a unit, play it here.\n▲\n[旧文本/OLD TEXT]\nWhen I attack, you may pay [C]",
+      "normalized_summary": "Errata: Ava Achiever — condition_change",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='Ava Achiever'"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0003",
+      "source_id": "source_013",
+      "page": 1,
+      "rule_number": null,
+      "target_rule_candidate": "Baited Hook",
+      "modification_type": "condition_change",
+      "card_ids": "[\"OGN-242\"]",
+      "related_cards": null,
+      "original_text": "Baited Hook\n[新文本/NEW TEXT]\n[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may\nbanish a unit from among them that has Might up to 1 more than the killed unit\nand play",
+      "normalized_summary": "Errata: Baited Hook — condition_change",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='Baited Hook'"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0004",
+      "source_id": "source_013",
+      "page": 2,
+      "rule_number": null,
+      "target_rule_candidate": "Blind Fury",
+      "modification_type": "partial_replacement",
+      "card_ids": "[\"OGN-025\"]",
+      "related_cards": null,
+      "original_text": "Blind Fury\n[新文本/NEW TEXT]\n[Action] (Play on your turn or in showdowns.)\nEach opponent reveals the top card of their Main Deck. Choose one and banish it,\nthen play it, ignoring its cost. Then recycle t",
+      "normalized_summary": "Errata: Blind Fury — partial_replacement",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='Blind Fury'"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0005",
+      "source_id": "source_013",
+      "page": 2,
+      "rule_number": null,
+      "target_rule_candidate": "Clockwork Keeper",
+      "modification_type": "condition_change",
+      "card_ids": "[\"OGN-044\"]",
+      "related_cards": null,
+      "original_text": "Clockwork Keeper\n[新文本/NEW TEXT]\nYou may pay [C] as an additional cost to play me.\nWhen you play me, if you paid the additional cost, draw 1.\n▲\n[旧文本/OLD TEXT]\nAs you play me, you may pay [C] as an addi",
+      "normalized_summary": "Errata: Clockwork Keeper — condition_change",
+      "notes": "structural_extraction; stage2c card errata; modification_type_source: heuristic | stage3_entity:exact target='Clockwork Keeper'"
+    }
+  ],
+  "errata_front_matter": [
+    {
+      "evidence_id": "EV-EN-ER-0001",
+      "source_id": "source_013",
+      "t": "Riftbound Card Errata\nLast Updated: 2025-10-21"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0049",
+      "source_id": "source_017",
+      "t": "UNLEASHED ERRATA UPDATES\nUpdates on the rules wording for cards from Spiritforged and Unleashed.\nRules and Releases | 4/3/2026\nHey Riftbounders!\nWe’ve"
+    },
+    {
+      "evidence_id": "EV-EN-ER-0058",
+      "source_id": "source_020",
+      "t": "VENDETTA ERRATA UPDATES\nUpdates regarding card text with the Vendetta release.\nAnnouncements | 7/24/2026\nHey Riftbounders!\nWe’ve got some fresh card e"
+    }
+  ],
+  "mod_types": [
+    {
+      "modification_type": null,
+      "n": 3
+    },
+    {
+      "modification_type": "condition_change",
+      "n": 30
+    },
+    {
+      "modification_type": "effect_change",
+      "n": 19
+    },
+    {
+      "modification_type": "numeric_change",
+      "n": 1
+    },
+    {
+      "modification_type": "partial_replacement",
+      "n": 73
+    },
+    {
+      "modification_type": "replacement",
+      "n": 5
+    },
+    {
+      "modification_type": "terminology_fix",
+      "n": 28
+    }
+  ],
+  "errata_sources": [
+    {
+      "source_id": "source_002",
+      "source_document": "02_2025-12-03_符文战场_勘误汇总_1028.pdf",
+      "language": "zh",
+      "date": "2025-12-03",
+      "effective_date": "2025-12-03",
+      "version": "v2025",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_003",
+      "source_document": "03_2026-04-15_破限系列_勘误汇总_260403.pdf",
+      "language": "zh",
+      "date": "2026-04-15",
+      "effective_date": "2026-04-15",
+      "version": "v2026",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_004",
+      "source_document": "04_2026-04-15_铸魂淬炼系列_勘误汇总_260114.pdf",
+      "language": "zh",
+      "date": "2026-04-15",
+      "effective_date": "2026-04-15",
+      "version": "v2026",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_010",
+      "source_document": "10_2026-07-24_9fe1f19110dd4678a6ad7bd96e791bba.pdf",
+      "language": "zh",
+      "date": "2026-07-24",
+      "effective_date": "2026-07-24",
+      "version": "v2026",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_013",
+      "source_document": "02_2025-10-28_Origins_Errata.pdf",
+      "language": "en",
+      "date": "2025-10-21",
+      "effective_date": "2025-10-21",
+      "version": "v2025",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_015",
+      "source_document": "04_2026-01-14_Spiritforged_Errata.pdf",
+      "language": "en",
+      "date": "2026-01-14",
+      "effective_date": "2026-01-14",
+      "version": "v2026",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_017",
+      "source_document": "06_2026-04-03_Unleashed_Errata.pdf",
+      "language": "en",
+      "date": "2026-04-03",
+      "effective_date": "2026-04-03",
+      "version": "v2026",
+      "possible_counterpart": null
+    },
+    {
+      "source_id": "source_020",
+      "source_document": "09_2026-07-23_Vendetta_Errata.pdf",
+      "language": "en",
+      "date": "2026-07-24",
+      "effective_date": "2026-07-24",
+      "version": "v2026",
+      "possible_counterpart": null
+    }
+  ]
+}
