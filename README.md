@@ -125,6 +125,34 @@ python scripts/stage6/stage6f_final_consistency.py   # 6F 五产物 × DB 一致
 早期阶段脚本（downloader / extract_pdfs / card_scraper / stage2x–stage5x）保留用于审计
 与未来资料增量，当前语料下无需重跑。
 
+## RAG 查询（本地 BGE-M3）
+
+基于最终规则库的自然语言问答：**BGE-M3 向量召回 + 关键词（规则号/卡号/官方术语）
+召回 → RRF 融合 → OpenAI 兼容 API 生成带引用的回答**。本地 CPU 即可，无需 GPU。
+
+```powershell
+# 环境准备（项目内 venv，依赖约 3 GB：CPU 版 torch + sentence-transformers + 模型权重）
+python -m venv .venv
+.\.venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+.\.venv\Scripts\python -m pip install sentence-transformers openai
+
+# 构建向量索引（2984 条规则 → workspace/rag/，首次自动下载 BGE-M3 权重 ~2.2 GB）
+.\.venv\Scripts\python scripts/rag/build_rag_index.py
+
+# 检索 + 生成
+.\.venv\Scripts\python scripts/rag/rag_query.py "反制堆叠有上限吗"
+
+# 只看召回质量（不接 LLM，无需任何密钥）
+.\.venv\Scripts\python scripts/rag/rag_query.py "OGN-131 现行怎么处理" --retrieve-only
+```
+
+生成端通过环境变量配置（任意 OpenAI 兼容服务）：
+`OPENAI_API_KEY`、`OPENAI_BASE_URL`（如 `https://api.deepseek.com/v1`）、
+`RAG_LLM_MODEL`（如 `deepseek-chat`）。回答中每条结论标注 [rule_id] 引用，
+可回查 `workspace/final/rules.md` / `rules.db`。
+
+向量产物在 `workspace/rag/`（已 gitignore，可随时用 build 脚本幂等重建）。
+
 ## 关键统计
 
 | 指标 | 数量 |
