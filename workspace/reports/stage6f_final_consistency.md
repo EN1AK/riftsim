@@ -1,6 +1,6 @@
 # Stage 6F — Final Consistency Check (spec 17.4)
 
-- 执行时间: 2026-09-22T19:21:10  脚本: stage6f_final_consistency.py (幂等, 只读产物)
+- 执行时间: 2026-09-23T12:44:15  脚本: stage6f_final_consistency.py (幂等, 只读产物)
 - 数据源: workspace/rules_work.db (事实来源) + workspace/final/{rules.md, rules.db, change_log.md, manual_review.md, coverage_report.md}
 - 结论: **全部检查 PASS** (24/24)
 
@@ -8,7 +8,7 @@
 |---|---|---|---|
 | F0 | 五个最终产物齐备且非空 | PASS | missing=[] |
 | A1 | rules.md 条目数/ID 集合 == DB rules == rules.db | PASS | file=2984 distinct=2984 db=2984 rules_db=2984 |
-| A2 | rules.md 每条含 spec-17.2 全部 14 字段 | PASS | expected=2984 each; bad=[] |
+| A2 | rules.md 每条含 9 个恒显字段；结构化五字段 DB 全 NULL 且条目级行已省略 | PASS | expected=2984 each (9 fields); bad=[]; struct_md_lines=[]; struct_db_nonempty=0 |
 | A3 | rules.md NULL-canonical 标记数 == DB NULL canonical（两者一致） | PASS | markers=472 db_null=472 rules_db_null=472 |
 | A4 | rules.md 每条状态均为终态（无未解决/待验证） | PASS | status_lines=2984 unresolved=[] |
 | B1 | rules.db 各表计数 == rules_work.db | PASS | {"rules_db": {"rules": 2984, "rule_sources": 6353, "rule_cards": 7046, "rule_keywords": 885, "rule_verification": 393, "rule_changes": 267, "null_canon": 472}, "db": {"rules": 2984, "rule_evidence": 6353, "verification": 393, "changes": 267 |

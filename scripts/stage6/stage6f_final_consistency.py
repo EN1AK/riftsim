@@ -134,9 +134,7 @@ def main():
           f'file={len(ids)} distinct={len(set(ids))} db={db_rules_n} rules_db={rd["rules"]}')
     labels = [
         ('Rule ID', r'^- \*\*Rule ID\*\*: '), ('主题', r'^- \*\*主题\*\*: '),
-        ('规范规则', r'^- \*\*规范规则\*\*'), ('适用对象', r'^- \*\*适用对象\*\*: '),
-        ('触发条件', r'^- \*\*触发条件\*\*: '), ('前置条件', r'^- \*\*前置条件\*\*: '),
-        ('效果', r'^- \*\*效果\*\*: '), ('限制', r'^- \*\*限制\*\*: '),
+        ('规范规则', r'^- \*\*规范规则\*\*'),
         ('例外', r'^- \*\*例外\*\*\('), ('官方解释', r'^- \*\*官方解释\*\*\('),
         ('由 FAQ 推导的解释', r'^- \*\*由 FAQ 推导的解释\*\*'),
         ('案例', r'^- \*\*案例\*\*\('), ('来源', r'^- \*\*来源\*\*: '),
@@ -144,8 +142,20 @@ def main():
     ]
     label_bad = [(n, len(re.findall(p, entries, flags=re.M)))
                  for n, p in labels if len(re.findall(p, entries, flags=re.M)) != db_rules_n]
-    check('A2', 'rules.md 每条含 spec-17.2 全部 14 字段', not label_bad,
-          f'expected={db_rules_n} each; bad={label_bad}')
+    # 结构化五字段：DB 全量 NULL（structured extraction 未做），rules.md 按全局声明省略条目级行
+    struct_labels = [('适用对象', r'^- \*\*适用对象\*\*: '), ('触发条件', r'^- \*\*触发条件\*\*: '),
+                     ('前置条件', r'^- \*\*前置条件\*\*: '), ('效果', r'^- \*\*效果\*\*: '),
+                     ('限制', r'^- \*\*限制\*\*: ')]
+    struct_bad = [(n, len(re.findall(p, entries, flags=re.M)))
+                  for n, p in struct_labels if len(re.findall(p, entries, flags=re.M)) != 0]
+    db_struct_nonempty = q1(w, "SELECT COUNT(*) FROM rules WHERE "
+                               "coalesce(applicable_object,'')!='' OR coalesce(trigger,'')!='' OR "
+                               "coalesce(precondition,'')!='' OR coalesce(effect,'')!='' OR "
+                               "coalesce(restriction,'')!=''")
+    check('A2', 'rules.md 每条含 9 个恒显字段；结构化五字段 DB 全 NULL 且条目级行已省略',
+          not label_bad and not struct_bad and db_struct_nonempty == 0,
+          f'expected={db_rules_n} each (9 fields); bad={label_bad}; '
+          f'struct_md_lines={struct_bad}; struct_db_nonempty={db_struct_nonempty}')
     marker_n = entries.count('FAQ 挂载型记录')
     check('A3', 'rules.md NULL-canonical 标记数 == DB NULL canonical（两者一致）',
           marker_n == db_null_canon == rd['null_canon'],

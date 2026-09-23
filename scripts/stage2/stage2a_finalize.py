@@ -2,7 +2,7 @@
 """Stage 2A finalize: verify fixed state, sync processing_tasks.json."""
 import sqlite3, json, datetime, os
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WS = os.path.join(BASE, "workspace")
 con = sqlite3.connect(os.path.join(WS, "rules_work.db"))
 cur = con.cursor()

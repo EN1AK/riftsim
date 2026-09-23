@@ -2,7 +2,7 @@
 """Stage 2A fix: real page counts, proper task chunks, correct top-section flags."""
 import os, re, json, sqlite3, datetime
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WS = os.path.join(BASE, "workspace")
 EX = os.path.join(BASE, "extracted")
 DB = os.path.join(WS, "rules_work.db")

@@ -8,7 +8,7 @@ Structural extraction only: no semantic fields, no canonical decisions.
 """
 import os, re, json, sqlite3, datetime, sys
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WS = os.path.join(BASE, "workspace")
 EX = os.path.join(BASE, "extracted")
 DB = os.path.join(WS, "rules_work.db")

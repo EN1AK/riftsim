@@ -170,11 +170,8 @@ def main():
             out.append(f"- **规范规则**(官方规则): {canon}")
         else:
             out.append(f"- **规范规则**(官方规则): —（本条为 FAQ 挂载型记录，无规范规则正文；不作为缺失处理，勿凭此条目推造规则）")
-        out.append(f"- **适用对象**: —（未做结构化语义抽取，见规范规则正文）")
-        out.append(f"- **触发条件**: —（未做结构化语义抽取，见规范规则正文）")
-        out.append(f"- **前置条件**: —（未做结构化语义抽取，见规范规则正文）")
-        out.append(f"- **效果**: —（未做结构化语义抽取，见规范规则正文）")
-        out.append(f"- **限制**: —（未做结构化语义抽取，见规范规则正文）")
+        # 结构化五字段（applicable_object/trigger/precondition/effect/restriction）全库 NULL，
+        # 不再逐条重复占位行，统一见 front matter 声明。
         exc = (r['exception'] or '').strip()
         oi = (r['official_interpretation'] or '').strip()
         der = (r['derived_interpretation'] or '').strip()
@@ -208,7 +205,7 @@ def main():
         w('- **案例** = example（example_only 类 FAQ 逐字挂载）。\n')
         w('- **例外** = exception。\n')
         w('- **未解决** = 0 条（Stage 4B/5 全部裁决完毕；conflicts 1/1 resolved_stage5）。\n')
-        w('- 结构化字段「适用对象 / 触发条件 / 前置条件 / 效果 / 限制」全线未做语义抽取（结构化抽取仅做原文定位），权威信息在规范规则正文。\n')
+        w('- 结构化字段「适用对象 / 触发条件 / 前置条件 / 效果 / 限制」全库未做语义抽取（全量 NULL），为可读性各条不再重复列出；权威信息在规范规则正文。\n')
         w(f'- 规范规则为“—（FAQ 挂载型记录）”的条目共 {stats["null_canonical"]} 条：均为仅 FAQ 出现的卡牌牌面 R-CARD 记录，按设计 canonical 为 NULL，仅挂载官方解释/案例/例外。\n')
         w('- 来源行格式: `关系: EVIDENCE_ID@SOURCE_ID`；`[superseded-已被取代]` 表示该来源条目已被官方后续条目取代（链接保留）。\n')
         w('- R-CR-811.1.b 的规范规则含英文同版本优先补充的持续时间从句（见该条特别说明）。\n')

@@ -1,6 +1,6 @@
 import re, json, os
 
-BASE = os.path.dirname(__file__)
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 EX = os.path.join(BASE, "extracted")
 KB = os.path.join(BASE, "kb")
 os.makedirs(KB, exist_ok=True)

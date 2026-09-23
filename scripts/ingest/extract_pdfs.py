@@ -1,12 +1,14 @@
 import sys, os, glob
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".pylibs"))
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(ROOT, ".pylibs"))
 import fitz
 
-OUT = os.path.join(os.path.dirname(__file__), "extracted")
+OUT = os.path.join(ROOT, "extracted")
 os.makedirs(OUT, exist_ok=True)
 
 for folder in ("loltcg_pdfs", "riftbound_en_rules"):
-    base = os.path.join(os.path.dirname(__file__), folder)
+    base = os.path.join(ROOT, folder)
     for pdf in sorted(glob.glob(os.path.join(base, "*.pdf"))):
         name = os.path.splitext(os.path.basename(pdf))[0]
         out_path = os.path.join(OUT, f"{folder}__{name}.txt")
