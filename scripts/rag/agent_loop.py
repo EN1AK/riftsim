@@ -9,7 +9,7 @@ planner 每步输出一个 JSON 动作 {"tool": ..., "arguments": {...}, "ration
     submit_answer  {"answer": str, "citations": [str]}  唯一终止动作，引用经证据池校验
 
 界限（design D4）：
-    - RAG_AGENT_MAX_STEPS 最大步数（默认 4，钳制 1-8）；
+    - RAG_AGENT_MAX_STEPS 最大步数（默认 8，钳制 1-8）；
     - 重复 (tool, 规范化 arguments) 签名拒绝执行（给出观察，不计无效）；
     - 连续两个无效输出（非 JSON / 未知工具 / 参数畸形）停止进 fallback；
     - planner LLM 调用失败直接进 fallback。
@@ -32,7 +32,7 @@ from rulebook_index import (
 TOOL_NAMES = ("resolve_cards", "get_card_rules", "search_rules",
               "lookup_rule", "submit_answer")
 
-DEFAULT_MAX_STEPS = 4
+DEFAULT_MAX_STEPS = 8
 MIN_MAX_STEPS = 1
 MAX_MAX_STEPS = 8
 
@@ -106,7 +106,7 @@ def _env_int(name, default):
 
 
 def agent_max_steps():
-    """RAG_AGENT_MAX_STEPS：默认 4，钳制到 [1, 8]。"""
+    """RAG_AGENT_MAX_STEPS：默认 8，钳制到 [1, 8]。"""
     raw = _env_int("RAG_AGENT_MAX_STEPS", DEFAULT_MAX_STEPS)
     return max(MIN_MAX_STEPS, min(MAX_MAX_STEPS, raw))
 
@@ -287,8 +287,9 @@ def build_system_prompt(resolution, chapter_hint=None):
         "",
         "规则：只引用证据池中的 rule_id；禁止猜测卡号/规则号；"
         "证据足够时立即用 submit_answer 收尾，不要重复检索。",
-        "步数预算很小（通常 3-4 步），推荐节奏：resolve_cards 一次 → "
-        "search_rules（一次查询覆盖全部已识别卡片与关键概念）→ submit_answer；"
+        "步数预算默认 8 步，但不要浪费：推荐节奏 resolve_cards 一次 → "
+        "search_rules（一次查询覆盖全部已识别卡片与关键概念）→ "
+        "按需 lookup_rule 翻推荐章节正文 → 证据足够立即 submit_answer；"
         "get_card_rules 返回 0 条时下一步立即改用 search_rules，"
         "不要逐卡重复 get_card_rules。",
         "",

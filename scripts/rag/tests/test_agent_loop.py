@@ -206,9 +206,9 @@ def test_max_steps_env_clamped(monkeypatch):
     monkeypatch.setenv("RAG_AGENT_MAX_STEPS", "0")
     assert agent_max_steps() == 1
     monkeypatch.setenv("RAG_AGENT_MAX_STEPS", "abc")
-    assert agent_max_steps() == 4
+    assert agent_max_steps() == 8
     monkeypatch.delenv("RAG_AGENT_MAX_STEPS")
-    assert agent_max_steps() == 4
+    assert agent_max_steps() == 8
 
 
 def test_duplicate_action_rejected(rules_db):
