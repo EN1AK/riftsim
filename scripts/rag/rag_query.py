@@ -4,6 +4,13 @@
 召回：BGE-M3 向量召回 + 关键词召回（规则号 / 卡号 / 关键字表 / 拉丁词元），
       RRF 融合。生成：OpenAI 兼容 API（DeepSeek、通义、智谱、OpenAI 等均可）。
 
+除一次性 CLI 管线外，本文件还提供基于连接的检索工具层（agent loop 调用，
+rag_server agent 模式使用；原有 CLI 函数签名与行为保持不变）：
+    EvidencePool      以 rule_id 为键累积规则行（去重、保持插入序）
+    get_card_rules    按 card_id 经 rule_cards 关联取规则行
+    search_rules      混合召回函数化（向量通道依赖注入支持扩展文本召回）
+    lookup_rule       精确 rule_id / 裸规则号模糊定位
+
 用法（仓库根目录执行）：
     python scripts/rag/rag_query.py "反制堆叠上限是多少"
     python scripts/rag/rag_query.py "OGN-131 现行效果" --retrieve-only   # 只看召回
@@ -40,6 +47,10 @@ _RE_RULE_NO = re.compile(r"\b\d{3}(?:\.\d+[a-z]?){1,4}\b")
 _RE_CARD_ID = re.compile(r"\b[A-Z]{2,4}-\d{3}\b")
 _RE_LATIN = re.compile(r"[A-Za-z][A-Za-z0-9_\-]{1,}")
 RRF_K = 60
+CANDIDATE = 30
+# rules 表参与召回/展示的列（fetch_rows / get_card_rules / lookup_rule 统一）
+_RULE_COLS = ("rule_id, topic, proposed_canonical_rule, official_interpretation,"
+              " exception, example, status")
 
 
 def resolve_model(default=MODEL_NAME):
@@ -113,13 +124,93 @@ def fuse(vec, kw, top_k):
 
 
 def fetch_rows(db, rule_ids):
-    cols = ("rule_id, topic, proposed_canonical_rule, official_interpretation,"
-            " exception, example, status")
     mark = ",".join("?" for _ in rule_ids)
-    rows = db.execute("SELECT %s FROM rules WHERE rule_id IN (%s)" % (cols, mark),
-                      rule_ids).fetchall()
+    rows = db.execute("SELECT %s FROM rules WHERE rule_id IN (%s)"
+                      % (_RULE_COLS, mark), rule_ids).fetchall()
     by_id = {r[0]: r for r in rows}
     return [by_id[r] for r in rule_ids if r in by_id]
+
+
+# ---------- 检索工具层（agent loop / 服务端使用；CLI 管线不受影响） ----------
+
+
+class EvidencePool:
+    """证据池：以 rule_id 为键累积规则行（fetch_rows 返回的行 tuple），
+    去重且保持插入序。"""
+
+    def __init__(self):
+        self._rows = {}
+
+    def add(self, rows):
+        for r in rows or []:
+            self._rows.setdefault(r[0], r)
+
+    def rows(self):
+        return list(self._rows.values())
+
+    @property
+    def rule_ids(self):
+        return list(self._rows.keys())
+
+    def __len__(self):
+        return len(self._rows)
+
+
+def get_card_rules(db, card_id, top_k=6):
+    """按 card_id 经 rule_cards 关联取规则行（列与 fetch_rows 相同）。"""
+    return db.execute(
+        "SELECT r.%s FROM rules r JOIN rule_cards rc ON r.rule_id=rc.rule_id"
+        " WHERE rc.card_id=? ORDER BY r.rule_id LIMIT ?"
+        % _RULE_COLS.replace(", ", ", r."), (card_id, top_k)).fetchall()
+
+
+def _fuse_channels(channels, top_k):
+    """多通道 RRF 融合：channels 为 {rule_id: (rank, aux)} 列表。"""
+    score = {}
+    for ch in channels:
+        for rid, (rank, _aux) in (ch or {}).items():
+            score[rid] = score.get(rid, 0.0) + 1.0 / (RRF_K + rank)
+    return sorted(score, key=lambda r: -score[r])[:top_k]
+
+
+def search_rules(db, query, top_k, *, vec=None, kw_vocab, expansion_texts=()):
+    """混合召回的函数化：关键词 LIKE + 向量通道（依赖注入）→ RRF → fetch_rows。
+
+    vec：callable(text) -> {rule_id: (rank, sim)} 或 None；为 None 时跳过向量通道。
+    expansion_texts：已解析卡的规范文本片段（最多 2 张卡），拼进向量查询文本
+        （query + "\\n" + 文本）做扩展召回，与原查询结果 RRF 合并。
+    两个通道都不可用时返回空列表。
+    """
+    terms = extract_terms(query, kw_vocab)
+    channels = []
+    if vec is not None:
+        main_vec = vec(query)
+        if main_vec:
+            channels.append(main_vec)
+        for text in list(expansion_texts)[:2]:
+            exp_vec = vec(query + "\n" + text)
+            if exp_vec:
+                channels.append(exp_vec)
+    kw = keyword_recall(db, terms, CANDIDATE)
+    if kw:
+        channels.append(kw)
+    if not channels:
+        return []
+    return fetch_rows(db, _fuse_channels(channels, top_k))
+
+
+def lookup_rule(db, ref):
+    """精确 rule_id（如 R-CR-716.1 / R-CARD-OGN-242）或裸规则号（如 716.1 →
+    rule_id LIKE '%716.1%'）检索；返回规则行列表（列与 fetch_rows 相同）。"""
+    ref = (ref or "").strip()
+    if not ref:
+        return []
+    if ref.upper().startswith("R-"):
+        return db.execute("SELECT %s FROM rules WHERE rule_id=?" % _RULE_COLS,
+                          (ref,)).fetchall()
+    return db.execute(
+        "SELECT %s FROM rules WHERE rule_id LIKE ? ORDER BY rule_id LIMIT 20"
+        % _RULE_COLS, ("%" + ref + "%",)).fetchall()
 
 
 def build_context(rows):
