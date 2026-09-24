@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
 """Riftbound 规则 RAG HTTP 服务（kami-man 契约）
 
-接口：
-    POST /api/query   请求 {"query": 非空字符串, "top_k": 可选整数(1-20, 默认 6)}
-        200 {"answer": str, "warnings": [str, ...],
-             "sources": [{"rule_id": str, "topic": str}, ...]}
-        400 {"error": str}  请求体非法（非 JSON / query 为空 / top_k 越界）
+接口（契约 v2，字段均为增量、legacy 消费方不受影响）：
+    POST /api/query   请求 {"query": 非空字符串, "top_k": 可选整数(1-20, 默认 6),
+                            "mode": 可选 "agent"(默认) | "oneshot",
+                            "trace": 可选布尔(默认 false)}
+        agent 模式    200 {"answer": str, "warnings": [...],
+                          "sources": [{"rule_id", "topic"}],
+                          "mode": "agent", "exhausted": bool,
+                          "resolved_cards": [...],
+                          "coverage": {"unresolved_mentions": [...],
+                                       "ambiguous_mentions": [...]},
+                          ("trace": [...]，仅请求 trace=true)}
+        oneshot 模式  200 {"answer": str, "warnings": [...],
+                          "sources": [...]}（legacy 形状，无 v2 字段）
+        400 {"error": str}  请求体非法（非 JSON / query 为空 / top_k 越界 / mode 非法 / trace 非布尔）
         500 {"error": str}  生成失败（未配置 LLM / LLM API 异常）
     GET  /healthz     200 {"ok": true}（不加载模型，仅探活）
     其余方法/路径     405 / 404，均返回 {"error": str}
@@ -22,6 +31,9 @@
     RAG_EMBED_MODEL              嵌入模型（默认 BAAI/bge-m3；本地 workspace/rag/bge-m3 优先）
     RAG_SERVER_EMBED_TIMEOUT     单次嵌入请求超时秒数（默认 300）
     RAG_SERVER_GENERATE_TIMEOUT  单次生成超时秒数（默认 180，需小于 bot 侧 240）
+    RAG_AGENT_MAX_STEPS          agent 模式最大步数（默认 4，钳制 1-8）
+    卡名解析相关（RAG_CARDS_DB_PATH / RAG_CARD_RESOLUTION_* / RAG_LLM_CARD_*）
+        见 scripts/rag/card_resolver.py
 
 运行：
     python scripts/rag/rag_server.py --host 127.0.0.1 --port 7862 [--preload]
@@ -40,6 +52,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
+import agent_loop  # noqa: E402  agent 模式循环（契约 v2）
 import rag_query  # noqa: E402  复用召回与生成逻辑
 
 DEFAULT_HOST = "127.0.0.1"
@@ -47,11 +60,8 @@ DEFAULT_PORT = 7862
 DEFAULT_TOP_K = 6
 MAX_TOP_K = 20
 CANDIDATE = 30
-
-EMPTY_RETRIEVAL_ANSWER = (
-    "未在规则库中检索到与该问题相关的条目，"
-    "请补充章节号（如 716.1）、卡号（如 OGN-131）或换一种问法后重试。"
-)
+DEFAULT_MODE = "agent"
+VALID_MODES = ("agent", "oneshot")
 
 
 class GenerationError(RuntimeError):
@@ -184,6 +194,7 @@ class RagService:
         self._vecs = None
         self._meta = None
         self._embedder = None
+        self._resolver = None
 
     def _get_db(self):
         if self._db is None:
@@ -251,14 +262,20 @@ class RagService:
         order, _ = rag_query.fuse(vec, kw, top_k)
         return rag_query.fetch_rows(db, order)
 
-    def answer(self, query, top_k):
-        """返回契约响应 dict；生成失败抛 GenerationError。"""
+    def answer(self, query, top_k, mode=DEFAULT_MODE, trace=False):
+        """按模式分发：oneshot 走 legacy 单次管线，agent 走工具循环。"""
+        if mode == "oneshot":
+            return self._answer_oneshot(query, top_k)
+        return self._answer_agent(query, top_k, trace)
+
+    def _answer_oneshot(self, query, top_k):
+        """legacy 单次检索+生成；生成失败抛 GenerationError。"""
         warnings = []
         rows = self.retrieve(query, top_k, warnings)
         if not rows:
             warnings.append("检索结果为空")
             return {
-                "answer": EMPTY_RETRIEVAL_ANSWER,
+                "answer": agent_loop.EMPTY_RETRIEVAL_ANSWER,
                 "warnings": warnings,
                 "sources": [],
             }
@@ -285,9 +302,79 @@ class RagService:
             ],
         }
 
+    def _check_generation_config(self):
+        model_name = os.environ.get("RAG_LLM_MODEL")
+        if not model_name:
+            raise GenerationError("未配置生成模型（RAG_LLM_MODEL）")
+        if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("RAG_API_KEY")):
+            raise GenerationError("未配置生成端 API Key（OPENAI_API_KEY）")
+        return model_name
+
+    def _answer_agent(self, query, top_k, trace_wanted):
+        """agent 模式：planner→工具循环 + 引用校验 + 确定性回退（契约 v2）。"""
+        model_name = self._check_generation_config()
+        timeout = float(os.environ.get("RAG_SERVER_GENERATE_TIMEOUT", "180"))
+        vec_warnings = []
+        runner = self._build_agent_runner(model_name, timeout, vec_warnings)
+        try:
+            result = runner.run(query, top_k)
+        except GenerationError:
+            raise
+        except Exception as exc:
+            raise GenerationError("生成失败: %s" % exc) from exc
+        response = {
+            "answer": result.answer,
+            "warnings": result.warnings + vec_warnings,
+            "sources": result.sources,
+            "mode": "agent",
+            "exhausted": result.exhausted,
+            "resolved_cards": result.resolved_cards,
+            "coverage": {
+                "unresolved_mentions": result.unresolved_mentions,
+                "ambiguous_mentions": result.ambiguous_mentions,
+            },
+        }
+        if trace_wanted:
+            response["trace"] = result.trace
+        return response
+
+    def _build_agent_runner(self, model_name, generate_timeout, warnings_sink):
+        """构造 agent 循环执行器（测试可覆盖为桩）。"""
+        seen = set()
+
+        def vec(text):
+            local = []
+            out = self._vector_recall(text, local)
+            for msg in local:
+                if msg not in seen:
+                    seen.add(msg)
+                    warnings_sink.append(msg)
+            return out
+
+        return agent_loop.AgentRunner(
+            db=self._get_db(),
+            resolver=self._get_resolver(),
+            kw_vocab=self._get_kw_vocab(),
+            vec=vec,
+            model_name=model_name,
+            generate_timeout=generate_timeout,
+        )
+
+    def _get_resolver(self):
+        """惰性构建卡名解析器（cards DB 缺失时降级为规则库卡名索引）。"""
+        if self._resolver is None:
+            import card_resolver
+            self._resolver = card_resolver.CardResolver()
+        return self._resolver
+
     def preload(self):
         self._get_kw_vocab()
         self._load_vectors()
+        try:
+            self._get_resolver()
+        except Exception as exc:
+            print("预热卡名解析器失败（首次请求时会重试）: %s" % exc,
+                  file=sys.stderr)
         try:
             self._get_embedder().embed_query("预热")
         except Exception as exc:
@@ -301,7 +388,7 @@ class RagService:
 
 
 def parse_request(payload):
-    """契约校验；非法输入抛 ValueError（映射为 HTTP 400）。"""
+    """契约 v2 校验；非法输入抛 ValueError（映射为 HTTP 400）。"""
     if not isinstance(payload, dict):
         raise ValueError("请求体必须是 JSON 对象")
     query = payload.get("query")
@@ -312,7 +399,13 @@ def parse_request(payload):
         raise ValueError("top_k 必须是整数")
     if not 1 <= top_k <= MAX_TOP_K:
         raise ValueError("top_k 必须在 1-%d 之间" % MAX_TOP_K)
-    return query.strip(), top_k
+    mode = payload.get("mode", DEFAULT_MODE)
+    if not isinstance(mode, str) or mode not in VALID_MODES:
+        raise ValueError("mode 必须是 agent 或 oneshot")
+    trace = payload.get("trace", False)
+    if not isinstance(trace, bool):
+        raise ValueError("trace 必须是布尔值")
+    return query.strip(), top_k, mode, trace
 
 
 async def _read_body(receive):
@@ -365,7 +458,8 @@ def create_app(service):
         if method == "GET" and path == "/":
             await _send_json(send, 200, {
                 "service": "rift-rag",
-                "usage": "POST /api/query {\"query\": str, \"top_k\": int}",
+                "usage": ("POST /api/query {\"query\": str, \"top_k\": int, "
+                          "\"mode\": \"agent|oneshot\", \"trace\": bool}"),
             })
             return
         if path != "/api/query":
@@ -383,13 +477,13 @@ def create_app(service):
             return
 
         try:
-            query, top_k = parse_request(payload)
+            query, top_k, mode, trace = parse_request(payload)
         except ValueError as exc:
             await _send_json(send, 400, {"error": str(exc)})
             return
 
         try:
-            result = service.answer(query, top_k)
+            result = service.answer(query, top_k, mode=mode, trace=trace)
         except GenerationError as exc:
             await _send_json(send, 500, {"error": str(exc)})
             return
