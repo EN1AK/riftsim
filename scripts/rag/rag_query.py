@@ -236,7 +236,8 @@ def build_context(rows):
     return "\n\n".join(blocks)
 
 
-def generate(query, context_rows, model_name, timeout=180.0):
+def generate(query, context_rows, model_name, timeout=180.0,
+             thinking_disabled=False):
     from openai import OpenAI
 
     client = OpenAI(
@@ -253,11 +254,15 @@ def generate(query, context_rows, model_name, timeout=180.0):
     )
     user_prompt = "问题：%s\n\n参考条目：\n%s" % (query, context)
     t0 = datetime.datetime.now()
+    kwargs = {}
+    if thinking_disabled:
+        kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
     resp = client.chat.completions.create(
         model=model_name,
         messages=[{"role": "system", "content": sys_prompt},
                   {"role": "user", "content": user_prompt}],
         temperature=0.2,
+        **kwargs,
     )
     dt = (datetime.datetime.now() - t0).total_seconds()
     content = resp.choices[0].message.content

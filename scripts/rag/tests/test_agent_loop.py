@@ -478,3 +478,26 @@ def test_card_text_feeds_vector_expansion(rules_db, cards_db):
 
     assert result.exhausted is False
     assert any("每当我移动时，抽一张牌" in t for t in vec_texts)
+
+
+# ---------- thinking_disabled 传递（深思考场景） ----------
+
+def _run_fallback_with_flag(rules_db, thinking_disabled):
+    holder = {}
+
+    def spy(query, rows, model, timeout=180.0, **kwargs):
+        holder.update(kwargs)
+        return "generated", 0.1
+
+    planner = _ScriptedPlanner([_step("lookup_rule", ref="100.")])
+    runner = AgentRunner(
+        db=rules_db, kw_vocab=["连锁"], vec=lambda t: None, planner=planner,
+        generate_fn=spy, max_steps=1, cards_db_path=_MISSING_CARDS_DB,
+        thinking_disabled=thinking_disabled)
+    runner.run("连锁")
+    return holder
+
+
+def test_fallback_forwards_thinking_disabled(rules_db):
+    assert _run_fallback_with_flag(rules_db, True).get("thinking_disabled") is True
+    assert "thinking_disabled" not in _run_fallback_with_flag(rules_db, False)

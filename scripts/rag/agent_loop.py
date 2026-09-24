@@ -107,7 +107,7 @@ def agent_max_steps():
     return max(MIN_MAX_STEPS, min(MAX_MAX_STEPS, raw))
 
 
-def call_planner(messages, model_name, timeout):
+def call_planner(messages, model_name, timeout, thinking_disabled=False):
     """默认 planner：OpenAI 兼容端点（DeepSeek 等），返回原样文本。"""
     from openai import OpenAI
 
@@ -116,8 +116,11 @@ def call_planner(messages, model_name, timeout):
         base_url=os.environ.get("OPENAI_BASE_URL") or os.environ.get("RAG_BASE_URL"),
         timeout=timeout,
     )
+    kwargs = {}
+    if thinking_disabled:
+        kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
     resp = client.chat.completions.create(
-        model=model_name, messages=messages, temperature=0.1,
+        model=model_name, messages=messages, temperature=0.1, **kwargs,
     )
     return resp.choices[0].message.content
 
@@ -255,14 +258,17 @@ class AgentRunner:
         generate_timeout  单次 LLM 调用超时秒数
         max_steps    步数上限；None 时取 agent_max_steps()
         cards_db_path  cards_bilingual.db 路径（卡文注入用；None 时取 default_cards_db()）
+        thinking_disabled  本循环所有 LLM 调用附加 thinking=disabled（深思考模型用）
     """
 
     def __init__(self, *, db, resolver=None, kw_vocab=(), vec=None,
                  planner=None, generate_fn=None, model_name=None,
-                 generate_timeout=180.0, max_steps=None, cards_db_path=None):
+                 generate_timeout=180.0, max_steps=None, cards_db_path=None,
+                 thinking_disabled=False):
         self._db = db
         self._resolver = resolver
         self._cards_db_path = cards_db_path or default_cards_db()
+        self._thinking_disabled = thinking_disabled
         self._kw_vocab = kw_vocab
         self._vec = vec
         self._model_name = model_name
@@ -271,7 +277,8 @@ class AgentRunner:
             if not model_name:
                 raise ValueError("planner 为 None 时必须提供 model_name")
             def planner(messages):
-                return call_planner(messages, model_name, generate_timeout)
+                return call_planner(messages, model_name, generate_timeout,
+                                    thinking_disabled=thinking_disabled)
         self._planner = planner
         self._generate = generate_fn or rag_query.generate
         self._max_steps = agent_max_steps() if max_steps is None else max_steps
@@ -582,8 +589,11 @@ class AgentRunner:
                 trace=trace,
             )
         rows = pool.rows()
+        gen_kwargs = ({"thinking_disabled": True}
+                      if self._thinking_disabled else {})
         answer, _ = self._generate(query, rows, self._model_name,
-                                   timeout=self._generate_timeout)
+                                   timeout=self._generate_timeout,
+                                   **gen_kwargs)
         return AgentResult(
             answer=answer,
             warnings=warnings,

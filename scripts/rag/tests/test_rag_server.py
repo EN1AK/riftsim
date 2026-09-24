@@ -111,7 +111,8 @@ class _StubRunnerService(RagService):
         self._error = error
         self.runner_calls = []
 
-    def _build_agent_runner(self, model_name, generate_timeout, warnings_sink):
+    def _build_agent_runner(self, model_name, generate_timeout, warnings_sink,
+                            thinking_disabled=False):
         self.runner_calls.append(model_name)
         outer = self
 
@@ -351,3 +352,25 @@ def test_llm_helpers_skipped_without_model_config(monkeypatch):
     resolver = _BareResolver()
     RagService._attach_llm_helpers(resolver)
     assert resolver.llm_extract is None
+
+
+# ---------- 深度思考触发模型切换（_pick_model） ----------
+
+def test_pick_model_defaults_to_main_model(llm_env):
+    monkeypatch_del = RagService.__new__(RagService)
+    model, flag = monkeypatch_del._pick_model("什么是迅捷")
+    assert model == "fixture-model" and flag is False
+
+
+def test_pick_model_deep_trigger(llm_env, monkeypatch):
+    monkeypatch.setenv("RAG_LLM_MODEL_DEEP", "deep-model-x")
+    svc = RagService.__new__(RagService)
+    model, flag = svc._pick_model("请深度思考：两者结算顺序")
+    assert model == "deep-model-x" and flag is True
+
+
+def test_pick_model_deep_falls_back_without_env(llm_env, monkeypatch):
+    monkeypatch.delenv("RAG_LLM_MODEL_DEEP", raising=False)
+    svc = RagService.__new__(RagService)
+    model, flag = svc._pick_model("深度思考一下这个问题")
+    assert model == "fixture-model" and flag is True

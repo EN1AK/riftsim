@@ -28,6 +28,8 @@
 
 环境变量（与 rag_query 一致 + 服务专属）：
     OPENAI_API_KEY / OPENAI_BASE_URL / RAG_LLM_MODEL   生成端（如 DeepSeek）
+    RAG_LLM_MODEL_DEEP           深度思考模型：问题含"深度思考"时使用，
+                                 并统一附加 thinking=disabled（用强模型、关扩展思考）
     RAG_EMBED_MODEL              嵌入模型（默认 BAAI/bge-m3；本地 workspace/rag/bge-m3 优先）
     RAG_SERVER_EMBED_TIMEOUT     单次嵌入请求超时秒数（默认 300）
     RAG_SERVER_GENERATE_TIMEOUT  单次生成超时秒数（默认 180，需小于 bot 侧 240）
@@ -326,6 +328,18 @@ class RagService:
             return self._answer_oneshot(query, top_k)
         return self._answer_agent(query, top_k, trace)
 
+    def _pick_model(self, query):
+        """按问题选择模型并返回 (model_name, thinking_disabled)。
+
+        问题含"深度思考"时改用 RAG_LLM_MODEL_DEEP（且附加 thinking=disabled，
+        用更强的模型但关掉扩展思考）；否则用默认 RAG_LLM_MODEL。
+        """
+        model_name = self._check_generation_config()
+        deep = "深度思考" in (query or "")
+        if deep:
+            model_name = os.environ.get("RAG_LLM_MODEL_DEEP") or model_name
+        return model_name, deep
+
     def _answer_oneshot(self, query, top_k):
         """legacy 单次检索+生成；生成失败抛 GenerationError。"""
         warnings = []
@@ -338,15 +352,12 @@ class RagService:
                 "sources": [],
             }
 
-        model_name = os.environ.get("RAG_LLM_MODEL")
-        if not model_name:
-            raise GenerationError("未配置生成模型（RAG_LLM_MODEL）")
-        if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("RAG_API_KEY")):
-            raise GenerationError("未配置生成端 API Key（OPENAI_API_KEY）")
-
+        model_name, thinking_disabled = self._pick_model(query)
         timeout = float(os.environ.get("RAG_SERVER_GENERATE_TIMEOUT", "180"))
         try:
-            answer, _ = rag_query.generate(query, rows, model_name, timeout=timeout)
+            answer, _ = rag_query.generate(
+                query, rows, model_name, timeout=timeout,
+                thinking_disabled=thinking_disabled)
         except GenerationError:
             raise
         except Exception as exc:
@@ -370,10 +381,11 @@ class RagService:
 
     def _answer_agent(self, query, top_k, trace_wanted):
         """agent 模式：planner→工具循环 + 引用校验 + 确定性回退（契约 v2）。"""
-        model_name = self._check_generation_config()
+        model_name, thinking_disabled = self._pick_model(query)
         timeout = float(os.environ.get("RAG_SERVER_GENERATE_TIMEOUT", "180"))
         vec_warnings = []
-        runner = self._build_agent_runner(model_name, timeout, vec_warnings)
+        runner = self._build_agent_runner(model_name, timeout, vec_warnings,
+                                          thinking_disabled=thinking_disabled)
         try:
             result = runner.run(query, top_k)
         except GenerationError:
@@ -396,7 +408,8 @@ class RagService:
             response["trace"] = result.trace
         return response
 
-    def _build_agent_runner(self, model_name, generate_timeout, warnings_sink):
+    def _build_agent_runner(self, model_name, generate_timeout, warnings_sink,
+                            thinking_disabled=False):
         """构造 agent 循环执行器（测试可覆盖为桩）。"""
         seen = set()
 
@@ -416,6 +429,7 @@ class RagService:
             vec=vec,
             model_name=model_name,
             generate_timeout=generate_timeout,
+            thinking_disabled=thinking_disabled,
         )
 
     def _get_resolver(self):
