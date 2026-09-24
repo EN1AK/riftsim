@@ -162,6 +162,10 @@ def build_system_prompt(resolution):
         "",
         "规则：只引用证据池中的 rule_id；禁止猜测卡号/规则号；"
         "证据足够时立即用 submit_answer 收尾，不要重复检索。",
+        "步数预算很小（通常 3-4 步），推荐节奏：resolve_cards 一次 → "
+        "search_rules（一次查询覆盖全部已识别卡片与关键概念）→ submit_answer；"
+        "get_card_rules 返回 0 条时下一步立即改用 search_rules，"
+        "不要逐卡重复 get_card_rules。",
     ]
     resolved = resolution.get("resolved") or []
     ambiguous = resolution.get("ambiguous") or []
@@ -238,12 +242,18 @@ class AgentRunner:
                 # planner LLM 失败：直接回退，不消耗语义上的"无效输出"计数
                 print("agent_loop: planner 调用失败，进入 fallback: %s" % exc,
                       file=sys.stderr)
+                trace.append({"step": step, "tool": None, "arguments": None,
+                              "ok": False,
+                              "summary": "planner 调用失败: %.200s" % exc})
                 break
             messages.append({"role": "assistant", "content": content})
 
             tool, args_or_reason = _parse_action(content)
             if tool is None:
                 consecutive_invalid += 1
+                trace.append({"step": step, "tool": None, "arguments": None,
+                              "ok": False,
+                              "summary": "动作无效: %s" % args_or_reason})
                 messages.append({"role": "user", "content": json.dumps(
                     {"ok": False, "error": "动作无效：%s" % args_or_reason,
                      "hint": "请只输出一个 JSON 动作对象"},
@@ -255,6 +265,9 @@ class AgentRunner:
             reason = _validate_args(tool, args)
             if reason is not None:
                 consecutive_invalid += 1
+                trace.append({"step": step, "tool": tool, "arguments": args,
+                              "ok": False,
+                              "summary": "参数畸形: %s" % reason})
                 messages.append({"role": "user", "content": json.dumps(
                     {"ok": False, "error": "参数畸形：%s" % reason},
                     ensure_ascii=False)})
@@ -265,6 +278,9 @@ class AgentRunner:
 
             sig = _signature(tool, args)
             if sig in seen:
+                trace.append({"step": step, "tool": tool, "arguments": args,
+                              "ok": False,
+                              "summary": "重复动作被拒绝：相同工具与参数已执行过"})
                 messages.append({"role": "user", "content": json.dumps(
                     {"ok": False, "error": "重复动作已拒绝：相同工具与参数已执行过"},
                     ensure_ascii=False)})
@@ -308,7 +324,8 @@ class AgentRunner:
             messages.append({"role": "user", "content": json.dumps(
                 observation, ensure_ascii=False)})
 
-        return self._fallback(query, pool, resolution, warnings, trace)
+        return self._fallback(query, pool, resolution, warnings, trace,
+                              expansion_cache, top_k)
 
     # ---------- 工具执行 ----------
 
@@ -453,7 +470,22 @@ class AgentRunner:
 
     # ---------- 确定性回退 ----------
 
-    def _fallback(self, query, pool, resolution, warnings, trace):
+    def _fallback(self, query, pool, resolution, warnings, trace,
+                  expansion_cache, top_k):
+        if len(pool) == 0:
+            # 确定性兜底检索：planner 预算可能浪费在无命中的卡查上
+            # （如 get_card_rules 0 条），判空前保证做过一次混合检索，
+            # 最坏退化为 oneshot 质量而不是空答。
+            try:
+                _rows, observation = self._execute(
+                    "search_rules", {"query": query}, pool, resolution,
+                    expansion_cache, default_top_k=top_k)
+            except Exception as exc:  # 兜底检索也不外抛
+                observation = {"ok": False, "summary": "fallback search error: %s" % exc}
+            trace.append({"step": "fallback", "tool": "search_rules",
+                          "arguments": {"query": query},
+                          "ok": observation.get("ok", False),
+                          "summary": observation.get("summary", "")})
         if len(pool) == 0:
             warnings.append("检索结果为空")
             return AgentResult(

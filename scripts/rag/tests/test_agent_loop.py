@@ -196,8 +196,11 @@ def test_duplicate_action_rejected(rules_db):
     result = _runner(rules_db, planner).run("q")
 
     assert result.exhausted is False
-    # 重复动作被拒：不进 trace、不再执行（证据池未新增行）
-    assert [t["tool"] for t in result.trace] == ["lookup_rule", "submit_answer"]
+    # 重复动作被拒：记录进 trace（ok=False）且不再执行，随后照常收尾
+    assert [t["tool"] for t in result.trace] == [
+        "lookup_rule", "lookup_rule", "submit_answer"]
+    assert result.trace[1]["ok"] is False
+    assert "重复" in result.trace[1]["summary"]
     obs = json.loads(planner.calls[2][-1]["content"])
     assert obs["ok"] is False and "重复动作" in obs["error"]
 
@@ -212,6 +215,39 @@ def test_two_consecutive_invalid_outputs_stop_loop(rules_db):
     assert len(planner.calls) == 2  # 两个连续无效即停止，第三个输出未消费
     assert any("动作无效" in m["content"] for call in planner.calls
                for m in call if m["role"] == "user")
+    # 无效输出同样记录进 trace（此前为空，fallback 时无法反推原因）
+    assert [t["tool"] for t in result.trace[:2]] == [None, None]
+    assert all("动作无效" in t["summary"] for t in result.trace[:2])
+    assert result.trace[-1]["step"] == "fallback"
+
+
+# ---------- 1.x 空池 fallback 的确定性兜底检索 ----------
+
+def test_empty_pool_fallback_rescues_with_search(rules_db):
+    gen_calls = []
+    planner = _ScriptedPlanner([
+        _step("get_card_rules", card_id="NO-000"),  # 0 行，耗尽预算
+    ])
+    result = _runner(rules_db, planner, generate_calls=gen_calls,
+                     max_steps=1).run("连锁 怎么结算")
+
+    assert result.exhausted is True
+    assert gen_calls, "兜底命中后应走生成而不是固定空答"
+    assert "检索结果为空" not in result.warnings
+    assert result.sources
+    assert result.trace[-1]["step"] == "fallback"
+    assert result.trace[-1]["tool"] == "search_rules"
+    assert result.trace[-1]["ok"] is True
+
+
+def test_empty_pool_fallback_search_empty_keeps_fixed_answer(rules_db):
+    planner = _ScriptedPlanner([_step("lookup_rule", ref="999.")])
+    result = _runner(rules_db, planner, max_steps=1).run("偏门概念阿尾")
+
+    assert result.exhausted is True
+    assert result.answer == agent_loop.EMPTY_RETRIEVAL_ANSWER
+    assert "检索结果为空" in result.warnings
+    assert result.trace[-1]["step"] == "fallback"
 
 
 # ---------- 2.1 submit_answer 引用校验 ----------
