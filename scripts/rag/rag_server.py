@@ -43,6 +43,7 @@ import argparse
 import json
 import os
 import queue
+import re
 import sqlite3
 import subprocess
 import sys
@@ -66,6 +67,63 @@ VALID_MODES = ("agent", "oneshot")
 
 class GenerationError(RuntimeError):
     """生成阶段失败（未配置 LLM 或 LLM API 异常），映射为 HTTP 500。"""
+
+
+def _env_flag(name):
+    return os.environ.get(name, "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _make_llm_extract(chat):
+    """llm_extract(query) -> [str]：LLM 卡名提取（仍须过本地索引解析）。"""
+    def extract(query):
+        system = ("你是《符文战场》规则问答的卡名提取器。从用户问题中提取被提及的"
+                  "卡名，逐字摘取、不得改写或编造。只输出 JSON 字符串数组，"
+                  "没有则输出 []。")
+        try:
+            out = chat([
+                {"role": "system", "content": system},
+                {"role": "user", "content": query},
+            ]) or ""
+            start, end = out.find("["), out.rfind("]")
+            if start < 0 or end <= start:
+                return []
+            names = json.loads(out[start:end + 1])
+            if not isinstance(names, list):
+                return []
+            return [n.strip() for n in names
+                    if isinstance(n, str) and n.strip()]
+        except Exception as exc:
+            print("rag_server: LLM 卡名提取失败: %s" % exc, file=sys.stderr)
+            return []
+    return extract
+
+
+def _make_llm_select(chat, resolver):
+    """llm_select(mention, card_ids) -> id | None：ambiguous 候选仲裁，未知 id 拒绝。"""
+    def select(mention, card_ids):
+        lines = []
+        for cid in card_ids:
+            info = (getattr(resolver, "cards", None) or {}).get(cid) or {}
+            lines.append("- %s（%s / %s）" % (
+                cid, info.get("name_cn") or "?", info.get("name_en") or "?"))
+        system = ("你是《符文战场》卡名消歧器。给定卡名提及与候选卡号，选出最匹配"
+                  "的一个；无法确定就用 null。只输出 JSON："
+                  "{\"card_id\": \"<id>\"} 或 {\"card_id\": null}。")
+        try:
+            out = chat([
+                {"role": "system", "content": system},
+                {"role": "user", "content": "提及：%s\n候选：\n%s"
+                                          % (mention, "\n".join(lines))},
+            ]) or ""
+            start, end = out.find("{"), out.rfind("}")
+            if start < 0 or end <= start:
+                return None
+            chosen = json.loads(out[start:end + 1]).get("card_id")
+            return chosen if chosen in card_ids else None
+        except Exception as exc:
+            print("rag_server: LLM 消歧失败: %s" % exc, file=sys.stderr)
+            return None
+    return select
 
 
 class SubprocessEmbedder:
@@ -364,8 +422,27 @@ class RagService:
         """惰性构建卡名解析器（cards DB 缺失时降级为规则库卡名索引）。"""
         if self._resolver is None:
             import card_resolver
-            self._resolver = card_resolver.CardResolver()
+            resolver = card_resolver.CardResolver()
+            self._attach_llm_helpers(resolver)
+            self._resolver = resolver
         return self._resolver
+
+    @staticmethod
+    def _attach_llm_helpers(resolver):
+        """API Key 与生成模型可用时按环境开关注入 llm_extract / llm_select。"""
+        model_name = os.environ.get("RAG_LLM_MODEL")
+        if not model_name:
+            return
+        if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("RAG_API_KEY")):
+            return
+
+        def chat(messages):
+            return agent_loop.call_planner(messages, model_name, 30.0)
+
+        if _env_flag("RAG_LLM_CARD_EXTRACTION"):
+            resolver.llm_extract = _make_llm_extract(chat)
+        if _env_flag("RAG_LLM_CARD_SELECTION"):
+            resolver.llm_select = _make_llm_select(chat, resolver)
 
     def preload(self):
         self._get_kw_vocab()

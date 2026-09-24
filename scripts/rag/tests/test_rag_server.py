@@ -288,10 +288,66 @@ def test_http_500_on_generation_error():
 
 def test_http_error_semantics_unchanged():
     svc = _StubService(result={"answer": "a", "warnings": [], "sources": []})
-    status, data = _run_http(create_app(svc), {"query": "q"}, path="/nope")
+    status, data = _run_http(
+        create_app(svc), {"query": "q"}, path="/nope")
     assert status == 404 and "error" in data
     status, data = _run_http(create_app(svc), {"query": "q"}, method="GET")
     assert status == 405
     status, data = _run_http(
         create_app(svc), None, path="/healthz", method="GET")
     assert status == 200 and data == {"ok": True}
+
+
+# ---------- LLM 辅助解析开关（RAG_LLM_CARD_EXTRACTION / SELECTION） ----------
+
+class _BareResolver:
+    def __init__(self):
+        self.llm_extract = None
+        self.llm_select = None
+        self.cards = {"OGN-242": {"name_cn": "海兽钓钩",
+                                  "name_en": "Baited Hook"}}
+
+
+def test_llm_helpers_attached_only_with_flags(llm_env, monkeypatch):
+    calls = []
+
+    def fake_chat(messages, model_name, timeout):
+        calls.append(messages)
+        last = messages[-1]["content"]
+        if "候选" in last:
+            return '{"card_id": "OGN-242"}'
+        return '["海兽钓钩"]'
+
+    monkeypatch.setattr(rag_server.agent_loop, "call_planner", fake_chat)
+    resolver = _BareResolver()
+    monkeypatch.delenv("RAG_LLM_CARD_EXTRACTION", raising=False)
+    monkeypatch.delenv("RAG_LLM_CARD_SELECTION", raising=False)
+    RagService._attach_llm_helpers(resolver)
+    assert resolver.llm_extract is None and resolver.llm_select is None
+
+    monkeypatch.setenv("RAG_LLM_CARD_EXTRACTION", "1")
+    monkeypatch.setenv("RAG_LLM_CARD_SELECTION", "1")
+    RagService._attach_llm_helpers(resolver)
+    assert resolver.llm_extract("海兽钓钩和蔚怎么结算") == ["海兽钓钩"]
+    assert resolver.llm_select("海兽钓钩", ["OGN-242", "OGN-243"]) == "OGN-242"
+
+
+def test_llm_select_rejects_unknown_id(llm_env, monkeypatch):
+    def fake_chat(messages, model_name, timeout):
+        return '{"card_id": "ZZZ-999"}'
+
+    monkeypatch.setattr(rag_server.agent_loop, "call_planner", fake_chat)
+    monkeypatch.setenv("RAG_LLM_CARD_SELECTION", "1")
+    resolver = _BareResolver()
+    RagService._attach_llm_helpers(resolver)
+    assert resolver.llm_select("海兽钓钩", ["OGN-242"]) is None
+
+
+def test_llm_helpers_skipped_without_model_config(monkeypatch):
+    monkeypatch.delenv("RAG_LLM_MODEL", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("RAG_API_KEY", raising=False)
+    monkeypatch.setenv("RAG_LLM_CARD_EXTRACTION", "1")
+    resolver = _BareResolver()
+    RagService._attach_llm_helpers(resolver)
+    assert resolver.llm_extract is None

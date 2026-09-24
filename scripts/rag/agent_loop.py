@@ -4,7 +4,7 @@
 planner 每步输出一个 JSON 动作 {"tool": ..., "arguments": {...}, "rationale": ...}：
     resolve_cards  {"mentions": [str, ...]}          确定性解析卡名提及
     get_card_rules {"card_id": str, "top_k": int?}   按卡号取关联规则
-    search_rules   {"query": str, "top_k": int?}     混合召回（自动含已解析卡扩展）
+    search_rules   {"query": str, "top_k": int?}     混合召回规则库（自动含已解析卡扩展，R-CARD 条目并入证据池）
     lookup_rule    {"ref": str}                      按 rule_id / 裸规则号直查
     submit_answer  {"answer": str, "citations": [str]}  唯一终止动作，引用经证据池校验
 
@@ -18,6 +18,7 @@ planner 每步输出一个 JSON 动作 {"tool": ..., "arguments": {...}, "ration
 import json
 import os
 import re
+import sqlite3
 import sys
 from dataclasses import dataclass, field
 
@@ -38,6 +39,59 @@ EMPTY_RETRIEVAL_ANSWER = (
 
 # 答案中的引用标记：[R-CR-716.1] / [R-CARD-OGN-242] 等（不允许空白/嵌套括号）
 _RE_CITE = re.compile(r"\[([^\[\]\s]{1,64})\]")
+
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
+_RE_SET_NUMBER = re.compile(r"^([A-Za-z]{2,4})-(\d{3})")
+
+
+def default_cards_db():
+    """cards_bilingual.db 路径（全量卡文来源）；RAG_CARDS_DB_PATH 可覆盖。"""
+    return os.environ.get("RAG_CARDS_DB_PATH") or os.path.join(
+        _REPO_ROOT, "cards_bilingual.db")
+
+
+def card_text_rows(cards_db_path, card_ids, limit=2):
+    """从 cards_bilingual.db 按卡号取规范效果文本，合成证据行（7 元组形状）。
+
+    合成 rule_id ``R-CARD-<卡号>-TEXT``（与 rules.db 中 R-CARD 裁定条目不冲突），
+    卡文放入 proposed_canonical_rule 列（build_context 的"规范规则"位）。
+    cards DB 缺失/读取失败时返回 []。
+    """
+    out = []
+    if not cards_db_path or not os.path.exists(cards_db_path):
+        return out
+    try:
+        db = sqlite3.connect(cards_db_path)
+        try:
+            for card_id in (card_ids or [])[:limit]:
+                m = _RE_SET_NUMBER.match(card_id or "")
+                if not m:
+                    continue
+                row = db.execute(
+                    "SELECT set_id, number, name_en, name_cn, text_en, text_cn "
+                    "FROM cards WHERE UPPER(set_id) = ? AND number = ? "
+                    "ORDER BY CASE variant WHEN 'base' THEN 0 ELSE 1 END LIMIT 1",
+                    (m.group(1).upper(), m.group(2))).fetchone()
+                if not row:
+                    continue
+                set_id, number, name_en, name_cn, text_en, text_cn = row
+                parts = []
+                if text_cn:
+                    parts.append("中文效果：" + text_cn)
+                if text_en:
+                    parts.append("英文效果：" + text_en)
+                if not parts:
+                    continue
+                cid = "%s-%s" % ((set_id or m.group(1)).upper(), number)
+                topic = "card_text:%s (%s / %s)" % (cid, name_en or "", name_cn or "")
+                out.append(("R-CARD-%s-TEXT" % cid, topic, "\n".join(parts),
+                            "", "", "", "card_text"))
+        finally:
+            db.close()
+    except Exception as exc:
+        print("agent_loop: cards DB 卡文读取失败: %s" % exc, file=sys.stderr)
+    return out
 
 
 def _env_int(name, default):
@@ -153,7 +207,8 @@ def build_system_prompt(resolution):
         "",
         "可用工具：",
         '- resolve_cards {"mentions": [str]}：确定性解析卡名提及',
-        '- get_card_rules {"card_id": str, "top_k": int?}：取该卡关联规则',
+        '- get_card_rules {"card_id": str, "top_k": int?}：取该卡关联规则与规范卡文'
+        '（卡文引用 id 形如 R-CARD-<卡号>-TEXT，同为证据池条目）',
         '- search_rules {"query": str, "top_k": int?}：混合检索规则库',
         '- lookup_rule {"ref": str}：按 rule_id（R-CR-716.1 / R-CARD-OGN-242）'
         '或裸规则号（716.1）直查',
@@ -199,13 +254,15 @@ class AgentRunner:
         model_name   生成/planner 模型名（默认 planner 使用）
         generate_timeout  单次 LLM 调用超时秒数
         max_steps    步数上限；None 时取 agent_max_steps()
+        cards_db_path  cards_bilingual.db 路径（卡文注入用；None 时取 default_cards_db()）
     """
 
     def __init__(self, *, db, resolver=None, kw_vocab=(), vec=None,
                  planner=None, generate_fn=None, model_name=None,
-                 generate_timeout=180.0, max_steps=None):
+                 generate_timeout=180.0, max_steps=None, cards_db_path=None):
         self._db = db
         self._resolver = resolver
+        self._cards_db_path = cards_db_path or default_cards_db()
         self._kw_vocab = kw_vocab
         self._vec = vec
         self._model_name = model_name
@@ -336,8 +393,9 @@ class AgentRunner:
             if tool == "resolve_cards":
                 return self._tool_resolve_cards(args["mentions"], resolution)
             if tool == "get_card_rules":
-                rows = get_card_rules(self._db, args["card_id"].strip(),
-                                      args.get("top_k") or default_top_k)
+                return self._tool_get_card_rules(
+                    args["card_id"].strip(), args.get("top_k") or default_top_k,
+                    pool)
             elif tool == "search_rules":
                 rows = self._tool_search_rules(
                     args["query"].strip(), args.get("top_k") or default_top_k,
@@ -374,6 +432,25 @@ class AgentRunner:
         out["summary"] = "%d mentions resolved/ambiguous/unresolved" % len(mentions)
         return [], out
 
+    def _tool_get_card_rules(self, card_id, top_k, pool):
+        """get_card_rules 工具：rules.db 卡链规则 + cards db 规范卡文一并注入。"""
+        rows = get_card_rules(self._db, card_id, top_k)
+        text_rows = card_text_rows(self._cards_db_path, [card_id], limit=1)
+        all_rows = list(rows) + text_rows
+        if not all_rows:
+            return [], {"ok": False, "rows": 0,
+                        "summary": "该卡无卡链规则与卡文",
+                        "hint": "改用 search_rules 组合检索"}
+        pool.add(all_rows)
+        summary = "%d rules" % len(rows)
+        if text_rows:
+            summary += "（含卡文 %d 条）" % len(text_rows)
+        return all_rows, {
+            "ok": True, "rows": len(all_rows),
+            "preview": [{"rule_id": r[0], "topic": r[1] or ""}
+                        for r in all_rows[:5]],
+            "summary": summary}
+
     def _tool_search_rules(self, query, top_k, pool, resolution,
                            expansion_cache):
         expansion_texts = []
@@ -384,11 +461,17 @@ class AgentRunner:
                 if text:
                     expansion_texts.append(text)
                 continue
+            parts = []
             rc_rows = lookup_rule(self._db, "R-CARD-" + str(card_id))
-            pool.add(rc_rows)  # R-CARD 条目本身也是证据
-            text = ""
+            pool.add(rc_rows)  # R-CARD 裁定条目本身也是证据
             if rc_rows and rc_rows[0][2]:
-                text = rc_rows[0][2][:400]
+                parts.append(rc_rows[0][2][:400])
+            # 规范卡文（cards db 全量）一并注入证据池并用作检索扩展
+            text_rows = card_text_rows(self._cards_db_path, [card_id], limit=1)
+            pool.add(text_rows)
+            if text_rows and text_rows[0][2]:
+                parts.append(text_rows[0][2][:400])
+            text = "\n".join(parts)
             expansion_cache[card_id] = text
             if text:
                 expansion_texts.append(text)

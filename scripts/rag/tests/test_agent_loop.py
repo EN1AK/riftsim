@@ -6,6 +6,7 @@
 确定性 fallback（含空池固定答案、planner 抛异常）、以及卡名解析/扩展文本接线。
 """
 import json
+import os
 import sqlite3
 
 import pytest
@@ -113,15 +114,38 @@ def _submit(answer, citations=()):
     return _step("submit_answer", answer=answer, citations=list(citations))
 
 
+_MISSING_CARDS_DB = os.path.join(os.path.dirname(__file__),
+                                 "__missing_cards.db__")
+
+
 def _runner(rules_db, planner, generate_calls=None, resolver=None,
-            max_steps=None, vec=None):
+            max_steps=None, vec=None, cards_db_path=None):
     return AgentRunner(
         db=rules_db, resolver=resolver, kw_vocab=["连锁", "反制"],
         vec=vec or (lambda text: None),
         planner=planner,
         generate_fn=_generate_spy(generate_calls if generate_calls is not None
                                   else []),
-        max_steps=max_steps)
+        max_steps=max_steps,
+        cards_db_path=cards_db_path or _MISSING_CARDS_DB)
+
+
+@pytest.fixture()
+def cards_db(tmp_path):
+    """最小 cards_bilingual.db fixture：OGN-242 有规范卡文，NO-000 无卡。"""
+    path = str(tmp_path / "cards_bilingual.db")
+    db = sqlite3.connect(path)
+    db.execute("""CREATE TABLE cards (
+        card_key TEXT, set_id TEXT, number TEXT, variant TEXT,
+        name_en TEXT, name_cn TEXT, sub_title_cn TEXT,
+        text_en TEXT, text_cn TEXT)""")
+    db.execute(
+        "INSERT INTO cards VALUES (?,?,?,?,?,?,?,?,?)",
+        ("OGN-242", "OGN", "242", "base", "Baited Hook", "海兽钓钩", None,
+         "When I move, draw a card.", "每当我移动时，抽一张牌。"))
+    db.commit()
+    db.close()
+    return path
 
 
 # ---------- 1.1 多步执行顺序与观察回灌 ----------
@@ -379,3 +403,78 @@ def test_resolve_cards_tool_merges_outcome(rules_db):
     obs = json.loads(planner.calls[1][-1]["content"])
     assert obs["ok"] is True and obs["results"][0]["resolved"] == ["OGN-242"]
     assert obs["results"][1]["unresolved"] == ["不存在的卡"]
+
+
+# ---------- 卡文注入（cards_bilingual.db 规范文本 → 证据池 / 检索扩展） ----------
+
+def test_get_card_rules_injects_card_text(rules_db, cards_db):
+    planner = _ScriptedPlanner([
+        _step("get_card_rules", card_id="SFD-048"),  # 规则库无此卡，但卡库有卡文
+        _submit("卡文效果见 [R-CARD-SFD-048-TEXT]"),
+    ])
+    db = sqlite3.connect(cards_db)
+    db.execute(
+        "INSERT INTO cards VALUES (?,?,?,?,?,?,?,?,?)",
+        ("SFD-048", "SFD", "048", "base", "Stellacorn Herder", "天角牧者",
+         None, "When I move, draw.", "每当我移动时，抽一张牌。"))
+    db.commit()
+    db.close()
+
+    result = _runner(rules_db, planner,
+                     cards_db_path=cards_db).run("天角牧者的效果")
+
+    assert result.exhausted is False  # 合成 id 入池，引用校验通过
+    obs = json.loads(planner.calls[1][-1]["content"])  # 第 1 步的观察回灌
+    assert obs["ok"] is True and "卡文" in obs["summary"]
+    assert obs["rows"] == 1  # 仅合成卡文行
+    assert obs["preview"][0]["rule_id"] == "R-CARD-SFD-048-TEXT"
+    assert any(s["rule_id"] == "R-CARD-SFD-048-TEXT" for s in result.sources)
+
+
+def test_get_card_rules_without_any_rows_reports_not_found(rules_db):
+    planner = _ScriptedPlanner([
+        _step("get_card_rules", card_id="NO-000"),  # 无卡链规则且无卡文
+    ])
+    result = _runner(rules_db, planner, max_steps=1).run("连锁 怎么结算")
+
+    obs = trace = [t for t in result.trace if t["tool"] == "get_card_rules"][0]
+    assert obs["ok"] is False
+    assert "改用 search_rules" in obs["summary"] or result.exhausted is True
+
+
+def test_search_rules_injects_card_text_into_pool(rules_db, cards_db):
+    resolver = _FakeResolver(query_outcome={
+        "resolved": [_resolved_item("OGN-242", "海兽钓钩")],
+        "ambiguous": [], "unresolved": [],
+    })
+    planner = _ScriptedPlanner([
+        _step("search_rules", query="连锁"),
+        _submit("回答见 [R-CARD-OGN-242-TEXT]"),
+    ])
+    result = _runner(rules_db, planner, resolver=resolver,
+                     cards_db_path=cards_db).run("海兽钓钩问法")
+
+    assert result.exhausted is False  # 卡文行在 search 扩展时已入池
+    assert any(s["rule_id"] == "R-CARD-OGN-242-TEXT" for s in result.sources)
+
+
+def test_card_text_feeds_vector_expansion(rules_db, cards_db):
+    vec_texts = []
+
+    def vec(text):
+        vec_texts.append(text)
+        return None
+
+    resolver = _FakeResolver(query_outcome={
+        "resolved": [_resolved_item("OGN-242", "海兽钓钩")],
+        "ambiguous": [], "unresolved": [],
+    })
+    planner = _ScriptedPlanner([
+        _step("search_rules", query="连锁"),
+        _submit("回答 [R-CR-716.1]"),
+    ])
+    result = _runner(rules_db, planner, resolver=resolver, vec=vec,
+                     cards_db_path=cards_db).run("海兽钓钩问法")
+
+    assert result.exhausted is False
+    assert any("每当我移动时，抽一张牌" in t for t in vec_texts)
