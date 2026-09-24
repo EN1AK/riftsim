@@ -503,3 +503,78 @@ def _run_fallback_with_flag(rules_db, thinking_disabled):
 def test_fallback_forwards_thinking_disabled(rules_db):
     assert _run_fallback_with_flag(rules_db, True).get("thinking_disabled") is True
     assert "thinking_disabled" not in _run_fallback_with_flag(rules_db, False)
+
+
+# ---------- 规则书章节预分类（方案 C） ----------
+
+def test_system_prompt_contains_static_chapter_catalog(rules_db):
+    planner = _ScriptedPlanner([_submit("回答 [R-CR-100.1]")])
+    _runner(rules_db, planner).run("连锁")
+    system = planner.calls[0][0]["content"]
+    assert "规则书章节索引" in system
+    assert "382-388" in system  # 触发式能力大类常驻
+    assert "触发式能力" in system
+
+
+def test_chapter_hint_injected_into_prompt_and_trace(rules_db):
+    planner = _ScriptedPlanner([_submit("回答 [R-CR-100.1]")])
+    runner = AgentRunner(
+        db=rules_db, kw_vocab=["连锁"], vec=lambda t: None, planner=planner,
+        generate_fn=_generate_spy([]), max_steps=1,
+        cards_db_path=_MISSING_CARDS_DB, chapter_hint=["383", "325"])
+    result = runner.run("结算顺序")
+    system = planner.calls[0][0]["content"]
+    assert "可能相关章节" in system
+    assert "R-CR-383.x" in system and "R-CR-325.x" in system
+    step0 = result.trace[0]
+    assert step0["step"] == 0 and step0["tool"] == "classify_chapters"
+    assert step0["ok"] is True
+    assert "383" in step0["summary"]
+
+
+def test_no_chapter_hint_keeps_prompt_and_trace_unchanged(rules_db):
+    planner = _ScriptedPlanner([_submit("回答 [R-CR-100.1]")])
+    result = _runner(rules_db, planner).run("连锁")
+    assert "可能相关章节" not in planner.calls[0][0]["content"]
+    assert all(t["step"] != 0 for t in result.trace)
+
+
+def test_classify_chapters_parses_filters_and_caps(monkeypatch):
+    captured = {}
+
+    def fake_planner(messages, model_name, timeout, thinking_disabled=False):
+        captured["system"] = messages[0]["content"]
+        return ('{"chapters": ["383", "xyz", "383", "325", "808", "813", '
+                '"349"]}')
+
+    monkeypatch.setattr(agent_loop, "call_planner", fake_planner)
+    out = agent_loop.classify_chapters("绝念和移动谁的结算先", "m", 1.0)
+    assert out == ["383", "325", "808", "813"]  # 非法过滤、去重、封顶 4
+    assert "触发式能力" in captured["system"]  # 分类器提示含静态书目
+    assert "Deathknell" in captured["system"]  # 含关键词词条明细
+
+
+def test_classify_chapters_bad_json_returns_empty(monkeypatch):
+    monkeypatch.setattr(agent_loop, "call_planner",
+                        lambda messages, model_name, timeout, **kw: "不是 JSON")
+    assert agent_loop.classify_chapters("q", "m", 1.0) == []
+
+
+def test_classify_chapters_llm_failure_returns_empty(monkeypatch):
+    def boom(messages, model_name, timeout, thinking_disabled=False):
+        raise RuntimeError("network down")
+
+    monkeypatch.setattr(agent_loop, "call_planner", boom)
+    assert agent_loop.classify_chapters("q", "m", 1.0) == []
+
+
+def test_classify_chapters_requires_model_and_query():
+    assert agent_loop.classify_chapters("", "m", 1.0) == []
+    assert agent_loop.classify_chapters("q", None, 1.0) == []
+
+
+def test_rulebook_classify_enabled_env(monkeypatch):
+    monkeypatch.delenv("RAG_RULEBOOK_CLASSIFY", raising=False)
+    assert agent_loop.rulebook_classify_enabled() is True
+    monkeypatch.setenv("RAG_RULEBOOK_CLASSIFY", "0")
+    assert agent_loop.rulebook_classify_enabled() is False

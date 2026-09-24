@@ -24,6 +24,10 @@ from dataclasses import dataclass, field
 
 import rag_query
 from rag_query import EvidencePool, get_card_rules, lookup_rule, search_rules
+from rulebook_index import (
+    is_valid_chapter, render_categories, render_keywords,
+    describe_chapters,
+)
 
 TOOL_NAMES = ("resolve_cards", "get_card_rules", "search_rules",
               "lookup_rule", "submit_answer")
@@ -125,6 +129,69 @@ def call_planner(messages, model_name, timeout, thinking_disabled=False):
     return resp.choices[0].message.content
 
 
+# ---------- 规则书章节预分类（方案 C：静态书目常驻 + 前置分类挑重点章节） ----------
+
+CLASSIFY_MAX_CHAPTERS = 4
+
+
+def rulebook_classify_enabled():
+    """RAG_RULEBOOK_CLASSIFY：默认开；0/false/no 关（关=跳过前置分类，回到无引导）。"""
+    raw = (os.environ.get("RAG_RULEBOOK_CLASSIFY") or "").strip().lower()
+    return raw not in ("0", "false", "no", "off")
+
+
+def classify_chapters(query, model_name, timeout, thinking_disabled=False):
+    """前置 LLM 分类：按章节索引（静态书目 + 关键词词条）为问题挑重点章号。
+
+    返回去重、合法性过滤后封顶 CLASSIFY_MAX_CHAPTERS 的章号列表；
+    任何异常（无模型/调用失败/解析失败）静默返回 [] —— 分类失败=无引导=现状。
+    """
+    if not query or not model_name:
+        return []
+    system = (
+        "你是《符文战场》规则书的图书管理员。根据用户问题，从下面的章节索引中"
+        "选出最可能回答该问题的章节（最多 %d 个，按相关度排序），"
+        "只输出一个 JSON 对象，形如 {\"chapters\": [\"383\", \"325\"]}，"
+        "章号必须是索引中出现的三位数字，不要编造，不要输出其他文本。\n"
+        "章节索引：\n%s\n关键词词条章节（按词条名）：%s"
+    ) % (CLASSIFY_MAX_CHAPTERS, render_categories(), render_keywords())
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": "问题：%s" % query},
+    ]
+    try:
+        content = call_planner(messages, model_name, timeout,
+                               thinking_disabled=thinking_disabled)
+    except Exception as exc:
+        print("agent_loop: 章节分类调用失败，按无引导继续: %s" % exc,
+              file=sys.stderr)
+        return []
+    text = (content or "").strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"\s*```$", "", text)
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end <= start:
+        return []
+    try:
+        payload = json.loads(text[start:end + 1])
+    except ValueError:
+        return []
+    chapters = payload.get("chapters") if isinstance(payload, dict) else None
+    if not isinstance(chapters, list):
+        return []
+    seen, out = set(), []
+    for chap in chapters:
+        chap = str(chap).strip()
+        if not is_valid_chapter(chap) or chap in seen:
+            continue
+        seen.add(chap)
+        out.append(chap)
+        if len(out) >= CLASSIFY_MAX_CHAPTERS:
+            break
+    return out
+
+
 @dataclass
 class AgentResult:
     """agent 循环的结构化结果（服务端据其装配契约 v2 响应）。"""
@@ -202,8 +269,8 @@ def _signature(tool, args):
     return (tool, canon)
 
 
-def build_system_prompt(resolution):
-    """planner 系统提示：工具协议 + 预解析结果摘要 + 行为规则。"""
+def build_system_prompt(resolution, chapter_hint=None):
+    """planner 系统提示：工具协议 + 预解析结果摘要 + 行为规则 + 规则书章节索引。"""
     lines = [
         "你是《符文战场》规则问答的规划器。每步只输出一个 JSON 动作，不要输出其他文本：",
         '{"tool": "<工具名>", "arguments": {...}, "rationale": "<一句话>"}',
@@ -224,7 +291,14 @@ def build_system_prompt(resolution):
         "search_rules（一次查询覆盖全部已识别卡片与关键概念）→ submit_answer；"
         "get_card_rules 返回 0 条时下一步立即改用 search_rules，"
         "不要逐卡重复 get_card_rules。",
+        "",
+        "规则书章节索引（rule_id 形如 R-CR-<章号>.<节>，可用 lookup_rule 按章号前缀翻正文）：",
+        render_categories(),
     ]
+    if chapter_hint:
+        lines.append(
+            "本次提问可能相关章节（分类器推荐，仅供参考，仍可按需查其他章节）：%s"
+            % describe_chapters(chapter_hint))
     resolved = resolution.get("resolved") or []
     ambiguous = resolution.get("ambiguous") or []
     unresolved = resolution.get("unresolved") or []
@@ -259,16 +333,18 @@ class AgentRunner:
         max_steps    步数上限；None 时取 agent_max_steps()
         cards_db_path  cards_bilingual.db 路径（卡文注入用；None 时取 default_cards_db()）
         thinking_disabled  本循环所有 LLM 调用附加 thinking=disabled（深思考模型用）
+        chapter_hint   前置分类推荐章号列表（可选）；非空时注入系统提示并记 trace
     """
 
     def __init__(self, *, db, resolver=None, kw_vocab=(), vec=None,
                  planner=None, generate_fn=None, model_name=None,
                  generate_timeout=180.0, max_steps=None, cards_db_path=None,
-                 thinking_disabled=False):
+                 thinking_disabled=False, chapter_hint=None):
         self._db = db
         self._resolver = resolver
         self._cards_db_path = cards_db_path or default_cards_db()
         self._thinking_disabled = thinking_disabled
+        self._chapter_hint = list(chapter_hint or [])
         self._kw_vocab = kw_vocab
         self._vec = vec
         self._model_name = model_name
@@ -292,8 +368,15 @@ class AgentRunner:
         resolution = self._pre_resolve(query, warnings)
         expansion_cache = {}  # card_id -> 规范文本片段（search 扩展用）
 
+        if self._chapter_hint:
+            trace.append({"step": 0, "tool": "classify_chapters",
+                          "arguments": {"chapters": self._chapter_hint},
+                          "ok": True,
+                          "summary": "章节预分类推荐: %s"
+                                     % describe_chapters(self._chapter_hint)})
         messages = [
-            {"role": "system", "content": build_system_prompt(resolution)},
+            {"role": "system", "content": build_system_prompt(
+                resolution, chapter_hint=self._chapter_hint)},
             {"role": "user", "content": "问题：%s" % query},
         ]
         seen = set()

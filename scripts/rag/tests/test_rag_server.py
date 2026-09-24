@@ -110,10 +110,12 @@ class _StubRunnerService(RagService):
         self._scripted = result
         self._error = error
         self.runner_calls = []
+        self.hints = []
 
     def _build_agent_runner(self, model_name, generate_timeout, warnings_sink,
-                            thinking_disabled=False):
+                            thinking_disabled=False, chapter_hint=None):
         self.runner_calls.append(model_name)
+        self.hints.append(chapter_hint)
         outer = self
 
         class _Runner:
@@ -129,6 +131,7 @@ class _StubRunnerService(RagService):
 def llm_env(monkeypatch):
     monkeypatch.setenv("RAG_LLM_MODEL", "fixture-model")
     monkeypatch.setenv("OPENAI_API_KEY", "fixture-key")
+    monkeypatch.setenv("RAG_RULEBOOK_CLASSIFY", "0")  # 既有用例保持离线
 
 
 def test_agent_response_shape(llm_env):
@@ -169,6 +172,31 @@ def test_agent_runner_exception_wrapped(llm_env):
     svc = _StubRunnerService(error=RuntimeError("boom"))
     with pytest.raises(GenerationError, match="生成失败"):
         svc.answer("q", 6)
+
+
+# ---------- 章节预分类装配（方案 C） ----------
+
+def test_classify_hint_skipped_when_env_off(llm_env):
+    svc = _StubRunnerService(result=_scripted_result())
+    svc.answer("q", 6)
+    assert svc.hints == [[]]  # llm_env 关分类 → 无引导（现状）
+
+
+def test_classify_hint_wired_into_runner(llm_env, monkeypatch):
+    monkeypatch.setenv("RAG_RULEBOOK_CLASSIFY", "1")
+    seen = {}
+
+    def fake_classify(query, model_name, timeout, thinking_disabled=False):
+        seen.update({"query": query, "model": model_name, "timeout": timeout,
+                     "thinking_disabled": thinking_disabled})
+        return ["383", "325"]
+
+    monkeypatch.setattr(agent_loop, "classify_chapters", fake_classify)
+    svc = _StubRunnerService(result=_scripted_result())
+    svc.answer("深度思考：结算顺序", 6)
+    assert svc.hints == [["383", "325"]]
+    assert seen["query"] == "深度思考：结算顺序"
+    assert seen["thinking_disabled"] is True  # 随 _pick_model 的深度思考标记
 
 
 def test_oneshot_response_keeps_legacy_shape():

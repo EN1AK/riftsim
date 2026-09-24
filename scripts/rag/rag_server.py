@@ -384,8 +384,11 @@ class RagService:
         model_name, thinking_disabled = self._pick_model(query)
         timeout = float(os.environ.get("RAG_SERVER_GENERATE_TIMEOUT", "180"))
         vec_warnings = []
+        chapter_hint = self._classify_chapter_hint(query, model_name,
+                                                   thinking_disabled)
         runner = self._build_agent_runner(model_name, timeout, vec_warnings,
-                                          thinking_disabled=thinking_disabled)
+                                          thinking_disabled=thinking_disabled,
+                                          chapter_hint=chapter_hint)
         try:
             result = runner.run(query, top_k)
         except GenerationError:
@@ -408,8 +411,16 @@ class RagService:
             response["trace"] = result.trace
         return response
 
+    @staticmethod
+    def _classify_chapter_hint(query, model_name, thinking_disabled):
+        """前置章节分类（RAG_RULEBOOK_CLASSIFY 可关；失败静默 [] —— 无引导=现状）。"""
+        if not agent_loop.rulebook_classify_enabled():
+            return []
+        return agent_loop.classify_chapters(
+            query, model_name, 30.0, thinking_disabled=thinking_disabled)
+
     def _build_agent_runner(self, model_name, generate_timeout, warnings_sink,
-                            thinking_disabled=False):
+                            thinking_disabled=False, chapter_hint=None):
         """构造 agent 循环执行器（测试可覆盖为桩）。"""
         seen = set()
 
@@ -430,6 +441,7 @@ class RagService:
             model_name=model_name,
             generate_timeout=generate_timeout,
             thinking_disabled=thinking_disabled,
+            chapter_hint=chapter_hint,
         )
 
     def _get_resolver(self):
