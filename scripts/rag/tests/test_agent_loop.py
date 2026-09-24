@@ -426,6 +426,8 @@ def test_get_card_rules_injects_card_text(rules_db, cards_db):
     assert result.exhausted is False  # 合成 id 入池，引用校验通过
     obs = json.loads(planner.calls[1][-1]["content"])  # 第 1 步的观察回灌
     assert obs["ok"] is True and "卡文" in obs["summary"]
+    # 无关联规则行（即使注入卡文）仍要带方向标，防逐卡浪费步数
+    assert "search_rules" in obs["hint"]
     assert obs["rows"] == 1  # 仅合成卡文行
     assert obs["preview"][0]["rule_id"] == "R-CARD-SFD-048-TEXT"
     assert any(s["rule_id"] == "R-CARD-SFD-048-TEXT" for s in result.sources)

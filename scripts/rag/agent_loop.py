@@ -452,11 +452,17 @@ class AgentRunner:
         summary = "%d rules" % len(rows)
         if text_rows:
             summary += "（含卡文 %d 条）" % len(text_rows)
-        return all_rows, {
+        observation = {
             "ok": True, "rows": len(all_rows),
             "preview": [{"rule_id": r[0], "topic": r[1] or ""}
                         for r in all_rows[:5]],
             "summary": summary}
+        if not rows:
+            # 没有关联规则行（即使有卡文）：明确引导下一步组合检索，
+            # 防止 planner 误以为查到了规则、逐卡重复浪费步数
+            observation["hint"] = ("本卡无关联规则行（已注入卡文）；"
+                                   "下一步请用 search_rules 组合检索")
+        return all_rows, observation
 
     def _tool_search_rules(self, query, top_k, pool, resolution,
                            expansion_cache):
