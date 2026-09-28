@@ -1,0 +1,2336 @@
+# =============================================================================
+# 阶段 1 手写语义层（机制级）
+# 规则集版本：core-2026-07 zh canonical(source_009) + Vendetta Patch(source_019) + 勘误(<=source_010/020)
+# 用法：scripts/spec/build_rules_spec.py 按 covers 将机制的 semantics 继承给每条规则，
+#       与 DB 元数据（rule_id/topic/canonical/source）合并生成 spec/rules_spec.yaml。
+# covers 语法："R-CR-A..R-CR-B" 为主编号闭区间（含全部子条款），单条写 "R-CR-A..R-CR-A"，
+#              FRONT 写作 "R-CR-FRONT..R-CR-FRONT"。区间之间不得重叠，且须覆盖全部 R-CR。
+# tier：MVP=首个可完结对局必需；P1=卡牌效果扩展前必需；P2=随卡牌覆盖按需启用；OUT=明确排除。
+# status 由生成器按本层与 unresolved 清单推导（verified|ambiguous；R-CARD 另标 deferred）。
+# =============================================================================
+meta:
+  schema: riftsim.rule_semantics/v1
+  ruleset_version: core-2026-07-zh+patch-2026-07+errata-2026-07
+  language: zh
+  mvp_mode: "1v1 Duel (R-CR-485)"
+
+mechanisms:
+  # ================= 000 黄金/白银法则 =================
+  - mechanism_id: MECH-GOLDEN-RULES
+    title: 黄金法则（卡面优先）
+    tier: MVP
+    covers: ["R-CR-0..R-CR-2"]
+    semantics:
+      prerequisites: "卡牌印刷文字与规则文本对同一事项产生冲突。"
+      legality: null
+      transition: null
+      timing: "任意冲突发生时即刻适用，不经结算链。"
+      exceptions: []
+      dependencies: ["MECH-CANT-BEATS-CAN"]
+    test_hints: ["卡牌文本与核心规则冲突时以卡牌为准"]
+
+  - mechanism_id: MECH-SILVER-RULES
+    title: 白银法则（术语体系与自称）
+    tier: MVP
+    covers: ["R-CR-50..R-CR-53"]
+    semantics:
+      prerequisites: "解析卡面文字时适用。"
+      legality: null
+      transition: null
+      timing: "效果文本解析期间。"
+      exceptions: []
+      dependencies: []
+    notes:
+      - "卡面与规则为两套术语体系，卡面文字按核心规则口径解读（051）。"
+      - "效果中的「卡牌」是「主牌堆卡牌」简称（052）。"
+      - "卡面第一人称「我」指代该游戏物体自身（053）。"
+    test_hints: ["效果解析时第一人称绑定来源物体"]
+
+  - mechanism_id: MECH-CANT-BEATS-CAN
+    title: “无法”优先法则与尽可能执行
+    tier: MVP
+    covers: ["R-CR-54..R-CR-56"]
+    semantics:
+      prerequisites: "同一结算中出现「可以」与「无法」的冲突指示，或部分指示不可执行。"
+      legality: "「无法」效力高于「可以」，无例外通道。"
+      transition: "执行卡面文字时尽可能执行全部指示，忽略无法执行的指示（不因此回滚整个效果）（055）。"
+      timing: "效果结算执行期间。"
+      exceptions:
+        - "区域归属修正：某玩家的卡牌不会进入其他玩家对应的非场地区域，改进入其所属者的对应区域（056）。"
+      dependencies: []
+    test_hints: ["敌方效果试图将我方牌放入其牌堆/手牌时改为回我方对应区域"]
+
+  # ================= 100 游戏概念/组卡/Setup/区域 =================
+  - mechanism_id: MECH-GAME-CONCEPTS
+    title: 游戏概念（章标题）
+    tier: MVP
+    covers: ["R-CR-100..R-CR-100"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["结构性条目，无独立行为语义。"]
+
+  - mechanism_id: MECH-DECK-CONSTRUCTION
+    title: 卡组构筑
+    tier: MVP
+    covers: ["R-CR-101..R-CR-103"]
+    semantics:
+      prerequisites: "对局开始前校验；卡组=传奇 1 张＋主牌堆≥40 张（含 1 张选定英雄）＋符文牌堆 12 张＋若干战场（数量按模式）。"
+      legality:
+        - "符文特性由传奇特性决定；单特性卡牌只可加入特性相同的卡组；多特性卡牌要求其全部特性都与卡组特性相同（103.1.b.3/4）。"
+        - "选定英雄必须是英雄单位，且其英雄标签与传奇标签一致；游戏开始时置于英雄区域（103.2.a.1/2）。"
+        - "主牌堆同名卡≤3 张（选定英雄计入名额）（103.2.b/103.2.b.1）。"
+        - "与传奇同英雄标签的专属卡全卡组合计≤3 张，不计入同名上限（103.2.d）。"
+        - "同名战场≤1 个（103.4.c）；需符合赛制合法性（103.2.e）。"
+      transition: null
+      timing: "reset() 之前的配置/合法性阶段；对局内不再校验。"
+      exceptions:
+        - "效果可允许任意特性卡牌入组，视为符合特性（103.1.b.5）。"
+        - "[唯我]：同名限 1（825）；专属+唯我组合特例（825.3.b）。"
+      dependencies: ["MECH-LEGENDS", "MECH-PRIVACY"]
+    test_hints:
+      - "多特性卡在单特性卡组中非法"
+      - "选定英雄+2 张同名英雄合法，+3 张非法"
+      - "专属卡 4 张非法"
+
+  - mechanism_id: MECH-SETUP-OVERVIEW
+    title: 准备游戏（引导）
+    tier: MVP
+    covers: ["R-CR-104..R-CR-104"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SETUP-PROCESS"]
+    notes: ["引导性条目；具体步骤见 MECH-SETUP-PROCESS。"]
+
+  - mechanism_id: MECH-SPACES
+    title: 游戏空间
+    tier: MVP
+    covers: ["R-CR-105..R-CR-106"]
+    semantics:
+      prerequisites: "游戏区域是按卡牌行为与玩家关系划分的逻辑区域，可有物理或逻辑载体。"
+      legality: "每个游戏物体在任意时刻恰好位于一个区域内（区域模型排他性）。"
+      transition: "物体跨区域移动即区域成员关系变更；见 MECH-GAME-OBJECTS 的「新物体」规则。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-GAME-OBJECTS", "MECH-PRIVACY"]
+    test_hints: ["同一物体不重叠存在于两个区域"]
+
+  - mechanism_id: MECH-BOARD
+    title: 场地（棋盘与盘内区域）
+    tier: MVP
+    covers: ["R-CR-107..R-CR-107"]
+    semantics:
+      prerequisites: "1v1 模式下：每玩家 1 个基地、2 个战场区域；战场由双方战场牌各随机选 1 产生（485）。"
+      legality:
+        - "基地：受其玩家控制的常驻牌和符文位于其中（107.1.c；召出符文落点=控制者基地）；基地/战场内容为公开信息（107.1.d/107.2.c）。"
+        - "待命区：关联单战场的逻辑子区、容量 1（可增加/减少，107.3.b）、仅控制者可放入（107.3.c）、不是位置（107.3.e）、为公共区域但牌面朝下内容私密（107.3.f）；失控→下次清理移除该区全部牌（107.3.d）。"
+        - "传奇区：非位置；传奇为游戏物体；卡组传奇不可被移除/移动（107.4.d）；加入的非卡组传奇另按 107.4.d.1/d.2。"
+      transition: "常驻牌在盘内区域间的变化经由移动/打出/召回等行动完成；单位与装备等常驻牌置于基地或各战场区域；基地不属于战场。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SPACES", "MECH-UNITS", "MECH-BATTLEFIELDS", "MECH-LOCATIONS"]
+    test_hints: ["基地不可作为战场被争夺"]
+
+  - mechanism_id: MECH-NONBOARD-ZONES
+    title: 非场地区域
+    tier: MVP
+    covers: ["R-CR-108..R-CR-108"]
+    semantics:
+      prerequisites: "非场地区域清单：手牌、主牌堆、符文牌堆、废牌堆、放逐区、英雄区、结算链等（待命区/传奇区属盘内，见 107.3/107.4 与 MECH-BOARD）。"
+      legality:
+        - "结算链仅在有项目时存在（330）；链上卡牌与技能属公开信息。"
+      transition: "牌堆/手牌/废牌堆/放逐区成员由抽牌、弃置、摧毁、放逐等行动变更。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SPACES", "MECH-PRIVACY", "MECH-CHAINS", "MECH-KW-HIDDEN"]
+    test_hints: ["待命区已有牌时不可再待命第二张（见 MECH-BOARD/MECH-KW-HIDDEN）"]
+
+  - mechanism_id: MECH-BOARD-PUBLIC-INFO
+    title: 盘内信息公开性
+    tier: MVP
+    covers: ["R-CR-109..R-CR-109"]
+    semantics:
+      prerequisites: "游戏物体位于共同游戏区域（场地）。"
+      legality: "共同游戏区域中的所有游戏物体皆为公开信息。"
+      transition: null
+      timing: "observe() 依据；与 MECH-PRIVACY 共同决定可见性矩阵。"
+      exceptions: ["待命状态牌面朝下为例外私密信息（811.6.a）。"]
+      dependencies: ["MECH-PRIVACY"]
+    test_hints: ["场上单位战力/休眠状态对双方可见"]
+
+  - mechanism_id: MECH-SETUP-PROCESS
+    title: 准备流程
+    tier: MVP
+    covers: ["R-CR-110..R-CR-118"]
+    semantics:
+      prerequisites: "卡组已通过 MECH-DECK-CONSTRUCTION 校验。"
+      legality:
+        - "调度：每玩家最多选 2 张手牌搁置→补抽等量→搁置卡回收（117）；1v1 模式后手玩家首个召出阶段额外召 1 符文（485 联动）。"
+      transition:
+        - "顺序：传奇入传奇区(111)→选定英雄入英雄区(112)→战场搁置备用(113)→主/符文牌堆分别洗牌入对应区域(114)→随机定回合顺序(115，循环队列)→各抽 4 张(116)→按回合序依次调度(117)→起始玩家开启首回合(118)。"
+      timing: "对局开始、首个回合开始之前。"
+      exceptions: []
+      dependencies: ["MECH-DECK-CONSTRUCTION", "MECH-NONBOARD-ZONES", "MECH-ACT-DRAW", "MECH-ACT-RECYCLE", "MECH-MODE-DUEL"]
+    test_hints:
+      - "先/后手由 RNG 决定且可复现"
+      - "调度 0/1/2 张的补抽与回收"
+
+  - mechanism_id: MECH-GAME-OBJECTS
+    title: 游戏物体
+    tier: MVP
+    covers: ["R-CR-119..R-CR-124"]
+    semantics:
+      prerequisites: "游戏物体=能产生效果或作为行动前提的实体/逻辑体；枚举含卡牌、符文、传奇、战场、指示物、技能、结算链项目等。"
+      legality: "物体跨区域（至非场地区域或反向）后成为一个新物体，此前作用于它的效果通常不再适用（124，例外按其条款）。"
+      transition: "区域迁移→新物体身份；同区域内移动保持身份。"
+      timing: "任何区域迁移完成时。"
+      exceptions: ["124 子条款列明的身份保持例外。"]
+      dependencies: ["MECH-SPACES"]
+    test_hints: ["单位从战场进废牌堆后，其增益/伤害/持续效果不再附着"]
+
+  # ================= 125-139 卡牌与卡面属性 =================
+  - mechanism_id: MECH-CARDS
+    title: 卡牌总述
+    tier: MVP
+    covers: ["R-CR-125..R-CR-126"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["定义性条目。"]
+
+  - mechanism_id: MECH-OWNERSHIP
+    title: 所属权
+    tier: MVP
+    covers: ["R-CR-127..R-CR-127"]
+    semantics:
+      prerequisites: "每张卡牌的所属者=构筑时将其带入对局的玩家。"
+      legality: "所属权在对局中不可变更（控制权可变，所属权不变）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-CONTROL", "MECH-CANT-BEATS-CAN"]
+    test_hints: ["对手获得我方单位控制权后其离场仍回我方废牌堆"]
+
+  - mechanism_id: MECH-PRIVACY
+    title: 隐私（信息可见性三级）
+    tier: MVP
+    covers: ["R-CR-128..R-CR-128"]
+    semantics:
+      prerequisites: "区域与物体按规则分为公开/私密/隐秘。"
+      legality:
+        - "公开：所有玩家可见（场地、废牌堆、放逐区内容、结算链上的卡牌与技能等；链上项目公开见 108 子条款锚点）。"
+        - "私密：仅其持有者可查看（自己手牌、自己待命牌）。"
+        - "隐秘：任何玩家不可知（牌堆顺序、对手手牌内容）。"
+      transition: "物体进入不同隐私级区域时可见性随之变化；展示动作可临时公开。"
+      timing: "observe()/legal_actions/公开 trace 的统一过滤依据。"
+      exceptions: ["待命牌的[反应]属性不属于公开信息（811.6.a）。"]
+      dependencies: ["MECH-SPACES", "MECH-BOARD-PUBLIC-INFO"]
+    test_hints: ["对手手牌数量可见、内容不可见；牌库顶不可见"]
+
+  - mechanism_id: MECH-CARD-FACES
+    title: 卡背与卡面
+    tier: MVP
+    covers: ["R-CR-129..R-CR-130"]
+    semantics:
+      prerequisites: "卡牌双面：卡背统一；卡面载全部游戏属性。"
+      legality: "牌面朝下时对手仅可见卡背（待命/牌堆）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PRIVACY"]
+    test_hints: ["待命牌对对手呈现为卡背"]
+
+  - mechanism_id: MECH-COST-ATTRIBUTE
+    title: 卡面费用属性
+    tier: MVP
+    covers: ["R-CR-131..R-CR-131"]
+    semantics:
+      prerequisites: "卡牌印刷费用=法力数值＋符能需求（特性符号集合）。"
+      legality: "判定卡牌费用一律以印刷（或被复制的）费用为准（206 联动）。"
+      transition: null
+      timing: "打出流程步骤 3 定总费的输入（356）。"
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP3-COST", "MECH-COSTS", "MECH-DOMAIN"]
+    test_hints: ["印有 [2][R][R] 的卡需 2 点任意法力+2 点炽烈符能"]
+
+  - mechanism_id: MECH-NAME
+    title: 名称
+    tier: MVP
+    covers: ["R-CR-132..R-CR-132"]
+    semantics:
+      prerequisites: "名称是卡牌身份属性，组卡上限与选定英雄判定的键。"
+      legality: "同角色不同名称视为不同卡（103.2.b.2）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-DECK-CONSTRUCTION"]
+    test_hints: ["「亚索-迷途怅惘」与「亚索-乘风归」各占同名名额"]
+
+  - mechanism_id: MECH-CATEGORY
+    title: 类别（超类型/类型/标签）
+    tier: MVP
+    covers: ["R-CR-133..R-CR-133"]
+    semantics:
+      prerequisites: "类别=超类型＋类型（单位/装备/法术/符文/传奇/战场）＋标签（英雄/[武装]/[专属]等）。"
+      legality: "类型决定该卡适用的行为规则（打出目的地、结算去向等）。"
+      transition: "效果可在效果层第 1 层改变特质（含类别）（477.1）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-GAME-OBJECTS", "MECH-LAYERS-ORDER"]
+    test_hints: ["[武装]标签使装备可用[装配]"]
+
+  - mechanism_id: MECH-DOMAIN
+    title: 特性（领域）
+    tier: MVP
+    covers: ["R-CR-134..R-CR-134"]
+    semantics:
+      prerequisites: "特性枚举：[R][G][B][O][P][Y] 六色；[A]表任意特性；[C]表该牌自身的特性。"
+      legality: "符能支付必须特性匹配；匹配规则按 [A]/[C] 语义展开。"
+      transition: null
+      timing: "费用判定与支付时（356/357）。"
+      exceptions: []
+      dependencies: ["MECH-RUNE-POOLS", "MECH-COST-ATTRIBUTE"]
+    test_hints: ["无特性卡的 [C] 符能费可用任意特性支付（805.1.a.2 同口径）"]
+
+  - mechanism_id: MECH-RULES-TEXT
+    title: 规则文本
+    tier: MVP
+    covers: ["R-CR-135..R-CR-135"]
+    semantics:
+      prerequisites: "规则文本=关键词、技能、符号的组合；符号含 [E]（休眠费用）、[M]（战力）、[>]（关键词-技能链接）等。"
+      legality: "执行顺序为文本自上而下（803）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-KEYWORDS-GENERAL", "MECH-ABILITIES-OVERVIEW"]
+    test_hints: ["同卡多技能按印刷顺序结算"]
+
+  - mechanism_id: MECH-EFFECT-TEXT
+    title: 效果文本
+    tier: MVP
+    covers: ["R-CR-136..R-CR-136"]
+    semantics:
+      prerequisites: "效果文本是贴附机制相关文本；与规则文本区分（724：未贴附时处于未激活）。"
+      legality: null
+      transition: "贴附完成→效果文本激活并入顶部卡牌（719.2 联动）。"
+      timing: "贴附/卸除行动完成时。"
+      exceptions: []
+      dependencies: ["MECH-ATTACHMENT", "MECH-INACTIVE"]
+    test_hints: ["未贴附装备的效果文本对游戏无影响"]
+
+  - mechanism_id: MECH-MIGHT-BONUS
+    title: 战力加成
+    tier: MVP
+    covers: ["R-CR-137..R-CR-137"]
+    semantics:
+      prerequisites: "装备卡面可印刷战力加成（+N[M]）。"
+      legality: null
+      transition: "贴附生效期间在效果层第 3 层加算于顶部卡战力（477.3.d）。"
+      timing: "效果层应用时。"
+      exceptions: []
+      dependencies: ["MECH-ATTACHMENT", "MECH-LAYERS-ORDER"]
+    test_hints: ["卸除后加成立即消失"]
+
+  - mechanism_id: MECH-FLAVOR-ILLUSTRATION
+    title: 趣味性文本与插画
+    tier: MVP
+    covers: ["R-CR-138..R-CR-139"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["无游戏语义；引擎不建模。"]
+
+  # ================= 140-159 单位/装备/法术 =================
+  - mechanism_id: MECH-UNITS
+    title: 单位
+    tier: MVP
+    covers: ["R-CR-140..R-CR-146"]
+    semantics:
+      prerequisites: "单位=主牌堆卡牌类型之一；自有属性含战力[M]、伤害标记、位置；[E]费用可用。"
+      legality:
+        - "打出时默认以休眠状态进场（359；[急速]等可替换为活跃）。"
+        - "单位主动技能仅可在其控制者回合的主阶段且开环时激活（145.2）。"
+        - "标准移动是全体单位的自有技能（144）。"
+      transition: "伤害以标记数值累积于单位；伤害≥战力即致命（143；清理 3b 摧毁）；战力可被效果改变。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-CATEGORY", "MECH-ACT-DEAL", "MECH-CLEANUPS", "MECH-MOVEMENT"]
+    test_hints:
+      - "伤害在回合结束清理 3c 移除"
+      - "战力被减至与累积伤害相等时下次清理被摧毁"
+
+  - mechanism_id: MECH-GEAR
+    title: 装备
+    tier: MVP
+    covers: ["R-CR-147..R-CR-152"]
+    semantics:
+      prerequisites: "装备=主牌堆卡牌类型之一；通常带战力加成与效果文本；可带[武装]标签（150）。"
+      legality:
+        - "打出时活跃状态进入其控制者基地（159/359 联动）。"
+        - "装备主动技能仅可在其控制者回合的主阶段且开环时激活（151.2）。"
+        - "[武装]装备可通过[装配](818)贴附于单位。"
+      transition: "贴附后成为附着堆成员、规则文本未激活而效果文本并入顶部卡（718/719）。"
+      timing: null
+      exceptions: ["待命机制可覆盖装备的目的地限制（811.1.d.1.a）。"]
+      dependencies: ["MECH-CATEGORY", "MECH-EFFECT-TEXT", "MECH-ATTACHMENT", "MECH-KW-EQUIP"]
+    test_hints: ["装备不能被打出到战场（除待命特例）"]
+
+  - mechanism_id: MECH-SPELLS
+    title: 法术
+    tier: MVP
+    covers: ["R-CR-153..R-CR-159"]
+    semantics:
+      prerequisites: "法术=主牌堆卡牌类型之一；受将其打出的玩家控制。"
+      legality:
+        - "默认仅可在自己回合、非法术对决的开环状态打出（155）；[迅捷]/[反应]提供扩展权限。"
+        - "法术从来不是常驻牌；结算后置于所属者废牌堆（157）。"
+      transition: "确认后留存结算链；结算时自上而下执行指示（158）；随后进废牌堆（流转等替换除外）。"
+      timing: "FEPR 结算步骤。"
+      exceptions: ["部分关键词是法术的自有属性而非可执行文本（159）。"]
+      dependencies: ["MECH-PLAY-STEP1-CHAIN", "MECH-FEPR-RESOLVE", "MECH-TURN-STATES"]
+    test_hints:
+      - "法术结算中目标失效的逐条处理（359.3.e 联动）"
+      - "法术不进基地/战场"
+
+  # ================= 160-206 符文/池/战场/传奇/Token/控制/胜负/位置/费用 =================
+  - mechanism_id: MECH-RUNES
+    title: 符文
+    tier: MVP
+    covers: ["R-CR-160..R-CR-164"]
+    semantics:
+      prerequisites: "符文=卡牌类型，置于符文牌堆/战场区域落成位置；产出支付费用所需资源。"
+      legality:
+        - "召出阶段每回合召 2 张符文（316 联动；485 后手首回合 3 张）；默认活跃进场（430）。"
+        - "基本符文技能：'[E]：[反应]—[获得][1]' 与 '回收此牌：[反应]—[获得][C]'（164.2）。"
+      transition: "休眠/回收符文触发资源获得（进符文池）。"
+      timing: "反应权限=闭环亦可激活（813）。"
+      exceptions: []
+      dependencies: ["MECH-RUNE-POOLS", "MECH-ACT-CHANNEL", "MECH-ACT-EXHAUST", "MECH-ACT-RECYCLE", "MECH-KW-REACTION"]
+    test_hints:
+      - "符文回收获 [C]（该符文自身特性）"
+      - "符文技能在对手回合闭环可激活"
+
+  - mechanism_id: MECH-RUNE-POOLS
+    title: 符文池
+    tier: MVP
+    covers: ["R-CR-165..R-CR-168"]
+    semantics:
+      prerequisites: "每玩家一个符文池，收集法力与符能；只有含「获得法力/符能」表述的技能才向其中添加（168）。"
+      legality: "池内资源仅可用于支付费用；不是实体区域。"
+      transition: "获得→加入；支付→扣除；清空事件→移除全部。"
+      timing: "每名玩家的主阶段开始时、每个回合结束时，所有玩家的符文池清空（167、316.3、317.2.d）。"
+      exceptions: []
+      dependencies: ["MECH-RUNES", "MECH-ACT-ADD", "MECH-ACT-PAY", "MECH-MAIN-PHASE"]
+    test_hints:
+      - "清空跨越回合玩家边界（双方池同时清空）"
+      - "对手回合获得的资源保留至下个清空时点"
+
+  - mechanism_id: MECH-BATTLEFIELDS
+    title: 战场
+    tier: MVP
+    covers: ["R-CR-169..R-CR-172"]
+    semantics:
+      prerequisites: "战场=游戏物体、非常驻牌；是位置，也是得分载体；数量按模式（1v1=2）。"
+      legality: "战场可被控制、可被争夺；同名战场组卡限 1。"
+      transition: "控制权经对决/战斗结算确立（190/466 联动）；争夺状态由移动/打出触发（344/450）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-CONTROL", "MECH-SCORING", "MECH-SHOWDOWNS", "MECH-MOVEMENT"]
+    test_hints: ["空战场被进入→直接控制不触发战斗"]
+
+  - mechanism_id: MECH-LEGENDS
+    title: 传奇
+    tier: MVP
+    covers: ["R-CR-173..R-CR-176"]
+    semantics:
+      prerequisites: "传奇=游戏物体、非常驻牌；置传奇区；可带特性与技能。"
+      legality: "每玩家场上传奇唯一（来自卡组单张）；传奇技能按自身类型权限激活。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-DECK-CONSTRUCTION", "MECH-ACTIVATED"]
+    test_hints: ["传奇技能可能带[反应]/[迅捷]权限关键词"]
+
+  - mechanism_id: MECH-MULTI-TYPES
+    title: 多种类型
+    tier: P1
+    covers: ["R-CR-177..R-CR-178"]
+    semantics:
+      prerequisites: "游戏物体可同时拥有多种类型。"
+      legality: "任一类型的规则均适用于该物体。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-CATEGORY"]
+    test_hints: ["多类型卡牌同时受各类别限制与权限"]
+
+  - mechanism_id: MECH-TOKENS
+    title: 指示物
+    tier: P1
+    covers: ["R-CR-179..R-CR-187"]
+    semantics:
+      prerequisites: "指示物=法术/技能在游戏中创建的物体；控制者=创建效果控制者（182），所属者同理（183）。"
+      legality:
+        - "指示物不是卡牌（185），不可入卡组。"
+        - "只能存在于场地或结算链（186）；进入任何其他区域即消亡（状态基动作处理，不占链）。"
+      transition: "创建效果决定其部分属性（187）；离场后不再存在（不可回收/回手）。"
+      timing: "创建即入场于指定位置（按其条件，184）。"
+      exceptions: []
+      dependencies: ["MECH-ACT-CREATE", "MECH-GAME-OBJECTS"]
+    test_hints: ["指示物被放逐/回手时直接消亡"]
+
+  - mechanism_id: MECH-CONTROL
+    title: 控制
+    tier: MVP
+    covers: ["R-CR-188..R-CR-192"]
+    semantics:
+      prerequisites: "控制=玩家对特定物体的影响权；战场与其他物体规则不同（190/191 分述）。"
+      legality:
+        - "战场：仅一名玩家可控制；控制经对决/战斗结算或进入空战场确立（190 子条款）。"
+        - "其他物体默认由其打出/创建者控制；控制权可变、所属权不变（191/127）。"
+      transition: "控制权变更即时生效；失控时该物按规则处理（清理 323.4）。"
+      timing: "确立控制时点触发征服检查（467 联动）。"
+      exceptions: []
+      dependencies: ["MECH-OWNERSHIP", "MECH-BATTLEFIELDS", "MECH-SCORING", "MECH-CLEANUPS"]
+    test_hints: ["争夺中的战场无人控制；争夺解除后唯一留场方确立控制"]
+
+  - mechanism_id: MECH-WINNING
+    title: 获胜
+    tier: MVP
+    covers: ["R-CR-193..R-CR-196"]
+    semantics:
+      prerequisites: "胜利分按模式（1v1=8）；获胜还需总分为全场最高。"
+      legality: "效果指示获胜、或成为仅剩玩家时立即获胜（195）；对局随即结束（196）。"
+      transition: "获胜→终局；records termination_reason。"
+      timing: "分数达成检查仅在清理 323.1 执行（472 联动）。"
+      exceptions: []
+      dependencies: ["MECH-SCORING", "MECH-CLEANUPS", "MECH-CONCEDE"]
+    test_hints: ["同分时无人获胜，继续对局"]
+
+  - mechanism_id: MECH-LOCATIONS
+    title: 位置
+    tier: MVP
+    covers: ["R-CR-197..R-CR-200"]
+    semantics:
+      prerequisites: "位置=可放置常驻牌与符文的物体/区域（基地、各战场；符文落点依模式）。"
+      legality: "位置嵌套：包含位置的物体也视为位于该位置（199）；位置是移动的起讫点（200）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-BOARD", "MECH-MOVEMENT"]
+    test_hints: ["「此处」指向物体当前所在位置"]
+
+  - mechanism_id: MECH-COSTS
+    title: 费用通则
+    tier: MVP
+    covers: ["R-CR-201..R-CR-206"]
+    semantics:
+      prerequisites: "费用=为获得关联效果而支付的资源/消耗或执行的行动（202/203）。"
+      legality:
+        - "形式：资源（法力/符能）、[E]休眠、回收、弃置、消耗计数标/经验、执行游戏行动等（204）。"
+        - "无关联效果的单纯支付不构成「费用」（205）。"
+      transition: "费用一经支付不可返还（打出失败撤销例外见 358.5）。"
+      timing: "打出流程步骤 4（357）或技能激活时。"
+      exceptions: ["判定卡牌费用以印刷/复制费用为准，即使已被效果改变（206）。"]
+      dependencies: ["MECH-PLAY-STEP4-PAY", "MECH-ACT-PAY", "MECH-RUNE-POOLS"]
+    test_hints: ["即使打出后续被撤销，被替换效果代付的部分仍视为已支付（357.2.a 联动）"]
+
+  # ================= 300 回合结构 =================
+  - mechanism_id: MECH-PLAYING-GAME
+    title: 游玩游戏（章标题）
+    tier: MVP
+    covers: ["R-CR-300..R-CR-300"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["结构性条目。"]
+
+  - mechanism_id: MECH-TURN
+    title: 回合
+    tier: MVP
+    covers: ["R-CR-301..R-CR-306"]
+    semantics:
+      prerequisites: "回合顺序由 Setup 确立的循环队列（115）。"
+      legality:
+        - "回合玩家=当前进行回合的玩家；自决行动通常仅回合玩家可执行（409）。"
+        - "阶段须按固定顺序进行，阶段内行动顺序由玩家自决（303）。"
+      transition: "回合玩家全部阶段结束→下一位玩家成为回合玩家（306）；链空且回合玩家不再自决行动时进入结束流程（305）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SETUP-PROCESS", "MECH-PHASES"]
+    test_hints: ["1v1 双方交替为回合玩家"]
+
+  - mechanism_id: MECH-TURN-STATES
+    title: 回合状态（四态）
+    tier: MVP
+    covers: ["R-CR-307..R-CR-310"]
+    semantics:
+      prerequisites: "两个独立维度：普通/法术对决 × 开环/闭环（308/309）。"
+      legality:
+        - "四态：普通开环、普通闭环、法术对决开环、法术对决闭环（310）；行动权限按状态判定（[迅捷]=法术对决期间，[反应]=闭环期间）。"
+        - "结算链非空→闭环（331）；存在进行中的法术对决/战斗→法术对决状态（343）。"
+      transition: "链创建/清空、对决开始/结束驱动状态迁移。"
+      timing: "legal_actions 的顶层前置判定。"
+      exceptions: []
+      dependencies: ["MECH-CHAINS", "MECH-SHOWDOWNS", "MECH-KW-ACTION", "MECH-KW-REACTION"]
+    test_hints: ["链清空后从闭环回到开环；对决结束回到普通状态"]
+
+  - mechanism_id: MECH-PRIORITY
+    title: 优先行动权
+    tier: MVP
+    covers: ["R-CR-311..R-CR-312"]
+    semantics:
+      prerequisites: "任意时刻至多一名玩家拥有优先行动权。"
+      legality: "仅持优先权者可执行需优先权的行动（自决行动/激活/打出）。"
+      transition: "行动或让过后按规则传递；具体移交随状态与 FEPR。"
+      timing: "legal_actions 的玩家归属判定。"
+      exceptions: []
+      dependencies: ["MECH-TURN-STATES", "MECH-TASKS-FEPR"]
+    test_hints: ["无优先权玩家的 legal_actions 为空（除免费反应类）"]
+
+  - mechanism_id: MECH-FOCUS
+    title: 焦点
+    tier: MVP
+    covers: ["R-CR-313..R-CR-313"]
+    semantics:
+      prerequisites: "任意时刻至多一名玩家拥有焦点；焦点主要在对决中表示当前可实质行动的一方。"
+      legality: "持焦点者可打出法术/激活技能/让过焦点（347）。"
+      transition: "对决开始：使战场进入争夺的玩家得焦点（345）；链上一个项目结算完且回到开环时焦点按回合序传递（346；由触发/技能开的链不传递，346.1）。"
+      timing: "对决期间的行动轮转依据。"
+      exceptions: []
+      dependencies: ["MECH-SHOWDOWNS", "MECH-PRIORITY"]
+    test_hints: ["346.1：触发引发的链结算后焦点不传递"]
+
+  - mechanism_id: MECH-PHASES
+    title: 回合阶段（总述）
+    tier: MVP
+    covers: ["R-CR-314..R-CR-314"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-START-OF-TURN", "MECH-MAIN-PHASE", "MECH-ENDING-PHASE"]
+    notes: ["阶段集合引导：回合开始(315)/主阶段(316)/回合结束(317)。"]
+
+  - mechanism_id: MECH-START-OF-TURN
+    title: 回合开始（唤醒/开始阶段/召出/抽牌）
+    tier: MVP
+    covers: ["R-CR-315..R-CR-315"]
+    semantics:
+      prerequisites: "成为回合玩家即进入回合开始。"
+      legality: "各子步骤按固定顺序，玩家不可跳过（除非效果跳过）。"
+      transition:
+        - "唤醒：其所有可活跃物体转为活跃。"
+        - "开始阶段：「开始时」触发入链并处理；随后得分步骤（据守：仍控制战场的控制者得 1 分，受 470/471 限制）。"
+        - "召出：从符文牌堆召出 2 张符文（默认活跃）；空堆则燃尽（431）。"
+        - "抽牌：抽 1 张；空牌堆则燃尽（431）。"
+      timing: "子步骤间按规则处理触发与清理。"
+      exceptions: ["485：后手玩家首个召出阶段额外召 1 符文。"]
+      dependencies: ["MECH-ACT-READY", "MECH-TRIGGERED", "MECH-SCORING", "MECH-ACT-CHANNEL", "MECH-ACT-DRAW", "MECH-ACT-BURNOUT"]
+    test_hints:
+      - "据守得分仅计仍控制的战场"
+      - "召出/抽牌空堆触发燃尽流程"
+
+  - mechanism_id: MECH-MAIN-PHASE
+    title: 主阶段
+    tier: MVP
+    covers: ["R-CR-316..R-CR-316"]
+    semantics:
+      prerequisites: "回合开始各子步骤完成后进入主阶段。"
+      legality: "主阶段中回合玩家可执行自决行动（打出/激活/移动等），次数不限，受资源与权限约束。"
+      transition: "进入时所有玩家符文池清空（167/316.3）→「主阶段开始时」触发入链处理→玩家自决行动窗口（含 HOT FEPR）。"
+      timing: "自决行动窗口的合法性以四态与优先权判定。"
+      exceptions: []
+      dependencies: ["MECH-RUNE-POOLS", "MECH-PRIORITY", "MECH-TASKS-FEPR"]
+    test_hints: ["主阶段进入即清空双方符文池"]
+
+  - mechanism_id: MECH-ENDING-PHASE
+    title: 回合结束阶段
+    tier: MVP
+    covers: ["R-CR-317..R-CR-317"]
+    semantics:
+      prerequisites: "回合玩家选择结束主阶段（或无可行动）。"
+      legality: null
+      transition:
+        - "「回合结束时」触发入链处理→特殊清理：3c 移除所有单位伤害、3d 回合内效果失效（含眩晕 423）、3e 清空符文池→此后若触发/任务产生则继续 FEPR 循环直至安静。"
+      timing: "之后移交下一位玩家（306）。"
+      exceptions: []
+      dependencies: ["MECH-CLEANUPS", "MECH-RUNE-POOLS", "MECH-ACT-STUN"]
+    test_hints:
+      - "回合内增益/眩晕在 3d 消失"
+      - "结束前新触发会延长结束阶段（FEPR 循环）"
+
+  # ================= 318-348 清理/链/FEPR/对决 =================
+  - mechanism_id: MECH-CLEANUPS
+    title: 清理
+    tier: MVP
+    covers: ["R-CR-318..R-CR-324"]
+    semantics:
+      prerequisites: "解锁条件（319.1-8 完整枚举）：①开环/闭环转换后；②阶段转换后；③待处理项目入链后；④项目变为已确认后；⑤链上项目被移除后；⑥任意物体进入或离开场地后；⑦任意物体状态改变后；⑧移动完成后。"
+      legality: "清理进行中不确认/结算链项目（320）；结算链项目结算期间不发生清理（321，相关清理变未决）。"
+      transition: "按序执行 14 项（规则号↔项号：323.1=1 胜利检查；323.2=2 确立攻防身份；323.3=3 未决场地状态；323.4=3a 绝念触发入链；323.5=3b 致命伤害摧毁；323.6=4 失控；323.7=5 召回错位物体含待命牌处理；323.8=6 争夺→对决待发生；323.9=7 战斗待发生；323.10=7a 取消战斗待发生；323.11=8 移除失效争夺；323.12=9 回合玩家选场开对决；323.13=10 选场开战斗；323.14=10a 对决转战斗对决）。期间新满足清理条件→本次清理完成后立即再清一次（322）。"
+      timing: "满足解锁条件且不在 320/321 抑制窗口时。"
+      exceptions: ["特殊清理（324）在回合结束/战斗结算等指定时点附加额外操作。"]
+      dependencies: ["MECH-WINNING", "MECH-ACT-KILL", "MECH-SHOWDOWNS", "MECH-COMBAT", "MECH-CONTROL"]
+    test_hints:
+      - "清理链路反应：3b 摧毁触发绝念→FEPR→再清理"
+      - "结算中产生的死亡在下一次清理统一处理"
+
+  - mechanism_id: MECH-CHAINS
+    title: 结算链
+    tier: MVP
+    covers: ["R-CR-325..R-CR-331"]
+    semantics:
+      prerequisites: "玩家打出卡牌或激活技能→创建结算链并放入首个待处理项目（328/329）。"
+      legality: "链存在期间回合为闭环（331）；行动窗口见 326。"
+      transition: "项目状态迁移：待处理→已确认→结算完成；链空即消失（330）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-TURN-STATES", "MECH-TASKS-FEPR"]
+    test_hints: ["链清空瞬间四态标志复位"]
+
+  - mechanism_id: MECH-TASKS-FEPR
+    title: 任务与 HOT FEPR 流程
+    tier: MVP
+    covers: ["R-CR-332..R-CR-336"]
+    semantics:
+      prerequisites: "任务=进行其他行动前必须执行的步骤/流程（333）。"
+      legality: "行动产生任务→参考 HOT FEPR：先处理未决任务，再按 确认→执行→让过→结算 循环（334）。"
+      transition: "无任务、无待处理项、无对决/战斗且回合玩家无行动→推进阶段（335）；无任务且有链上项目→进入 FEPR（336）。"
+      timing: "每次任务/链状态变化后重新评估。"
+      exceptions: []
+      dependencies: ["MECH-CHAINS", "MECH-PRIORITY", "MECH-FEPR-FINALIZE", "MECH-FEPR-EXECUTE", "MECH-FEPR-PASS", "MECH-FEPR-RESOLVE"]
+    test_hints: ["清理未决期间玩家行动被抑制"]
+
+  - mechanism_id: MECH-FEPR-FINALIZE
+    title: FEPR-确认
+    tier: MVP
+    covers: ["R-CR-337..R-CR-337"]
+    semantics:
+      prerequisites: "存在待处理结算链项目。"
+      legality: "按加入结算链的顺序确认（337.1.b）。"
+      transition: "确认=锁定选择并成为已确认项目；单位/装备牌及获得资源类技能确认后立即结算（337.2/400.2/429.2）。"
+      timing: "FEPR 循环第 1 步。"
+      exceptions: []
+      dependencies: ["MECH-TASKS-FEPR", "MECH-PLAY-STEP6-PROCEED"]
+    test_hints: ["多待处理项按加入先后逐个确认"]
+
+  - mechanism_id: MECH-FEPR-EXECUTE
+    title: FEPR-执行
+    tier: MVP
+    covers: ["R-CR-338..R-CR-338"]
+    semantics:
+      prerequisites: "确认完成（含其立即结算分支）后。"
+      legality: "执行阶段各玩家可按权限向链上加入反应（含[反应]与对决许可的[迅捷]行动）。"
+      transition: "新项目加入→回到确认（FEPR 循环）。"
+      timing: "FEPR 循环第 2 步。"
+      exceptions: []
+      dependencies: ["MECH-TASKS-FEPR", "MECH-KW-REACTION"]
+    test_hints: ["执行窗加入反应后须先确认该反应"]
+
+  - mechanism_id: MECH-FEPR-PASS
+    title: FEPR-让过
+    tier: MVP
+    covers: ["R-CR-339..R-CR-339"]
+    semantics:
+      prerequisites: "执行窗口中玩家无/不再行动。"
+      legality: "让过按回合序依次声明；全部连续让过即满足结算前置。"
+      transition: "全员连续让过→进入结算步骤。"
+      timing: "FEPR 循环第 3 步。"
+      exceptions: []
+      dependencies: ["MECH-TASKS-FEPR", "MECH-PRIORITY"]
+    test_hints: ["非回合玩家让过后回合玩家再次行动→重新计连续让过"]
+
+  - mechanism_id: MECH-FEPR-RESOLVE
+    title: FEPR-结算
+    tier: MVP
+    covers: ["R-CR-340..R-CR-340"]
+    semantics:
+      prerequisites: "全员连续让过。"
+      legality: "只结算最新（最后加入）的已确认项目（340）；结算后链上旧项目重新进入 FEPR 评估。"
+      transition: "项目按文本执行；法术结算后进废牌堆；生成的触发/任务按规则入链或置未决。"
+      timing: "FEPR 循环第 4 步；结算期间抑制清理（321）。"
+      exceptions: []
+      dependencies: ["MECH-TASKS-FEPR", "MECH-SPELLS", "MECH-CLEANUPS"]
+    test_hints: ["连锁反应：最新反应先结算（后进先出）"]
+
+  - mechanism_id: MECH-SHOWDOWNS
+    title: 法术对决
+    tier: MVP
+    covers: ["R-CR-341..R-CR-348"]
+    semantics:
+      prerequisites: "清理中战场控制权受争夺且回合为普通开环→开始对决（344；战斗外争夺产生非战斗对决）。"
+      legality:
+        - "对决期间仅持焦点者可行动：打出法术（[迅捷]权限）、激活技能、让过焦点（347）；全员连续让过→对决关闭（348）。"
+        - "非战斗对决结束：唯一留场玩家确立控制（未得分则征服）（348 子条款/466 联动）。"
+      transition: "战场进入争夺状态→对决开始；关闭时回到普通开环并处理控制权。"
+      timing: "焦点传递按 MECH-FOCUS。"
+      exceptions: ["由触发/获得技能引发的链不引起焦点传递（346.1）。"]
+      dependencies: ["MECH-FOCUS", "MECH-TURN-STATES", "MECH-BATTLEFIELDS", "MECH-KW-ACTION"]
+    test_hints:
+      - "移动进非控战场→争夺→对决"
+      - "对决关闭时双方皆在场→维持争夺不产生控制"
+
+  # ================= 349-406 打出流程与技能 =================
+  - mechanism_id: MECH-PLAYING-CARDS-OVERVIEW
+    title: 打出卡牌（总述）
+    tier: MVP
+    covers: ["R-CR-349..R-CR-353"]
+    semantics:
+      prerequisites: "打出=将卡牌经六步流程成为已确认结算链项目；打出中卡牌经历不同的状态（352：在手/链上待处理/已确认/结算完毕）。"
+      legality: "行动方须持有优先权/焦点及对应时机权限。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP1-CHAIN", "MECH-PLAY-STEP2-CHOICES", "MECH-PLAY-STEP3-COST", "MECH-PLAY-STEP4-PAY", "MECH-PLAY-STEP5-LEGALITY", "MECH-PLAY-STEP6-PROCEED"]
+    test_hints: []
+    notes: ["六步模板同时是 step() 合法动作校验的状态机。"]
+
+  - mechanism_id: MECH-PLAY-STEP1-CHAIN
+    title: 打出步骤1-入链
+    tier: MVP
+    covers: ["R-CR-354..R-CR-354"]
+    semantics:
+      prerequisites: "已声明打出并对卡牌有打出权限。"
+      legality: "卡牌从当前区域移入结算链；回合转为闭环。"
+      transition: "成为待处理项目；其中产生的任务优先于后续步骤。" 
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-CHAINS", "MECH-PLAYING-CARDS-OVERVIEW"]
+    test_hints: ["从待命/英雄区/废牌堆（流转）入链的起始区域记录用于撤销"]
+
+  - mechanism_id: MECH-PLAY-STEP2-CHOICES
+    title: 打出步骤2-做出相关选择
+    tier: MVP
+    covers: ["R-CR-355..R-CR-355"]
+    semantics:
+      prerequisites: "卡牌已在链上（待处理）。"
+      legality:
+        - "顺序：模式→目标→位置等；「打出我时」效果的选择在此进行。"
+        - "目标须合法且数量精确（355.6 及 355.10.a-f 例外清单）；分摊类效果须完整分配（355.14）。"
+        - "[伏击]/待命运项影响可选位置；灵便/百炼的选择按各自关键词。"
+      transition: "选择随确认锁定；回响等额外执行的选择在同一时点做出（820.2）。"
+      timing: null
+      exceptions: ["355.10.a-f：目标选取例外（含不可选、超量、备选等情形按其条款）。"]
+      dependencies: ["MECH-KW-DEFLECT", "MECH-KW-AMBUSH", "MECH-KW-HIDDEN", "MECH-UNTARGETABILITY"]
+    test_hints:
+      - "少选/多选目标=非法"
+      - "分摊不足额=非法选择"
+
+  - mechanism_id: MECH-PLAY-STEP3-COST
+    title: 打出步骤3-确定总费用
+    tier: MVP
+    covers: ["R-CR-356..R-CR-356"]
+    semantics:
+      prerequisites: "选择完成，进入费用计算。"
+      legality: "顺序：基础调整→额外费用（强制→可选，[回响]/[急速]在此选择）→增费→减费（部分优先、每项独立下限）→总调整；结果≥0（356.6）。"
+      transition: "产生总费用对象（法力+符能明细），供步骤 4 支付。"
+      timing: null
+      exceptions: ["[法盾]使指定己方牌为目标的对手法术/技能附加额外费用（809）。"]
+      dependencies: ["MECH-COST-ATTRIBUTE", "MECH-DOMAIN", "MECH-KW-REPEAT", "MECH-KW-ACCELERATE", "MECH-KW-FLOW"]
+    test_hints:
+      - "减费下限独立：两项减费各自的每项下限分别计算"
+      - "总费用下限 0"
+
+  - mechanism_id: MECH-PLAY-STEP4-PAY
+    title: 打出步骤4-支付费用
+    tier: MVP
+    covers: ["R-CR-357..R-CR-357"]
+    semantics:
+      prerequisites: "总费用已确定。"
+      legality:
+        - "支付期间可激活[反应]权限的获得资源类技能（357.1.a；基本符文两项技能适用）。"
+        - "符能须特性匹配；法力任意支付。"
+      transition: "扣除符文池资源/执行非资源费用（休眠、回收、弃置等）。"
+      timing: null
+      exceptions: ["被替换效果代付的部分仍视为已支付（357.2.a）。"]
+      dependencies: ["MECH-RUNE-POOLS", "MECH-COSTS", "MECH-ACT-PAY"]
+    test_hints: ["支付中激活符文技能→获得→完成支付（链不因此新开）"]
+
+  - mechanism_id: MECH-PLAY-STEP5-LEGALITY
+    title: 打出步骤5-检查合法性
+    tier: MVP
+    covers: ["R-CR-358..R-CR-358"]
+    semantics:
+      prerequisites: "支付完成。"
+      legality: "复核：目标仍合法、费用已付足、无非法状态、时机权限仍成立（[迅捷]/[反应]条件类 806.4.b/813.4.b 在此裁决）。"
+      transition: "失败→撤销打出的一切动作，卡牌回起始区域（358.5）；成功→进入步骤 6。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP2-CHOICES", "MECH-KW-ACTION", "MECH-KW-REACTION"]
+    test_hints: ["目标在连锁中被返回手牌→合法性失败→全撤销"]
+
+  - mechanism_id: MECH-PLAY-STEP6-PROCEED
+    title: 打出步骤6-继续游戏（确认与落位）
+    tier: MVP
+    covers: ["R-CR-359..R-CR-359"]
+    semantics:
+      prerequisites: "合法性检查通过。"
+      legality: null
+      transition:
+        - "常驻牌：确认即离场入场——单位休眠进场（[急速]等替换除外）、非单位与装备活跃进基地。"
+        - "法术：确认后留存链上；结算时自上而下执行指示并随后进废牌堆。"
+        - "法术结算目标失效细则 359.3.e：目标往返合法、跨区域往返非法、指定失效计数（359.3.e.9.a）等。"
+      timing: "确认时点在 FEPR-确认步骤完成。"
+      exceptions: []
+      dependencies: ["MECH-FEPR-FINALIZE", "MECH-KW-ACCELERATE", "MECH-SPELLS"]
+    test_hints:
+      - "两种失效模式：目标非法→该指示跳过（尽可能执行）；计数型失效→法术进废牌堆规则"
+      - "单位进场休眠且带召唤失调语义（由 144/446 联动约束行动）"
+
+  - mechanism_id: MECH-ABILITIES-OVERVIEW
+    title: 技能总览
+    tier: MVP
+    covers: ["R-CR-360..R-CR-362"]
+    semantics:
+      prerequisites: "技能=结构性规则与能力；类型：被动/替换/主动/触发/延迟/内嵌(反射)/关联。"
+      legality: "单卡可持有多种多类型技能。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-RULES-TEXT"]
+    test_hints: []
+
+  - mechanism_id: MECH-PASSIVE
+    title: 被动技能
+    tier: MVP
+    covers: ["R-CR-363..R-CR-366"]
+    semantics:
+      prerequisites: "影响常规游戏流程的条件/限制/声明；常驻牌上与场地外的生效面分述（365/366）。"
+      legality: "无激活概念；满足条件即持续生效（经效果层应用）。"
+      transition: "经 Layers 持续重评估（476）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-LAYERS"]
+    test_hints: ["离场后被动立即失效"]
+
+  - mechanism_id: MECH-REPLACEMENT
+    title: 替换效果
+    tier: MVP
+    covers: ["R-CR-367..R-CR-375"]
+    semantics:
+      prerequisites: "替换效果在事件发生前登记，干预该事件的标准流程。"
+      legality:
+        - "每个事件同一替换效果只生效一次（370.2）。"
+        - "同一事件多个替换：由受影响方控制者决定应用顺序（372）；同时多事件：逐个处理、同属一控制者的顺序由其定（373）。"
+        - "「每回合限一次」类按次数限制（371）。"
+      transition: "被替换事件按新指示执行，原事件视为未以其原方式发生；替换效果控制者=其来源控制者（374）。"
+      timing: "事件执行前点。"
+      exceptions: ["事件将受生成它的效果调整或引用被替换事件时按 375 处理。"]
+      dependencies: ["MECH-DELAYED", "MECH-CANT-BEATS-CAN"]
+    test_hints:
+      - "致命摧毁被替换为召回→绝念不入链（808.1.d.1）"
+      - "双重替换同一事件只取其一施序"
+
+  - mechanism_id: MECH-ACTIVATED
+    title: 主动技能
+    tier: MVP
+    covers: ["R-CR-376..R-CR-381"]
+    semantics:
+      prerequisites: "主动技能=带费用的可重复效果；格式「费用：效果」。"
+      legality:
+        - "仅控制者可激活（378）；默认仅其回合且开环（381）；单位/装备另限主阶段（145.2/151.2）；[反应]/[迅捷]扩展时机。"
+        - "多数须来源在场上（380 及其例外）。"
+      transition: "激活经打出技能五步（402-406）入链结算。"
+      timing: null
+      exceptions: ["费用/触发引发的新触发以待处理置于该技能之上（818.1.c.1/376）。"]
+      dependencies: ["MECH-ABILITY-PLAY-CHOICES", "MECH-PRIORITY", "MECH-TURN-STATES"]
+    test_hints: ["对手回合开环下有[迅捷]的主动技能可激活"]
+
+  - mechanism_id: MECH-TRIGGERED
+    title: 触发式技能
+    tier: MVP
+    covers: ["R-CR-382..R-CR-385"]
+    semantics:
+      prerequisites: "满足触发条件即以待处理项目入链（383）。"
+      legality:
+        - "顺序：同玩家多个触发由其自选顺序；跨玩家从回合玩家起按回合序（383.3.d.1）。"
+        - "具名五类：打出/指目标/征服/据守/进攻·防守触发（383.4.a-f）；攻守触发每场战斗各仅检一次。"
+      transition: "触发入链→FEPR；对常驻牌与场地外的生效面分述（384/385）。"
+      timing: "事件发生后、下一次清理/结算前入链。"
+      exceptions: []
+      dependencies: ["MECH-TASKS-FEPR", "MECH-REFLEXIVE"]
+    test_hints:
+      - "双方同事件触发：回合玩家先排入链"
+      - "进攻触发在第二次战斗中重新可用"
+
+  - mechanism_id: MECH-REFLEXIVE
+    title: 内嵌式触发
+    tier: MVP
+    covers: ["R-CR-386..R-CR-388"]
+    semantics:
+      prerequisites: "由另一效果的执行而生成的条件式后续效果。"
+      legality: "条件满足时创建一个或多个结算链项目（387）；使用结算链（388）。"
+      transition: null
+      timing: "母效果结算过程中判定并入链。"
+      exceptions: []
+      dependencies: ["MECH-TRIGGERED", "MECH-CHAINS"]
+    test_hints: ["“若如此做，则……”结构触发入链可被反应"]
+
+  - mechanism_id: MECH-DELAYED
+    title: 延迟技能
+    tier: MVP
+    covers: ["R-CR-389..R-CR-392"]
+    semantics:
+      prerequisites: "由其他技能/法术创建、指定时间窗口生效（390）。"
+      legality: "与来源物体脱离：来源离场不影响其存续（392）。"
+      transition: "到窗口时按其对应类型（触发/替换等）生效（391）。"
+      timing: "窗口由创建效果指定（如「本回合」）；关联区域持续替换（390.5.c）。"
+      exceptions: []
+      dependencies: ["MECH-REPLACEMENT", "MECH-TRIGGERED"]
+    test_hints: ["延迟替换在窗口外不再适用"]
+
+  - mechanism_id: MECH-LINKED
+    title: 关联技能
+    tier: MVP
+    covers: ["R-CR-393..R-CR-401"]
+    semantics:
+      prerequisites: "同一卡面或同一来源赋予的技能组互相引用（394/395）。"
+      legality: "引用同组技能所影响物体的组件，只可作用于同组技能影响的物体（397）。"
+      transition: "打出/激活技能遵循与打出卡牌相同的步骤并入链为待处理（398-400；1=激活或触发入链，401）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ABILITIES-OVERVIEW", "MECH-PLAYING-CARDS-OVERVIEW"]
+    test_hints: ["关联范围限定目标池"]
+
+  - mechanism_id: MECH-ABILITY-PLAY-CHOICES
+    title: 技能打出步骤2-选择
+    tier: MVP
+    covers: ["R-CR-402..R-CR-402"]
+    semantics:
+      prerequisites: "技能已入链（激活/触发，401）。"
+      legality: "与卡牌步骤2同构：模式/目标/变体（谐振等）按技能文本；目标合法性同 355 口径。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP2-CHOICES", "MECH-LINKED"]
+    test_hints: ["技能目标失效在结算时按其指示逐个处理"]
+
+  - mechanism_id: MECH-ABILITY-PLAY-COST
+    title: 技能打出步骤3-定费
+    tier: MVP
+    covers: ["R-CR-403..R-CR-403"]
+    semantics:
+      prerequisites: "选择完成。"
+      legality: "计算总费用含技能额外/替代费用；[回响]对技能同样适用（820）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP3-COST"]
+    test_hints: []
+
+  - mechanism_id: MECH-ABILITY-PLAY-PAY
+    title: 技能打出步骤4-支付
+    tier: MVP
+    covers: ["R-CR-404..R-CR-404"]
+    semantics:
+      prerequisites: "总费用已定。"
+      legality: "同卡牌步骤4口径；支付中可激活获得资源类[反应]技能。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP4-PAY"]
+    test_hints: []
+
+  - mechanism_id: MECH-ABILITY-PLAY-LEGALITY
+    title: 技能打出步骤5-合法性
+    tier: MVP
+    covers: ["R-CR-405..R-CR-405"]
+    semantics:
+      prerequisites: "支付完成。"
+      legality: "同 358 口径；条件性[迅捷]/[反应]权限在此最终裁决。"
+      transition: "失败→撤销激活并恢复原状。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP5-LEGALITY"]
+    test_hints: []
+
+  - mechanism_id: MECH-ABILITY-PLAY-PROCEED
+    title: 技能打出步骤6-继续
+    tier: MVP
+    covers: ["R-CR-406..R-CR-406"]
+    semantics:
+      prerequisites: "合法性通过。"
+      legality: "技能确认；获得资源类技能确认后立即结算（429.2/337.2 联动）。"
+      transition: "其余技能留存链上待 FEPR 结算。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-FEPR-FINALIZE", "MECH-ACT-ADD"]
+    test_hints: ["「[E]：[获得][1]」确认后立即得资源不经过反应窗口"]
+
+  # ================= 407-444 游戏行动（原子动作） =================
+  - mechanism_id: MECH-ACTIONS-OVERVIEW
+    title: 游戏行动总览
+    tier: MVP
+    covers: ["R-CR-407..R-CR-412"]
+    semantics:
+      prerequisites: "行动=玩家在游戏过程中执行的操作；除另有说明仅自己回合可执行（409）。"
+      legality: "分自决行动与限定行动（410）；责任划分与行动类型按 411/412。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PRIORITY"]
+    test_hints: ["限定行动（移动/贴附/回收等）可在权限窗口内不按主动技能限制"]
+
+  - mechanism_id: MECH-ACT-DRAW
+    title: 行动-抽牌
+    tier: MVP
+    covers: ["R-CR-413..R-CR-413"]
+    semantics:
+      prerequisites: "抽牌者有其主牌堆。"
+      legality: "从牌堆顶抽取入手牌；牌堆空→燃尽（431）。"
+      transition: "牌堆顶移入手牌区；多张抽牌逐张执行。"
+      timing: "抽牌子步骤或效果指示时。"
+      exceptions: ["洞察（436）造成的查看后回收不算抽牌。"]
+      dependencies: ["MECH-ACT-BURNOUT", "MECH-PRIVACY"]
+    test_hints: ["空堆抽牌→燃尽全流程"]
+
+  - mechanism_id: MECH-ACT-EXHAUST
+    title: 行动-休眠
+    tier: MVP
+    covers: ["R-CR-414..R-CR-414"]
+    semantics:
+      prerequisites: "目标物体处于活跃状态。"
+      legality: "休眠的物体不能作为[E]费用支付、不能 attack/移动（具名限制按其条款）。"
+      transition: "活跃→休眠；[E]费用即休眠来源物体。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ACT-READY", "MECH-COSTS"]
+    test_hints: ["休眠单位在唤醒步骤转活跃"]
+
+  - mechanism_id: MECH-ACT-READY
+    title: 行动-激活（就绪）
+    tier: MVP
+    covers: ["R-CR-415..R-CR-415"]
+    semantics:
+      prerequisites: "目标物体处于休眠状态。"
+      legality: null
+      transition: "休眠→活跃；唤醒步骤对回合玩家全部可活跃物体执行（315）。"
+      timing: "唤醒步骤或效果指示时。"
+      exceptions: []
+      dependencies: ["MECH-ACT-EXHAUST", "MECH-START-OF-TURN"]
+    test_hints: ["被跳过唤醒的物体保持休眠"]
+
+  - mechanism_id: MECH-ACT-RECYCLE
+    title: 行动-回收
+    tier: MVP
+    covers: ["R-CR-416..R-CR-416"]
+    semantics:
+      prerequisites: "目标在废牌堆或效果指定的区域；回收=将牌放到相应牌堆底部（416.1）。"
+      legality:
+        - "限定行动（416.2）；各归各：主牌堆卡回其所属者主牌堆底、符文回其所属者符文牌堆底，与指示谁执行无关（416.1.a-c）。"
+        - "费用性回收必须能足额完成，否则费用不可支付（416.3）；效果性回收则有多少收多少（416.4/416.6）。"
+        - "多张同回主牌堆以随机顺序置底（416.5，纳入 seed）；多张同回符文牌堆由拥有者排序置底（416.5.a）。"
+      transition: "目标牌→相应牌堆底；不视为抽牌。"
+      timing: null
+      exceptions: ["调度（117.3）中搁置卡亦按 416 回收至主牌堆底。"]
+      dependencies: ["MECH-RUNES", "MECH-ACT-BURNOUT", "MECH-SETUP-PROCESS"]
+    test_hints:
+      - "回收不洗牌；燃尽流程才有洗牌（431 联动）"
+      - "废牌堆不足时效果性回收照常部分执行（416.6）"
+
+  - mechanism_id: MECH-ACT-DEAL
+    title: 行动-造成伤害
+    tier: MVP
+    covers: ["R-CR-417..R-CR-417"]
+    semantics:
+      prerequisites: "指定来源对目标造成 N 点伤害。"
+      legality: "伤害>0 才构成造成伤害事件（挑战0伤/负伤视为0）；额外伤害并入同一事件（712-715）。"
+      transition: "单位：累积伤害数值；非单位目标按其类别规则处理。"
+      timing: "伤害在清理 3b 判定致命、3c（特殊清理/回合结束）移除。"
+      exceptions: ["抵挡（437）在战斗分配时延迟替换生效。"]
+      dependencies: ["MECH-UNITS", "MECH-CLEANUPS", "MECH-ACT-PREVENT", "MECH-BONUS-DAMAGE"]
+    test_hints: ["超额伤害毁灭由清理统一判定而非即时"]
+
+  - mechanism_id: MECH-ACT-HEAL
+    title: 行动-移除伤害
+    tier: MVP
+    covers: ["R-CR-418..R-CR-418"]
+    semantics:
+      prerequisites: "目标单位已有累积伤害。"
+      legality: "移除量不超过已有伤害。"
+      transition: "伤害数值减少指定量。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ACT-DEAL"]
+    test_hints: ["无伤单位被治疗=无效果（不适用恢复生命语义）"]
+
+  - mechanism_id: MECH-ACT-PLAY
+    title: 行动-打出（动词）
+    tier: MVP
+    covers: ["R-CR-419..R-CR-419"]
+    semantics:
+      prerequisites: "效果指示「打出某牌」时。"
+      legality: "遵循完整打出流程；效果改变的费用/权限按其指示。"
+      transition: null
+      timing: null
+      exceptions: ["仅实际经六步流程确认才视为打出过（[鼓舞]计数之类引用）。"]
+      dependencies: ["MECH-PLAYING-CARDS-OVERVIEW"]
+    test_hints: ["效果免费打出仍走六步（费用步骤按指示调整）"]
+
+  - mechanism_id: MECH-ACT-MOVE
+    title: 行动-移动（动词）
+    tier: MVP
+    covers: ["R-CR-420..R-CR-420"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: "详见 MECH-MOVEMENT 全套规则。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-MOVEMENT"]
+    test_hints: []
+
+  - mechanism_id: MECH-ACT-HIDE
+    title: 行动-待命（动词）
+    tier: P1
+    covers: ["R-CR-421..R-CR-421"]
+    semantics:
+      prerequisites: "卡牌拥有[待命]关键词（811）且位于手牌/英雄区。"
+      legality: "自决行动；仅自身回合开环；目标战场须为己方控制且无正面待命牌。"
+      transition: "支付[A]→牌面朝下置入该战场待命区；不视为打出、不开链。"
+      timing: "下回合起获得[反应]可被打出（811.6）。"
+      exceptions: []
+      dependencies: ["MECH-KW-HIDDEN", "MECH-NONBOARD-ZONES"]
+    test_hints: ["待命区已有牌→该战场不可再待命"]
+
+  - mechanism_id: MECH-ACT-DISCARD
+    title: 行动-弃置
+    tier: MVP
+    covers: ["R-CR-422..R-CR-422"]
+    semantics:
+      prerequisites: "弃置者手牌非空。"
+      legality: "从其手牌选择（或随机/指定，按效果文本）置于各自废牌堆。"
+      transition: "手牌→废牌堆。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PRIVACY", "MECH-OWNERSHIP"]
+    test_hints: ["费用弃置与效果弃置引用点不同"]
+
+  - mechanism_id: MECH-ACT-STUN
+    title: 行动-眩晕
+    tier: P1
+    covers: ["R-CR-423..R-CR-423"]
+    semantics:
+      prerequisites: "目标为单位。"
+      legality: "被眩晕单位失去位置关联的战斗资格/不能攻击防守与移动（按其条款）。"
+      transition: "附加眩晕状态；回合结束特殊清理 3d 失去（317）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ENDING-PHASE", "MECH-UNITS"]
+    test_hints: ["眩晕单位在回合末恢复"]
+
+  - mechanism_id: MECH-ACT-REVEAL
+    title: 行动-展示
+    tier: P1
+    covers: ["R-CR-424..R-CR-424"]
+    semantics:
+      prerequisites: "效果指示展示手牌/牌堆顶等私密信息。"
+      legality: "展示给指定范围（全体/某玩家）；展示后按指示处理（放回/回收/弃置）。"
+      transition: "可见性临时提升；牌不变更区域（除另有指示）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PRIVACY"]
+    test_hints: ["展示费用须实际展示才完成支付"]
+
+  - mechanism_id: MECH-ACT-COUNTER
+    title: 行动-无效化
+    tier: P1
+    covers: ["R-CR-425..R-CR-425"]
+    semantics:
+      prerequisites: "目标为链上已确认的项目（法术/技能）。"
+      legality: null
+      transition: "目标从链移除且不结算；法术进其所属者废牌堆。"
+      timing: "结算链结算前的反应窗口生效。"
+      exceptions: []
+      dependencies: ["MECH-CHAINS", "MECH-FEPR-RESOLVE"]
+    test_hints: ["无效化不触发被无效者的结算效果"]
+
+  - mechanism_id: MECH-ACT-BUFF
+    title: 行动-增益（动词）
+    tier: MVP
+    covers: ["R-CR-426..R-CR-426"]
+    semantics:
+      prerequisites: "目标为单位。"
+      legality: "每单位至多持有 1 个增益（703）；重复给予按 426 条款处理。"
+      transition: "放置增益计数标→+1[M]（效果层规则见 477.3）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-BUFFS", "MECH-COUNTERS"]
+    test_hints: ["已有增益的单位再次被增益按上限规则裁决"]
+
+  - mechanism_id: MECH-ACT-BANISH
+    title: 行动-放逐
+    tier: P1
+    covers: ["R-CR-427..R-CR-427"]
+    semantics:
+      prerequisites: "目标可被放逐。"
+      legality: null
+      transition: "目标移入其所属者放逐区（公开）。"
+      timing: null
+      exceptions: ["流转法术的延迟替换将离场去向改为放逐（829.1.b.1）。"]
+      dependencies: ["MECH-NONBOARD-ZONES", "MECH-KW-FLOW"]
+    test_hints: ["放逐≠摧毁：不触发绝念类摧毁触发"]
+
+  - mechanism_id: MECH-ACT-KILL
+    title: 行动-摧毁
+    tier: MVP
+    covers: ["R-CR-428..R-CR-428"]
+    semantics:
+      prerequisites: "主动摧毁（效果指示）或被动摧毁（清理 3b 致命伤害/3 项其他）。"
+      legality: "摧毁指示生效前：其绝念类触发以待处理项目入链并记录最后状态（808.1.d.2/3、428.1.a.1.b）。"
+      transition: "目标从当前位置移入其所属者废牌堆。"
+      timing: "清理 3b 或效果结算。"
+      exceptions: ["摧毁被替换（如召回）→绝念触发从链移除（808.1.d.1）。"]
+      dependencies: ["MECH-CLEANUPS", "MECH-KW-DEATHKNELL", "MECH-REPLACEMENT"]
+    test_hints:
+      - "清理 3a 先记录绝念再 3b 摧毁"
+      - "被替换的摧毁不进废牌堆"
+
+  - mechanism_id: MECH-ACT-ADD
+    title: 行动-获得（资源）
+    tier: MVP
+    covers: ["R-CR-429..R-CR-429"]
+    semantics:
+      prerequisites: "效果含「获得法力/符能」表述。"
+      legality: "获得的资源加入获得者的符文池（168）。"
+      transition: "池内对应资源增加；获得资源类技能确认后立即结算（429.2）。"
+      timing: "支付窗口亦可（357.1.a）。"
+      exceptions: []
+      dependencies: ["MECH-RUNE-POOLS", "MECH-FEPR-FINALIZE"]
+    test_hints: ["立即结算分支不产生反应窗口"]
+
+  - mechanism_id: MECH-ACT-CHANNEL
+    title: 行动-召出
+    tier: MVP
+    covers: ["R-CR-430..R-CR-430"]
+    semantics:
+      prerequisites: "召出阶段或效果指示；符文牌堆非空。"
+      legality: "从符文牌堆顶召出；默认活跃进场（430）。"
+      transition: "符文牌堆顶→其落成位置；空堆→燃尽（431）。"
+      timing: "召出子步骤（2 张；485 后手首回合 3 张）。"
+      exceptions: []
+      dependencies: ["MECH-START-OF-TURN", "MECH-RUNES", "MECH-ACT-BURNOUT"]
+    test_hints: ["召出与抽牌空堆分开各自判燃尽"]
+
+  - mechanism_id: MECH-ACT-BURNOUT
+    title: 行动-燃尽
+    tier: MVP
+    covers: ["R-CR-431..R-CR-431"]
+    semantics:
+      prerequisites: "玩家需从其空主牌堆抽牌/召出失败等触发点。"
+      legality: null
+      transition: "回收其废牌堆洗入牌堆→选一名对手获得 1 分→完成原动作（431）；循环直至满足；431.3.c.1 条件下直接立即胜利。"
+      timing: "原动作上下文中立即执行，不占链。"
+      exceptions: []
+      dependencies: ["MECH-ACT-DRAW", "MECH-SCORING", "MECH-WINNING"]
+    test_hints:
+      - "燃尽送分可触发对手胜利检查（下一清理 323.1）"
+      - "无限循环直至达成胜利（431.3.c.1）"
+
+  - mechanism_id: MECH-ACT-DOUBLE
+    title: 行动-翻倍
+    tier: P1
+    covers: ["R-CR-432..R-CR-432"]
+    semantics:
+      prerequisites: "效果指示将某数值翻倍。"
+      legality: "翻倍=增加其当前值等量；负值时视为增加 0（477.3.c 口径）。"
+      transition: "数值属性修改，效果层内应用。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-LAYERS-ORDER"]
+    test_hints: ["负战力翻倍结果不恶化（+0）"]
+
+  - mechanism_id: MECH-ACT-SWAP
+    title: 行动-互换
+    tier: P1
+    covers: ["R-CR-433..R-CR-433"]
+    semantics:
+      prerequisites: "效果指示两物体交换位置/数值。"
+      legality: "位置互换须双方都在场合法落点。"
+      transition: "两物体状态对调。"
+      timing: "立即，不经链（移动语义例外按其条款）。"
+      exceptions: []
+      dependencies: ["MECH-LOCATIONS"]
+    test_hints: ["一方离场后剩余的互换部分忽略（尽可能执行）"]
+
+  - mechanism_id: MECH-ACT-ATTACH
+    title: 行动-贴附（动词）
+    tier: MVP
+    covers: ["R-CR-434..R-CR-434"]
+    semantics:
+      prerequisites: "来源卡与目标顶部卡均在场。"
+      legality: "限定行动；经[装配]/[灵便]/[百炼]或效果指示执行。"
+      transition: "来源卡贴附于目标之下，目标成为顶部卡牌（718/719 规则化状态）。"
+      timing: "立即完成，不开链（行动本身；触发另计）。"
+      exceptions: []
+      dependencies: ["MECH-ATTACHMENT", "MECH-KW-EQUIP"]
+    test_hints: ["贴附立即生效战力与效果文本并入"]
+
+  - mechanism_id: MECH-ACT-DETACH
+    title: 行动-卸除
+    tier: MVP
+    covers: ["R-CR-435..R-CR-435"]
+    semantics:
+      prerequisites: "目标为已贴附卡或带贴附卡的顶部卡。"
+      legality: null
+      transition: "贴附卡分离并留在当前区域；顶部卡离场时贴附卡卸除留存（719.5）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ATTACHMENT", "MECH-EFFECT-TEXT"]
+    test_hints: ["卸除后效果文本回到未激活"]
+
+  - mechanism_id: MECH-ACT-PREDICT
+    title: 行动-洞察
+    tier: P1
+    covers: ["R-CR-436..R-CR-436"]
+    semantics:
+      prerequisites: "效果指示洞察（[预知]817 等）。"
+      legality: "查看其牌堆顶 N 张（按指示），每张选择回收或放回；牌堆空不触发燃尽（436）。"
+      transition: "查看→逐张决定去向。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ACT-RECYCLE", "MECH-KW-VISION"]
+    test_hints: ["连续两次洞察看同一叠（817.2.b）"]
+
+  - mechanism_id: MECH-ACT-PREVENT
+    title: 行动-抵挡
+    tier: P1
+    covers: ["R-CR-437..R-CR-437"]
+    semantics:
+      prerequisites: "抵挡效果登记于单位（延迟替换）。"
+      legality: "数值型抵挡；先抵挡后承受；多来源次序按其条款。"
+      transition: "战斗伤害分配时生效（437.5），减少实际造成的伤害。"
+      timing: "伤害事件执行前。"
+      exceptions: ["额外伤害并入后再抵（712-715/437 联动）。"]
+      dependencies: ["MECH-ACT-DEAL", "MECH-REPLACEMENT", "MECH-BONUS-DAMAGE"]
+    test_hints: ["抵挡值用尽后剩余伤害正常造成"]
+
+  - mechanism_id: MECH-ACT-REPLACE
+    title: 行动-替换（动词）
+    tier: P1
+    covers: ["R-CR-438..R-CR-438"]
+    semantics:
+      prerequisites: "效果指示以乙替换甲（区域物体整体替换）。"
+      legality: "替换后新物体继承按其条款；旧物体去向按指示。"
+      transition: "区域成员整体更换。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-GAME-OBJECTS"]
+    test_hints: ["新物体为全新身份：旧效果不随附"]
+
+  - mechanism_id: MECH-ACT-CREATE
+    title: 行动-创建
+    tier: P1
+    covers: ["R-CR-439..R-CR-439"]
+    semantics:
+      prerequisites: "效果指示创建指示物/卡副本。"
+      legality: "被创建物直接置于场地或链上指定位置（186）。"
+      transition: "新游戏物体入场；属性由创建效果定义（187）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-TOKENS"]
+    test_hints: ["创建入场触发其「打出我时」类检视口径按其条款"]
+
+  - mechanism_id: MECH-ACT-BURN
+    title: 行动-燃烧
+    tier: P2
+    covers: ["R-CR-440..R-CR-440"]
+    semantics:
+      prerequisites: "效果指示燃烧。"
+      legality: null
+      transition: "按 440 子条款结算（区域/资源类燃烧语义）。"
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["MVP 卡池不涉及；阶段 4 随首张燃烧卡补全细则。"]
+    test_hints: []
+
+  - mechanism_id: MECH-ACT-EMPOWER
+    title: 行动-强化（动词）
+    tier: P1
+    covers: ["R-CR-441..R-CR-441"]
+    semantics:
+      prerequisites: "来源为可强化物体（常驻牌/传奇，未强化）。"
+      legality: "经[强化](827)主动技能或效果指示执行。"
+      transition: "该物体进入已强化状态（828 依赖技能随之激活口径）。"
+      timing: null
+      exceptions: ["强化事件的「当我变为已强化时」触发生效并触发（828.1.d）。"]
+      dependencies: ["MECH-KW-EMPOWER", "MECH-KW-EMPOWERED", "MECH-ACT-DISEMPOWER"]
+    test_hints: ["已强化物体再次被强化=无操作"]
+
+  - mechanism_id: MECH-ACT-DISEMPOWER
+    title: 行动-解除强化
+    tier: P1
+    covers: ["R-CR-442..R-CR-442"]
+    semantics:
+      prerequisites: "目标处于已强化状态。"
+      legality: null
+      transition: "失去已强化状态；其依赖技能随之未激活（828.1.c 逆）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ACT-EMPOWER"]
+    test_hints: ["解除后相关持续效果经 Layers 重评估移除"]
+
+  - mechanism_id: MECH-ACT-SKIP
+    title: 行动-跳过
+    tier: P2
+    covers: ["R-CR-443..R-CR-443"]
+    semantics:
+      prerequisites: "效果指示跳过某步骤/阶段/回合项。"
+      legality: "被跳过的项目视为未发生；触发时点在跳过时点前的按 443 条款处理。"
+      transition: "状态机越过指定项目。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PHASES"]
+    test_hints: ["跳过抽牌子步骤不触发燃尽"]
+
+  - mechanism_id: MECH-ACT-PAY
+    title: 行动-支付
+    tier: MVP
+    covers: ["R-CR-444..R-CR-444"]
+    semantics:
+      prerequisites: "存在可支付的费用对象。"
+      legality: "支付形式见 MECH-COSTS；资源从符文池扣除，[E]休眠来源，弃置/回收按各自行动执行。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-COSTS", "MECH-PLAY-STEP4-PAY"]
+    test_hints: []
+
+  # ================= 445-458 移动与召回 =================
+  - mechanism_id: MECH-MOVEMENT
+    title: 移动
+    tier: MVP
+    covers: ["R-CR-445..R-CR-453"]
+    semantics:
+      prerequisites: "移动=常驻牌从起始位置前往终点位置的限定行动（447）；标准移动为单位自有技能（144）。"
+      legality:
+        - "移动立即完成、不经结算链、不可被反应（446）；完成后进行清理（453）。"
+        - "不得移入已有 2 名其他玩家单位的战场（拥挤限制）。"
+        - "进入非己方控制且未争夺的战场→该战场进入争夺（450）→非战斗对决（451）；进入敌方在场战场可能引发战斗（452）。"
+      transition: "单位区域归属变更；状态（伤害/增益/贴附）随物体保留。"
+      timing: "移动完成即清理，可能接续对决/战斗。"
+      exceptions: ["[游走]扩展标准移动终点至其他战场（810）。"]
+      dependencies: ["MECH-LOCATIONS", "MECH-SHOWDOWNS", "MECH-COMBAT", "MECH-CLEANUPS", "MECH-KW-GANKING"]
+    test_hints:
+      - "移动不受召唤失调类主动限制（限定行动）但受休眠约束按其条款"
+      - "移入拥挤战场=非法移动"
+
+  - mechanism_id: MECH-RECALL
+    title: 召回
+    tier: MVP
+    covers: ["R-CR-454..R-CR-458"]
+    semantics:
+      prerequisites: "效果/规则指示召回（战斗结算 3d、清理 5 等）。"
+      legality: "召回不属于移动（456）；装备亦可召回（457）。"
+      transition: "从任意位置转移至其所属者基地；不改变被召回物体的状态（458：伤害/增益/贴附保留口径按其条款）。"
+      timing: "立即完成，不经链。"
+      exceptions: []
+      dependencies: ["MECH-MOVEMENT", "MECH-COMBAT-STEP3-RESOLUTION"]
+    test_hints: ["召回不触发争夺/对决"]
+
+  # ================= 459-472 战斗与得分 =================
+  - mechanism_id: MECH-COMBAT
+    title: 战斗（框架）
+    tier: MVP
+    covers: ["R-CR-459..R-CR-463"]
+    semantics:
+      prerequisites: "清理时链空、某战场有待发生战斗且无其他战场正在战斗/对决（460）；同一战场两名敌对玩家单位共存而战斗未启动→待发生（461）；战斗恰在两名玩家单位间（462）。"
+      legality: "战斗仅经清理 7/10 步骤启动；争夺发起者=进攻方。"
+      transition: "启动后按三步执行（463）：战斗法术对决→战斗伤害→结算。"
+      timing: "战斗进行中回合为法术对决状态（343）。"
+      exceptions: []
+      dependencies: ["MECH-CLEANUPS", "MECH-COMBAT-STEP1-SHOWDOWN", "MECH-COMBAT-STEP2-DAMAGE", "MECH-COMBAT-STEP3-RESOLUTION"]
+    test_hints: ["多场待发生战斗由回合玩家按 323.10 选场逐个进行"]
+
+  - mechanism_id: MECH-COMBAT-STEP1-SHOWDOWN
+    title: 战斗步骤1-战斗法术对决
+    tier: MVP
+    covers: ["R-CR-464..R-CR-464"]
+    semantics:
+      prerequisites: "战斗已启动。"
+      legality:
+        - "先确立攻/防身份；进攻方得焦点。"
+        - "攻/守触发入链顺序：进攻方→非防守方（按回合序）→防守方（464 子条款）；攻守触发每场战斗各仅检一次（383.4）。"
+      transition: "对决按 MECH-SHOWDOWNS 进行直至关闭。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SHOWDOWNS", "MECH-TRIGGERED"]
+    test_hints: ["首个战斗法术对决前攻防身份即锁定以结算攻守触发"]
+
+  - mechanism_id: MECH-COMBAT-STEP2-DAMAGE
+    title: 战斗步骤2-战斗伤害
+    tier: MVP
+    covers: ["R-CR-465..R-CR-465"]
+    semantics:
+      prerequisites: "对决关闭，双方仍有参战单位。"
+      legality:
+        - "双方战力总和为各自伤害池；进攻方先分配。"
+        - "必须先为单位分配致命伤害（当前战力-已受伤害）才能分给下一个；不得超过致少量（465.2.c.4.a）。"
+        - "[壁垒]先于非壁垒、非[后排]先于后排分配（465.2.c.6-9、815/826）。"
+        - "替换/抵挡效果在分配时生效（465.2.c.4.a/c.5、437.5）。"
+      transition: "分配确定→同时造成伤害。"
+      timing: "伤害造成后的摧毁由后续清理处理。"
+      exceptions: []
+      dependencies: ["MECH-ACT-DEAL", "MECH-KW-TANK", "MECH-KW-BACKLINE", "MECH-ACT-PREVENT", "MECH-KW-ASSAULT", "MECH-KW-SHIELD"]
+    test_hints:
+      - "进攻方先分→防守方再分（顺序结算非同时选择）"
+      - "战力为 0 方不产生伤害分配"
+
+  - mechanism_id: MECH-COMBAT-STEP3-RESOLUTION
+    title: 战斗步骤3-结算
+    tier: MVP
+    covers: ["R-CR-466..R-CR-466"]
+    semantics:
+      prerequisites: "伤害步骤完成。"
+      legality:
+        - "战斗清理插入 3c（移除伤害）与 3d：防守方仍在场→召回进攻方单位。"
+        - "判定：进攻方确立控制（防守方全部离场）→胜负；双方留存→无结果且标记新对决+战斗待发生。"
+        - "确立控制清争夺→可征服；随后移除攻防身份、本次战斗的效果失效。"
+      transition: "战场控制/争夺状态更新；触发征服检查（467）。"
+      timing: "随后继续未决清理/任务。"
+      exceptions: []
+      dependencies: ["MECH-RECALL", "MECH-SCORING", "MECH-CONTROL", "MECH-CLEANUPS"]
+    test_hints:
+      - "无结果→双方留存→新对决标记"
+      - "战斗效果（强攻/坚守）在结算步后失效"
+
+  - mechanism_id: MECH-SCORING
+    title: 得分计算
+    tier: MVP
+    covers: ["R-CR-467..R-CR-472"]
+    semantics:
+      prerequisites: "得分方式：征服（确立控制时）与据守（开始阶段计分步骤仍控制）（469）。"
+      legality:
+        - "每战场、每回合、每玩家至多 1 分（470）。"
+        - "终分限制（471.1.b）：仅以征服手段，且当前分≥胜利分-1 时，须本回合已在每个战场都得过分；不满足则该得分改为抽 1 张牌。"
+        - "胜利检查：清理 323.1，分≥胜利分且高于所有对手（472/194）。"
+      transition: "得分事件→分数累加并记录本回合各战场得分标记。"
+      timing: "征服在对决/战斗结算确立控制时；据守在开始阶段计分步骤。"
+      exceptions: ["燃尽送分（431）不受 470/471 限制（按其条款）。"]
+      dependencies: ["MECH-WINNING", "MECH-CONTROL", "MECH-START-OF-TURN", "MECH-ACT-BURNOUT"]
+    test_hints:
+      - "同回合同一战场征服+据守只得 1 分"
+      - "终分局未满足全场得分→改为抽牌并继续"
+
+  # ================= 473-489 Layers 与模式 =================
+  - mechanism_id: MECH-LAYERS
+    title: 效果层（框架）
+    tier: P1
+    covers: ["R-CR-473..R-CR-476"]
+    semantics:
+      prerequisites: "存在作用于物体特质/技能/数值的持续效果。"
+      legality: "层按顺序应用；每个效果在每次应用序列中至多应用一次（476.1）；完成一轮后重新评估并应用新适用效果直至收敛（476.2）。"
+      transition: "物体最终属性=全部适用效果按层序与时间戳/依赖结算后的值。"
+      timing: "任何特质/状态查询时（引擎快照点）。"
+      exceptions: ["效果移除/失效与应用是独立事件（476.3）。"]
+      dependencies: ["MECH-LAYERS-ORDER", "MECH-LAYERS-DEPENDENCY"]
+    test_hints: ["效果失效后按其缺失重算（菲奥娜示例口径）"]
+
+  - mechanism_id: MECH-LAYERS-ORDER
+    title: 效果层-层序
+    tier: P1
+    covers: ["R-CR-477..R-CR-477"]
+    semantics:
+      prerequisites: null
+      legality:
+        - "层1 改变特质：名称/超类型/类型/标签/控制者/费用/特性；战力赋值（477.1.a.1）与复制效果（477.1.b，含可复制特质=名称/超类型/类型/标签/费用/特性/规则文本）在此层。"
+        - "层2 改变技能：关键词/被动增删、规则文本增删；已贴附卡效果文本在此并入（477.2.c）。"
+        - "层3 加减计算：战力/法力费/符能费；先增值后减值（477.3.e）；贴附战力加成在此层（477.3.d）；非被动带限制的快照（477.3.b）；负数增加视为 0（477.3.c）。"
+      transition: "层内多个效果：依赖优先，其次时间戳。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-LAYERS"]
+    test_hints:
+      - "战力变 4 的赋值先于 +2 的加算"
+      - "复制只复制印刷可复制特质（不复制已强化状态）"
+
+  - mechanism_id: MECH-LAYERS-DEPENDENCY
+    title: 效果层-依赖与时间戳
+    tier: P1
+    covers: ["R-CR-478..R-CR-480"]
+    semantics:
+      prerequisites: "同层多效果。"
+      legality:
+        - "依赖建立：一个效果改变另一个的存在/影响数量/结果（478.1.a-c）。"
+        - "被依赖者先应用，依赖者紧随其后（479.2）；双方互相依赖→依赖不成立（479.1）。"
+        - "无依赖→时间戳早者先（480.3）；时间戳仅相对比较、不被效果引用；未激活失时间戳、再激活取新值（480.2）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-LAYERS"]
+    test_hints: ["「提升至5」与「+2」：+2 先应用（被动依赖法术效果）"]
+
+  - mechanism_id: MECH-MODES-OVERVIEW
+    title: 游戏模式（总述）
+    tier: MVP
+    covers: ["R-CR-481..R-CR-484"]
+    semantics:
+      prerequisites: "模式变量：玩家数、胜利分、战场数、首回合调整、组卡变量（483）。"
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-MODE-DUEL"]
+    test_hints: []
+
+  - mechanism_id: MECH-MODE-DUEL
+    title: 模式-1v1 决斗
+    tier: MVP
+    covers: ["R-CR-485..R-CR-485"]
+    semantics:
+      prerequisites: "2 名玩家；胜利分 8；各备 3 个战场、各随机选 1（共 2 个）。"
+      legality: "后手玩家首个召出阶段额外召出 1 张符文（485 补偿）。"
+      transition: null
+      timing: "Setup 与首回合。"
+      exceptions: []
+      dependencies: ["MECH-SETUP-PROCESS", "MECH-START-OF-TURN", "MECH-WINNING"]
+    test_hints: ["战场随机选择纳入 seed 可复现"]
+
+  - mechanism_id: MECH-MODE-MATCH
+    title: 模式-1v1 比赛
+    tier: OUT
+    covers: ["R-CR-486..R-CR-486"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["多局赛制（sideboard/局间规则），超出 headless 引擎 MVP；不实现。"]
+    test_hints: []
+
+  - mechanism_id: MECH-MODE-FFA3
+    title: 模式-3 人乱斗
+    tier: OUT
+    covers: ["R-CR-487..R-CR-487"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["多人模式，范围排除（implementation_scope §2）。"]
+    test_hints: []
+
+  - mechanism_id: MECH-MODE-FFA4
+    title: 模式-4 人乱斗
+    tier: OUT
+    covers: ["R-CR-488..R-CR-488"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["多人模式，范围排除。"]
+    test_hints: []
+
+  - mechanism_id: MECH-MODE-2V2
+    title: 模式-2v2 熔岩大厅
+    tier: OUT
+    covers: ["R-CR-489..R-CR-489"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["团队模式（共享战场/队友），范围排除。"]
+    test_hints: []
+
+  # ================= 649-652 认输 =================
+  - mechanism_id: MECH-CONCEDE
+    title: 认输
+    tier: MVP
+    covers: ["R-CR-649..R-CR-652"]
+    semantics:
+      prerequisites: "任意时刻（650）。"
+      legality: "认输是始终合法的动作；1v1 中认输者移出游戏→对手获胜（195 联动）。"
+      transition: "玩家移出对局→若游戏继续则按 652 步骤移除其全部物体/终止其未决项。"
+      timing: "立即生效，不经链；termination_reason=concede。"
+      exceptions: []
+      dependencies: ["MECH-WINNING"]
+    test_hints: ["认输后其链上项目与其物体按 652 清理"]
+
+  # ================= 700-767 附加规则与特殊术语 =================
+  - mechanism_id: MECH-ADDITIONAL-HEADER
+    title: 附加规则（章标题）
+    tier: MVP
+    covers: ["R-CR-700..R-CR-700"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["结构性条目。"]
+
+  - mechanism_id: MECH-BUFFS
+    title: 增益（计数标）
+    tier: MVP
+    covers: ["R-CR-701..R-CR-705"]
+    semantics:
+      prerequisites: "增益=置于单位上的计数标（702），属于游戏物体（704）。"
+      legality: "每单位至多 1 个增益；每个增益单独提供 +1[M]（703）。"
+      transition: "单位离开游戏→其增益全部移除（705）。"
+      timing: "战力计算在效果层第 3 层增值子层。"
+      exceptions: []
+      dependencies: ["MECH-ACT-BUFF", "MECH-COUNTERS", "MECH-LAYERS-ORDER"]
+    test_hints: ["增益单位受[瞬息]摧毁→增益消散"]
+
+  - mechanism_id: MECH-MIGHTY
+    title: 强力（状态描述）
+    tier: MVP
+    covers: ["R-CR-706..R-CR-711"]
+    semantics:
+      prerequisites: "场上单位按当前战力评估；非场地区域按印刷战力评估（710/711）。"
+      legality: "战力≥5 即为强力单位（708）；从 <5 变为 ≥5 是「变为强力单位」事件（709）。"
+      transition: "状态判定随战力变化即时更新（无链）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-UNITS", "MECH-LAYERS-ORDER"]
+    test_hints: ["增益使 4→5 触发「变为强力」类触发"]
+
+  - mechanism_id: MECH-BONUS-DAMAGE
+    title: 额外伤害
+    tier: MVP
+    covers: ["R-CR-712..R-CR-715"]
+    semantics:
+      prerequisites: "额外伤害=提供给造成伤害行动的自有属性（713）。"
+      legality: "同一造成伤害行动的多个额外伤害相加后一次性应用（714）；应用对象为行动每次结算的总伤害（715）。"
+      transition: "并入伤害事件总额。"
+      timing: "伤害事件结算时；多目标分别加算。"
+      exceptions: ["计入抵挡抵扣基数（437 联动）。"]
+      dependencies: ["MECH-ACT-DEAL", "MECH-ACT-PREVENT"]
+    test_hints: ["对两目标各造成 3 的伤害加 +1 额外→各 4"]
+
+  - mechanism_id: MECH-ATTACHMENT
+    title: 贴附（规则）
+    tier: MVP
+    covers: ["R-CR-716..R-CR-719"]
+    semantics:
+      prerequisites: "贴附=限定行动，将卡牌连接到另一张卡（717）；结果状态=已贴附/顶部卡牌（718/719）。"
+      legality:
+        - "已贴附卡的规则文本未激活、效果文本激活（724/719.2 联动）。"
+        - "贴附堆整体视为一个游戏物体单元（其规则文本集合=顶部卡+各效果文本）。"
+      transition: "顶部卡离场→贴附卡卸除并留在当前区域（719.5）。"
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-ACT-ATTACH", "MECH-ACT-DETACH", "MECH-EFFECT-TEXT", "MECH-INACTIVE"]
+    test_hints: ["顶部卡被摧毁→下方贴附卡留场原区"]
+
+  - mechanism_id: MECH-INACTIVE
+    title: 未激活
+    tier: MVP
+    covers: ["R-CR-720..R-CR-725"]
+    semantics:
+      prerequisites: "文本被指定忽略/无视，或装备类效果文本未贴附（724）。"
+      legality: "默认所有规则文本处于激活（723）；未激活文本仍存在但不生效（722）。"
+      transition: "激活↔未激活即时切换；未激活失时间戳（480.2）。"
+      timing: null
+      exceptions: ["特定条件下可部分解除未激活（725；如百炼 821.1.c）。"]
+      dependencies: ["MECH-EFFECT-TEXT", "MECH-LAYERS-DEPENDENCY"]
+    test_hints: ["唯[装配]判定可在文本未激活时引用其存在（818.5.a）"]
+
+  - mechanism_id: MECH-DEPENDENT-KEYWORDS
+    title: 依赖性关键词（通则）
+    tier: P2
+    covers: ["R-CR-726..R-CR-727"]
+    semantics:
+      prerequisites: "格式「[关键词][>] [文本]」：满足关键词条件即获得文本（726/727）。"
+      legality: "条件不满足→依赖文本未激活。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-KW-LEVEL", "MECH-KW-EMPOWERED", "MECH-KW-LEGION"]
+    notes: ["具体依赖关键词见 824/828/812。"]
+
+  - mechanism_id: MECH-XP
+    title: 经验（XP）
+    tier: P2
+    covers: ["R-CR-728..R-CR-733"]
+    semantics:
+      prerequisites: "XP=玩家资源，可获得/消耗（729/730）；不是游戏物体（731）；无上限（733）。"
+      legality: null
+      transition: null
+      timing: null
+      exceptions: ["团队模式不共享（732，1v1 不适用）。"]
+      dependencies: ["MECH-KW-HUNT", "MECH-KW-LEVEL"]
+    notes: ["[狩猎]/[等级]启用时随卡启用。"]
+
+  - mechanism_id: MECH-EXTRA-TURNS
+    title: 额外回合
+    tier: P2
+    covers: ["R-CR-734..R-CR-738"]
+    semantics:
+      prerequisites: "效果指示额外回合（735）。"
+      legality: "插入回合队列不改变原循环顺序（736/737）；多个按生成顺序（738）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-TURN"]
+    notes: ["MVP 卡池无此效果；随卡启用。"]
+
+  - mechanism_id: MECH-SPECIAL-TERMS
+    title: 特定术语
+    tier: P1
+    covers: ["R-CR-739..R-CR-740"]
+    semantics:
+      prerequisites: "卡面/规则文书中的专用术语表（740，15 条）。"
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-SILVER-RULES"]
+    notes: ["效果解析期按需查阅；术语出现歧义时优先引用本章。"]
+
+  - mechanism_id: MECH-COUNTERS
+    title: 计数标
+    tier: P1
+    covers: ["R-CR-741..R-CR-749"]
+    semantics:
+      prerequisites: "计数标=置于场上物体上的游戏物体（742），追踪半永久效果（743）；可被消耗（745）/移动（746）；无控制者（749）。"
+      legality: "离开物体即消亡（747）；物体离场至非场地区域时失去全部计数标（748）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-BUFFS", "MECH-GAME-OBJECTS"]
+    test_hints: ["单位被召回（留在场地区域）计数标保留口径按 748 区域限定"]
+
+  - mechanism_id: MECH-NEW-CHOICES
+    title: 另做选择
+    tier: P2
+    covers: ["R-CR-750..R-CR-755"]
+    semantics:
+      prerequisites: "效果指示为链上已确认项目另做选择（751/752）。"
+      legality: "可重做部分或全部选择但不致非法状态（753）；新目标化生效（754）；由此产生的费用被忽略（755）。"
+      transition: null
+      timing: "通常在结算中。"
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP2-CHOICES"]
+    notes: ["随首张另做选择卡启用。"]
+
+  - mechanism_id: MECH-UNTARGETABILITY
+    title: 不可被选取
+    tier: P2
+    covers: ["R-CR-756..R-CR-758"]
+    semantics:
+      prerequisites: "效果声明物体不可被某类法术/技能选为目标（757）。"
+      legality: "不可被选取=不合法目标（355 联动；已在链的目标不追溯失效，按其条款）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP2-CHOICES"]
+    notes: ["随首张相关卡启用。"]
+
+  - mechanism_id: MECH-NAMING
+    title: 宣告卡牌/类型/标签
+    tier: P2
+    covers: ["R-CR-759..R-CR-763"]
+    semantics:
+      prerequisites: "效果指示宣告（760）。"
+      legality: "宣告方式二选一（761）；须宣告当前赛制合法卡牌（762）；标签须真实存在（763）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["随首张相关卡启用。"]
+
+  - mechanism_id: MECH-IGNORING
+    title: 无视效果
+    tier: P2
+    covers: ["R-CR-764..R-CR-767"]
+    semantics:
+      prerequisites: "效果指示在某行动/流程中无视技能（765）。"
+      legality: "被无视技能视为未激活，仅限该行动/流程与指定对象（766/767）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-INACTIVE"]
+    notes: ["随首张相关卡启用。"]
+
+  # ================= 800-829 关键词 =================
+  - mechanism_id: MECH-KEYWORDS-GENERAL
+    title: 关键词通则
+    tier: MVP
+    covers: ["R-CR-800..R-CR-804"]
+    semantics:
+      prerequisites: "关键词=代表效果/技能的术语（801）；可被效果引用/赋予/移除。"
+      legality: "多关键词可共存（802）；执行按文本自上而下（803）；赋予/移除的持续时长默认至离场或离开当前非场地区域（801.3.a.3/b.2）。"
+      transition: "层2 应用关键词增删。"
+      timing: null
+      exceptions: ["重复获得同关键词的行为由该关键词自身定义（801.3.a.1）。"]
+      dependencies: ["MECH-RULES-TEXT", "MECH-LAYERS-ORDER"]
+    test_hints: ["「本回合获得[反应]」在回合末 3d 失效"]
+
+  - mechanism_id: MECH-KW-ACCELERATE
+    title: 关键词-急速
+    tier: P1
+    covers: ["R-CR-805..R-CR-805"]
+    semantics:
+      prerequisites: "单位带[急速]。"
+      legality: "打出时可选额外费用 [1]+[C]（无特性单位可用[A]）（805.1.a）；仅打出步骤中可付（805.2.a）。"
+      transition: "生成延迟替换：该单位改为以活跃状态进场（805.2.b/805.6；非「先休眠再激活」）。"
+      timing: "步骤3 定总费时选择支付。"
+      exceptions: ["多个[急速]仅生效一次（805.4）。"]
+      dependencies: ["MECH-PLAY-STEP3-COST", "MECH-DELAYED"]
+    test_hints: ["确认中失去急速仍活跃进场（805.2.b）"]
+
+  - mechanism_id: MECH-KW-ACTION
+    title: 关键词-迅捷
+    tier: MVP
+    covers: ["R-CR-806..R-CR-806"]
+    semantics:
+      prerequisites: "卡牌/技能带[迅捷]。"
+      legality: "权限：可在任意玩家回合的法术对决期间打出/激活（806.1.c）；不改变功能与自有打出限制（806.3）。"
+      transition: null
+      timing: "对决窗口 legal_actions 判定；条件性迅捷在步骤5 复核（806.4.b）。"
+      exceptions: ["被动授予的迅捷仅在条件满足时成立（806.4）。"]
+      dependencies: ["MECH-TURN-STATES", "MECH-SHOWDOWNS", "MECH-PLAY-STEP5-LEGALITY"]
+    test_hints: ["对决中打出[迅捷]单位仍受目的地限制"]
+
+  - mechanism_id: MECH-KW-ASSAULT
+    title: 关键词-强攻
+    tier: P1
+    covers: ["R-CR-807..R-CR-807"]
+    semantics:
+      prerequisites: "单位带[强攻X]（默认 1）。"
+      legality: "其为进攻方期间 [M]+X（807.1.c）。"
+      transition: "多来源强攻值相加（807.2）。"
+      timing: "持进攻方身份期间持续生效。"
+      exceptions: []
+      dependencies: ["MECH-COMBAT", "MECH-LAYERS-ORDER"]
+    test_hints: ["战斗结算步后身份移除→加成立即消失"]
+
+  - mechanism_id: MECH-KW-DEATHKNELL
+    title: 关键词-绝念
+    tier: P1
+    covers: ["R-CR-808..R-CR-808"]
+    semantics:
+      prerequisites: "常驻牌带[绝念][>]效果。"
+      legality: "被摧毁入废牌堆前：触发以待处理入链并记录最后状态（808.1.d.2/3）；实未入废牌堆→触发从链移除（808.1.d.1）。"
+      transition: "每个[绝念]分别触发，控制者定入链顺序（808.2.a）。"
+      timing: "清理 3a/3b 或摧毁指示结算。"
+      exceptions: []
+      dependencies: ["MECH-ACT-KILL", "MECH-TRIGGERED"]
+    test_hints: ["摧毁被替换为召回→绝念不结算"]
+
+  - mechanism_id: MECH-KW-DEFLECT
+    title: 关键词-法盾
+    tier: P1
+    covers: ["R-CR-809..R-CR-809"]
+    semantics:
+      prerequisites: "常驻牌带[法盾X]（默认 1）。"
+      legality: "对手控制的、将其选为目标的法术/技能每选一次+X 强制额外费用（809.1.c）；符能特性不限（809.1.c.1）。"
+      transition: "多来源法盾值相加（809.2）。"
+      timing: "步骤3 定总费。"
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP3-COST"]
+    test_hints: ["双目标法术选中带法盾单位两次→费用加两份"]
+
+  - mechanism_id: MECH-KW-GANKING
+    title: 关键词-游走
+    tier: P1
+    covers: ["R-CR-810..R-CR-810"]
+    semantics:
+      prerequisites: "单位带[游走]。"
+      legality: "标准移动可从一处战场移至另一处战场（810.1.b）；仅增加选项、无费用、不提供额外移动机会（810.1.c）。"
+      transition: null
+      timing: null
+      exceptions: ["多个[游走]仅生效一次（810.2）。"]
+      dependencies: ["MECH-MOVEMENT"]
+    test_hints: ["游走移动进非控战场照常触发争夺"]
+
+  - mechanism_id: MECH-KW-HIDDEN
+    title: 关键词-待命
+    tier: P1
+    covers: ["R-CR-811..R-CR-811"]
+    semantics:
+      prerequisites: "卡牌（法术/单位/装备）带[待命]。"
+      legality:
+        - "自决行动：己方回合开环、手牌/英雄区，付[A]置己方控制的无待命牌战场，牌面朝下（811.1.b）；非打出、不开链（811.1.c.1/2）。"
+        - "下回合起待命牌获[反应]（811.6）可被打出且无视基础费用；打出开链。"
+        - "从待命打出：常驻牌只能落到其待命战场（811.1.d.1，装备目的地限制被覆盖 811.1.d.1.a）；目标优先从该战场选（811.1.d.2 及逐目标判定 a）；导致打出单位的效果须选该战场（811.1.d.3）。"
+        - "失去战场控制→待命牌处理按其条款（811.1.b 末段）。"
+      transition: null
+      timing: null
+      exceptions: ["亦可以正常时机正常费用正常打出（811.3）；多个[待命]仅生效一次（811.4）；[反应]来自待命状态非公开信息（811.6.a）。"]
+      dependencies: ["MECH-ACT-HIDE", "MECH-NONBOARD-ZONES", "MECH-KW-REACTION"]
+    test_hints: ["R-CR-811.1.b 中英差异已裁决：同版本英文优先（change_log CHG-5 系）"]
+
+  - mechanism_id: MECH-KW-LEGION
+    title: 关键词-鼓舞
+    tier: P2
+    covers: ["R-CR-812..R-CR-812"]
+    semantics:
+      prerequisites: "卡牌带「[鼓舞][>] [文本]」。"
+      legality: "同回合中该玩家已确认另一张不同卡牌→全部鼓舞文本生效（812.1.c/812.2）。"
+      transition: null
+      timing: "打出/激活时与结算时评估。"
+      exceptions: []
+      dependencies: ["MECH-ACT-PLAY"]
+    notes: ["随卡启用。"]
+
+  - mechanism_id: MECH-KW-REACTION
+    title: 关键词-反应
+    tier: MVP
+    covers: ["R-CR-813..R-CR-813"]
+    semantics:
+      prerequisites: "卡牌/技能带[反应]。"
+      legality: "权限：可在任意玩家回合的闭环状态打出/激活（813.1.c），并涵盖其行动相关全部权限（813.1.b）；不改变功能与自有限制（813.3）。"
+      transition: null
+      timing: "闭环 legal_actions 判定；条件性反应在步骤5 复核（813.4.b）。"
+      exceptions: ["被动授予的反应仅在条件满足时成立（813.4）。"]
+      dependencies: ["MECH-TURN-STATES", "MECH-FEPR-EXECUTE", "MECH-PLAY-STEP5-LEGALITY"]
+    test_hints: ["对手回合闭环内可激活基本符文[反应]技能"]
+
+  - mechanism_id: MECH-KW-SHIELD
+    title: 关键词-坚守
+    tier: P1
+    covers: ["R-CR-814..R-CR-814"]
+    semantics:
+      prerequisites: "单位带[坚守X]（默认 1）。"
+      legality: "其为防守方期间 [M]+X（814.1.c）；多来源相加（814.2）。"
+      transition: null
+      timing: "持防守方身份期间。"
+      exceptions: []
+      dependencies: ["MECH-COMBAT", "MECH-LAYERS-ORDER"]
+    test_hints: ["对称强攻；结算步后失效"]
+
+  - mechanism_id: MECH-KW-TANK
+    title: 关键词-壁垒
+    tier: P1
+    covers: ["R-CR-815..R-CR-815"]
+    semantics:
+      prerequisites: "单位带[壁垒]。"
+      legality: "战斗伤害分配时：须先为带[壁垒]者分配致命伤害，才可为同控制者无[壁垒]者分配（815.1.b/c.2）；分配仍须逐个致命（815.1.c.1）。"
+      transition: null
+      timing: "伤害步骤分配合法性。"
+      exceptions: ["多个[壁垒]仅生效一次（815.2）。"]
+      dependencies: ["MECH-COMBAT-STEP2-DAMAGE"]
+    test_hints: ["绕过壁垒先伤后排单位=非法分配"]
+
+  - mechanism_id: MECH-KW-TEMPORARY
+    title: 关键词-瞬息
+    tier: P1
+    covers: ["R-CR-816..R-CR-816"]
+    semantics:
+      prerequisites: "常驻牌带[瞬息]。"
+      legality: "其控制者回合开始阶段、计分之前将此牌摧毁（816.1.b/c）。"
+      transition: "触发入链→摧毁。"
+      timing: "其控制者开始阶段开始。"
+      exceptions: ["多个[瞬息]仅触发一次（816.2；已贴附情形按其 FAQ 口径：激活态触发一次）。"]
+      dependencies: ["MECH-START-OF-TURN", "MECH-ACT-KILL"]
+    test_hints: ["瞬息摧毁走完整绝念/清理链路"]
+
+  - mechanism_id: MECH-KW-VISION
+    title: 关键词-预知
+    tier: P1
+    covers: ["R-CR-817..R-CR-817"]
+    semantics:
+      prerequisites: "常驻牌带[预知]。"
+      legality: "进场触发：洞察（817.1.b/c）；每个[预知]分别触发（817.2），每次可自选是否回收（817.2.a）。"
+      transition: null
+      timing: "进场为确认落位完成时点。"
+      exceptions: ["两次洞察间无过程→看到相同牌（817.2.b）。"]
+      dependencies: ["MECH-ACT-PREDICT", "MECH-TRIGGERED"]
+    test_hints: ["多预知实例分别结算"]
+
+  - mechanism_id: MECH-KW-EQUIP
+    title: 关键词-装配
+    tier: P2
+    covers: ["R-CR-818..R-CR-818"]
+    semantics:
+      prerequisites: "带[武装]标签的装备带「装配[费用]」。"
+      legality: "主动技能：付费用将装备贴附于所选己方单位（目标）；时点按主动技能通则+装备主阶段限制，文本可变体（818.1.c.4/5）。"
+      transition: "支付→贴附；目标成顶部卡（818.1.b.2）；完成即配装状态（818.2/818.3）。"
+      timing: null
+      exceptions: ["多[装配]为多个独立主动技能（818.4）；文本未激活仍可引用[装配]存在性（818.5.a）。"]
+      dependencies: ["MECH-ATTACHMENT", "MECH-ACTIVATED", "MECH-KW-QUICKDRAW", "MECH-KW-WEAPONMASTER"]
+    notes: ["随首批装备卡启用。"]
+
+  - mechanism_id: MECH-KW-QUICKDRAW
+    title: 关键词-灵便
+    tier: P2
+    covers: ["R-CR-819..R-CR-819"]
+    semantics:
+      prerequisites: "带[装配]的装备带[灵便]。"
+      legality: "自带[反应]；可用[反应]时机打出并立即贴附于己方单位（819.1.b/c/d）。"
+      transition: null
+      timing: null
+      exceptions: ["多[灵便]仅首个有效（819.2）。"]
+      dependencies: ["MECH-KW-EQUIP", "MECH-KW-REACTION"]
+    notes: ["随首批装备卡启用。"]
+
+  - mechanism_id: MECH-KW-REPEAT
+    title: 关键词-回响
+    tier: P2
+    covers: ["R-CR-820..R-CR-820"]
+    semantics:
+      prerequisites: "法术/技能带「回响[费用]」。"
+      legality: "可选额外费用，打出时声明；每个回响费至多付一次，多个分别支付（820.1.c.2/3）；每付一份结算时指示额外执行一次（820.1.d.1）；未执行指示无视（820.1.d.2）。"
+      transition: "额外执行的选择在打出的选择步骤做出，可与首次不同（820.2.a）；仍只算打出一次（820.3.a）。"
+      timing: "步骤3 定总费。"
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP3-COST", "MECH-PLAY-STEP2-CHOICES"]
+    notes: ["随卡启用。"]
+
+  - mechanism_id: MECH-KW-WEAPONMASTER
+    title: 关键词-百炼
+    tier: P2
+    covers: ["R-CR-821..R-CR-821"]
+    semantics:
+      prerequisites: "单位带[百炼]。"
+      legality: "打出效果：选己方[武装]卡，其必要文本暂不视为未激活，其[装配]费减[A]支付并贴附于本单位（无视装配时点）（821.1.c；费用确定含改费文本 821.1.c.2；无[A]不减免 c.3；无装配费不可付 c.4）。"
+      transition: "多[百炼]分别触发、可不同目标（821.1.c.7），同目标逐个结算（821.1.d）。"
+      timing: null
+      exceptions: ["费用/贴附不可完成→该卡停留原处（821.1.c.5）；[装配]未视为激活、单位未被选取（821.1.c.6）。"]
+      dependencies: ["MECH-KW-EQUIP", "MECH-ATTACHMENT"]
+    notes: ["随首批武装卡启用。"]
+
+  - mechanism_id: MECH-KW-AMBUSH
+    title: 关键词-伏击
+    tier: P1
+    covers: ["R-CR-822..R-CR-822"]
+    semantics:
+      prerequisites: "单位带[伏击]。"
+      legality: "被动：可被打出的有效位置增加「有己方单位的战场」（822.1.b/c）；若打出到有己方单位战场上则获得[反应]（822.1.b 后段）；确认前该位置无单位→该伏击打点失效（822.3）。"
+      transition: null
+      timing: "步骤2 选择位置与步骤5 合法性复核。"
+      exceptions: ["多个[伏击]仅生效一次（822.2）；动词用法按 822.1.d。"]
+      dependencies: ["MECH-PLAY-STEP2-CHOICES", "MECH-PLAY-STEP5-LEGALITY"]
+    test_hints: ["响应中己方单位离场→伏击目的地失效"]
+
+  - mechanism_id: MECH-KW-HUNT
+    title: 关键词-狩猎
+    tier: P2
+    covers: ["R-CR-823..R-CR-823"]
+    semantics:
+      prerequisites: "单位带「狩猎X」（默认 1；823.1.c.2/3 狩猎值）。"
+      legality: "征服或据守战场时，其控制者获得 X 经验（823.1.c.1）。"
+      transition: "多来源狩猎值相加（823.2）。"
+      timing: "征服/据守得分事件。"
+      exceptions: []
+      dependencies: ["MECH-XP", "MECH-SCORING"]
+    notes: ["随 XP 体系启用。"]
+
+  - mechanism_id: MECH-KW-LEVEL
+    title: 关键词-等级
+    tier: P2
+    covers: ["R-CR-824..R-CR-824"]
+    semantics:
+      prerequisites: "卡牌带「[等级[N][>] [文本]」。"
+      legality: "控制者经验≥N→依赖文本生效（824.1.b.1/c）；随控制权变更按新控制者经验判定（824.1.c.1）；低于 N→立即未激活（824.1.d）。"
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: ["MECH-XP", "MECH-DEPENDENT-KEYWORDS"]
+    notes: ["随 XP 体系启用。"]
+
+  - mechanism_id: MECH-KW-UNIQUE
+    title: 关键词-唯我
+    tier: P2
+    covers: ["R-CR-825..R-CR-825"]
+    semantics:
+      prerequisites: "主牌堆卡牌带[唯我]。"
+      legality: "组卡限制：同名仅 1 张（825.3.a）；专属+唯我组合为任意三张专属但每种唯我同名仍限 1（825.3.b）。"
+      transition: null
+      timing: "组卡校验；对局内无效果（825.4）。"
+      exceptions: []
+      dependencies: ["MECH-DECK-CONSTRUCTION"]
+    notes: ["实现于组卡校验器。"]
+
+  - mechanism_id: MECH-KW-BACKLINE
+    title: 关键词-后排
+    tier: P1
+    covers: ["R-CR-826..R-CR-826"]
+    semantics:
+      prerequisites: "单位带[后排]。"
+      legality: "战斗伤害分配时：须先为同控制者无[后排]者分配致命伤害，才可分配给后排者（826.3/826.4.b）；分配仍逐个致命。"
+      transition: null
+      timing: "伤害步骤分配合法性。"
+      exceptions: ["多个[后排]仅生效一次（826.5）。"]
+      dependencies: ["MECH-COMBAT-STEP2-DAMAGE"]
+    test_hints: ["壁垒与后排序列：壁垒先→普通→后排"]
+
+  - mechanism_id: MECH-KW-EMPOWER
+    title: 关键词-强化
+    tier: P2
+    covers: ["R-CR-827..R-CR-827"]
+    semantics:
+      prerequisites: "常驻牌/传奇带「强化[费用]」（来源非目标，827.1.b.1）。"
+      legality: "主动技能：付费用强化来源自身（827.1.c.1）；仅未强化时可激活；费用/时机文本可变体（827.1.c.3/4）。"
+      transition: "完成→来源进入已强化状态（827.2，可引用事件 a）。"
+      timing: null
+      exceptions: ["多[强化]为多个独立主动技能（827.3）。"]
+      dependencies: ["MECH-ACT-EMPOWER", "MECH-KW-EMPOWERED", "MECH-ACTIVATED"]
+    notes: ["随首批强化卡启用。"]
+
+  - mechanism_id: MECH-KW-EMPOWERED
+    title: 关键词-已强化
+    tier: P2
+    covers: ["R-CR-828..R-CR-828"]
+    semantics:
+      prerequisites: "卡牌带「[已强化][>] [文本]」。"
+      legality: "处于已强化状态→依赖文本生效（828.1.c）；失去状态→未激活。"
+      transition: null
+      timing: null
+      exceptions: ["触发条件为「当我变为已强化时」的依赖触发在强化事件时生效并触发（828.1.d）。"]
+      dependencies: ["MECH-ACT-EMPOWER", "MECH-DEPENDENT-KEYWORDS"]
+    notes: ["随首批强化卡启用。"]
+
+  - mechanism_id: MECH-KW-FLOW
+    title: 关键词-流转
+    tier: P2
+    covers: ["R-CR-829..R-CR-829"]
+    semantics:
+      prerequisites: "法术带「流转[费用]」。"
+      legality: "替代费用：可从废牌堆支付流转费打出该法术（829.1.b/c.1）；不改变打出时机与其他权限（829.1.b.2）；多流转费可选其一（829.1.c.3）。"
+      transition: "生成延迟替换：该法术成为已确认链项目后若离链且非自身指示所去→改为放逐（829.1.b.1）。"
+      timing: "步骤3 定总费（替代费用分支）。"
+      exceptions: []
+      dependencies: ["MECH-PLAY-STEP3-COST", "MECH-ACT-BANISH", "MECH-DELAYED"]
+    notes: ["随首批流转卡启用。"]
+
+  # ================= FRONT =================
+  - mechanism_id: MECH-FRONT-MATTER
+    title: 核心规则前言
+    tier: MVP
+    covers: ["R-CR-FRONT..R-CR-FRONT"]
+    semantics:
+      prerequisites: null
+      legality: null
+      transition: null
+      timing: null
+      exceptions: []
+      dependencies: []
+    notes: ["文档标题与版本信息；ruleset_version 的来源锚点。"]

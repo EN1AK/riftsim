@@ -3,3 +3,10 @@ __pycache__/
 .venv/
 workspace/rag/
 api.txt
+.pytest_cache/
+.trae/
+workspace/*.db-shm
+workspace/*.db-wal
+.tmp/diag_traces/
+runs/*/
+!runs/fixtures/
