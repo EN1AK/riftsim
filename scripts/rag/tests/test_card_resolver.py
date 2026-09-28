@@ -165,3 +165,59 @@ def test_llm_extraction_enabled(mini_dbs, monkeypatch):
     item = res["resolved"][0]
     assert item["card_id"] == "OGN-242"
     assert item["source"] == "llm_extract"
+
+
+# ---------- 【】引号片段（群聊惯用方括号） ----------
+
+@pytest.fixture()
+def shuriken_resolver(tmp_path):
+    """同前缀双卡 fixture：「我流奥义！」截断/后缀写法走 fuzzy。"""
+    cards_path = str(tmp_path / "cards.db")
+    db = sqlite3.connect(cards_path)
+    db.execute("""CREATE TABLE cards (card_key TEXT PRIMARY KEY,
+                                      name_en TEXT, name_cn TEXT, sub_title_cn TEXT)""")
+    db.executemany(
+        "INSERT INTO cards VALUES (?,?,?,?)",
+        [
+            ("VEN-031", "Twilight Shroud", "我流奥义！霞阵", None),
+            ("VEN-140", "Shuriken Flip", "我流奥义！隼舞", None),
+        ],
+    )
+    db.commit()
+    db.close()
+    rules_path = str(tmp_path / "rules.db")
+    db = sqlite3.connect(rules_path)
+    db.execute("CREATE TABLE rules (rule_id TEXT PRIMARY KEY, topic TEXT)")
+    db.commit()
+    db.close()
+    return CardResolver(rules_db_path=rules_path, cards_db_path=cards_path)
+
+
+def test_square_brackets_full_name_exact(shuriken_resolver):
+    res = shuriken_resolver.resolve("我方打出【我流奥义！隼舞】造成伤害")
+    assert _card_ids(res) == ["VEN-140"]
+    assert not res["ambiguous"] and not res["unresolved"]
+
+
+def test_square_brackets_truncated_goes_ambiguous(shuriken_resolver):
+    """【我流奥义】截断：fuzzy 双候选（霞阵/隼舞），交给 LLM 仲裁或如实汇报。"""
+    res = shuriken_resolver.resolve("我方打出【我流奥义】选择造成2点伤害")
+    assert not res["resolved"] and not res["unresolved"]
+    assert len(res["ambiguous"]) == 1
+    cand_ids = {c["card_id"] for c in res["ambiguous"][0]["candidates"]}
+    assert cand_ids == {"VEN-031", "VEN-140"}
+    assert res["ambiguous"][0]["mention"] == "我流奥义"
+
+
+def test_square_brackets_suffix_fuzzy_unique(shuriken_resolver):
+    res = shuriken_resolver.resolve("【隼舞】这张卡什么效果")
+    assert _card_ids(res) == ["VEN-140"]
+    assert res["resolved"][0]["confidence"] == "fuzzy"
+
+
+def test_bare_truncated_name_stays_unmentioned(shuriken_resolver):
+    """裸写截断名不加通道：不静默解析、也不报 unresolved（刻意保持）。"""
+    res = shuriken_resolver.resolve("我流奥义的结算怎么定")
+    assert not res["resolved"]
+    assert not res["ambiguous"]
+    assert not res["unresolved"]

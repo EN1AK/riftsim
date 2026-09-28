@@ -41,8 +41,8 @@ DEFAULT_CARDS_DB = os.path.join(ROOT, "cards_bilingual.db")
 _RE_CARD_ID = re.compile(r"[A-Za-z]{2,4}-\d{3}[a-zA-Z]?")
 # R-CARD topic："card:<id> (<EN> / <CN>)" 或只有 CN
 _RE_TOPIC = re.compile(r"^card:([^\s()]+)\s*(?:\((.*)\))?\s*$")
-# 引号片段
-_RE_QUOTED = re.compile(r"[《「\"“]([^《》「」\"“”]{1,40}?)[》」\"”]")
+# 引号片段（含群聊惯用的【】；截断写法由此进入 fuzzy 兜底）
+_RE_QUOTED = re.compile(r"[《「\"“【]([^《》「」\"“”【】]{1,40}?)[》」\"”】]")
 
 # 归一化时映射为空格的字符
 _SPACE_CHARS = u"·・"
