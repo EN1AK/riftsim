@@ -64,6 +64,12 @@ def legal_for_request(state: GameState, req: DecisionRequest) -> list[Action]:
             Action(ActionKind.RESOLVE_CHOICE, req.player, params={"order": o})
             for o in req.options.get("orders", [])
         ]
+    if k == DecisionKind.SCOUT_KEEP:
+        # 436.1/817.2.a：回收或不回收（留顶）
+        return [
+            Action(ActionKind.RESOLVE_CHOICE, req.player, params={"choice": c})
+            for c in ("keep", "recycle")
+        ]
     return []
 
 

@@ -110,7 +110,9 @@ def _dispatch(state: GameState, req: DecisionRequest, action: Action) -> None:
         if ak == ActionKind.END_MAIN:
             state.current_request = None
             phaser.end_turn(state)
-            state.sub_step = "pending_start"
+            if not state.chain_live():
+                # 结束触发链未挂起时才直入下回合启动（链挂起期间 sub_step="end_after_triggers" 由 advance 续段）
+                state.sub_step = "pending_start"
             return
         from . import movement, playing
 
@@ -145,6 +147,9 @@ def _dispatch(state: GameState, req: DecisionRequest, action: Action) -> None:
         state.current_request = None
         _open_pending_at(state, action.params["battlefield"])
         return
+    if k == DecisionKind.SCOUT_KEEP:
+        _handle_scout_keep(state, req, action)
+        return
     if k in (DecisionKind.CHOOSE_TARGETS, DecisionKind.CHOOSE_LOCATION, DecisionKind.CHOOSE_MODE,
              DecisionKind.ORDER_TRIGGERS):
         from . import chain_sys
@@ -152,6 +157,26 @@ def _dispatch(state: GameState, req: DecisionRequest, action: Action) -> None:
         chain_sys.handle_choice(state, req, action)
         return
     raise IllegalActionError(state.step_id, action.actor, action.digest(), f"unhandled request {k}")
+
+
+def _handle_scout_keep(state: GameState, req: DecisionRequest, action: Action) -> None:
+    """洞察去留回答（436.1/817.2.a）：keep 留顶（817.2.b）；recycle 回收置底（416）。"""
+    from .resources import recycle
+
+    uid = req.options["uids"][0]
+    p = state.players[req.player]
+    state.current_request = None
+    if not p.main_deck or p.main_deck[-1] != uid:
+        # 防御：请求产生后牌堆顶不可变（无窗口插入），异常即不变更仅记录
+        emit(state, EventType.EXECUTE, rule_ids=["R-CR-436.1"],
+             public={"player": req.player, "scout_stale": True})
+        return
+    choice = action.params.get("choice")
+    assert choice in ("keep", "recycle"), choice  # legal_for_request 已约束成员
+    emit(state, EventType.EXECUTE, rule_ids=["R-CR-436.1"],
+         public={"player": req.player, "scout": choice})
+    if choice == "recycle":
+        recycle(state, uid, rule="R-CR-436.1")
 
 
 def advance(state: GameState) -> None:
@@ -172,6 +197,21 @@ def advance(state: GameState) -> None:
         if state.sub_step == "pending_start":
             state.sub_step = ""
             phaser.start_turn(state)
+            continue
+        if state.sub_step == "begin_after_triggers":
+            # 816 瞬息等开始触发链已结算干净 → 开始阶段续段（315.2 计分起）
+            state.sub_step = ""
+            phaser.begin_after_triggers(state)
+            continue
+        if state.sub_step == "begin_after_hold_triggers":
+            # 据守计分触发链已结算干净 → 召出/抽牌/主阶段入口
+            state.sub_step = ""
+            phaser.begin_after_hold_triggers(state)
+            continue
+        if state.sub_step == "end_after_triggers":
+            # 结束阶段触发链已结算干净 → 特殊清理/移交
+            state.sub_step = ""
+            phaser.end_after_triggers(state)
             continue
         if state.phase == Phase.SETUP:
             if len(state.mulligan_set) == 2 and not state.current_request:

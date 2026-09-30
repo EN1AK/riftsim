@@ -57,6 +57,18 @@
 - 受影响模块：phaser 召出子步骤、runner 长对局。
 - 需要人工确认的问题：符文牌堆空时的官方结算。
 
+## OPEN-7 UNL-019 枯萎战斧「deal 4 to me」的对象语义（卡面「我」指代未裁决）
+
+- rule_id: R-CARD-UNL-019（卡面条目）；关联 R-CR-383.3（触发式技能入链）、R-CR-417.1（伤害）
+- 原文引用（EN，bilingual 修复后完整）："[Equip] ... At the end of your turn, if you didn't conquer this turn, unattach me and deal 4 damage to me."
+- 冲突/歧义解释候选：
+  - A「me」=装备自身：卸载后对装备自身造成 4——装备非单位、toughness 语义不适用，伤害落到装备上无规则落点（142 伤害对象定义以单位/玩家为主，装备受伤在 rules.db 无可执行条文）；
+  - B「me」=宿主单位（贴附的单位）：卸载后对宿主造成 4——与 719.5 卸除语义可衔接（先 unattach 脱离宿主、再对「曾宿主」造成伤害，需跨贴附态记忆 last_known_host），卡面叙事（战斧反噬持有者）也更顺。
+- 现状：rules.db 搜索无对应 R-CARD 裁定条目；two-step（unattach→deal）中「me」在 unattach 结算后指代对象是否随贴附态改变，383/359 段无明确条文。
+- 受影响模块：383 触发注册表二批（end_of_turn_own 触发 + unattach_self/last_damage 载荷）、cardfx/unl.py UNL-019 登记。
+- 需要人工确认的问题：B 解释是否官方意图（近似判例检查 FAQ/裁定库无命中）；确认前 UNL-019 保持草稿档、trigger payload 不接线。
+- 下一步：383 二批实现 end_of_turn_own 触发与 unattach_self 载荷时，先按 B 草拟测试但 leave reviewed=False；用户/官方裁定后收口。
+
 ## CLOSED 记录（阶段 1 中澄清、不再未决）
 
 | 条目 | 结论 |

@@ -26,6 +26,7 @@ class PlayerState:
     score: int = 0
     # 每战场得分回合标记（470：每战场每回合每玩家限 1 分）
     score_marks: dict[int, list[int]] = field(default_factory=dict)
+    conquered_this_turn: bool = False                       # 本回合是否征服过（383 触发条件面，UNL-019 类）
     conceded: bool = False
     first_channel_extra: int = 0                            # 485 后手首回合补偿 1
 
@@ -198,6 +199,7 @@ class GameState:
                 "rune_energy": p.rune_energy, "rune_power": dict(p.rune_power),
                 "score": p.score,
                 "score_marks": {str(k): sorted(v) for k, v in p.score_marks.items()},
+                "conquered_this_turn": p.conquered_this_turn,
                 "conceded": p.conceded, "first_channel_extra": p.first_channel_extra,
             }
 
@@ -240,6 +242,7 @@ class GameState:
                 "might": d.might, "might_bonus": d.might_bonus,
                 "tags": sorted(d.tags), "hero_tag": d.hero_tag,
                 "keywords": sorted(k.value for k in d.keywords),
+                "keyword_values": dict(d.keyword_values),
                 "pool": d.pool,
                 "abilities": [
                     {
@@ -249,6 +252,16 @@ class GameState:
                         "grant_energy": a.grant_energy,
                         "grant_power_self_domain": a.grant_power_self_domain,
                         "immediate": a.immediate, "rules_ref": list(a.rules_ref),
+                        "damage": a.damage, "target_scope": a.target_scope,
+                        "grant_power_domain": a.grant_power_domain,
+                        "cost_symbols": list(a.cost_symbols),
+                        "draw_count": a.draw_count,
+                        "pump_value": a.pump_value,
+                        "resolve_fn": a.resolve_fn,
+                        "trigger": a.trigger,
+                        "payload": a.payload,
+                        "value": a.value,
+                        "condition": a.condition,
                     }
                     for a in d.abilities
                 ],
@@ -328,6 +341,7 @@ class GameState:
                 rune_energy=p["rune_energy"], rune_power=dict(p["rune_power"]),
                 score=p["score"],
                 score_marks={int(k): set(v) for k, v in p["score_marks"].items()},
+                conquered_this_turn=p.get("conquered_this_turn", False),
                 conceded=p["conceded"], first_channel_extra=p["first_channel_extra"],
             )
             for p in data["players"]
@@ -413,6 +427,7 @@ class GameState:
                 might=v["might"], might_bonus=v["might_bonus"],
                 tags=frozenset(v["tags"]), hero_tag=v["hero_tag"],
                 keywords=frozenset(Keyword(kw) for kw in v["keywords"]),
+                keyword_values=dict(v.get("keyword_values", {})),
                 pool=v["pool"],
                 abilities=tuple(
                     AbilityDef(
@@ -422,6 +437,16 @@ class GameState:
                         grant_energy=a["grant_energy"],
                         grant_power_self_domain=a["grant_power_self_domain"],
                         immediate=a["immediate"], rules_ref=tuple(a["rules_ref"]),
+                        damage=a.get("damage", 0), target_scope=a.get("target_scope", ""),
+                        grant_power_domain=a.get("grant_power_domain", ""),
+                        cost_symbols=tuple(a.get("cost_symbols", ())),
+                        draw_count=a.get("draw_count", 0),
+                        pump_value=a.get("pump_value", 0),
+                        resolve_fn=a.get("resolve_fn", ""),
+                        trigger=a.get("trigger", ""),
+                        payload=a.get("payload", ""),
+                        value=int(a.get("value", 0)),
+                        condition=a.get("condition", ""),
                     )
                     for a in v["abilities"]
                 ),

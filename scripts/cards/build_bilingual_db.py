@@ -103,7 +103,22 @@ def load_en() -> dict:
             "might_bonus": r["might_bonus"],
             "rarity_en": r["rarity"],
             "tags_en": r["tags"],
-            "text_en": r["text_plain"],
+            # 修复 2026-09-30：卡本体效果如果写在 effect_plain 拓展栏（32 张），
+            # 原版只取 text_plain 导致整列丢弃（例 UNL-019 枯萎战斧的
+            # 「回合结束时未征服→卸载+造成4点」）——合并两栏。
+            # 另 2026-09-30：过滤 effect_plain 中的抓取噪音行（如 VEN-103 的 "1" 页码 DIV）。
+            "text_en": (
+                (r["text_plain"] or "").rstrip()
+                + (
+                    ("\n" + r["effect_plain"].strip())
+                    if (
+                        (r["effect_plain"] or "").strip()
+                        and len((r["effect_plain"] or "").strip()) > 3
+                        and not (r["effect_plain"] or "").strip().isdigit()
+                    )
+                    else ""
+                )
+            ) or None,
             "image_url_en": r["image_url"],
         }
     return out

@@ -167,6 +167,46 @@ def _execute_pass(state: GameState, player: int) -> None:
 
 
 def handle_choice(state: GameState, req: DecisionRequest, action: Action) -> None:
-    """CHOOSE_* 回答（骨架池一般纳税人——阶段 4 卡牌效果时扩展）。"""
+    """CHOOSE_* 回答。reason="trigger_discard"：383 触发弃抽续段（弃 1 手牌→抽 N，422.1+413.1）。"""
+    options = req.options or {}
+    if options.get("reason") == "trigger_discard":
+        from .resources import discard, draw
+
+        player = req.player
+        uid = action.params.get("choice")
+        if uid not in state.players[player].hand:
+            raise IllegalActionError(state.step_id, action.actor, action.digest(),
+                                     "trigger_discard: choice not in hand (R-CR-422.1)")
+        state.current_request = None
+        discard(state, player, [uid], rule="R-CR-422.1")
+        n = int(options.get("then_draw") or 0)
+        if n > 0:
+            draw(state, player, n, rule="R-CR-413.1")
+        emit(state, EventType.EXECUTE, rule_ids=["R-CR-383.3"],
+             public={"player": player, "trigger_followup": "discard_draw",
+                     "item_id": options.get("item_id")})
+        return
+    if options.get("reason") == "trigger_deal_enemy_here":
+        # 383 触发「此处一名敌方单位」目标续段：结算时选择（时点近似）+ 复查（359.3.e.9）
+        from .resources import deal_damage
+
+        player = req.player
+        uid = action.params.get("choice")
+        o = state.objects.get(uid)
+        legal_target = (
+            o is not None and o.zone == Zone.BATTLEFIELD and o.attached_to is None
+            and o.controller != player
+            and CardType.UNIT in state.card_registry[o.def_id].card_types
+        )
+        if not legal_target:
+            raise IllegalActionError(state.step_id, action.actor, action.digest(),
+                                     "trigger_deal_enemy_here: not a legal foe unit (R-CR-359.3.e.9)")
+        state.current_request = None
+        deal_damage(state, uid, int(options.get("damage") or 0),
+                    source=f"trigger:uid{options.get('source_uid')}", rule="R-CR-417.1")
+        emit(state, EventType.EXECUTE, rule_ids=["R-CR-383.3"],
+             public={"player": player, "trigger_followup": "deal_enemy_here",
+                     "item_id": options.get("item_id"), "target": uid})
+        return
     raise IllegalActionError(state.step_id, action.actor, action.digest(),
                              f"choose not supported in skeleton pool: {req.kind}")

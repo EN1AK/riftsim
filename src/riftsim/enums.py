@@ -80,7 +80,9 @@ class LinkState(str, Enum):
 
 
 class Keyword(str, Enum):
-    """关键词（R-CR-800..829）。MVP 骨架仅枚举；无文本骨架卡默认不带。"""
+    """关键词（R-CR-800..829 全部 25 个术语；无文本骨架卡默认不带）。
+    引擎已接线：806/813（时机）、810/811（移动/待命）、815/826（伤害分组）；
+    其余仅作印刷关键词解析占位（语义按 worklog 未实现清单，随卡逐步接通）。"""
 
     ACCELERATE = "accelerate"   # 805 急速
     ACTION = "action"           # 806 迅捷
@@ -95,8 +97,18 @@ class Keyword(str, Enum):
     TANK = "tank"               # 815 壁垒
     TEMPORARY = "temporary"     # 816 瞬息
     VISION = "vision"           # 817 预知
+    EQUIP = "equip"             # 818 装配（P2，未接线）
+    QUICKDRAW = "quickdraw"     # 819 灵便（P2，未接线）
+    REPEAT = "repeat"           # 820 回响（P2，未接线）
+    WEAPONMASTER = "weaponmaster"  # 821 百炼（P2，未接线）
     AMBUSH = "ambush"           # 822 伏击
+    HUNT = "hunt"               # 823 狩猎（P2，随 XP 体系）
+    LEVEL = "level"             # 824 等级（P2，随 XP 体系）
+    UNIQUE = "unique"           # 825 唯我（组卡校验器消费）
     BACKLINE = "backline"       # 826 后排
+    EMPOWER = "empower"         # 827 强化（P2，未接线）
+    EMPOWERED = "empowered"     # 828 已强化（P2，未接线）
+    FLOW = "flow"               # 829 流转（P2，未接线）
 
 
 class DecisionKind(str, Enum):

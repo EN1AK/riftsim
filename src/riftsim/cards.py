@@ -12,18 +12,34 @@ from .version import CARD_POOL_VERSION
 class AbilityDef:
     """技能的结构化描述骨架（MECH-ABILITIES-OVERVIEW）。
     M1 仅支持符文自带两类获得资源技能（R-CR-164.2）与框架位；
-    P1/阶段 4 接入效果原语后扩展 op/tags。
+    阶段 4 起 effects.py 按卡面白名单句式编译出 kind="enters_exhausted"/"deal_damage"。
+    新增字段均为可选默认，向后兼容骨架池定义。
     """
 
     ability_id: str
-    kind: str            # "gain_resource" | "play_primitive"(预留)
-    timing: str = "action"   # "action"(己方回合开环) | "reaction"(闭环亦可, 813)
+    kind: str            # "gain_resource" | "deal_damage" | "enters_exhausted"(静态，不可激活) | "play_primitive"(预留)
+    timing: str = "action"   # "action"(己方回合开环) | "reaction"(闭环亦可, 813) | "passive"(静态)
     cost_exhaust_self: bool = False   # [E] 费用（377.2.a.1）
     cost_recycle_self: bool = False   # 回收此牌费用
     grant_energy: int = 0             # 获得法力数
     grant_power_self_domain: bool = False  # [C]：获得牌自身特性符能
     immediate: bool = True            # 获得资源技能确认后立即结算（429.2/337.2）
     rules_ref: tuple[str, ...] = ()
+    # ---- 阶段 4 效果原语字段（仅 kind="deal_damage" 使用；417.1）----
+    damage: int = 0                   # 结算时造成伤害点数
+    target_scope: str = ""            # 目标范围："unit" 任一单位 | "unit_at_battlefield" 战场上的单位
+    # ---- 批次 2 扩展字段 ----
+    grant_power_domain: str = ""      # 获得指定特性符能（装备资源技能 [C]-域，如 "R"）替代 grant_power_self_domain
+    cost_symbols: tuple[str, ...] = ()  # 可选附加费符号（规范化："1","A","R",...；805/批次 2-e）
+    draw_count: int = 0               # 抽牌数（spell_draw / on_play_draw / vision_scout 衍生）
+    pump_value: int = 0               # 本回合临时战力修正（spell_pump / on_play_pump；317.2.c/473-480）
+    # ---- per-card 脚本（cardfx）命名回调；快照只存 key，函数体不进序列化 ----
+    resolve_fn: str = ""              # 非空时结算优先调 riftsim.cardfx.RESOLVERS[key]（孤例效果适配层）
+    # ---- 383 触发注册表字段（kind="trigger" 使用；383.3 条件满足入链）----
+    trigger: str = ""                 # 触发事件："hold"(据守) | "conquer"(征服) | "move"(移动) | "atk_defend"(进攻/防守身份) | "end_of_turn_own"(回合结束)
+    payload: str = ""                 # 触发载荷："score" | "channel" | "discard_draw" | "pump_turn" | "unattach_self_deal_host" | "deal_all_enemy_here" | "deal_enemy_here"
+    value: int = 0                    # 载荷数量参数（分数/符文数/弃抽数/伤害数）
+    condition: str = ""               # 触发条件（383.3 前置，不满足不注册）："no_conquer_this_turn" 等
 
 
 @dataclass(frozen=True)
@@ -41,6 +57,7 @@ class CardDefinition:
     tags: frozenset[str] = frozenset()             # 标签：hero / 专属等（133.4）
     hero_tag: str | None = None                    # 英雄标签（103.2.a.2 选定英雄匹配键）
     keywords: frozenset[Keyword] = frozenset()     # 印刷关键词（800）
+    keyword_values: dict[str, int] = field(default_factory=dict)  # 内嵌数值关键词（807.1.b.3/809.1.b.3/814.1.b.3）
     abilities: tuple[AbilityDef, ...] = ()         # 规则文本技能（135）
     pool: str = CARD_POOL_VERSION
 

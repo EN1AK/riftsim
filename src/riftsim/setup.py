@@ -43,6 +43,20 @@ def reset(seed: int, config: GameConfig | None = None) -> GameState:
         for c in itertools.chain([d.legend, d.chosen_hero], d.main_deck, d.rune_deck, d.battlefields):
             registry[c.def_id] = c
 
+    cfg_dict: dict = {"mode": config.mode,
+                      "decks": [d.deck_id or f"deck{i}" for i, d in enumerate(decks)],
+                      "max_steps": config.max_steps}
+    if config.record_decklists:
+        # 完整 def_id 清单（阶段 5 真卡组回放重建依据；trace header.config 携带，向后兼容新增字段）
+        cfg_dict["decklists"] = [
+            {"deck_id": d.deck_id or f"deck{i}", "legend": d.legend.def_id,
+             "chosen_hero": d.chosen_hero.def_id,
+             "main": [c.def_id for c in d.main_deck],
+             "runes": [c.def_id for c in d.rune_deck],
+             "battlefields": [c.def_id for c in d.battlefields]}
+            for i, d in enumerate(decks)
+        ]
+
     state = GameState(
         meta=GameMeta(
             match_id=config.match_id or _new_match_id(seed, decks),
@@ -52,8 +66,7 @@ def reset(seed: int, config: GameConfig | None = None) -> GameState:
             spec_hash=spec_hash(),
             card_pool_version=CARD_POOL_VERSION,
             win_score=config.win_score,
-            config={"mode": config.mode, "decks": [d.deck_id or f"deck{i}" for i, d in enumerate(decks)],
-                    "max_steps": config.max_steps},
+            config=cfg_dict,
             trace_level=config.trace_level,
             max_steps=config.max_steps,
         ),

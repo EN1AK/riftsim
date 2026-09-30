@@ -102,7 +102,18 @@ def observe(state: GameState, player: int) -> dict[str, Any]:
     req_view = None
     if state.current_request:
         req_view = dict(state.current_request)
-        # 请求参数过滤：不能包含对手私有 uid（MVP 请求均针对公开/自身对象，防御式保留）
+        # 请求参数过滤：非请求方不得看到洞察牌顶 uid（436.1 私密查看；隐藏信息隔离）
+        from .enums import DecisionKind
+
+        opts = dict(req_view.get("options") or {})
+        if req_view.get("kind") == DecisionKind.SCOUT_KEEP.value and req_view.get("player") != player:
+            opts.pop("uids", None)
+            req_view["options"] = opts
+        if (req_view.get("kind") == DecisionKind.CHOOSE_MODE.value
+                and opts.get("reason") == "trigger_discard"
+                and req_view.get("player") != player):
+            opts.pop("choices", None)  # 383 弃抽续段：手牌 uid 选择面仅请求方可见（128）
+            req_view["options"] = opts
 
     return {
         "schema": OBS_SCHEMA_VERSION,

@@ -19,10 +19,18 @@ def start_combat(state: GameState, bf: BattlefieldState) -> None:
     state.showdown_bf = bf.index
     state.focus = attacker
     state.sd_pass = []
-    # 攻/守触发入链（464：进攻方→非防守方回合序→防守方）——骨架池无触发，挂点
     emit(state, EventType.COMBAT_START, rule_ids=["R-CR-460.1", "R-CR-463.1", "R-CR-464.1"],
          public={"battlefield": bf.index, "attacker": attacker, "defender": defender})
-    state.current_request = DecisionRequest(DecisionKind.SHOWDOWN_FOCUS, attacker).to_dict()
+    # 383.3：「当我进攻或防守」式触发——攻方宿主先入链、守方后入链（464 顺序近似；
+    # 链结算后进焦点窗：advance 的 showdown 焦点重建接管）
+    from . import triggers
+
+    triggers.fire(state, "atk_defend", player=attacker, battlefield_index=bf.index)
+    triggers.fire(state, "atk_defend", player=defender, battlefield_index=bf.index)
+    if not state.chain_live():
+        state.current_request = DecisionRequest(DecisionKind.SHOWDOWN_FOCUS, attacker).to_dict()
+    else:
+        state.current_request = None
 
 
 def showdown_closed(state: GameState, bf: BattlefieldState) -> None:
@@ -36,7 +44,7 @@ def showdown_closed(state: GameState, bf: BattlefieldState) -> None:
         _resolve_combat(state, bf)  # 无单位侧不分配，直接进入结算
         return
     c.assign_side = c.attacker
-    c.pool = sum(effective_might(state, u) for u in atk_units)
+    c.pool = _side_pool(state, atk_units, role="attacker")  # 强攻仅进攻身份生效（807.1.d.1）
     c.assigned = {}
     emit(state, EventType.COMBAT_DAMAGE_ASSIGNED, rule_ids=["R-CR-465.2"],
          public={"battlefield": bf.index, "side": c.attacker, "pool": c.pool})
@@ -55,6 +63,21 @@ def _units(state: GameState, bf: BattlefieldState, seat: int) -> list[int]:
     ]
 
 
+def _has_ability(state: GameState, uid: int, kind: str) -> bool:
+    d = state.card_registry[state.obj(uid).def_id]
+    return any(ab.kind == kind for ab in d.abilities)
+
+
+def _side_pool(state: GameState, units: list[int], *, role: str) -> int:
+    """战斗伤害池（465.2.c 战力总和）：身份期关键词计入（807.1.d.1/814.1.d.1）；
+    「无法造成战斗伤害」的单位不贡献（卡面文本，R-CR-465.2 分配前提）。"""
+    return sum(
+        effective_might(state, u, role=role)
+        for u in units
+        if not _has_ability(state, u, "no_combat_damage")
+    )
+
+
 def legal_assign_actions(state: GameState, req: DecisionRequest) -> list[Action]:
     """合法分配枚举（465.2.c）：组序 壁垒→普通→后排；逐目标不得超致少（战力-已伤）；
     先致命后摊分：目标达到致少后才允许对下一组/下一目标分配；
@@ -67,7 +90,11 @@ def legal_assign_actions(state: GameState, req: DecisionRequest) -> list[Action]
     groups = _assign_groups(state, targets)
     from .playing import keywords_of
 
-    caps = {u: max(0, effective_might(state, u) - state.obj(u).damage) for u in targets}
+    # 致少口径含身份期关键词：被分配方的当前战力（465.2.c.4；432.1.a 坚守示例）
+    c = bf.combat
+    role = "attacker" if c is not None and enemy == c.attacker else \
+        "defender" if c is not None and enemy == c.defender else None
+    caps = {u: max(0, effective_might(state, u, role=role) - state.obj(u).damage) for u in targets}
     total_cap = sum(caps.values())
     total = min(pool, total_cap)
     if total == 0:
@@ -79,7 +106,8 @@ def legal_assign_actions(state: GameState, req: DecisionRequest) -> list[Action]
 
 
 def _assign_groups(state: GameState, targets: list[int]) -> list[list[int]]:
-    """分配优先级组（壁垒 815.1.b → 普通 → 后排 826.3）。"""
+    """分配优先级组（壁垒 815.1.b → 普通 → 后排 826.3/「最后承担伤害」465.2.c.2/c.6）。
+    壁垒与「最后」排斥时任选其一（465.2.c.8）——现有卡池无同体实例，P2 记录。"""
     from .playing import keywords_of
 
     tank, mid, back = [], [], []
@@ -87,7 +115,7 @@ def _assign_groups(state: GameState, targets: list[int]) -> list[list[int]]:
         kws = keywords_of(state, u)
         if Keyword.TANK in kws:
             tank.append(u)
-        elif Keyword.BACKLINE in kws:
+        elif Keyword.BACKLINE in kws or _has_ability(state, u, "last_damage"):
             back.append(u)
         else:
             mid.append(u)
@@ -172,7 +200,7 @@ def handle_assign(state: GameState, req: DecisionRequest, action: Action) -> Non
             _resolve_combat(state, bf)
             return
         c.assign_side = defender
-        c.pool = sum(effective_might(state, u) for u in _units(state, bf, defender))
+        c.pool = _side_pool(state, _units(state, bf, defender), role="defender")  # 814.1.d.1
         c.assigned = {}
         state.current_request = DecisionRequest(
             DecisionKind.ASSIGN_DAMAGE, defender,

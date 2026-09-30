@@ -34,22 +34,49 @@ def replay(initial, action_log: Sequence[Action], *, seed: int | None = None) ->
     return state
 
 
+def _config_from_header(header: dict) -> "GameConfig":
+    """按 trace header 重建运行配置（T-0131/0132）。
+    header.config 含 decklists（阶段 5 真卡组）→ 从 carddb 重建 DeckList；
+    无 decklists（旧骨架 fixture）→ 骨架卡组 fallback，二者 meta.config 与生成端一致
+    （state_hash 覆盖运行配置：trace_level 与 decklists 存在性必须与生成端同构，
+    否则会造成确定性“假分叉”）。"""
+    from .cards import DeckList, make_skeleton_deck
+    from .config import GameConfig as _Cfg
+
+    cfg_rec = header.get("config") or {}
+    decklists = cfg_rec.get("decklists")
+    trace_level = header.get("trace_level", "summary")
+    if decklists:
+        from .carddb import load_card_db
+
+        cdb = load_card_db("cards_bilingual.db")
+        decks = []
+        for dl in decklists:
+            def _d(def_id: str):
+                return cdb.defs[def_id]
+
+            decks.append(DeckList(
+                legend=_d(dl["legend"]), chosen_hero=_d(dl["chosen_hero"]),
+                main_deck=tuple(_d(x) for x in dl["main"]),
+                rune_deck=tuple(_d(x) for x in dl["runes"]),
+                battlefields=tuple(_d(x) for x in dl["battlefields"]),
+                deck_id=dl.get("deck_id", ""),
+            ))
+        return _Cfg(decks=(decks[0], decks[1]), trace_level=trace_level,
+                    max_steps=cfg_rec.get("max_steps", 5000), record_decklists=True)
+    return _Cfg(
+        decks=(make_skeleton_deck("A", "hero-a"), make_skeleton_deck("B", "hero-b")),
+        trace_level=trace_level,
+    )
+
+
 def trace_replay_check(trace_path: str | Path) -> dict:
     """T-0131 回放校验：逐步校验 chosen ∈ legal、事件 hash 链（[before,after] 区间一致）、
     终态 hash 与 footer 一致。"""
     recs = [json.loads(x) for x in Path(trace_path).read_text(encoding="utf-8").splitlines() if x.strip()]
     header = recs[0]
     footer = recs[-1]
-    # state_hash 覆盖运行配置（含 trace_level）：回放须以同等级复位，
-    # 否则 debug/summary 之间的 meta 差异会造成确定性“假分叉”。
-    from .cards import make_skeleton_deck
-    from .config import GameConfig as _Cfg
-
-    cfg = _Cfg(
-        decks=(make_skeleton_deck("A", "hero-a"), make_skeleton_deck("B", "hero-b")),
-        trace_level=header.get("trace_level", "summary"),
-    )
-    state = engine.reset(header["seed"], cfg)
+    state = engine.reset(header["seed"], _config_from_header(header))
     checked = 0
     hash_chain_ok = True
     for r in recs:

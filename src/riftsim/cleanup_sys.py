@@ -26,14 +26,30 @@ def win_check(state: GameState) -> bool:
 
 
 def lethal_marked(state: GameState, uid: int) -> bool:
-    """致命标记（142.4/323.5）：伤害≥当前战力（伤害>0 才构成致命语境）。"""
+    """致命标记（142.4/323.5）：伤害≥当前战力（伤害>0 才构成致命语境）。
+    战斗期间身份未移除（466.7 前），强攻/坚守仍计入当前战力（807.1.d.1/814.1.d.1）。"""
     o = state.obj(uid)
     d = state.card_registry[o.def_id]
     if CardType.UNIT not in d.card_types:
         return False
     if o.damage <= 0:
         return False
-    return o.damage >= effective_might(state, uid)
+    return o.damage >= effective_might(state, uid, role=_combat_role(state, uid))
+
+
+def _combat_role(state: GameState, uid: int) -> str | None:
+    """单位在进行中战斗里的身份（仅其所在战场为当前对决战场时）。"""
+    if state.showdown_bf is None:
+        return None
+    c = state.battlefields[state.showdown_bf].combat
+    o = state.obj(uid)
+    if c is None or o.battlefield != state.showdown_bf:
+        return None
+    if o.controller == c.attacker:
+        return "attacker"
+    if o.controller == c.defender:
+        return "defender"
+    return None
 
 
 def cleanup(state: GameState) -> None:

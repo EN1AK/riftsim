@@ -71,10 +71,11 @@ def handle_move(state: GameState, action: Action) -> None:
 
         if o.zone == Zone.BATTLEFIELD and Keyword.GANKING not in keywords_of(state, uid):
             raise IllegalActionError(state.step_id, player, action.digest(), "battlefield-to-battlefield needs [游走] (R-CR-144.4.c.1)")
-        _untrack(state, uid)
+        _untrack(state, uid, board_move=True)  # 场上区域内移动：719.5 不卸除
         bf = state.battlefields[idx]
         o.zone, o.zone_owner, o.battlefield = Zone.BATTLEFIELD, None, idx
         bf.occupants.append(uid)
+        _sync_attachments(state, uid)  # 719.3.a：顶部卡变位置时贴附卡跟随
         o.exhausted = True  # 144.2 费用
         emit(state, EventType.MOVE, rule_ids=["R-CR-144.4.a", "R-CR-446.3"], card_ids=[f"uid:{uid}"],
              public={"uid": uid, "from": _loc_str(origin), "to": f"battlefield:{idx}"})
@@ -84,14 +85,28 @@ def handle_move(state: GameState, action: Action) -> None:
             bf.contested_by = player
             emit(state, EventType.CONTEST, rule_ids=["R-CR-450.1"], card_ids=[f"uid:{uid}"],
                  public={"battlefield": idx, "by": player})
+        # 383.3：「当我移动到一处战场」式触发（贴附卡随宿主 719.3.a 抵达后入链；446.3 移动本身不开链）
+        from . import triggers
+
+        triggers.fire(state, "move", player=player, battlefield_index=idx)
     else:  # to base（144.4.b）
-        _untrack(state, uid)
+        _untrack(state, uid, board_move=True)  # 场上区域内移动：719.5 不卸除
         o.zone, o.zone_owner, o.battlefield = Zone.BASE, player, None
         state.base_occupants[player].append(uid)
+        _sync_attachments(state, uid)  # 719.3.a：顶部卡变位置时贴附卡跟随
         o.exhausted = True
         emit(state, EventType.MOVE, rule_ids=["R-CR-144.4.b", "R-CR-446.3"], card_ids=[f"uid:{uid}"],
              public={"uid": uid, "from": _loc_str(origin), "to": "base"})
     state.current_request = None  # 移动完成；453 清理由 engine.advance 保证
+
+
+def _sync_attachments(state: GameState, host_uid: int) -> None:
+    """719.3.a：顶部卡位置变化时，贴附卡同步位置（贴附期间不进区域 occupants 列表；
+    列表登记由 719.5 卸除路径负责）。"""
+    o = state.obj(host_uid)
+    for att_uid in list(o.attachments):
+        a = state.obj(att_uid)
+        a.zone, a.zone_owner, a.battlefield = o.zone, o.zone_owner, o.battlefield
 
 
 def _loc_str(origin: tuple) -> str:

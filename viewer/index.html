@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RiftSim 对局回放器 — 只读回防 · 不驱动引擎</title>
+<!-- 完全离线：不加载任何外部 CDN / 字体 / 网络资源 -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>RiftSim 对局回放器</h1>
+  <span class="badge">只读回防 · 不驱动引擎</span>
+  <div id="loadArea">
+    <input type="file" id="fileInput" accept=".jsonl,.txt" multiple>
+    <span id="dropHint">或将一个 / 多个 trace .jsonl 拖入本页</span>
+  </div>
+</header>
+
+<div id="errorBox"></div>
+<div id="warnBox"></div>
+
+<section id="indexSection">
+  <h2>对局索引（§3.5）</h2>
+  <div id="indexTableWrap"><span class="unknown">尚未加载 trace。trace 由引擎离线导出，本页面仅消费记录。</span></div>
+</section>
+
+<section id="replaySection" class="hidden">
+  <h2>回放</h2>
+
+  <div class="toolbar">
+    <div class="group">
+      <label>视角（§3.4）</label>
+      <button data-persp="P0" class="perspBtn">P0</button>
+      <button data-persp="P1" class="perspBtn">P1</button>
+      <button data-persp="OBSERVER" class="perspBtn active">Observer</button>
+      <button data-persp="PRIVILEGED" class="perspBtn">Privileged</button>
+    </div>
+    <div class="group">
+      <label>播放（§3.2）</label>
+      <button id="btnPrev" title="← 上一帧">◀</button>
+      <button id="btnPlay">▶ 播放</button>
+      <button id="btnNext" title="→ 下一帧">▶</button>
+      <select id="speedSel">
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+    </div>
+    <div class="group">
+      <label>跳转</label>
+      <select id="anchorSelect"><option value="">（回合/战斗/得分/终局锚点）</option></select>
+      <button id="btnAnchor">跳转</button>
+    </div>
+    <span class="mono" id="matchMeta"></span>
+  </div>
+
+  <div id="privGate" class="priv-lock hidden">
+    Privileged 视角为受控离线调试视角。<br>
+    <button id="btnPrivAuth">我已获授权，解锁特权视角</button>
+  </div>
+
+  <div id="requestBanner" class="none">当前请求：未知</div>
+
+  <div class="arena" id="arenaBox">
+    <div class="bfs" id="bfRow"></div>
+    <div id="playerBox0"></div>
+    <div id="playerBox1"></div>
+  </div>
+
+  <section id="timelineWrap">
+    <input type="range" id="timelineSlider" min="0" max="0" value="0" step="1">
+    <div id="frameInfo"></div>
+  </section>
+
+  <div class="cols">
+    <div class="panelBox">
+      <h3>帧内事件（event_seq 顺序）</h3>
+      <div id="eventList"></div>
+    </div>
+    <div class="panelBox">
+      <h3>决策面板（§3.3）</h3>
+      <div id="decisionPanel"></div>
+    </div>
+    <div class="panelBox">
+      <h3>动作前 → 动作后（公开状态 diff）</h3>
+      <div id="diffPanel"></div>
+    </div>
+  </div>
+
+  <section id="footerPanel"></section>
+</section>
+
+<script src="tracecore.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

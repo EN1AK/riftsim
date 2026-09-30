@@ -1,15 +1,19 @@
 # 资源与游戏行动原子（MECH-RUNE-POOLS / MECH-ACT-*；413/416/417/418/422/428/429/430/431/444）
 from __future__ import annotations
 
-from .enums import CardType, Domain, EventType, Termination, Zone
+from .enums import CardType, Domain, EventType, Keyword, Termination, Zone
 from .events import emit
 from .rng import STREAM_BURNOUT_SHUFFLE, STREAM_RECYCLE_ORDER
 from .state import GameState
 
 
-def effective_might(state: GameState, uid: int) -> int:
+def effective_might(state: GameState, uid: int, role: str | None = None) -> int:
     """单位当前战力（R-CR-143/147/703/+临时修正）。M1 线性：印刷+增益+临时；
-    P1 由 MECH-LAYERS 全量接管。"""
+    P1 由 MECH-LAYERS 全量接管。
+    role="attacker"/"defender" 时叠加身份期关键词数值：
+    强攻+X 仅在保持进攻方身份期间生效（807.1.d.1），坚守+X 同理（814.1.d.1）；
+    数值取自印刷内嵌值（807.1.b.3/814.1.b.3），无内嵌值的关键词默认 1。
+    """
     o = state.obj(uid)
     d = state.card_registry[o.def_id]
     base = d.might or 0
@@ -18,7 +22,19 @@ def effective_might(state: GameState, uid: int) -> int:
     for m in state.effects.continuous:
         if m.target_uid == uid:
             temp += m.might_add
-    return base + buff + temp
+    # 718.4/137.3.a：贴附卡的战力加成在贴附期间调整顶部卡战力；137.3.b 顶部卡无战力则无视
+    attach_bonus = 0
+    for att_uid in o.attachments:
+        ad = state.card_registry[state.obj(att_uid).def_id]
+        attach_bonus += int(ad.might_bonus or 0)
+    total = base + buff + temp + attach_bonus
+    if role in ("attacker", "defender"):
+        kw = Keyword.ASSAULT if role == "attacker" else Keyword.SHIELD
+        kws = set(d.keywords) | set(o.keywords_extra)
+        if kw in kws:
+            v = d.keyword_values.get(kw.value)
+            total += v if v is not None else 1  # 变量缺省=1（807.1.b.3/814.1.b.3；授予值 P1 跟踪）
+    return total
 
 
 def add_energy(state: GameState, seat: int, n: int) -> None:
@@ -48,22 +64,42 @@ def clear_all_pools(state: GameState, *, rule: str) -> None:
 
 
 def can_pay(state: GameState, seat: int, energy: int, power: dict[str, int]) -> bool:
-    """支付能力判定（357）：法力任意、符能须特性匹配（134）。"""
+    """支付能力判定（357）：法力任意、符能须特性匹配（134）；
+    伪域 "A"（[A] 任意特性符能，805.1.a.2/809.1.c.1）由任意特性池余量支付。"""
     p = state.players[seat]
     if p.rune_energy < energy:
         return False
+    specific_total = 0
     for d, n in power.items():
+        if d == "A":
+            continue  # [A] 不限特性，最后按池总量判定
+        specific_total += n
         if p.rune_power.get(d, 0) < n:
             return False
+    any_need = power.get("A", 0)
+    if any_need and sum(p.rune_power.values()) - specific_total < any_need:
+        return False
     return True
 
 
 def pay_cost(state: GameState, seat: int, energy: int, power: dict[str, int], *, rule: str = "R-CR-357.1") -> None:
-    """执行支付（357）。调用方须先 can_pay；非资源费用（[E]/回收/弃置）在调用处执行。"""
+    """执行支付（357）。调用方须先 can_pay；非资源费用（[E]/回收/弃置）在调用处执行。
+    "A" 伪域扣减按特性键排序取（确定性；809.1.c.1 任意特性皆可）。"""
     p = state.players[seat]
     p.rune_energy -= energy
     for d, n in power.items():
+        if d == "A":
+            continue
         p.rune_power[d] -= n
+        if p.rune_power[d] <= 0:
+            del p.rune_power[d]
+    any_left = power.get("A", 0)
+    for d in sorted(p.rune_power):
+        if any_left <= 0:
+            break
+        take = min(p.rune_power[d], any_left)
+        p.rune_power[d] -= take
+        any_left -= take
         if p.rune_power[d] <= 0:
             del p.rune_power[d]
     emit(state, EventType.PAID, rule_ids=[rule, "R-CR-444.1"], public={"player": seat, "energy": energy, "power": dict(power)})
@@ -224,8 +260,12 @@ def discard(state: GameState, seat: int, uids: list[int], *, rule: str = "R-CR-4
          privileged={"uids": list(uids)})
 
 
-def _untrack(state: GameState, uid: int) -> None:
-    """从当前区域移除 uid（不改变 o.zone——调用方负责）。"""
+def _untrack(state: GameState, uid: int, *, board_move: bool = False) -> None:
+    """从当前区域移除 uid（不改变 o.zone——调用方负责）。
+    board_move=True 表示场上区域间移动（战场↔基地↔战场）：719.5 仅当顶部卡
+    「场上→非场上」时才卸除贴附卡，故此类移动不得触发 detach。"""
+    # 719.5 判定：目的地非场上区域才卸除；board_move 移动跳过本函数的 detach 循环
+    skip_detach = board_move
     o = state.obj(uid)
     if o.zone == Zone.BASE and o.zone_owner is not None:
         if uid in state.base_occupants[o.zone_owner]:
@@ -245,7 +285,9 @@ def _untrack(state: GameState, uid: int) -> None:
                 if uid in lst:
                     lst.remove(uid)
                     break
-    # 贴附关系清理（719.5：顶部卡离场→贴附卡卸除留在当前区域）
+    # 贴附关系清理（719.5：顶部卡「场上→非场上」→贴附卡卸除留在当前区域）
+    if skip_detach:
+        return
     for att_uid in list(o.attachments):
         a = state.obj(att_uid)
         a.attached_to = None
